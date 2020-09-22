@@ -17,6 +17,7 @@ class CreateDepositosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nome', 255);
+            $table->string('codigo', 100);
         });
     }
 
