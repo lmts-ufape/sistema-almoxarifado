@@ -20,7 +20,7 @@ class CreateMateriaisTable extends Migration
             $table->string('nome', 255);
             $table->text('descricao');
             $table->integer('quantidade_minima');
-            $table->string('imagem_src', 255);
+            $table->binary('imagem');
         });
     }
 
