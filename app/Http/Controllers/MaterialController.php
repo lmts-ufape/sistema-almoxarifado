@@ -14,7 +14,8 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        //
+        $materials = material::all();
+        return view('material.material_index', ['materials' => $materials]);
     }
 
     /**
@@ -24,7 +25,7 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        return view("material.material_create");
     }
 
     /**
@@ -35,7 +36,15 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $material = new material;
+        $material->nome = $request->nome;
+        $material->codigo = $request->codigo;
+        $material->quantidade_minima = $request->quantidade_minima;
+        $material->descricao = $request->descricao;
+        $material->imagem = $request->imagem_material;
+        $material->save();
+
+        return redirect(route('material.create'));
     }
 
     /**
