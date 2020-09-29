@@ -14,12 +14,12 @@ class CreateMaterialsTable extends Migration
     public function up()
     {
         Schema::create('materials', function (Blueprint $table) {
-            $table->id('id_material');
+            $table->id();
             $table->string('codigo', 20);
             $table->string('nome', 255);
             $table->text('descricao');
             $table->integer('quantidade_minima');
-            $table->binary('imagem');
+            // $table->binary('imagem');
             $table->timestamps();
         });
     }

@@ -13,10 +13,10 @@
     <label>Quantidade mínima:</label>
     <input type="number" name="quantidade_minima">
     </br>
-
+{{--
     <label>Imagem:</label>
     <input type="image" name="imagem_material">
-    </br>
+    </br> --}}
 
     <label>Descrição:</label>
     <input type="text" name="descricao">

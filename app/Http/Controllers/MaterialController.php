@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\material;
+
 use Illuminate\Http\Request;
 
 class MaterialController extends Controller
@@ -36,12 +36,12 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        $material = new material;
+        $material = new material();
         $material->nome = $request->nome;
         $material->codigo = $request->codigo;
         $material->quantidade_minima = $request->quantidade_minima;
         $material->descricao = $request->descricao;
-        $material->imagem = $request->imagem_material;
+        // $material->imagem = $request->imagem_material;
         $material->save();
 
         return redirect(route('material.create'));
