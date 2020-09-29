@@ -1,26 +1,44 @@
-<form method="POST" action="{{ route('material.store') }}">
+@extends('layout')
 
-    {{ csrf_field() }}
+@section('content')
+    <h2>CADASTRO DE MATERIAL</h2>
+    <form method="POST" action="{{ route('material.store') }}">
 
-    <label>Nome:</label>
-    <input type="text" name="nome">
-    </br>
+        {{ csrf_field() }}
+        <p>
+            <label>Nome:</label>
+            <input type="text" name="nome" value="{{ old('nome') }}">
+        </p>
 
-    <label>Código:</label>
-    <input type="text" name="codigo">
-    </br>
+        <p>
+            <label>Código:</label>
+            <input type="text" name="codigo" value="{{ old('codigo') }}">
+        </p>
 
-    <label>Quantidade mínima:</label>
-    <input type="number" name="quantidade_minima">
-    </br>
-{{--
-    <label>Imagem:</label>
-    <input type="image" name="imagem_material">
-    </br> --}}
+        <p>
+            <label>Quantidade mínima:</label>
+            <input type="number" name="quantidade_minima" value="{{ old('quantidade_minima') }}">
+        </p>
 
-    <label>Descrição:</label>
-    <input type="text" name="descricao">
-    </br>
+        {{-- <p>
+            <label>Imagem:</label>
+            <input type="image" name="imagem_material">
+        </p> --}}
 
-    <input type="submit" value="Cadastrar">
-</form>
+        <p>
+            <label>Descrição:</label>
+            <input type="text" name="descricao" value="{{ old('descricao') }}">
+        </p>
+
+        @if($errors->any())
+            <div>
+                <ul>
+                    @foreach($errors->all() as $erro)
+                        <li>{{ $erro }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <button type="submit">CADASTRAR</button>
+    </form>
+@endsection

@@ -16,7 +16,7 @@ class CreateMaterialsTable extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->string('codigo', 20);
-            $table->string('nome', 255);
+            $table->string('nome', 50);
             $table->text('descricao');
             $table->integer('quantidade_minima');
             // $table->binary('imagem');

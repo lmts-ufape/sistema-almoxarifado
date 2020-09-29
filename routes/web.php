@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('material', 'MaterialController');
+Route::resource('material', 'MaterialController')->except(['show']);

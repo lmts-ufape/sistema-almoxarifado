@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreMaterial;
 use App\material;
 
 use Illuminate\Http\Request;
@@ -14,8 +16,7 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $materials = material::all();
-        return view('material.material_index', ['materials' => $materials]);
+        return view('material.material_index', ['materials' => material::all()]);
     }
 
     /**
@@ -34,28 +35,14 @@ class MaterialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMaterial $request)
     {
-        $material = new material();
-        $material->nome = $request->nome;
-        $material->codigo = $request->codigo;
-        $material->quantidade_minima = $request->quantidade_minima;
-        $material->descricao = $request->descricao;
-        // $material->imagem = $request->imagem_material;
+        $validatedData = $request->validated();
+
+        $material = material::create($validatedData);
         $material->save();
 
-        return redirect(route('material.create'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\material  $material
-     * @return \Illuminate\Http\Response
-     */
-    public function show(material $material)
-    {
-        //
+        return redirect(route('material.index'));
     }
 
     /**
@@ -64,9 +51,9 @@ class MaterialController extends Controller
      * @param  \App\material  $material
      * @return \Illuminate\Http\Response
      */
-    public function edit(material $material)
+    public function edit($id)
     {
-        //
+        return view('material.material_edit', ['material' => material::findOrFail($id)]);
     }
 
     /**
