@@ -15,9 +15,9 @@ class CreateDepositosTable extends Migration
     {
         Schema::create('depositos', function (Blueprint $table) {
             $table->id();
+            $table->string('nome');
+            $table->string('codigo');
             $table->timestamps();
-            $table->string('nome', 255);
-            $table->string('codigo', 100);
         });
     }
 
