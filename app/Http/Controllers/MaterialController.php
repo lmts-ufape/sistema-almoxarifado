@@ -63,9 +63,15 @@ class MaterialController extends Controller
      * @param  \App\material  $material
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, material $material)
+    public function update(StoreMaterial $request, $id)
     {
-        //
+        $material = material::findOrFail($id);
+        $validatedData = $request->validated();
+
+        $material->fill($validatedData);
+        $material->save();
+        return redirect()->route('material.index');
+
     }
 
     /**
@@ -74,8 +80,10 @@ class MaterialController extends Controller
      * @param  \App\material  $material
      * @return \Illuminate\Http\Response
      */
-    public function destroy(material $material)
+    public function destroy($id)
     {
-        //
+        material::destroy($id);
+
+        return redirect()->route('material.index');
     }
 }

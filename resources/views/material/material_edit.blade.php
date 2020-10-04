@@ -43,5 +43,12 @@
         @endif
 
         <button type="submit">ATUALIZAR</button>
+
+    </form>
+    <form method="POST" action="{{ route('material.destroy', ['material' => $material->id]) }}">
+
+        @csrf
+        @method('DELETE')
+        <button type="submit">EXCLUIR</button>
     </form>
 @endsection

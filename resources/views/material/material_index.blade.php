@@ -7,7 +7,7 @@
 
         <ul>
             @forelse($materials as $material)
-                <li> <a href="route('material.edit', ['material' => $material->id])">
+                <li> <a href="{{ route('material.edit', ['material' => $material->id]) }}">
                     <b>Material:</b> {{ $material->nome }} |
                      <b>Código:</b> {{ $material->codigo }} |
                      <b>Quantidade mínima:</b> {{ $material->quantidade_minima }} |
