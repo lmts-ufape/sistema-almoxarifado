@@ -1,4 +1,6 @@
-@extends('layout')
+@extends('templates.principal')
+
+@section('title') Cadastrar Material @endsection
 
 @section('content')
     <h2>CADASTRO DE MATERIAL</h2>
