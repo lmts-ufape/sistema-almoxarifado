@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::resource('material', 'MaterialController')->except(['show']);
+
+Route::resource('estoque', 'EstoqueController');
