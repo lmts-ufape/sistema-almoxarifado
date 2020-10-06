@@ -7,6 +7,7 @@
 </head>
 <body>
     <ul>
+        <li><a href="{{ route('home') }}"><b>PÁGINA INICIAL</b></a></li>
         <li><b>CADASTRAR</b></li>
         <ul>
             <li><a href="{{ route('material.create') }}">Cadastrar material</a></li>

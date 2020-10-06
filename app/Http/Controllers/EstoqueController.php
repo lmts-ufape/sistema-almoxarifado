@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Deposito;
 use App\Estoque;
+use App\Http\Requests\EstoqueStore;
+use App\material;
 use Illuminate\Http\Request;
 
 class EstoqueController extends Controller
@@ -24,7 +27,10 @@ class EstoqueController extends Controller
      */
     public function create()
     {
-        //
+        $materiais = material::all();
+        $depositos = Deposito::all();
+
+        return view('estoque.estoque_create', ['materiais' => $materiais, 'depositos' => $depositos]);
     }
 
     /**
@@ -33,9 +39,14 @@ class EstoqueController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EstoqueStore $request)
     {
-        //
+        $validatedData = $request->validated();
+
+        $entrada = Estoque::create($validatedData);
+        $entrada->save();
+
+        return redirect()->route('deposito.index');
     }
 
     /**

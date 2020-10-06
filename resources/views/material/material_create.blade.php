@@ -4,9 +4,11 @@
 
 @section('content')
     <h2>CADASTRO DE MATERIAL</h2>
+
     <form method="POST" action="{{ route('material.store') }}">
 
-        {{ csrf_field() }}
+        @csrf
+
         <p>
             <label>Nome:</label>
             <input type="text" name="nome" value="{{ old('nome') }}">

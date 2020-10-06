@@ -11,11 +11,10 @@
     </br>
 
     <select id="select_deposito">
-
+        <option>Depositos</option>
         @foreach($depositos as $d)
             <option> {{$d->nome}} </option>
         @endforeach
-
     </select>
 
 @endsection
