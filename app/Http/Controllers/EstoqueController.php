@@ -2,28 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Deposito;
-
 use App\Estoque;
+use App\Http\Requests\EstoqueStore;
+use App\material;
+use Illuminate\Http\Request;
 
-
-class DepositoController extends Controller {
-
+class EstoqueController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-
-
-        $depositos = new Deposito();
-        $depositos = $depositos->all();
-        $estoques = Estoque::all();
-
-        return view('deposito.deposito', compact('depositos','estoques'));
-
+    public function index()
+    {
+        //
     }
 
     /**
@@ -31,10 +25,12 @@ class DepositoController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
+        $materiais = material::all();
+        $depositos = Deposito::all();
 
-        return view('deposito.criarDeposito');
-
+        return view('estoque.entrada', ['materiais' => $materiais, 'depositos' => $depositos]);
     }
 
     /**
@@ -43,28 +39,23 @@ class DepositoController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(EstoqueStore $request)
+    {
+        $validatedData = $request->validated();
 
-        // $isValido = $request->validate([
-        //     'nome' => 'require|'
-        // ]);
+        $entrada = Estoque::create($validatedData);
+        $entrada->save();
 
-        $deposito = new Deposito();
-        $deposito->nome = $request->nome;
-        $deposito->codigo = $request->codigo;
-
-        $deposito->save();
-
-        return redirect('deposito');
+        return redirect()->route('deposito.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Estoque $estoque)
     {
         //
     }
@@ -72,22 +63,22 @@ class DepositoController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Estoque $estoque)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Estoque $estoque)
     {
         //
     }
@@ -95,10 +86,10 @@ class DepositoController extends Controller {
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Estoque  $estoque
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Estoque $estoque)
     {
         //
     }

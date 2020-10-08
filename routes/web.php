@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->name('home');
+
+Route::resource('material', 'MaterialController')->except(['show']);
+
+Route::resource('estoque', 'EstoqueController');
+
+Route::resource('deposito', 'DepositoController');
