@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Deposito;
+use App\Estoque;
 
 class DepositoController extends Controller {
 
@@ -16,8 +17,9 @@ class DepositoController extends Controller {
 
         $depositos = new Deposito();
         $depositos = $depositos->all();
+        $estoques = Estoque::all();
 
-        return view('deposito.deposito', compact('depositos'));
+        return view('deposito.deposito', compact('depositos','estoques'));
     }
 
     /**

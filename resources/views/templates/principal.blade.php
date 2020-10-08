@@ -22,8 +22,8 @@
 
         <li><b>GERENCIAR MATERIAIS</b></li>
         <ul>
-            <li><a href="{{ route('estoque.create') }}">Entrada</a></li>
-            {{-- <li><a href="{{ route('estoque.edit') }}">Saída</a></li> --}}
+            <li><a href="{{ route('estoque.create') }}">Nova Entrada</a></li>
+            {{-- <li><a href="{{  }}">Nova Saída</a></li> --}}
         </ul>
     </ul>
 

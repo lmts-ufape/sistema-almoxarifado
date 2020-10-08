@@ -30,7 +30,7 @@ class EstoqueController extends Controller
         $materiais = material::all();
         $depositos = Deposito::all();
 
-        return view('estoque.estoque_create', ['materiais' => $materiais, 'depositos' => $depositos]);
+        return view('estoque.entrada', ['materiais' => $materiais, 'depositos' => $depositos]);
     }
 
     /**
@@ -68,7 +68,7 @@ class EstoqueController extends Controller
      */
     public function edit(Estoque $estoque)
     {
-        //
+
     }
 
     /**
