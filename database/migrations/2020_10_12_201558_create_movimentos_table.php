@@ -24,8 +24,6 @@ class CreateMovimentosTable extends Migration
             // $table->unsignedInteger('solicitacao_id')->index();
             // $table->foreign('solicitacao_id')->references('id')->on('solicitacaos');
 
-            $table->unsignedInteger('itemMovimento_id')->index();
-            $table->foreign('itemMovimento_id')->references('id')->on('itemMovimentos');
             $table->timestamps();
         });
     }
