@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Estoque;
 use App\Http\Requests\StoreMaterial;
 use App\material;
 
@@ -16,7 +17,9 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        return view('material.material_index', ['materials' => material::all()]);
+        $estoques = Estoque::all();
+        $materials = material::all();
+        return view('material.material_index', ['materials' => $materials, 'estoques' => $estoques]);
     }
 
     /**
