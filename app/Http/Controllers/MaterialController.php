@@ -19,7 +19,14 @@ class MaterialController extends Controller
     {
         $estoques = Estoque::all();
         $materials = material::all();
-        return view('material.material_index', ['materials' => $materials, 'estoques' => $estoques]);
+
+        return view('material.material_consult', ['materials' => $materials, 'estoques' => $estoques]);
+    }
+
+    public function indexEdit(){
+
+        $materials = material::all();
+        return view('material.material_index_edit', ['materials' => $materials]);
     }
 
     /**

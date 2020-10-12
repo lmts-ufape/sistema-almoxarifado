@@ -18,6 +18,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::resource('material', 'MaterialController')->except(['show']);
+Route::get('material/index_edit', 'MaterialController@indexEdit')->name('material.indexEdit');
 
 Route::resource('estoque', 'EstoqueController');
 

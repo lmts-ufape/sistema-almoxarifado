@@ -4,7 +4,7 @@
 @section('title') Depositos @endsection
 
 @section('content')
-    <h1>CONSULTAR DEPÓSITOS</h1>
+    <h2>CONSULTAR DEPÓSITOS</h2>
 
     <label>Lista de Depositos:</label>
 
