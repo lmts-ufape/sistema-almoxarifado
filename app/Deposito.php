@@ -10,4 +10,7 @@ class Deposito extends Model {
 
     protected $table = 'depositos';
 
+    public function estoques(){
+        $this->hasMany('App\Estoque');
+    }
 }

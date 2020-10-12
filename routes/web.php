@@ -23,3 +23,4 @@ Route::get('material/index_edit', 'MaterialController@indexEdit')->name('materia
 Route::resource('estoque', 'EstoqueController');
 
 Route::resource('deposito', 'DepositoController');
+Route::get('get_estoques/{deposito_id}', 'DepositoController@getEstoques' )->name('deposito.getEstoque');
