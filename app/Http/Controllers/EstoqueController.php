@@ -28,7 +28,7 @@ class EstoqueController extends Controller
     public function create()
     {
         $materiais = material::all();
-        $depositos = Estoque::all();
+        $depositos = Deposito::all();
 
         return view('estoque.entrada', ['materiais' => $materiais, 'depositos' => $depositos]);
     }
