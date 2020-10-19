@@ -3,9 +3,9 @@
 @section('title') Entrada de Material @endsection
 
 @section('content')
-    <h2>ENTRADA DE MATERIAL</h2>
+    <h2>SAÍDA DE MATERIAL</h2>
 
-    <form method="POST" action="{{ route('movimento.entradaStore') }}">
+    <form method="POST" action="{{ route('movimento.saidaStore') }}">
 
         @csrf
 
@@ -30,15 +30,15 @@
 
         <p>
             <label>Quantidade:</label>
-            <input type="number" name="quantidade">
+            <input type="number" name="quantidade"  value="{{ old("quantidade") }}">
         </p>
 
         <p>
             <label>Descrição:</label>
-            <input type="text" name="descricao">
+            <input type="text" name="descricao"  value="{{ old("descricao") }}">
         </p>
 
-        <input type="hidden" name="operacao" value="0">
+        <input type="hidden" name="operacao" value="1">
 
         @if($errors->any())
             <div>
@@ -49,6 +49,8 @@
                 </ul>
             </div>
         @endif
-        <button type="submit">REGISTRAR ENTRADA</button>
+        <button type="submit">REGISTRAR SAÍDA</button>
     </form>
 @endsection
+
+

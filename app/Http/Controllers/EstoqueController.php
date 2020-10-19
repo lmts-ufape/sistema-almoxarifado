@@ -25,13 +25,7 @@ class EstoqueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $materiais = material::all();
-        $depositos = Deposito::all();
 
-        return view('estoque.entrada', ['materiais' => $materiais, 'depositos' => $depositos]);
-    }
 
     /**
      * Store a newly created resource in storage.

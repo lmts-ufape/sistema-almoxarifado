@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EstoqueStore extends FormRequest
+class MovimentoStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,11 @@ class EstoqueStore extends FormRequest
     public function rules()
     {
         return [
-            'material_id' => 'bail|required',
-            'quantidade' => 'required',
-            'codigo' => 'nullable',
-            'deposito_id' => 'bail|required'
+            'material_id' => 'bail|required|numeric',
+            'quantidade' => 'required|',
+            'deposito_id' => 'bail|required|numeric',
+            'descricao' => 'required',
+            'operacao' => 'numeric'
         ];
     }
 }

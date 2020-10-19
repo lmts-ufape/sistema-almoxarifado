@@ -1,11 +1,11 @@
 @extends('templates.principal')
 
-@section('title') SAÍDA DE MATERIAL @endsection
+@section('title') Entrada de Material @endsection
 
 @section('content')
-<h2>SAÍDA DE MATERIAL</h2>
+    <h2>ENTRADA DE MATERIAL</h2>
 
-    <form method="POST" action="{{ route('estoque.store') }}">
+    <form method="POST" action="{{ route('movimento.entradaStore') }}">
 
         @csrf
 
@@ -30,9 +30,15 @@
 
         <p>
             <label>Quantidade:</label>
-            <input type="number" name="quantidade">
+            <input type="number" name="quantidade"  value="{{ old("quantidade") }}">
         </p>
 
+        <p>
+            <label>Descrição:</label>
+            <input type="text" name="descricao"  value="{{ old("descricao") }}">
+        </p>
+
+        <input type="hidden" name="operacao" value="0">
 
         @if($errors->any())
             <div>
@@ -46,4 +52,3 @@
         <button type="submit">REGISTRAR ENTRADA</button>
     </form>
 @endsection
-

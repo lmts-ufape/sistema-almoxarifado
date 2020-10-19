@@ -20,9 +20,11 @@ Route::get('/', function () {
 Route::resource('material', 'MaterialController')->except(['show']);
 Route::get('material/index_edit', 'MaterialController@indexEdit')->name('material.indexEdit');
 
-Route::resource('estoque', 'EstoqueController');
 
+Route::get('nova_entrada_form', 'MovimentoController@createEntrada')->name('movimento.entradaCreate');
+Route::get('nova_saida_form', 'MovimentoController@createSaida')->name('movimento.saidaCreate');
 Route::post('movimento_entrada', 'MovimentoController@entradaStore')->name('movimento.entradaStore');
+Route::post('movimento_saida', 'MovimentoController@saidaStore')->name('movimento.saidaStore');
 
 Route::resource('deposito', 'DepositoController');
 Route::get('get_estoques/{deposito_id}', 'DepositoController@getEstoques' )->name('deposito.getEstoque');
