@@ -14,11 +14,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
-
-Route::resource('cargo', 'CargoController');
-
-Route::resource('deposito', 'DepositoController');
-
-Route::resource('usuario', 'UsuarioController');
