@@ -40,6 +40,11 @@
 
         <input type="hidden" name="operacao" value="1">
 
+        @if(session()->has('erro'))
+            <p style="color: red">
+                {{ session()->get('erro') }}
+            </p>
+        @endif
         @if($errors->any())
             <div>
                 <ul>

@@ -56,7 +56,8 @@ class MovimentoController extends Controller
             $estoque->quantidade += $request['quantidade'];
         }
 
-        $movimentoEntrada->save();
+        $
+        // $movimentoEntrada->save();
         $estoque->save();
 
         $itemMovimento = new itemMovimento();
@@ -69,9 +70,9 @@ class MovimentoController extends Controller
         return redirect()->route('deposito.index');
     }
 
-    public function saidaStore(MovimentoStoreRequest $request){
+    public function saidaStore(MovimentoStoreRequest $requestInput){
 
-        $request = $request->validated();
+        $request = $requestInput->validated();
 
         $movimentoSaida = new Movimento();
         $movimentoSaida->operacao = $request['operacao'];
@@ -86,12 +87,14 @@ class MovimentoController extends Controller
         if($estoque != null){
             $estoque = Estoque::findOrFail($estoque->id);
             if($estoque->quantidade - $request['quantidade'] < 0){
-                return 'Quantidade solicitada é maior que a disponível em estoque';
+                $requestInput->session()->flash('erro', 'Quantidade solicitada é maior que a disponível em estoque' );
+                return redirect()->route('movimento.saidaCreate');
             }
             $estoque->quantidade -= $request['quantidade'];
         }
         else{
-            return 'Não existe estoque do material selecionado nesse depósito';
+            $requestInput->session()->flash('erro', 'Não existe um estoque do material selecionado nesse depósito' );
+            return redirect()->route('movimento.saidaCreate');
         }
 
         $movimentoSaida->save();
