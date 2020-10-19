@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Deposito extends Model {
 
-    // protected $fillable = ['nome', 'codigo'];
-
     protected $table = 'depositos';
+
+    protected $fillable = ['nome', 'codigo'];
 
 }
