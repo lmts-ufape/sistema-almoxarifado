@@ -5,7 +5,7 @@
 @section('content')
     <h2>ENTRADA DE MATERIAL</h2>
 
-    <form method="POST" action="{{ route('estoque.store') }}">
+    <form method="POST" action="{{ route('movimento.entradaStore') }}">
 
         @csrf
 
@@ -33,6 +33,12 @@
             <input type="number" name="quantidade">
         </p>
 
+        <p>
+            <label>Descrição:</label>
+            <input type="text" name="descricao">
+        </p>
+
+        <input type="hidden" name="operacao" value="0">
 
         @if($errors->any())
             <div>

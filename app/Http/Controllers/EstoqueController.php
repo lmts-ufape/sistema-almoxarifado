@@ -41,12 +41,12 @@ class EstoqueController extends Controller
      */
     public function store(EstoqueStore $request)
     {
-        $validatedData = $request->validated();
+        // $validatedData = $request->validated();
 
-        $entrada = Estoque::create($validatedData);
-        $entrada->save();
+        // $entrada = Estoque::create($validatedData);
+        // $entrada->save();
 
-        return redirect()->route('deposito.index');
+        // return redirect()->route('deposito.index');
     }
 
     /**
