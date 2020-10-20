@@ -28,6 +28,7 @@
         <ul>
             <li><a href="{{ route('movimento.entradaCreate') }}">Nova Entrada</a></li>
             <li><a href="{{  route('movimento.saidaCreate') }}">Nova Saída</a></li>
+            <li><a href="{{  route('movimento.transferenciaCreate') }}">Nova Transferência</a></li>
         </ul>
     </ul>
 
