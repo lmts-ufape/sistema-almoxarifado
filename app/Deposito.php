@@ -10,4 +10,8 @@ class Deposito extends Model {
 
     protected $fillable = ['nome', 'codigo'];
 
+    public function estoques(){
+        $this->hasMany('App\Estoque');
+    }
+  
 }

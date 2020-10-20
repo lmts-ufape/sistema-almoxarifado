@@ -5,10 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Deposito;
 
+use App\Estoque;
+
+
 class DepositoController extends Controller {
 
     public function index() {
-        return view('deposito/deposito_index', ['depositos' => Deposito::all()]);
+        return view('deposito/deposito_index', ['depositos' => Deposito::all(), 'estoques' => Estoque::all()]);
+
+        //$depositos = new Deposito();
+        //$depositos = $depositos->all();
+        //$estoques = Estoque::all();
+
+        // return view('deposito.deposito', compact('depositos','estoques'));
+    }
+
+    public function getEstoques($deposito_id){
+
+        $allEstoques = Estoque::all();
+        $estoques = $allEstoques->where('deposito_id', $deposito_id);
+        return response()->json($estoques);
+      
     }
 
     public function create() {
