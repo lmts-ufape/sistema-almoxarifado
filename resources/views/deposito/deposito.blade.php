@@ -4,7 +4,7 @@
 @section('title') Depositos @endsection
 
 @section('content')
-    <h1>CONSULTAR DEPÓSITOS</h1>
+    <h2>CONSULTAR DEPÓSITOS</h2>
 
     <label>Lista de Depositos:</label>
 
@@ -13,17 +13,29 @@
     <select name="selectDeposito">
         <option>Depositos</option>
         @foreach($depositos as $d)
-            <option> {{$d->nome}} </option>
+            <option value="{{ $d->id }}"> {{$d->nome}} </option>
         @endforeach
     </select>
 
-    {{-- {{ $deposito =  $_post['selectDeposito'] }}
+    <ul id="listaEstoque">
 
-    @foreach($estoques as $estoque)
-        @if($estoque->deposito_id == $deposito)
-            <b>Material:</b> {{ $material->nome }} |
-            <b>Quantidade:</b> {{ $material->quantidade }} |
-        @endif
-    @endforeach --}}
+    </ul>
+@endsection
+@section('post-script')
+    <script type="text/javascript">
+        $('select[name=selectDeposito]').change(function (){
+            var deposito_id = $(this).val();
+
+            $.get('/get_estoques/' + deposito_id, function (estoques) {
+                $('#listaEstoque').empty();
+                $.each(estoques, function (key, value) {
+                    $('#listaEstoque').append('<li><b>Material: </b>' + value.material_id + ' | <b>Quantidade:</b> ' + value.quantidade + '</li>');
+                });
+            });
+        });
+
+    </script>
 @endsection
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>

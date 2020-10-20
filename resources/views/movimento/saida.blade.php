@@ -1,11 +1,11 @@
 @extends('templates.principal')
 
-@section('title') SAÍDA DE MATERIAL @endsection
+@section('title') Entrada de Material @endsection
 
 @section('content')
-<h2>SAÍDA DE MATERIAL</h2>
+    <h2>SAÍDA DE MATERIAL</h2>
 
-    <form method="POST" action="{{ route('estoque.store') }}">
+    <form method="POST" action="{{ route('movimento.saidaStore') }}">
 
         @csrf
 
@@ -30,10 +30,21 @@
 
         <p>
             <label>Quantidade:</label>
-            <input type="number" name="quantidade">
+            <input type="number" name="quantidade"  value="{{ old("quantidade") }}">
         </p>
 
+        <p>
+            <label>Descrição:</label>
+            <input type="text" name="descricao"  value="{{ old("descricao") }}">
+        </p>
 
+        <input type="hidden" name="operacao" value="1">
+
+        @if(session()->has('erro'))
+            <p style="color: red">
+                {{ session()->get('erro') }}
+            </p>
+        @endif
         @if($errors->any())
             <div>
                 <ul>
@@ -43,7 +54,8 @@
                 </ul>
             </div>
         @endif
-        <button type="submit">REGISTRAR ENTRADA</button>
+        <button type="submit">REGISTRAR SAÍDA</button>
     </form>
 @endsection
+
 

@@ -4,8 +4,7 @@
 
 @section('content')
     <div>
-        <h1>CONSULTAR MATERIAIS</h1>
-        {{-- <a href="{{ route('material.create') }}">Cadastrar novo material</a> --}}
+        <h2>MATERIAIS CADASTRADOS</h2>
 
         <ul>
             @forelse($materials as $material)

@@ -25,13 +25,7 @@ class EstoqueController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $materiais = material::all();
-        $depositos = Deposito::all();
 
-        return view('estoque.entrada', ['materiais' => $materiais, 'depositos' => $depositos]);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,12 +35,12 @@ class EstoqueController extends Controller
      */
     public function store(EstoqueStore $request)
     {
-        $validatedData = $request->validated();
+        // $validatedData = $request->validated();
 
-        $entrada = Estoque::create($validatedData);
-        $entrada->save();
+        // $entrada = Estoque::create($validatedData);
+        // $entrada->save();
 
-        return redirect()->route('deposito.index');
+        // return redirect()->route('deposito.index');
     }
 
     /**

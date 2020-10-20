@@ -26,6 +26,13 @@ class DepositoController extends Controller {
 
     }
 
+    public function getEstoques($deposito_id){
+
+        $allEstoques = Estoque::all();
+        $estoques = $allEstoques->where('deposito_id', $deposito_id);
+        return response()->json($estoques);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
