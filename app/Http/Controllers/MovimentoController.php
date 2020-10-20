@@ -138,13 +138,13 @@ class MovimentoController extends Controller
             $estoqueSaida = Estoque::findOrFail($estoqueSaida->id);
             if($estoqueSaida->quantidade - $request['quantidade'] < 0){
                 $requestInput->session()->flash('erro', 'Quantidade solicitada é maior que a disponível em estoque' );
-                return redirect()->route('movimento.saidaCreate');
+                return redirect()->route('movimento.transferenciaCreate');
             }
             $estoqueSaida->quantidade -= $request['quantidade'];
         }
         else{
             $requestInput->session()->flash('erro', 'Não existe um estoque do material selecionado nesse depósito' );
-            return redirect()->route('movimento.saidaCreate');
+            return redirect()->route('movimento.transferenciaCreate');
         }
 
         $estoqueEntrada = DB::table('estoques')->where([
