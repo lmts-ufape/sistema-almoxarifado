@@ -10,20 +10,14 @@ use App\Estoque;
 
 class DepositoController extends Controller {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index() {
+        return view('deposito/deposito_index', ['depositos' => Deposito::all(), 'estoques' => Estoque::all()]);
 
+        //$depositos = new Deposito();
+        //$depositos = $depositos->all();
+        //$estoques = Estoque::all();
 
-        $depositos = new Deposito();
-        $depositos = $depositos->all();
-        $estoques = Estoque::all();
-
-        return view('deposito.deposito', compact('depositos','estoques'));
-
+        // return view('deposito.deposito', compact('depositos','estoques'));
     }
 
     public function getEstoques($deposito_id){
@@ -31,82 +25,49 @@ class DepositoController extends Controller {
         $allEstoques = Estoque::all();
         $estoques = $allEstoques->where('deposito_id', $deposito_id);
         return response()->json($estoques);
+      
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create() {
-
-        return view('deposito.criarDeposito');
-
+        return view('deposito/deposito_create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) {
+        
+        $cadastro = ['nome' => $request->nome, 'codigo' => $request->codigo];
 
-        // $isValido = $request->validate([
-        //     'nome' => 'require|'
-        // ]);
+        // Falta Validar os Dados
 
-        $deposito = new Deposito();
-        $deposito->nome = $request->nome;
-        $deposito->codigo = $request->codigo;
+        Deposito::create($cadastro);
 
-        $deposito->save();
-
-        return redirect('deposito');
+        return redirect(route('deposito.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function show($id) {
+        return view('deposito/deposito_show', ['deposito' => Deposito::find($id)]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function edit($id) {
+        return view('deposito/deposito_edit', ['deposito' => Deposito::find($id)]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id) {
+
+        $deposito = Deposito::find($id);
+        $cadastro = ['nome' => $request->nome];
+
+        // Falta Validar os Dados
+        
+        $deposito->fill($cadastro)->save();
+
+        return redirect(route('deposito.index'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        
+        Deposito::destroy($id);
+        
+        return redirect(route('deposito.index'));
     }
+    
 }
