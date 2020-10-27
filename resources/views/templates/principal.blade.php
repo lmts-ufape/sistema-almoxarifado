@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #3E3767;" >
             <div class="container" >
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{asset('imagens/logo_visa_menu.png')}}" style="width:145px; margin-top:-5px; margin-bottom:-5px; margin-left:10px; margin-right:30px;">
+                    <img src="{{asset('imagens/logo.png')}}" style="width:145px; margin-top:-5px; margin-bottom:-5px; margin-left:10px; margin-right:30px;">
 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -52,7 +52,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-2" style="background-color: #151631; color: white; height: 550px;">
-                <ul>
+                <ul style="margin-top: 15px">
                     {{-- <li><a href="{{ route('home') }}"><b>PÁGINA INICIAL</b></a></li> --}}
                     <li><b>GERENCIAR CADASTROS</b></li>
                     <ul>
@@ -99,17 +99,29 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-sm-4" align="center">
+                <div class="col-sm-6" align="center">
                     <div class="row justify-content-center" style="margin-top:10px; margin-top:1.4rem;">
                         <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white">Desenvolvido por</div>
-                        <div style="margin:3px;"><img src="{{ asset('/imagens/logo_secretaria.png') }}"></div>
-                        <div style="margin:3px;"><img src="{{ asset('/imagens/logo_secretaria.png') }}"></div>
+                        <div style="margin:3px;" >
+                            <a href="http://lmts.uag.ufrpe.br/" target="blank">
+                                <img src="{{ asset('/imagens/logo_lmts.png') }}">
+                            </a>
+                        </div>
+                        <div style="margin:3px;">
+                            <a href="http://www.upe.br/garanhuns/" target="blank">
+                                <img style="width: 100px" src="{{ asset('/imagens/logo_upe.png') }}">
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-4" align="center">
                     <div class="row justify-content-center" style="margin-top:10px; margin-top:1.4rem;">
                         <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white">Apoio</div>
-                        <div style="margin:3px;"><img src="{{ asset('/imagens/logo_secretaria.png') }}"></div>
+                        <div style="margin:3px;">
+                            <a href="http://www.uag.ufrpe.br/" target="blank">
+                                <img src="{{ asset('/imagens/logo_ufape.png') }}">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
