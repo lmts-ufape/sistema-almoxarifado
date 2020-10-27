@@ -1,38 +1,34 @@
 @extends('templates.principal')
 
-@section('title') Cadastrar Material @endsection
+@section('title') Editar Material @endsection
 
 @section('content')
-    <h2>CADASTRO DE MATERIAL</h2>
+    <h2>EDITAR MATERIAL</h2>
     <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}">
 
         @csrf
         @method('PUT')
 
-        <p>
-            <label>Nome:</label>
-            <input type="text" name="nome" value="{{ old('nome', $material->nome) }}">
-        </p>
-
-        <p>
-            <label>Código:</label>
-            <input type="text" name="codigo" value="{{ old('codigo', $material->codigo) }}">
-        </p>
-
-        <p>
-            <label>Quantidade mínima:</label>
-            <input type="number" name="quantidade_minima" value="{{ old('quantidade_minima', $material->quantidade_minima) }}">
-        </p>
-
-        {{-- <p>
-            <label>Imagem:</label>
-            <input type="image" name="imagem_material" value="{{ old('image', $material->image) }}">
-        </p> --}}
-
-        <p>
-            <label>Descrição:</label>
-            <input type="text" name="descricao" value="{{ old('descricao', $material->descricao) }}">
-        </p>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputMaterial">Material</label>
+            <input type="text" class="form-control" id="inputMaterial" name="nome" placeholder="Material" value="{{ old('nome', $material->nome) }}">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputCodigo">Código</label>
+            <input type="text" class="form-control" id="inputCodigo" name="codigo" placeholder="Código" value="{{ old('codigo', $material->codigo) }}">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputQuantidadeMin">Quantidade mínima</label>
+            <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" value="{{ old('quantidade_minima', $material->quantidade_minima) }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputDescricao">Descrição</label>
+            <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3" value="{{ old('descricao', $material->descricao) }}"></textarea>
+          </div>
+        </div>
 
         @if($errors->any())
             <div>
@@ -44,13 +40,13 @@
             </div>
         @endif
 
-        <button type="submit">ATUALIZAR</button>
+        <button type="submit" class="btn btn-success">Atualizar</button>
 
     </form>
     <form method="POST" action="{{ route('material.destroy', ['material' => $material->id]) }}">
 
         @csrf
         @method('DELETE')
-        <button type="submit">EXCLUIR</button>
+        <button class="btn btn-danger" type="submit">EXCLUIR</button>
     </form>
 @endsection

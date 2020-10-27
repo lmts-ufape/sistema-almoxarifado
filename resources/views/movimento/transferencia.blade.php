@@ -3,9 +3,9 @@
 @section('title') Entrada de Material @endsection
 
 @section('content')
-    <h2>ENTRADA DE MATERIAL</h2>
+    <h2>TRANSFERÊNCIA DE MATERIAL</h2>
 
-    <form method="POST" action="{{ route('movimento.entradaStore') }}">
+    <form method="POST" action="{{ route('movimento.transferenciaStore') }}">
 
         @csrf
 
@@ -19,8 +19,15 @@
         </p>
 
         <p>
-            <select name="deposito_id">
-                <option >Deposito</option>
+            <select name="deposito_id_origem">
+                <option >Deposito de Origem</option>
+                @foreach($depositos as $deposito)
+                    <option value="{{ $deposito->id }}"> {{ $deposito->id }}. {{$deposito->nome}} </option>
+                @endforeach
+
+            </select>
+            <select name="deposito_id_destino">
+                <option >Deposito de Destino</option>
                 @foreach($depositos as $deposito)
                     <option value="{{ $deposito->id }}"> {{ $deposito->id }}. {{$deposito->nome}} </option>
                 @endforeach
@@ -38,8 +45,13 @@
             <input type="text" name="descricao"  value="{{ old("descricao") }}">
         </p>
 
-        <input type="hidden" name="operacao" value="0">
+        <input type="hidden" name="operacao" value="2">
 
+        @if(session()->has('erro'))
+            <p style="color: red">
+                {{ session()->get('erro') }}
+            </p>
+        @endif
         @if($errors->any())
             <div>
                 <ul>
@@ -49,6 +61,6 @@
                 </ul>
             </div>
         @endif
-        <button class="btn btn-success" type="submit">Registrar Estoque</button>
+        <button class="btn btn-success" type="submit">Transferir</button>
     </form>
 @endsection
