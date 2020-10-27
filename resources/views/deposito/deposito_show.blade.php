@@ -1,5 +1,5 @@
 
-@extends('../principal')
+@extends('../templates.principal')
 
 @section('title')
     Deposito - {{ $deposito->nome }}

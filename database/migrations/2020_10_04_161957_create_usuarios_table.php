@@ -15,7 +15,19 @@ class CreateUsuariosTable extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
+            // $table->binary('imagem');
+            $table->string('imagem');
+            $table->string('nome');
+            $table->string('cpf');
+            $table->string('rg');
+            $table->date('data_nascimento');
+            $table->integer('matricula');
+            $table->foreignId('cargo_id');
+            $table->string('email');
+            $table->string('senha');
             $table->timestamps();
+
+            $table->foreign('cargo_id')->references('id')->on('cargos');
         });
     }
 
