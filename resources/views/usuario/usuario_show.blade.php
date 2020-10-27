@@ -1,4 +1,6 @@
 
+@extends('../templates.principal')
+
 <h1> Perfil: {{ $usuario->nome }} </h1>
 
 <img src= "{{ url('storage/img/usuarios/'.$usuario->imagem) }}" alt="{{ $usuario->imagem }}" width="100" height="100"></img>

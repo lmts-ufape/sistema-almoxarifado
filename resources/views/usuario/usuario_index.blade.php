@@ -1,5 +1,5 @@
 
-@extends('../principal_testes')
+@extends('../templates.principal')
 
 @section('title')
     Usuario
