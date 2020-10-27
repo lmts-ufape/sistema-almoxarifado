@@ -54,7 +54,7 @@
                 </ul>
             </div>
         @endif
-        <button type="submit">REGISTRAR SAÍDA</button>
+        <button class="btn btn-danger" type="submit">Retirar</button>
     </form>
 @endsection
 

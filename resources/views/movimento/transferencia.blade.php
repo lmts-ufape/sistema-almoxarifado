@@ -61,6 +61,6 @@
                 </ul>
             </div>
         @endif
-        <button type="submit">REGISTRAR SAÍDA</button>
+        <button class="btn btn-success" type="submit">Transferir</button>
     </form>
 @endsection

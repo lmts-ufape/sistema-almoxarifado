@@ -32,6 +32,7 @@ class DepositoController extends Controller {
         $estoques = $allEstoques->where('deposito_id', $deposito_id);
 
         return response()->json($estoques);
+        // return response()->json($estoques)->with('material')->get();
     }
 
     /**

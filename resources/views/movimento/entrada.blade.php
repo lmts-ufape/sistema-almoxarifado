@@ -49,6 +49,6 @@
                 </ul>
             </div>
         @endif
-        <button type="submit">REGISTRAR ENTRADA</button>
+        <button class="btn btn-success" type="submit">Registrar Estoque</button>
     </form>
 @endsection
