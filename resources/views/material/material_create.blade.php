@@ -3,36 +3,32 @@
 @section('title') Cadastrar Material @endsection
 
 @section('content')
-    <h2>CADASTRO DE MATERIAL</h2>
+    <div>
+        <h2>CADASTRAR MATERIAL</h2>
+    </div>
 
     <form method="POST" action="{{ route('material.store') }}">
-
         @csrf
-
-        <p>
-            <label>Nome:</label>
-            <input type="text" name="nome" value="{{ old('nome') }}">
-        </p>
-
-        <p>
-            <label>Código:</label>
-            <input type="text" name="codigo" value="{{ old('codigo') }}">
-        </p>
-
-        <p>
-            <label>Quantidade mínima:</label>
-            <input type="number" name="quantidade_minima" value="{{ old('quantidade_minima') }}">
-        </p>
-
-        {{-- <p>
-            <label>Imagem:</label>
-            <input type="image" name="imagem_material">
-        </p> --}}
-
-        <p>
-            <label>Descrição:</label>
-            <input type="text" name="descricao" value="{{ old('descricao') }}">
-        </p>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="inputMaterial">Material</label>
+            <input type="text" class="form-control" id="inputMaterial" name="nome" placeholder="Material" value="{{ old('nome') }}">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputCodigo">Código</label>
+            <input type="text" class="form-control" id="inputCodigo" name="codigo" placeholder="Código" value="{{ old('codigo') }}">
+          </div>
+          <div class="form-group col-md-2">
+            <label for="inputQuantidadeMin">Quantidade mínima</label>
+            <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" value="{{ old('quantidade_minima') }}">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputDescricao">Descrição</label>
+            <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3" value="{{ old('descricao') }}"></textarea>
+          </div>
+        </div>
 
         @if($errors->any())
             <div>
@@ -43,6 +39,9 @@
                 </ul>
             </div>
         @endif
-        <button type="submit">CADASTRAR</button>
-    </form>
+
+        <button type="submit" class="btn btn-success">Salvar</button>
+      </form>
+
+
 @endsection
