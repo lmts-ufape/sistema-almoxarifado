@@ -11,33 +11,24 @@
         <h2>DEPÓSITOS CADASTRADOS</h2>
     </div>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th> Nome </th>
-                <th> Código </th>
-                <th> Mostrar </th>
-                <th> Editar </th>
-                <th> Remover </th>
+    <table class="table table-hover">
+        <thead style="background-color: #151631; color: white; border-radius: 15px">
+             <tr>
+                <th scope="col">Depósito</th>
+                <th scope="col">Código</th>
             </tr>
         </thead>
-
         <tbody>
-        @foreach($depositos as $deposito)
-            <tr>
-                <td> {{ $deposito->nome }} </td>
-                <td> {{ $deposito->codigo }} </td>
-                <td> <a href="{{ route('deposito.show', $deposito->id) }}"> <Button> Mostrar </Button> </a></td>
-                <td> <a href="{{ route('deposito.edit', $deposito->id) }}"> <Button> Editar </Button> </td>
-                <td>
-                    <form action="{{ route('deposito.destroy', $deposito->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <Button type="submit"> Remover </Button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
+
+            @forelse($depositos as $deposito)
+                <tr onclick="location.href = '{{ route('deposito.edit', $deposito->id) }}'" style="cursor: pointer;">
+                    <td> {{ $deposito->nome }} </td>
+                    <td> {{ $deposito->codigo }} </td>
+                </tr>
+            @empty
+                <td colspan="2">Sem depósitos cadastrados ainda</td>
+            @endempty
+
         </tbody>
     </table>
 
