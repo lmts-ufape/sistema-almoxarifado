@@ -3,7 +3,7 @@
 @section('title') Cadastrar Material @endsection
 
 @section('content')
-    <div>
+    <div style="border-bottom: #949494 2px solid; padding: 5px; margin-bottom: 10px">
         <h2>CADASTRAR MATERIAL</h2>
     </div>
 
@@ -23,8 +23,8 @@
             <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" value="{{ old('quantidade_minima') }}">
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
+        <div  >
+          <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             <label for="inputDescricao">Descrição</label>
             <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3" value="{{ old('descricao') }}"></textarea>
           </div>

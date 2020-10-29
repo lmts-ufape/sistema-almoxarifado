@@ -33,7 +33,7 @@ class DepositoController extends Controller {
     }
 
     public function store(Request $request) {
-        
+
         $cadastro = ['nome' => $request->nome, 'codigo' => $request->codigo];
 
         // Falta Validar os Dados
@@ -57,17 +57,17 @@ class DepositoController extends Controller {
         $cadastro = ['nome' => $request->nome];
 
         // Falta Validar os Dados
-        
+
         $deposito->fill($cadastro)->save();
 
         return redirect(route('deposito.index'));
     }
 
     public function destroy($id) {
-        
+
         Deposito::destroy($id);
-        
+
         return redirect(route('deposito.index'));
     }
-    
+
 }
