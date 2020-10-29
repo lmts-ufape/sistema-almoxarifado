@@ -52,7 +52,7 @@ class MaterialController extends Controller
         $material = material::create($validatedData);
         $material->save();
 
-        return redirect(route('material.index'));
+        return redirect(route('material.indexEdit'));
     }
 
     /**
@@ -80,7 +80,7 @@ class MaterialController extends Controller
 
         $material->fill($validatedData);
         $material->save();
-        return redirect()->route('material.index');
+        return redirect()->route('material.material_index_edit');
 
     }
 
