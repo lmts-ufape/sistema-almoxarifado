@@ -2,22 +2,31 @@
 @extends('../templates.principal')
 
 @section('title')
-    Deposito Edit
+    Editar Depósito
 @endsection
 
 @section('content')
+
+    <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
+        <h2>EDITAR DEPÓSITO</h2>
+    </div>
 
     <form action="{{ route('deposito.update', $deposito->id) }}" method="POST">
 
         @csrf
         @method('PUT')
 
-        <label for="nome"> Nome: </label>
-        <input type="text" name="nome" id="nome" value="{{ $deposito->nome }}">
-        
-        <label for="codigo"> Código: </label>
-        <input type="text" name="codigo" id="codigo" value="{{ $deposito->codigo }}" disabled>
-        
-    <input type="submit" value="Salvar">
+        <div class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
+            <div class="form-group col-md-3">
+                <label for="nome">Nome do depósito</label>
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Depósito" value="{{ old('nome', $deposito->nome) }}">
+            </div>
+            <div class="form-group col-md-2" >
+                <label for="inputCodigo">Código</label>
+                <input type="text" class="form-control" id="inputCodigo" name="codigo" placeholder="Código" value="{{ old('codigo', $deposito->codigo) }}">
+            </div>
+        </div>
+
+    <input class="btn btn-success" type="submit" value="Atualizar">
 
 @endsection
