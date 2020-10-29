@@ -10,24 +10,24 @@
     <form method="POST" action="{{ route('material.store') }}">
         @csrf
         <div class="form-row">
-          <div class="form-group col-md-3">
-            <label for="inputMaterial">Material</label>
-            <input type="text" class="form-control" id="inputMaterial" name="nome" placeholder="Material" value="{{ old('nome') }}">
-          </div>
-          <div class="form-group col-md-2">
-            <label for="inputCodigo">Código</label>
-            <input type="text" class="form-control" id="inputCodigo" name="codigo" placeholder="Código" value="{{ old('codigo') }}">
-          </div>
-          <div class="form-group col-md-2">
-            <label for="inputQuantidadeMin">Quantidade mínima</label>
-            <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" value="{{ old('quantidade_minima') }}">
-          </div>
+            <div class="form-group col-md-3">
+                <label for="inputMaterial">Material</label>
+                <input type="text" class="form-control" id="inputMaterial" name="nome" placeholder="Material" value="{{ old('nome') }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputCodigo">Código</label>
+                <input type="text" class="form-control" id="inputCodigo" name="codigo" placeholder="Código" value="{{ old('codigo') }}">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputQuantidadeMin">Quantidade mínima</label>
+                <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" value="{{ old('quantidade_minima') }}">
+            </div>
         </div>
         <div  >
-          <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
-            <label for="inputDescricao">Descrição</label>
-            <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3" value="{{ old('descricao') }}"></textarea>
-          </div>
+            <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
+                <label for="inputDescricao">Descrição</label>
+                <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3" value="{{ old('descricao') }}"></textarea>
+            </div>
         </div>
 
         @if($errors->any())
