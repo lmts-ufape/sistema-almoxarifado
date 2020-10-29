@@ -32,5 +32,5 @@
             @endempty
 
         </tbody>
-      </table>
+    </table>
 @endsection
