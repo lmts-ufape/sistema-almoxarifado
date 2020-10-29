@@ -50,7 +50,7 @@
             <div>
                 <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
                     <label for="inputDescricao">Descrição</label>
-                    <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3" value="{{ old('descricao') }}"></textarea>
+                    <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3">{{ old('descricao') }}</textarea>
                 </div>
             </div>
 
