@@ -20,7 +20,7 @@ class DepositoController extends Controller {
         $depositos = $depositos->all();
         $estoques = Estoque::all();
 
-        return view('deposito.deposito', compact('depositos','estoques'));
+        return view('deposito.deposito_consult', compact('depositos','estoques'));
     }
 
     public function getEstoques($deposito_id){

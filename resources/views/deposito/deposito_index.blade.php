@@ -2,12 +2,14 @@
 @extends('../templates.principal')
 
 @section('title')
-    Deposito
+    Depositos
 @endsection
 
 @section('content')
 
-    <a href="{{ route('deposito.create') }}"> <Button> Add Deposito </Button> </a>
+    <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
+        <h2>DEPÓSITOS CADASTRADOS</h2>
+    </div>
 
     <table border="1">
         <thead>
@@ -27,7 +29,7 @@
                 <td> {{ $deposito->codigo }} </td>
                 <td> <a href="{{ route('deposito.show', $deposito->id) }}"> <Button> Mostrar </Button> </a></td>
                 <td> <a href="{{ route('deposito.edit', $deposito->id) }}"> <Button> Editar </Button> </td>
-                <td> 
+                <td>
                     <form action="{{ route('deposito.destroy', $deposito->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
@@ -38,5 +40,5 @@
         @endforeach
         </tbody>
     </table>
-    
+
 @endsection
