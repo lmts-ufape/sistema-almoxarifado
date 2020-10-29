@@ -89,7 +89,7 @@
 
     </div>
 
-    <div id="appRodape" class="fixed-bottom navbar-light" style="background-color:#3E3767; padding-bottom:1rem; color:white">
+    <div id="appRodape" class="navbar-light" style="background-color:#3E3767; padding-bottom:1rem; color:white">
         <div class="container" >
             <div class="row justify-content-center" style="border-bottom: #949494 2px solid; padding: 10px; font-weight: bold">
                 <div class="col-sm-3" align="center" >
