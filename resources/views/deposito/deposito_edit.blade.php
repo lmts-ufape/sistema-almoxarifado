@@ -27,6 +27,12 @@
             </div>
         </div>
 
-    <input class="btn btn-success" type="submit" value="Atualizar">
+        <input class="btn btn-success" type="submit" value="Atualizar">
+    </form>
+    <form action="{{ route('deposito.destroy', $deposito->id) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <Button class="btn btn-danger" type="submit"> Remover </Button>
+    </form>
 
 @endsection
