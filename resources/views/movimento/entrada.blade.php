@@ -15,7 +15,7 @@
             <div class="form-group col-md-4">
                 <label for="inputMaterial">Material</label>
                 <select id="inputMaterial" class="form-control" name="material_id">
-                    <option selected>Escolher...</option>
+                    <option selected hidden>Escolher...</option>
                     @foreach($materiais as $material)
                         <option value="{{$material->id}}"> {{ $material->id }}. {{ $material->nome }} </option>
                     @endforeach
@@ -24,7 +24,7 @@
             <div class="form-group col-md-4">
                 <label for="inputMaterial">Depósito</label>
                 <select id="inputMaterial" class="form-control" name="deposito_id">
-                    <option selected>Escolher...</option>
+                    <option selected hidden>Escolher...</option>
                     @foreach($depositos as $deposito)
                         <option value="{{ $deposito->id }}"> {{ $deposito->id }}. {{$deposito->nome}} </option>
                     @endforeach
@@ -35,7 +35,7 @@
                 <input type="number" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
             </div>
         </div>
-            <div  >
+            <div>
                 <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
                     <label for="inputDescricao">Descrição</label>
                     <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3" value="{{ old('descricao') }}"></textarea>
