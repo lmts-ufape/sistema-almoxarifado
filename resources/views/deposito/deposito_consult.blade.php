@@ -4,22 +4,28 @@
 @section('title') Depositos @endsection
 
 @section('content')
-    <h2>CONSULTAR DEPÓSITOS</h2>
+    <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
+        <h2>CONSULTAR DEPÓSITOS</h2>
+    </div>
 
-    <label>Lista de Depositos:</label>
-
-    </br>
-
-    <select name="selectDeposito">
-        <option>Depositos</option>
+    <select name="selectDeposito" id="selectDeposito" style="float: right">
+        <option selected hidden>Escolher depósito</option>
         @foreach($depositos as $d)
-            <option value="{{ $d->id }}"> {{$d->nome}} </option>
+            <option value="{{ $d->id }}">{{ $d->id }}. {{$d->nome}} </option>
         @endforeach
     </select>
 
-    <ul id="listaEstoque">
+    <table class="table table-hover" >
+        <thead style="background-color: #151631; color: white; border-radius: 15px">
+             <tr>
+                {{-- <th scope="col">Imagem</th> --}}
+                <th scope="col">Material</th>
+                <th scope="col">Quantidade</th>
+            </tr>
+        </thead>
+        <tbody id="listaEstoque"></tbody>
+    </table>
 
-    </ul>
 @endsection
 @section('post-script')
     <script type="text/javascript">
@@ -29,7 +35,7 @@
             $.get('/get_estoques/' + deposito_id, function (estoques) {
                 $('#listaEstoque').empty();
                 $.each(estoques, function (key, value) {
-                    $('#listaEstoque').append('<li><b>Material: </b>' + value.material_id + ' | <b>Quantidade:</b> ' + value.quantidade + '</li>');
+                    $('#listaEstoque').append(`<tr><td>${value.material_id}</td><td>${value.quantidade}</td></tr>`);
                 });
             });
         });
