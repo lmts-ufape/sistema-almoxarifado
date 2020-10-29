@@ -13,11 +13,14 @@ class DepositoController extends Controller {
     public function index() {
         return view('deposito/deposito_index', ['depositos' => Deposito::all(), 'estoques' => Estoque::all()]);
 
-        //$depositos = new Deposito();
-        //$depositos = $depositos->all();
-        //$estoques = Estoque::all();
+    }
 
-        // return view('deposito.deposito', compact('depositos','estoques'));
+    public function consultarDepositoView(){
+        $depositos = new Deposito();
+        $depositos = $depositos->all();
+        $estoques = Estoque::all();
+
+        return view('deposito.deposito', compact('depositos','estoques'));
     }
 
     public function getEstoques($deposito_id){

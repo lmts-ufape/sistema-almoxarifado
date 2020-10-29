@@ -60,13 +60,13 @@
                         <li><a href="{{ route('material.indexEdit') }}">Editar material</a></li>
 
                         <li><a href="{{ route('deposito.create') }}">Cadastrar depósito</a></li>
-                        <li><a href="{{ route('deposito.create') }}">Editar depósito</a></li>
+                        <li><a href="{{ route('deposito.index') }}">Editar depósito</a></li>
                     </ul>
 
                     <li><b>CONSULTAR</b></li>
                     <ul>
                         <li><a href="{{ route('material.index') }}">Materiais</a></li>
-                        <li><a href="{{ route('deposito.index') }}">Depositos</a></li>
+                        <li><a href="{{ route('deposito.consultarDeposito') }}">Depositos</a></li>
                     </ul>
 
                     <li><b>GERENCIAR MATERIAIS</b></li>
