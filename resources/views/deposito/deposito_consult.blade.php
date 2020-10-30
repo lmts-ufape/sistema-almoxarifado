@@ -35,7 +35,7 @@
             $.get('/get_estoques/' + deposito_id, function (estoques) {
                 $('#listaEstoque').empty();
                 $.each(estoques, function (key, value) {
-                    $('#listaEstoque').append(`<tr><td>${value.material_id}</td><td>${value.quantidade}</td></tr>`);
+                    $('#listaEstoque').append(`<tr><td>${value.nome}</td><td>${value.quantidade}</td></tr>`);
                 });
             });
         });
