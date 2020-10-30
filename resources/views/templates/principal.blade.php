@@ -92,7 +92,7 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                           <div>
                             <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar material</li></a>
-                            <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.create') }}"><li>Editar depósito</li></a>
+                            <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar depósito</li></a>
                           </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                             <div>
                                 <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.index') }}"><li>Materiais</li></a>
-                                <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Depositos</li></a>
+                                <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.consultarDeposito') }}"><li>Depositos</li></a>
                             </div>
                         </div>
                     </div>
@@ -146,7 +146,7 @@
         </div>
     </div>
 
-    <div id="appRodape" class="fixed-bottom navbar-light" style="background-color:#3E3767; padding-bottom:1rem; color:white">
+    <div id="appRodape" class="navbar-light" style="background-color:#3E3767; padding-bottom:1rem; color:white">
         <div class="container" >
             <div class="row justify-content-center" style="border-bottom: #949494 2px solid; padding: 10px; font-weight: bold">
                 <div class="col-sm-3" align="center" >

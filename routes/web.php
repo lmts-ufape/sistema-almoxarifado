@@ -35,9 +35,8 @@ Route::post('movimento_transferencia', 'MovimentoController@transferenciaStore')
 
 Route::resource('deposito', 'DepositoController');
 Route::get('get_estoques/{deposito_id}', 'DepositoController@getEstoques' )->name('deposito.getEstoque');
+Route::get('consultarDeposito', 'DepositoController@consultarDepositoView')->name('deposito.consultarDeposito');
 
 Route::resource('cargo', 'CargoController');
-
-Route::resource('deposito', 'DepositoController');
 
 Route::resource('usuario', 'UsuarioController');

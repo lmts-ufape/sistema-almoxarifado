@@ -3,7 +3,10 @@
 @section('title') Editar Material @endsection
 
 @section('content')
-    <h2>EDITAR MATERIAL</h2>
+    <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
+        <h2>EDITAR MATERIAL</h2>
+    </div>
+
     <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}">
 
         @csrf
@@ -23,10 +26,10 @@
             <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" value="{{ old('quantidade_minima', $material->quantidade_minima) }}">
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
+        <div>
+          <div div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             <label for="inputDescricao">Descrição</label>
-            <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3" value="{{ old('descricao', $material->descricao) }}"></textarea>
+            <textarea class="form-control" name="descricao" id="inputDescricao" cols="30" rows="3">{{ old('descricao', $material->descricao) }}</textarea>
           </div>
         </div>
 
@@ -47,6 +50,6 @@
 
         @csrf
         @method('DELETE')
-        <button class="btn btn-danger" type="submit">EXCLUIR</button>
+        <button class="btn btn-danger" type="submit">Remover</button>
     </form>
 @endsection
