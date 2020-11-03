@@ -76,7 +76,9 @@
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div>
                                 <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.create') }}"><li>Material</li></a>
+                                <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.create') }}"><li>Usuário</li></a>
                                 <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.create') }}"><li>Depósito</li></a>
+                                <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.create') }}"><li>Cargo</li></a>
                             </div>
                         </div>
                     </div>
@@ -96,6 +98,7 @@
                           <div>
                             <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar material</li></a>
                             <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar depósito</li></a>
+                            <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.index') }}"><li>Editar cargo</li></a>
                           </div>
                         </div>
                     </div>

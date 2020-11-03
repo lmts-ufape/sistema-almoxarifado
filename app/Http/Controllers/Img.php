@@ -39,4 +39,12 @@ class Img {
         return $nameImage;
     }
 
+    public static function usuariosDir() {
+        return 'img/usuarios';
+    }
+
+    public static function materiaisDir() {
+        return 'img/materiais';
+    }
+
 }
