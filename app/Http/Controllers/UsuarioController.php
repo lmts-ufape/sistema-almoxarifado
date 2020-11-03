@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Usuario;
 use App\Cargo;
+use App\Http\Requests\UsuarioStoreRequest;
 use App\Http\Controllers\Img;
 
 class UsuarioController extends Controller {
@@ -18,17 +19,19 @@ class UsuarioController extends Controller {
         return view('usuario/usuario_create', ['cargos' => Cargo::all()]);
     }
 
-    public function store(Request $request) {
+    public function store(UsuarioStoreRequest $request) {
 
-        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+        $validatedFields = $request->validated();
+
+        if( ($request->hasFile('imagem') && $request->file('imagem')->isValid()) ) {
 
             $imgExtension = $request->imagem->extension();
             $imgName = Img::nameNewImage(Usuario::all(), $request->nome, $imgExtension);
 
-            $request->imagem->storeAs('img/usuarios', $imgName);
+            $request->imagem->storeAs(Img::usuariosDir(), $imgName);
             $request->imagem = $imgName;
-        }
 
+        }
 
         $data = [
             'imagem' => $request->imagem,
@@ -40,10 +43,7 @@ class UsuarioController extends Controller {
             'cargo_id' => $request->cargo,
             'email' => $request->email,
             'senha' => $request->senha,
-            'confirma_senha' => $request->confirma_senha
         ];
-
-        // dd($request->imagem); // verificacao de nome imagem
 
         Usuario::create($data);
 
