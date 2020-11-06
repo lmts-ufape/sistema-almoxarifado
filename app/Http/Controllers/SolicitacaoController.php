@@ -7,7 +7,7 @@ use App\ItemSolicitacao;
 use App\material;
 use App\Solicitacao;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class SolicitacaoController extends Controller
 {
@@ -47,5 +47,27 @@ class SolicitacaoController extends Controller
             $historicoStatus->save();
         }
         return redirect()->back()->with('success', 'Solicitação feita com sucesso');
+    }
+
+    public function list()
+    {
+        $solicitacoes = Solicitacao::all();
+        $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->get();
+        return view('solicitacao.consulta_solicitacao', [
+            'solicitacoes' => $solicitacoes, 'status' => $historicoStatus
+        ]);
+    }
+
+    public static function getItemSolicitacao($id)
+    {
+        $consulta = DB::select('select item.quantidade_solicitada, item.quantidade_aprovada, item.material_id, mat.nome, mat.descricao
+            from item_solicitacaos item, materials mat where item.solicitacao_id = ? and mat.id = item.solicitacao_id', [$id]);
+        return json_encode($consulta);
+    }
+
+    public static function getStatusSolicitacao($id)
+    {
+        $consulta = DB::select('select status.observacao from historico_statuses status where status.solicitacao_id = ?', [$id]);
+        return json_encode($consulta);
     }
 }
