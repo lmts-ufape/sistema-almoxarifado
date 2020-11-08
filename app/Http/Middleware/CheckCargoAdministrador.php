@@ -17,7 +17,6 @@ class CheckCargoAdministrador
      */
     public function handle($request, Closure $next)
     {
-        Log::info($request);
         if (Auth::user()->cargo_id == 2) {
             return $next($request);
         } else {
