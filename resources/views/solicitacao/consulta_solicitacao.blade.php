@@ -22,7 +22,7 @@
             @for ($i = 0; $i < count($solicitacoes); $i++)
                 <tr>
                     <td>{{$solicitacoes[$i]->id}}</td>
-                    <td>João</td>
+                    <td>{{ Auth::user()->nome }}</td>
                     <td><a type="button" class="showDetails" data-id="{{$solicitacoes[$i]->id}}">Abrir</a></td>
                     <td>{{$status[$i]->status}}</td>
                     <td>{{ date('d-m-Y',  strtotime($status[$i]->created_at))}}</td>
