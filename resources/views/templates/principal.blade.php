@@ -25,7 +25,7 @@
     </script>
 
 </head>
-<body>
+<body style="background-color: #151631">
     <div id="app" >
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #3E3767;" >
             <div class="container" >
@@ -143,7 +143,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                     @endif
                 @endauth
                 @auth
@@ -204,7 +204,7 @@
                     </div>
                 @else
                     <div>
-                        <a type="button" style="color: white; text-decoration: none; display: block" href="{{ route('logout') }}"  
+                        <a type="button" style="color: white; text-decoration: none; display: block" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <div class="menu" id="consultaSolicitacao" style="padding: 10px">
                                 <h6 class="mb-0">
