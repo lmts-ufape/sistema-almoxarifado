@@ -8,7 +8,7 @@
 @section('content')
 
     <div style="border-bottom: #949494 2px solid; padding: 5px; margin-bottom: 10px">
-        <h2>Editar USUÁRIO</h2>
+        <h2>Editar Usuário</h2>
     </div>
 
     <form action="{{ route('usuario.update', $usuario->id) }}" enctype="multipart/form-data" method="POST">
@@ -61,11 +61,11 @@
                     <label for="cargo"> Cargo </label>
                     <select class="custom-select" name="cargo" id="cargo">
                     <option value="{{ $usuario->cargo_id }}" selected="selected">{{ $usuario->getCargo($usuario->cargo_id)->nome }}</option>
-                    @foreach( $cargos as $cargo )
-                        @if( $cargo->id != $usuario->cargo_id )
-                        <option value="{{ $cargo->id }}"> {{ $cargo->nome }} </option>
-                        @endif
-                    @endforeach
+                        @foreach( $cargos as $cargo )
+                            @if( $cargo->id != $usuario->cargo_id )
+                                <option value="{{ $cargo->id }}"> {{ $cargo->nome }} </option>
+                            @endif
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -81,12 +81,12 @@
 
             <div class="form-group">
                 <label for="senha"> Senha </label>
-                <input class="form-control" type="password" name="senha" id="senha" placeHolder="" value="{{ $usuario->senha }}">
+                <input class="form-control" type="password" name="senha" id="senha" placeHolder="">
             </div>
 
             <div class="form-group">
                 <label for="confimar_senha"> Confirmar Senha </label>
-                <input class="form-control" type="password" name="confirmar_senha" id="confirmar_senha" placeHolder="" value="{{ $usuario->confirmar_senha }}">
+                <input class="form-control" type="password" name="confirmar_senha" id="confirmar_senha" placeHolder="">
             </div>
 
             <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
