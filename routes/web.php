@@ -40,3 +40,9 @@ Route::get('consultarDeposito', 'DepositoController@consultarDepositoView')->nam
 Route::resource('cargo', 'CargoController');
 
 Route::resource('usuario', 'UsuarioController');
+
+Route::resource('solicita', 'SolicitacaoController');
+Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
+Route::get('consulta_solicitacao', 'SolicitacaoController@list')->name('consulta.solicitacao');
+Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
+Route::get('status_solicitacao/{id}', 'SolicitacaoController@getStatusSolicitacao')->name('status.solicitacao');
