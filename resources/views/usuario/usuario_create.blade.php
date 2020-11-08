@@ -44,7 +44,7 @@
 
                 <div class="form-group">
                     <label for="data_nascimento"> Data de Nascimento </label>
-                    <input class="form-control" type="date" name="data_nascimento" id="data_nascimento">
+                    <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" min="" max="">
                 </div>
 
                 <div class="form-group col-md-2">

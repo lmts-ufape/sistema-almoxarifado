@@ -6,6 +6,10 @@ use Illuminate\Support\Str;
 
 class Img {
 
+    private static function id($id) {
+        return sprintf('%u', $id);
+    }
+
     private static function nextIdTable($modelList) {
 
         $id = 0;
@@ -30,13 +34,13 @@ class Img {
     private static function extensionImage($extension) {
         return '.'.$extension;
     }
-
+    
     public static function nameNewImage($modelAll, $name, $extensionFile) {
         return self::nextIdTable($modelAll).self::nameTextImage($name).self::extensionImage($extensionFile);
     }
 
-    public static function nameUpdateImage($nameImage) {
-        return $nameImage;
+    public static function nameUpdateImage($id, $name, $extensionFile) {
+        return self::id($id).self::nameTextImage($name).self::extensionImage($extensionFile);
     }
 
     public static function usuariosDir() {

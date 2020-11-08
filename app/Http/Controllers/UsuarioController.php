@@ -55,11 +55,39 @@ class UsuarioController extends Controller {
     }
 
     public function edit($id) {
-
+        return view('usuario/usuario_edit', ['usuario' => Usuario::find($id), 'cargos' => Cargo::all()]);
     }
 
-    public function update(Request $request, $id) {
+    public function update(UsuarioStoreRequest $request, $id) {
 
+        $usuario = Usuario::find($id);
+
+        $request->validated();
+
+        if( $request->hasFile('imagem') && $request->file('imagem')->isValid() ) {
+
+            $imgName = Img::nameUpdateImage($id, $request->nome, $request->imagem->extension());
+            $request->imagem->storeAs(Img::usuariosDir(), $imgName);
+
+            $request->imagem = $imgName;
+
+        }
+
+        $data = [
+            'imagem' => $request->imagem,
+            'nome' => $request->nome,
+            'cpf' => $request->cpf,
+            'rg' => $request->rg,
+            'data_nascimento' => $request->data_nascimento,
+            'matricula' => $request->matricula,
+            'cargo_id' => $request->cargo,
+            'email' => $request->email,
+            'senha' => $request->senha,
+        ];
+
+        $usuario->fill($data)->save();
+
+        return redirect()->route('usuario.index');
     }
 
     public function destroy($id) {
