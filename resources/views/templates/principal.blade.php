@@ -98,6 +98,7 @@
                                 </a>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                 <div>
+                                    <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.index') }}"><li>Editar Usuario</li></a>
                                     <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar material</li></a>
                                     <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar depósito</li></a>
                                     <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.index') }}"><li>Editar cargo</li></a>
