@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,28 +22,34 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::resource('material', 'MaterialController')->except(['show']);
-Route::get('material/index_edit', 'MaterialController@indexEdit')->name('material.indexEdit');
+Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
+    Route::resource('material', 'MaterialController')->except(['show']);
+    Route::get('material/index_edit', 'MaterialController@indexEdit')->name('material.indexEdit');
 
 
-Route::get('nova_entrada_form', 'MovimentoController@createEntrada')->name('movimento.entradaCreate');
-Route::get('nova_saida_form', 'MovimentoController@createSaida')->name('movimento.saidaCreate');
-Route::get('transferencia_form', 'MovimentoController@createTransferencia')->name('movimento.transferenciaCreate');
+    Route::get('nova_entrada_form', 'MovimentoController@createEntrada')->name('movimento.entradaCreate');
+    Route::get('nova_saida_form', 'MovimentoController@createSaida')->name('movimento.saidaCreate');
+    Route::get('transferencia_form', 'MovimentoController@createTransferencia')->name('movimento.transferenciaCreate');
 
-Route::post('movimento_entrada', 'MovimentoController@entradaStore')->name('movimento.entradaStore');
-Route::post('movimento_saida', 'MovimentoController@saidaStore')->name('movimento.saidaStore');
-Route::post('movimento_transferencia', 'MovimentoController@transferenciaStore')->name('movimento.transferenciaStore');
+    Route::post('movimento_entrada', 'MovimentoController@entradaStore')->name('movimento.entradaStore');
+    Route::post('movimento_saida', 'MovimentoController@saidaStore')->name('movimento.saidaStore');
+    Route::post('movimento_transferencia', 'MovimentoController@transferenciaStore')->name('movimento.transferenciaStore');
 
-Route::resource('deposito', 'DepositoController');
-Route::get('get_estoques/{deposito_id}', 'DepositoController@getEstoques' )->name('deposito.getEstoque');
-Route::get('consultarDeposito', 'DepositoController@consultarDepositoView')->name('deposito.consultarDeposito');
+    Route::resource('deposito', 'DepositoController');
+    Route::get('get_estoques/{deposito_id}', 'DepositoController@getEstoques')->name('deposito.getEstoque');
+    Route::get('consultarDeposito', 'DepositoController@consultarDepositoView')->name('deposito.consultarDeposito');
 
-Route::resource('cargo', 'CargoController');
+    Route::resource('cargo', 'CargoController');
 
-Route::resource('usuario', 'UsuarioController');
+    Route::resource('usuario', 'UsuarioController');
+});
 
-Route::resource('solicita', 'SolicitacaoController');
-Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
-Route::get('consulta_solicitacao', 'SolicitacaoController@list')->name('consulta.solicitacao');
-Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
-Route::get('status_solicitacao/{id}', 'SolicitacaoController@getStatusSolicitacao')->name('status.solicitacao');
+Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
+    Route::resource('solicita', 'SolicitacaoController');
+    Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
+    Route::get('consulta_solicitacao', 'SolicitacaoController@list')->name('consulta.solicitacao');
+    Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
+    Route::get('status_solicitacao/{id}', 'SolicitacaoController@getStatusSolicitacao')->name('status.solicitacao');
+});
+
+Auth::routes();
