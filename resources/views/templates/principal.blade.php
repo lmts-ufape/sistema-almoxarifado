@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-sm-2" style="background-color: #151631; color: white; height: 550px;">
                 @auth
-                    @if (Auth::user()->cargo_id == 1)
+                    @if (Auth::user()->cargo_id == 2)
                         <div id="accordion" class="mt-3">
                             <div>
                                 <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -146,9 +146,8 @@
                         </div>    
                     @endif
                 @endauth
-
                 @auth
-                    @if (Auth::user()->cargo_id == 2)
+                    @if (Auth::user()->cargo_id == 1)
                         <div style="margin-top: 10px">
                             <a type="button" style="color: white; text-decoration: none; display: block" href="{{ route('solicita.material') }}">
                                 <div class="menu" id="solicitaMaterial" style="padding: 10px">

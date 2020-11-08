@@ -22,10 +22,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
+Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
+
     Route::resource('material', 'MaterialController')->except(['show']);
     Route::get('material/index_edit', 'MaterialController@indexEdit')->name('material.indexEdit');
-
 
     Route::get('nova_entrada_form', 'MovimentoController@createEntrada')->name('movimento.entradaCreate');
     Route::get('nova_saida_form', 'MovimentoController@createSaida')->name('movimento.saidaCreate');
@@ -44,7 +44,8 @@ Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
     Route::resource('usuario', 'UsuarioController');
 });
 
-Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
+Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
+    
     Route::resource('solicita', 'SolicitacaoController');
     Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
     Route::get('consulta_solicitacao', 'SolicitacaoController@list')->name('consulta.solicitacao');
