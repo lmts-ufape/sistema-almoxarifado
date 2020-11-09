@@ -16,11 +16,16 @@
 
     <script>
         $(document).ready(function(){
-          $(".menu").hover(function(){
-            $(this).css("background-color", "#3E3767");
-            }, function(){
-            $(this).css("background-color", " #151631");
-          });
+            $(".menu").hover(function(){
+                $(this).css("background-color", "#3E3767");
+                }, function(){
+                    $(this).css("background-color", " #151631");
+            });
+            $(".menuSupEInf").hover(function(){
+                $(this).css("background-color", "#151631");
+                }, function(){
+                    $(this).css("background-color", "#3E3767");
+                })
         });
     </script>
 
@@ -41,12 +46,16 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto" >
                         <!-- Authentication Links -->
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white; font-weight: bold" href="{{ route('home') }}">{{ __('Inicio') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: white; font-weight: bold" href="">{{ __('Sobre') }}</a>
-                        </li>
+                        <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
+                            <li class="nav-item " style="padding: 0px 15px">
+                                {{ __('Inicio') }}
+                            </li>
+                        </a>
+                        <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
+                            <li class="nav-item " style="padding: 0px 15px">
+                                {{ __('Sobre') }}
+                            </li>
+                        </a>
                     </ul>
                 </div>
             </div>
@@ -236,7 +245,7 @@
             <div class="row justify-content-center" style="border-bottom: #949494 2px solid; padding: 10px; font-weight: bold">
                 <div class="col-sm-3" align="center" >
                     <div class="row justify-content-center" style="margin-top:15px;">
-                          <div class="col-sm-12 styleItemMapaDoSite" style=" font-family:arial"><a >Início</a> | <a >Sobre</a></div>
+                          <div class="col-sm-12 styleItemMapaDoSite" style=" font-family:arial"><a href="{{ route('home') }}">Início</a> | <a href="{{ route('home') }}">Sobre</a></div>
                     </div>
                 </div>
             </div>
