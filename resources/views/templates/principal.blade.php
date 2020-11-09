@@ -41,14 +41,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto" >
                         <!-- Authentication Links -->
-                        {{-- @guest --}}
                         <li class="nav-item">
                             <a class="nav-link" style="color: white; font-weight: bold" href="{{ route('home') }}">{{ __('Inicio') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" style="color: white; font-weight: bold" href="">{{ __('Sobre') }}</a>
                         </li>
-                        {{-- @endguest --}}
                     </ul>
                 </div>
             </div>
