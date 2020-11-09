@@ -1,7 +1,7 @@
 @extends('templates.principal')
 
 @section('title')
-    Registrar-se
+    Cadastrar-se
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registrar-se') }}</div>
+                <div class="card-header">{{ __('Cadastrar-se') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
@@ -138,7 +138,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrar-se') }}
+                                    {{ __('Cadastrar-se') }}
                                 </button>
                             </div>
                         </div>
