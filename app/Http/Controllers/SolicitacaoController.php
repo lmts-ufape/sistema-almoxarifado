@@ -9,6 +9,7 @@ use App\Solicitacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SolicitacaoController extends Controller
 {
@@ -58,7 +59,8 @@ class SolicitacaoController extends Controller
     public static function getItemSolicitacao($id)
     {
         $consulta = DB::select('select item.quantidade_solicitada, item.quantidade_aprovada, item.material_id, mat.nome, mat.descricao
-            from item_solicitacaos item, materials mat where item.solicitacao_id = ? and mat.id = item.solicitacao_id', [$id]);
+            from item_solicitacaos item, materials mat where item.solicitacao_id = ? and mat.id = item.material_id', [$id]);
+        Log::info($consulta);
         return json_encode($consulta);
     }
 
