@@ -7,15 +7,11 @@ use App\ItemSolicitacao;
 use App\material;
 use App\Solicitacao;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SolicitacaoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
         $materiais = material::all();
@@ -29,6 +25,7 @@ class SolicitacaoController extends Controller
         $receptores = explode(",",  $request->dataTableReceptor);
 
         $solicitacao = new Solicitacao();
+        $solicitacao->usuario_id = Auth::user()->id;
         $solicitacao->save();
 
         for ($i = 0; $i < count($materiais); $i++) {
@@ -51,7 +48,7 @@ class SolicitacaoController extends Controller
 
     public function list()
     {
-        $solicitacoes = Solicitacao::all();
+        $solicitacoes = Solicitacao::where('usuario_id', '=', Auth::user()->id)->get();
         $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->get();
         return view('solicitacao.consulta_solicitacao', [
             'solicitacoes' => $solicitacoes, 'status' => $historicoStatus

@@ -25,6 +25,7 @@ class CreateUsuariosTable extends Migration
             $table->foreignId('cargo_id');
             $table->string('email');
             $table->string('senha');
+            $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('cargo_id')->references('id')->on('cargos');
