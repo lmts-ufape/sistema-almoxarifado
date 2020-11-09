@@ -29,10 +29,7 @@
     <div id="app" >
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #3E3767;" >
             <div class="container" >
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{asset('imagens/logo.png')}}" style="width:145px; margin-top:-5px; margin-bottom:-5px; margin-left:10px; margin-right:30px;">
 
-                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -60,6 +57,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-2" style="background-color: #151631; color: white; height: 550px;">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{asset('imagens/logo.png')}}" style="width:200px; margin-top:5px; margin-bottom:-5px; margin-left:10px; margin-right:30px;">
+
+                </a>
                 @auth
                     @if (Auth::user()->cargo_id == 2)
                         <div id="accordion" class="mt-3">
