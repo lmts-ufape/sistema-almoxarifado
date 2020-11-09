@@ -99,16 +99,17 @@
                 type: 'GET',
                 dataType: 'json',
                 success : function(data){
-
                     var ret = '';
                     for(var item in data){
+                        ret += "<tr>";
                         ret += "<td>" + data[item]['nome'] + "</td>";
                         ret += "<td>" + data[item]['descricao'] + "</td>";
                         ret += "<td>" + data[item]['quantidade_solicitada'] + "</td>";
                         ret += "<td>" + (data[item]['quantidade_aprovada'] == null ? '' : data[item]['quantidade_aprovada']) + "</td>";
+                        ret += "</tr>";
                     }
 
-                    $("#tableItens tbody").append("<tr>" + ret + "</tr>");
+                    $("#tableItens tbody").append(ret);
                     $("#overlay").hide();
                     $("#tableItens").show();
                     $("#divObservacao").show();
