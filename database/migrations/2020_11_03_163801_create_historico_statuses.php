@@ -17,7 +17,6 @@ class CreateHistoricoStatuses extends Migration
             $table->id();
             $table->string('status');
             $table->string('observacao')->nullable();
-            $table->string('receptor');
             $table->unsignedInteger('solicitacao_id')->index();
             $table->foreign('solicitacao_id')->references('id')->on('solicitacaos');
             $table->timestamps();

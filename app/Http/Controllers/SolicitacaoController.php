@@ -29,20 +29,20 @@ class SolicitacaoController extends Controller
         $solicitacao->usuario_id = Auth::user()->id;
         $solicitacao->save();
 
+        $historicoStatus = new HistoricoStatus();
+        $historicoStatus->status = "Aguardando Aprovação";
+        $historicoStatus->observacao = $request->observacao;
+        $historicoStatus->solicitacao_id = $solicitacao->id;
+        $historicoStatus->save();
+
         for ($i = 0; $i < count($materiais); $i++) {
 
             $itemSolicitacao = new ItemSolicitacao();
             $itemSolicitacao->quantidade_solicitada = $quantidades[$i];
+            $itemSolicitacao->receptor = $receptores[$i];
             $itemSolicitacao->material_id = $materiais[$i];
             $itemSolicitacao->solicitacao_id = $solicitacao->id;
             $itemSolicitacao->save();
-
-            $historicoStatus = new HistoricoStatus();
-            $historicoStatus->status = "Aguardando Aprovação";
-            $historicoStatus->observacao = $request->observacao;
-            $historicoStatus->receptor = $receptores[$i];
-            $historicoStatus->solicitacao_id = $solicitacao->id;
-            $historicoStatus->save();
         }
         return redirect()->back()->with('success', 'Solicitação feita com sucesso');
     }
@@ -50,7 +50,7 @@ class SolicitacaoController extends Controller
     public function list()
     {
         $solicitacoes = Solicitacao::where('usuario_id', '=', Auth::user()->id)->get();
-        $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->get();
+        $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->orderBy('id')->get();
         return view('solicitacao.consulta_solicitacao', [
             'solicitacoes' => $solicitacoes, 'status' => $historicoStatus
         ]);
@@ -60,7 +60,6 @@ class SolicitacaoController extends Controller
     {
         $consulta = DB::select('select item.quantidade_solicitada, item.quantidade_aprovada, item.material_id, mat.nome, mat.descricao
             from item_solicitacaos item, materials mat where item.solicitacao_id = ? and mat.id = item.material_id', [$id]);
-        Log::info($consulta);
         return json_encode($consulta);
     }
 
