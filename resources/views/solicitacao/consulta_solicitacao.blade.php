@@ -25,7 +25,7 @@
                     <td>{{ Auth::user()->nome }}</td>
                     <td><a type="button" class="showDetails" data-id="{{$solicitacoes[$i]->id}}">Abrir</a></td>
                     <td>{{$status[$i]->status}}</td>
-                    <td>{{ date('d-m-Y',  strtotime($status[$i]->created_at))}}</td>
+                    <td>{{ date('d/m/Y',  strtotime($status[$i]->created_at))}}</td>
                 </tr>
             @endfor
         </tbody>
