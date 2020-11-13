@@ -3,17 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return view('index');
 });
@@ -42,15 +31,31 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
     Route::resource('cargo', 'CargoController');
 
     Route::resource('usuario', 'UsuarioController');
+
+    Route::resource('solicita', 'SolicitacaoController');
+    Route::get('solicitacoes', 'SolicitacaoController@listAllSolicitacoes')->name('solicitacoes');
+    Route::POST('solicitacoes', 'SolicitacaoController@aprovarSolicitacao')->name('aprovar.solicitacao');
+
+    Route::get('despaches', 'SolicitacaoController@listSolicitacoesAprovadas')->name('despaches');
+    Route::POST('despache_solicitacao', 'SolicitacaoController@despacharSolicitacao')->name('despache.solicitacao');
+    Route::POST('cancela_solicitacao', 'SolicitacaoController@cancelarSolicitacao')->name('cancela.solicitacao');
+
+    Route::get('itens_solicitacao_admin/{id}', 'SolicitacaoController@getItemSolicitacaoAdmin')->name('itens.solicitacao.admin');
+    Route::get('observacao_status/{id}', 'SolicitacaoController@getObservacaoStatus')->name('observacao_status');
 });
 
 Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
     
     Route::resource('solicita', 'SolicitacaoController');
     Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
-    Route::get('consulta_solicitacao', 'SolicitacaoController@list')->name('consulta.solicitacao');
+    Route::get('consulta_solicitacao', 'SolicitacaoController@listSolicitacoesRequerente')->name('consulta.solicitacao');
     Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
-    Route::get('status_solicitacao/{id}', 'SolicitacaoController@getStatusSolicitacao')->name('status.solicitacao');
+});
+
+Route::middleware(['auth'])->group(function () {
+    
+    Route::resource('solicita', 'SolicitacaoController');
+    Route::get('observacao_solicitacao/{id}', 'SolicitacaoController@getObservacaoSolicitacao')->name('observacao.solicitacao');
 });
 
 Auth::routes();

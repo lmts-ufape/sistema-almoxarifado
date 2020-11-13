@@ -1,7 +1,7 @@
 
 @extends('templates.principal')
 
-@section('title') Solicitações @endsection
+@section('title') Solicitar Material @endsection
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
