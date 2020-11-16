@@ -15,6 +15,19 @@
         </div>
     @endif
 
+    @if($errors->any())
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <ul>
+                @foreach($errors->all() as $erro)
+                        <li>{{ $erro }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <table id="tableSolicitacoes" class="table table-hover" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
@@ -77,15 +90,6 @@
                     <div id="observacaoAdmin" style="display: none; margin-top: 10px">
                         <label for="inputObservacao">Suas observações</label>
                         <textarea class="form-control" name="observacao" id="inputObservacao" cols="30" rows="3"></textarea>
-                        @if($errors->any())
-                            <div>
-                                <ul>
-                                    @foreach($errors->all() as $erro)
-                                        <li>{{ $erro }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
                     </div>
                 </div>
                 <div class="modal-footer">

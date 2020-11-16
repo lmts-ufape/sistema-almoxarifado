@@ -10,7 +10,6 @@ use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class SolicitacaoController extends Controller
 {
@@ -22,30 +21,34 @@ class SolicitacaoController extends Controller
 
     public function store(Request $request)
     {
-        $materiais = explode(",",  $request->dataTableMaterial);
-        $quantidades = explode(",",  $request->dataTableQuantidade);
-        $receptores = explode(",",  $request->dataTableReceptor);
+        if (empty($request->dataTableMaterial) || empty($request->dataTableQuantidade) || empty($request->dataTableReceptor)) {
+            return redirect()->back()->withErrors('Adicione o(s) material(is), sua(s) quantidade(s) e seu(s) receptor(es)');
+        } else {
+            $materiais = explode(",",  $request->dataTableMaterial);
+            $quantidades = explode(",",  $request->dataTableQuantidade);
+            $receptores = explode(",",  $request->dataTableReceptor);
 
-        $solicitacao = new Solicitacao();
-        $solicitacao->usuario_id = Auth::user()->id;
-        $solicitacao->observacao = $request->observacao;
-        $solicitacao->save();
+            $solicitacao = new Solicitacao();
+            $solicitacao->usuario_id = Auth::user()->id;
+            $solicitacao->observacao = $request->observacao;
+            $solicitacao->save();
 
-        $historicoStatus = new HistoricoStatus();
-        $historicoStatus->status = "Aguardando Aprovação";
-        $historicoStatus->solicitacao_id = $solicitacao->id;
-        $historicoStatus->save();
+            $historicoStatus = new HistoricoStatus();
+            $historicoStatus->status = "Aguardando Aprovação";
+            $historicoStatus->solicitacao_id = $solicitacao->id;
+            $historicoStatus->save();
 
-        for ($i = 0; $i < count($materiais); $i++) {
+            for ($i = 0; $i < count($materiais); $i++) {
 
-            $itemSolicitacao = new ItemSolicitacao();
-            $itemSolicitacao->quantidade_solicitada = $quantidades[$i];
-            $itemSolicitacao->receptor = $receptores[$i];
-            $itemSolicitacao->material_id = $materiais[$i];
-            $itemSolicitacao->solicitacao_id = $solicitacao->id;
-            $itemSolicitacao->save();
+                $itemSolicitacao = new ItemSolicitacao();
+                $itemSolicitacao->quantidade_solicitada = $quantidades[$i];
+                $itemSolicitacao->receptor = $receptores[$i];
+                $itemSolicitacao->material_id = $materiais[$i];
+                $itemSolicitacao->solicitacao_id = $solicitacao->id;
+                $itemSolicitacao->save();
+            }
+            return redirect()->back()->with('success', 'Solicitação feita com sucesso');
         }
-        return redirect()->back()->with('success', 'Solicitação feita com sucesso');
     }
 
     public function aprovarSolicitacao(Request $request)
@@ -63,7 +66,7 @@ class SolicitacaoController extends Controller
                     return redirect()->back()->withErrors('Informe o motivo de a solicitação ter sido negada');
                 } else {
                     DB::update('update historico_statuses set status = ?, observacao = ? where solicitacao_id = ?', ['Negado', $request->observacao, $request->solicitacaoID]);
-                    
+
                     return redirect()->back()->with('success', 'Solicitação cancelada com sucesso');
                 }
             } else if ($request->action == 'aprova') {
@@ -144,8 +147,8 @@ class SolicitacaoController extends Controller
         $itens = ItemSolicitacao::where('solicitacao_id', '=', $request->id)->get();
         $materiaisID = array_column($itens->toArray(), 'material_id');
         $quantAprovadas = array_column($itens->toArray(), 'quantidade_aprovada');
-        
-        for($i = 0; $i < count($materiaisID); $i++) {
+
+        for ($i = 0; $i < count($materiaisID); $i++) {
             DB::update('update materials set quantidade_minima = quantidade_minima - ? where id = ?', [$quantAprovadas[$i], $materiaisID[$i]]);
         }
 
