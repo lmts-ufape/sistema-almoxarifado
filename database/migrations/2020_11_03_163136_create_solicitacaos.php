@@ -15,6 +15,7 @@ class CreateSolicitacaos extends Migration
     {
         Schema::create('solicitacaos', function (Blueprint $table) {
             $table->id();
+            $table->string('observacao')->nullable();
             $table->unsignedInteger('usuario_id')->index();
             $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->timestamps();
