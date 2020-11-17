@@ -20,16 +20,16 @@
             </tr>
         </thead>
         <tbody>
-            @if (count($requerentes) > 0 && count($solicitacoes) > 0 && count($status) > 0)
+            @if (count($requerentes) > 0 && count($status) > 0)
                 @for ($b = 0; $b < count($requerentes); $b++)
-                    @for ($i = 0; $i < count($solicitacoes); $i++)
+                    @for ($i = 0; $i < count($status); $i++)
                         <tr>
-                            <td>{{ $solicitacoes[$i]->id }}</td>
+                            <td>{{ $status[$i]->solicitacao_id }}</td>
                             <td>{{ $requerentes[$b]->nome }}</td>
-                            <td><a type="button" class="showDetails" data-id="{{ $solicitacoes[$i]->id }}">Abrir</a></td>
+                            <td><a type="button" class="showDetails" data-id="{{ $status[$i]->solicitacao_id }}">Abrir</a></td>
                             <td>{{ $status[$i]->status }}</td>
                             <td>{{ date('d/m/Y',  strtotime($status[$i]->created_at))}}</td>
-                            <td><a type="button" class="btn btn-success despache" data-id="{{ $solicitacoes[$i]->id }}">Despachar</a><a type="button" style="margin-left: 10px" class="btn btn-danger cancelaDespache" data-id="{{ $solicitacoes[$i]->id }}">Cancelar</a></td>
+                            <td><a type="button" class="btn btn-success despache" data-id="{{ $status[$i]->solicitacao_id }}">Despachar</a><a type="button" style="margin-left: 10px" class="btn btn-danger cancelaDespache" data-id="{{ $status[$i]->solicitacao_id }}">Cancelar</a></td>
                         </tr>
                     @endfor
                 @endfor
