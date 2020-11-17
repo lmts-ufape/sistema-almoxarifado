@@ -37,6 +37,18 @@ class DatabaseSeeder extends Seeder
         ]);
         $admTeste->save();
 
+        $requerenteTeste = new Usuario([
+            'imagem' => 'requerente.jpg',
+            'nome' => 'requerente',
+            'cpf' => '00000000000',
+            'rg' => '11111111111',
+            'data_nascimento' => '01/02/2000',
+            'matricula' => '222222222',
+            'cargo_id' => '1',
+            'email' => 'requerente@admin.teste',
+            'senha' => '$2y$10$ZGZg6dMzSYegqGT.lKN6deaVsxnMFidwq9Z5f7t3ytaDQ6UE70zFi'
+        ]);
+        $requerenteTeste->save();
 
 
 
