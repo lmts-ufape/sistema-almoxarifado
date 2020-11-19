@@ -16,7 +16,7 @@
 
     <script>
         $(document).ready(function(){
-            $(".menu").hover(function(){
+            $(".menuEffect").hover(function(){
                 $(this).css("background-color", "#3E3767");
                 }, function(){
                     $(this).css("background-color", " #151631");
@@ -25,7 +25,17 @@
                 $(this).css("background-color", "#151631");
                 }, function(){
                     $(this).css("background-color", "#3E3767");
-                })
+            });
+
+            let selectedCollapse = sessionStorage.getItem('selectedCollapse');
+            if(selectedCollapse != null) {
+                $(selectedCollapse).addClass('show');
+            }
+
+            $('.selectedMenu').on('click', function(){ 
+                let target = $(this).data('target');
+                sessionStorage.setItem('selectedCollapse', target);
+            });
         });
     </script>
 
@@ -73,7 +83,7 @@
                         <div id="accordion" class="mt-3">
                             <div>
                                 <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <div class="menu" id="headingOne" style="padding: 10px">
+                                    <div class="menuEffect" id="headingOne" style="padding: 10px">
                                         <h6 class="mb-0">
                                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -85,16 +95,16 @@
                                 </a>
                                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.create') }}"><li>Material</li></a>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.create') }}"><li>Usuário</li></a>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.create') }}"><li>Depósito</li></a>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.create') }}"><li>Cargo</li></a>
+                                        <a data-target="#collapseOne" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.create') }}"><li>Material</li></a>
+                                        <a data-target="#collapseOne" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.create') }}"><li>Usuário</li></a>
+                                        <a data-target="#collapseOne" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.create') }}"><li>Depósito</li></a>
+                                        <a data-target="#collapseOne" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.create') }}"><li>Cargo</li></a>
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                    <div class="menu" id="headingTwo" style="padding: 10px">
+                                    <div class="menuEffect" id="headingTwo" style="padding: 10px">
                                         <h6 class="mb-0">
                                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -106,16 +116,16 @@
                                 </a>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                 <div>
-                                    <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.index') }}"><li>Editar Usuario</li></a>
-                                    <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar material</li></a>
-                                    <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar depósito</li></a>
-                                    <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.index') }}"><li>Editar cargo</li></a>
+                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.index') }}"><li>Editar Usuario</li></a>
+                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar material</li></a>
+                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar depósito</li></a>
+                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.index') }}"><li>Editar cargo</li></a>
                                 </div>
                                 </div>
                             </div>
                             <div>
                                 <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                    <div class="menu" id="headingThree" style="padding: 10px">
+                                    <div class="menuEffect" id="headingThree" style="padding: 10px">
                                         <h6 class="mb-0">
                                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-box" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
@@ -126,15 +136,15 @@
                                 </a>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                     <div>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.entradaCreate') }}"><li>Nova Entrada</li></a>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.saidaCreate') }}"><li>Nova Saída</li></a>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.transferenciaCreate') }}"><li>Nova Transferência</li></a>
+                                        <a data-target="#collapseThree" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.entradaCreate') }}"><li>Nova Entrada</li></a>
+                                        <a data-target="#collapseThree" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.saidaCreate') }}"><li>Nova Saída</li></a>
+                                        <a data-target="#collapseThree" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.transferenciaCreate') }}"><li>Nova Transferência</li></a>
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    <div class="menu" id="headingFour" style="padding: 10px">
+                                    <div class="menuEffect" id="headingFour" style="padding: 10px">
                                         <h6 class="mb-0">
                                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
@@ -146,14 +156,15 @@
                                 </a>
                                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                                     <div>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.index') }}"><li>Materiais</li></a>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.consultarDeposito') }}"><li>Depositos</li></a>
+                                        <a data-target="#collapseFour" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.index') }}"><li>Materiais</li></a>
+                                        <a data-target="#collapseFour" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.consultarDeposito') }}"><li>Depositos</li></a>
+                                        <a data-target="#collapseFour" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('solicitacoe.admin') }}"><li>Solicitações</li></a>
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    <div class="menu" id="headingFive" style="padding: 10px">
+                                    <div class="menuEffect" id="headingFive" style="padding: 10px">
                                         <h6 class="mb-0">
                                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-file-earmark-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
@@ -166,8 +177,8 @@
                                 </a>
                                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
                                     <div>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('solicitacoes') }}"><li>Aprovar solicitações</li></a>
-                                        <a class="menu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('despaches') }}"><li>Despaches</li></a>
+                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('analise.solicitacoes') }}"><li>Analisar</li></a>
+                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('despache.solicitacoes') }}"><li>Despachar</li></a>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +189,7 @@
                     @if (Auth::user()->cargo_id == 1)
                         <div style="margin-top: 10px">
                             <a type="button" style="color: white; text-decoration: none; display: block" href="{{ route('solicita.material') }}">
-                                <div class="menu" id="solicitaMaterial" style="padding: 10px">
+                                <div class="menuEffect" id="solicitaMaterial" style="padding: 10px">
                                     <h6 class="mb-0">
                                         <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clipboard-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
@@ -191,7 +202,7 @@
                         </div>
                         <div>
                             <a type="button" style="color: white; text-decoration: none; display: block" href="{{ route('consulta.solicitacao') }}">
-                                <div class="menu" id="consultaSolicitacao" style="padding: 10px">
+                                <div class="menuEffect" id="consultaSolicitacao" style="padding: 10px">
                                     <h6 class="mb-0">
                                         <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
@@ -207,7 +218,7 @@
                 @guest
                     <div style="margin-top: 10px">
                         <a type="button" style="color: white; text-decoration: none; display: block" href="{{ route('login') }}">
-                            <div class="menu" id="consultaSolicitacao" style="padding: 10px">
+                            <div class="menuEffect" id="consultaSolicitacao" style="padding: 10px">
                                 <h6 class="mb-0">
                                     <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-box-arrow-in-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
@@ -220,7 +231,7 @@
                     </div>
                     <div>
                         <a type="button" style="color: white; text-decoration: none; display: block" href="{{ route('register') }}">
-                            <div class="menu" id="consultaSolicitacao" style="padding: 10px">
+                            <div class="menuEffect" id="consultaSolicitacao" style="padding: 10px">
                                 <h6 class="mb-0">
                                     <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
@@ -233,8 +244,8 @@
                 @else
                     <div>
                         <a type="button" style="color: white; text-decoration: none; display: block" href="{{ route('logout') }}"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <div class="menu" id="consultaSolicitacao" style="padding: 10px">
+                                onclick="event.preventDefault(); sessionStorage.clear(); document.getElementById('logout-form').submit();">
+                            <div class="menuEffect" id="consultaSolicitacao" style="padding: 10px">
                                 <h6 class="mb-0">
                                     <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-box-arrow-in-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>

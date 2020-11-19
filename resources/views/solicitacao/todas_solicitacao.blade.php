@@ -1,11 +1,11 @@
 
 @extends('templates.principal')
 
-@section('title') Consultar Solicitações @endsection
+@section('title') Solicitações @endsection
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
-        <h2>CONSULTAR SOLICITAÇÕES</h2>
+        <h2>SOLICITAÇÕES</h2>
     </div>
 
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
@@ -120,7 +120,7 @@
             })
 
             $.ajax({
-                url: '/itens_solicitacao/' + id,
+                url: '/itens_solicitacao_admin/' + id,
                 type: 'GET',
                 dataType: 'json',
                 success : function(data){

@@ -33,15 +33,13 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
     Route::resource('usuario', 'UsuarioController');
 
     Route::resource('solicita', 'SolicitacaoController');
-    Route::get('solicitacoes', 'SolicitacaoController@listAllSolicitacoes')->name('solicitacoes');
-    Route::POST('solicitacoes', 'SolicitacaoController@aprovarSolicitacao')->name('aprovar.solicitacao');
-
-    Route::get('despaches', 'SolicitacaoController@listSolicitacoesAprovadas')->name('despaches');
+    Route::get('analise_solicitacoes', 'SolicitacaoController@listSolicitacoesAnalise')->name('analise.solicitacoes');
+    Route::POST('analise_solicitacoes', 'SolicitacaoController@aprovarSolicitacao')->name('aprovar.solicitacao');
+    Route::get('despache_solicitacoes', 'SolicitacaoController@listSolicitacoesAprovadas')->name('despache.solicitacoes');
     Route::POST('despache_solicitacao', 'SolicitacaoController@despacharSolicitacao')->name('despache.solicitacao');
     Route::POST('cancela_solicitacao', 'SolicitacaoController@cancelarSolicitacao')->name('cancela.solicitacao');
-
     Route::get('itens_solicitacao_admin/{id}', 'SolicitacaoController@getItemSolicitacaoAdmin')->name('itens.solicitacao.admin');
-    Route::get('observacao_status/{id}', 'SolicitacaoController@getObservacaoStatus')->name('observacao_status');
+    Route::get('solicitacoes_admin', 'SolicitacaoController@listTodasSolicitacoes')->name('solicitacoe.admin');
 });
 
 Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {

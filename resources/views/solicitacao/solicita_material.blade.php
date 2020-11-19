@@ -58,13 +58,13 @@
 
     <form method="POST" id="formSolicitacao" name="formSolicitacao" action="{{ route('solicita.store') }}">
         @csrf
-        <table id="tableMaterial" class="table table-hover" style="margin-top: 10px;">
+        <table id="tableMaterial" class="table table-hover table-responsive-md" style="margin-top: 10px">
             <thead style="background-color: #151631; color: white; border-radius: 15px">
                 <tr>
-                    <th scope="col">Material</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col">Receptor</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col" style="text-align: center">Material</th>
+                    <th scope="col" style="text-align: center">Quantidade</th>
+                    <th scope="col" style="text-align: center">Receptor</th>
+                    <th scope="col" style="text-align: center">Ações</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -112,9 +112,9 @@
     }
 
     function construirTable(quantidade, receptor){
-        return "<td class=\"quantidadeRow\">" + quantidade + "</td>" +
-        "<td class=\"receptorRow\">" + receptor + "</td>" +
-        "<td>" +
+        return "<td class=\"quantidadeRow\" style=\"text-align: center\">" + quantidade + "</td>" +
+        "<td class=\"receptorRow\" style=\"text-align: center\">" + receptor + "</td>" +
+        "<td style=\"text-align: center\">" +
             "<div class=\"dropdown\">" +
                 "<button class=\"btn btn-secondary dropdown\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
                     ":" +
@@ -160,7 +160,7 @@
 
     function addRowTable() {
         $("#tableMaterial tbody").append("<tr>" +
-            "<td class=\"materialRow\">" + $("#inputMaterial option:selected").text()+ "</td>" + 
+            "<td class=\"materialRow\" style=\"text-align: center\">" + $("#inputMaterial option:selected").text()+ "</td>" + 
             construirTable($("#inputQuantidade").val(), $("#inputReceptor").val()));
     }
 
@@ -176,7 +176,7 @@
 
     function refactorRowtable() {
         var ret = "<tr>" +
-            "<td class=\"materialRow\">" + nomeMaterial + "</td>" + construirTable($("#inputQuantidade").val(), $("#inputReceptor").val());
+            "<td class=\"materialRow\" style=\"text-align: center\">" + nomeMaterial + "</td>" + construirTable($("#inputQuantidade").val(), $("#inputReceptor").val());
         
         nomeMaterial = null;
         return ret;
