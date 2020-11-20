@@ -23,16 +23,7 @@ class RegisterController extends Controller
 
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'nome' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:usuarios'],
-            'cpf' => ['required', 'numeric', 'digits:11'],
-            'rg' => ['required', 'numeric', 'digits:11'],
-            'data_nascimento' => ['required', 'date'],
-            'matricula' => ['required', 'integer', 'min:1'],
-            'imagem' => ['required', 'image'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return Validator::make($data, \App\Usuario::$rules, \App\Usuario::$messages);
     }
 
     protected function create(array $data)

@@ -1,11 +1,11 @@
 
 @extends('templates.principal')
 
-@section('title') Consultar Solicitações @endsection
+@section('title') Despache @endsection
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
-        <h2>CONSULTAR SOLICITAÇÃO</h2>
+        <h2>Despache</h2>
     </div>
 
     <table id="tableSolicitacoes" class="table table-hover" style="margin-top: 10px;">
@@ -16,18 +16,24 @@
                 <th scope="col">Material</th>
                 <th scope="col">Situação</th>
                 <th scope="col">Data</th>
+                <th scope="col">Despachar ou Cancelar</th>
             </tr>
         </thead>
         <tbody>
-            @for ($i = 0; $i < count($status); $i++)
-                <tr>
-                    <td>{{ $status[$i]->solicitacao_id }}</td>
-                    <td>{{ Auth::user()->nome }}</td>
-                    <td><a type="button" class="showDetails" data-id="{{ $status[$i]->solicitacao_id }}">Abrir</a></td>
-                    <td>{{ $status[$i]->status }}</td>
-                    <td>{{ date('d/m/Y',  strtotime($status[$i]->created_at))}}</td>
-                </tr>
-            @endfor
+            @if (count($requerentes) > 0 && count($status) > 0)
+                @for ($b = 0; $b < count($requerentes); $b++)
+                    @for ($i = 0; $i < count($status); $i++)
+                        <tr>
+                            <td>{{ $status[$i]->solicitacao_id }}</td>
+                            <td>{{ $requerentes[$b]->nome }}</td>
+                            <td><a type="button" class="showDetails" data-id="{{ $status[$i]->solicitacao_id }}">Abrir</a></td>
+                            <td>{{ $status[$i]->status }}</td>
+                            <td>{{ date('d/m/Y',  strtotime($status[$i]->created_at))}}</td>
+                            <td><a type="button" class="btn btn-success despache" data-id="{{ $status[$i]->solicitacao_id }}">Despachar</a><a type="button" style="margin-left: 10px" class="btn btn-danger cancelaDespache" data-id="{{ $status[$i]->solicitacao_id }}">Cancelar</a></td>
+                        </tr>
+                    @endfor
+                @endfor
+            @endif
         </tbody>
     </table>
 
@@ -58,7 +64,11 @@
                     <tbody id="listaItens"></tbody>
                 </table>
                 <div id="observacao" style="display: none">
-                    <label for="inputObservacao">Observações</label>
+                    <label for="observacaoRequerente">Observações do requerente</label>
+                    <textarea class="form-control" id="observacaoRequerente" cols="30" rows="3" readonly></textarea>
+                </div>
+                <div id="observacaoAdmin" style="display: none; margin-top: 10px">
+                    <label for="inputObservacao">Observações do administrador</label>
                     <textarea class="form-control" name="observacao" id="inputObservacao" cols="30" rows="3" readonly></textarea>
                 </div>
             </div>
@@ -70,7 +80,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script>
-
     $(document).ready(function () {
         $(".showDetails").click(function (e) {
             e.preventDefault();
@@ -88,12 +97,21 @@
                 type: 'GET',
                 dataType: 'json',
                 success : function(data){
+                    $('#observacaoRequerente').text(data[0]['observacao']);
+                }
+            })
+
+            $.ajax({
+                url: '/observacao_status/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success : function(data){
                     $('#inputObservacao').text(data[0]['observacao']);
                 }
             })
 
             $.ajax({
-                url: '/itens_solicitacao/' + id,
+                url: '/itens_solicitacao_admin/' + id,
                 type: 'GET',
                 dataType: 'json',
                 success : function(data){
@@ -103,22 +121,58 @@
                         ret += "<td>" + data[item]['nome'] + "</td>";
                         ret += "<td>" + data[item]['descricao'] + "</td>";
                         ret += "<td>" + data[item]['quantidade_solicitada'] + "</td>";
-                        ret += "<td>" + (data[item]['quantidade_aprovada'] == null ? '' : data[item]['quantidade_aprovada']) + "</td>";
+                        ret += "<td>" + data[item]['quantidade_aprovada'] + "</td>";
                         ret += "</tr>";
                     }
 
+                    $('#solicitacaoID').val(id);
                     $("#tableItens tbody").append(ret);
                     $("#overlay").hide();
                     $("#tableItens").show();
                     $("#observacao").show();
+                    $("#observacaoAdmin").show();
                 }
             })
         });
 
         $('#detalhesSolicitacao').on('hidden.bs.modal', function (e) {
+            $('#solicitacaoID').val(0);
             $("#tableItens").hide();
             $("#observacao").hide();
+            $("#observacaoAdmin").hide();
+            $('#negaSolicitacao').hide();
+            $('#aprovaSolicitacao').hide();
             $("#listaItens").empty();
+        });
+
+        $(".despache").click(function (e) {
+            e.preventDefault();
+
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: "{{route('despache.solicitacao')}}",
+                type: 'POST',
+                data: {_token: '{{csrf_token()}}', id: id},
+                success:function(data){
+                    location.reload();
+                }
+            });
+        });
+
+        $(".cancelaDespache").click(function (e) {
+            e.preventDefault();
+
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: "{{route('cancela.solicitacao')}}",
+                type: 'POST',
+                data: {_token: '{{csrf_token()}}', id: id},
+                success:function(data){
+                    location.reload();
+                }
+            });
         });
     });
 </script>

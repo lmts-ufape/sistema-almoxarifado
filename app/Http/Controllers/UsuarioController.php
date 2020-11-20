@@ -6,6 +6,8 @@ use App\Usuario;
 use App\Cargo;
 use App\Http\Requests\UsuarioStoreRequest;
 use App\Http\Controllers\Img;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 class UsuarioController extends Controller {
 
@@ -53,6 +55,12 @@ class UsuarioController extends Controller {
     }
 
     public function edit($id) {
+
+        if (Gate::allows('update-usuario', $id)) {
+            return view('usuario/usuario_edit', ['usuario' => Usuario::find($id), 'cargos' => Cargo::all()]);
+        } else if (Gate::denies('update-usuario', $id)) {
+            abort('403', 'Não Autorizado');
+        }
         return view('usuario/usuario_edit', ['usuario' => Usuario::find($id), 'cargos' => Cargo::all()]);
     }
 
@@ -80,12 +88,12 @@ class UsuarioController extends Controller {
             'matricula' => $request->matricula,
             'cargo_id' => $request->cargo,
             'email' => $request->email,
-            'senha' => $request->senha,
+            'senha' => Hash::make($request->senha)
         ];
 
         $usuario->fill($data)->save();
 
-        return redirect()->route('usuario.index');
+        return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
     }
 
     public function destroy($id) {
