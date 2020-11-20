@@ -6,6 +6,7 @@ use App\Usuario;
 use App\Cargo;
 use App\Http\Requests\UsuarioStoreRequest;
 use App\Http\Controllers\Img;
+use Illuminate\Support\Facades\Gate;
 
 class UsuarioController extends Controller {
 
@@ -53,6 +54,12 @@ class UsuarioController extends Controller {
     }
 
     public function edit($id) {
+
+        if (Gate::allows('update-usuario', $id)) {
+            return view('usuario/usuario_edit', ['usuario' => Usuario::find($id), 'cargos' => Cargo::all()]);
+        } else if (Gate::denies('update-usuario', $id)) {
+            abort('403', 'Não Autorizado');
+        }
         return view('usuario/usuario_edit', ['usuario' => Usuario::find($id), 'cargos' => Cargo::all()]);
     }
 
