@@ -81,12 +81,12 @@ class SolicitacaoController extends Controller
             for ($i = 0; $i < count($itemSolicitacaos); $i++) {
                 if (empty($request->quantAprovada[$i])) {
                     $checkInputNull++;
-                } else if ($request->quantAprovada[$i] <= $itemSolicitacaos[$i]->quantidade_minima) {
+                } else if ($request->quantAprovada[$i] <= $itemSolicitacaos[$i]->quantidade) {
                     array_push($itensID, $itemSolicitacaos[$i]->id);
                     array_push($quantidadesAprovadas, $request->quantAprovada[$i]);
                 } else {
                     $checkQuantMinima++;
-                    $errorMessage .= $itemSolicitacaos[$i]->nome . "(Dispoível:" . $itemSolicitacaos[$i]->quantidade_minima . ")\n";
+                    $errorMessage .= $itemSolicitacaos[$i]->nome . "(Dispoível:" . $itemSolicitacaos[$i]->quantidade . ")\n";
                 }
             }
             if ($checkInputNull == count($itemSolicitacaos)) {
@@ -164,7 +164,7 @@ class SolicitacaoController extends Controller
         $quantAprovadas = array_column($itens->toArray(), 'quantidade_aprovada');
 
         for ($i = 0; $i < count($materiaisID); $i++) {
-            DB::update('update materials set quantidade_minima = quantidade_minima - ? where id = ?', [$quantAprovadas[$i], $materiaisID[$i]]);
+            DB::update('update estoques set quantidade = quantidade - ? where material_id = ?', [$quantAprovadas[$i], $materiaisID[$i]]);
         }
 
         DB::update('update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?', 
@@ -190,8 +190,8 @@ class SolicitacaoController extends Controller
             session()->forget('itemSolicitacoes');
         }
 
-        $consulta = DB::select('select item.quantidade_solicitada, item.material_id, mat.nome, mat.descricao, mat.quantidade_minima, item.quantidade_aprovada, item.id
-            from item_solicitacaos item, materials mat where item.solicitacao_id = ? and mat.id = item.material_id', [$id]);
+        $consulta = DB::select('select item.quantidade_solicitada, item.material_id, mat.nome, mat.descricao, item.quantidade_aprovada, item.id, est.quantidade
+            from item_solicitacaos item, materials mat, estoques est where item.solicitacao_id = ? and mat.id = item.material_id and est.material_id = item.material_id', [$id]);
 
         session(['itemSolicitacoes' => $consulta]);
 
