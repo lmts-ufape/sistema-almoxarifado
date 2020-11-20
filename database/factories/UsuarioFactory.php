@@ -16,6 +16,8 @@ $factory->define(Usuario::class, function (Faker $faker) {
         'matricula' => rand(100000, 999999),
         'cargo_id' => 1,
         'email' => $faker->email,
+
         'senha' => Hash::make('password'),
+
     ];
 });
