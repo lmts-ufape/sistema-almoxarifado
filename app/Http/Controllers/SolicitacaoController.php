@@ -89,6 +89,9 @@ class SolicitacaoController extends Controller
                         if ($materiaisID[$itemSolicitacaos[$i]->material_id] <= $itemSolicitacaos[$i]->quantidade) {
                             array_push($itensID, $itemSolicitacaos[$i]->id);
                             array_push($quantidadesAprovadas, $request->quantAprovada[$i]);
+                        } else {
+                            $checkQuantMinima++;
+                            array_push($errorMessage, $itemSolicitacaos[$i]->nome . "(Dispoível:" . $itemSolicitacaos[$i]->quantidade . ")");
                         }
                     } else if (!array_key_exists($itemSolicitacaos[$i]->material_id, $materiaisID)) {
                         $materiaisID[$itemSolicitacaos[$i]->material_id] = $request->quantAprovada[$i];
