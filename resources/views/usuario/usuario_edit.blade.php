@@ -10,6 +10,13 @@
         <h2>Editar Usuário</h2>
     </div>
 
+    @if(session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            <strong>{{session('success')}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
+
     <form action="{{ route('usuario.update', $usuario->id) }}" enctype="multipart/form-data" method="POST">
 
         @csrf
@@ -114,8 +121,8 @@
                 </div>
             @endif
 
-            <Button class="btn btn-secondary" type="button" onclick="location.href = '../' "> Cancelar</Button>
-            <Button class="btn btn-success" type="submit"> Cadastrar</Button>
+            <Button class="btn btn-secondary" type="button" onclick="location.href = '<?php echo $_SERVER['HTTP_REFERER']; ?>' "> Cancelar</Button>
+            <Button class="btn btn-success" type="submit"> Atualizar</Button>
 
         </div>
 
