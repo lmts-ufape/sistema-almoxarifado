@@ -4,6 +4,7 @@
 
 use App\Usuario;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
 
 $factory->define(Usuario::class, function (Faker $faker) {
     return [
@@ -15,6 +16,8 @@ $factory->define(Usuario::class, function (Faker $faker) {
         'matricula' => rand(100000, 999999),
         'cargo_id' => 1,
         'email' => $faker->email,
-        'senha' => Hash::make('password')
+
+        'senha' => Hash::make('password'),
+
     ];
 });
