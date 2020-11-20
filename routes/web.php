@@ -11,6 +11,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::resource('usuario', 'UsuarioController');
+
 Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 
     Route::resource('material', 'MaterialController')->except(['show']);
@@ -30,8 +32,6 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 
     Route::resource('cargo', 'CargoController');
 
-    Route::resource('usuario', 'UsuarioController');
-
     Route::resource('solicita', 'SolicitacaoController');
     Route::get('solicitacoes', 'SolicitacaoController@listAllSolicitacoes')->name('solicitacoes');
     Route::POST('solicitacoes', 'SolicitacaoController@aprovarSolicitacao')->name('aprovar.solicitacao');
@@ -45,15 +45,15 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 });
 
 Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
-    
     Route::resource('solicita', 'SolicitacaoController');
+    Route::get('editar_perfil/{user_id}', 'UsuarioController@edit')->name('perfil.editar');;
     Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
     Route::get('consulta_solicitacao', 'SolicitacaoController@listSolicitacoesRequerente')->name('consulta.solicitacao');
     Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
 });
 
 Route::middleware(['auth'])->group(function () {
-    
+
     Route::resource('solicita', 'SolicitacaoController');
     Route::get('observacao_solicitacao/{id}', 'SolicitacaoController@getObservacaoSolicitacao')->name('observacao.solicitacao');
 });
