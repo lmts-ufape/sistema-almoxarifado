@@ -10,7 +10,6 @@ use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class SolicitacaoController extends Controller
 {
@@ -154,10 +153,6 @@ class SolicitacaoController extends Controller
 
     public function listSolicitacoesAprovadas()
     {
-        /*$solicitacoes = Solicitacao::where('usuario_id', '!=', Auth::user()->id)->get();
-        $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->where('data_aprovado', '!=', null)
-            ->where('data_finalizado', null)->orderBy('id')->get();
-        $requerentes = Usuario::whereIn('id', array_column($solicitacoes->toArray(), 'usuario_id'))->get();*/
         $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
             from historico_statuses status, usuarios u, solicitacaos soli 
             where status.data_aprovado IS NOT NULL and status.data_finalizado IS NULL and status.solicitacao_id = soli.id
