@@ -63,7 +63,8 @@ class DepositoController extends Controller
     {
 
         $deposito = Deposito::find($id);
-        $cadastro = ['nome' => $request->nome];
+        $cadastro = ['nome' => $request->nome, 'codigo' => $request->codigo];
+
 
         // Falta Validar os Dados
 

@@ -92,7 +92,7 @@ class UsuarioController extends Controller {
 
         $usuario->fill($data)->save();
 
-        return redirect()->route('usuario.index');
+        return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
     }
 
     public function destroy($id) {
