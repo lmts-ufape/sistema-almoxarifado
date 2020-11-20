@@ -11,6 +11,7 @@
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
+                <th scope="col" style="text-align: center">Requente</th>
                 <th scope="col" style="text-align: center">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
             </tr>
@@ -18,6 +19,7 @@
         <tbody>
             @for ($i = 0; $i < count($status); $i++)
                 <tr class="showDetails" data-id="{{ $status[$i]->solicitacao_id }}" style="cursor: pointer">
+                    <td style="text-align: center">{{ $requerentes[$i]->nome }}</td>
                     <td style="text-align: center">
                         @if ($status[$i]->status == "Aguardando Aprovação")
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clock-history" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

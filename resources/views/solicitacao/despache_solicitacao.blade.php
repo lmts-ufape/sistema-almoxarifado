@@ -18,29 +18,27 @@
             </tr>
         </thead>
         <tbody>
-            @if (count($requerentes) > 0 && count($status) > 0)
-                @for ($b = 0; $b < count($requerentes); $b++)
-                    @for ($i = 0; $i < count($status); $i++)
-                        <tr class="showDetails" data-id="{{ $status[$i]->solicitacao_id }}" style="cursor: pointer">
-                            <td style="text-align: center">{{ $requerentes[$b]->nome }}</td>
-                            <td style="text-align: center">
-                                @if ($status[$i]->status == "Aprovado")
-                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-check-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                        <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
-                                    </svg>
-                                @endif
-                                @if ($status[$i]->status == "Aprovado parcialmente")
-                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-check2-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                                        <path fill-rule="evenodd" d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z"/>
-                                    </svg>
-                                @endif
-                            </td>
-                            <td style="text-align: center">{{ date('d/m/Y',  strtotime($status[$i]->created_at))}}</td>
-                            <td style="text-align: center"><a type="button" class="btn btn-success despache" data-id="{{ $status[$i]->solicitacao_id }}">Despachar</a><a type="button" style="margin-left: 10px" class="btn btn-danger cancelaDespache" data-id="{{ $status[$i]->solicitacao_id }}">Cancelar</a></td>
-                        </tr>
-                    @endfor
+            @if (count($dados) > 0)
+                @for ($i = 0; $i < count($dados); $i++)
+                    <tr class="showDetails" data-id="{{ $dados[$i]->solicitacao_id }}" style="cursor: pointer">
+                        <td style="text-align: center">{{ $dados[$i]->nome }}</td>
+                        <td style="text-align: center">
+                            @if ($dados[$i]->status == "Aprovado")
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-check-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                                </svg>
+                            @endif
+                            @if ($dados[$i]->status == "Aprovado parcialmente")
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-check2-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                                    <path fill-rule="evenodd" d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z"/>
+                                </svg>
+                            @endif
+                        </td>
+                        <td style="text-align: center">{{ date('d/m/Y',  strtotime($dados[$i]->created_at))}}</td>
+                        <td style="text-align: center"><a type="button" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}">Despachar</a><a type="button" style="margin-left: 10px" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}">Cancelar</a></td>
+                    </tr>
                 @endfor
             @endif
         </tbody>
@@ -124,7 +122,7 @@
                         ret += "<td>" + data[item]['nome'] + "</td>";
                         ret += "<td>" + data[item]['descricao'] + "</td>";
                         ret += "<td style=\"text-align: center\">" + data[item]['quantidade_solicitada'] + "</td>";
-                        ret += "<td style=\"text-align: center\">" + data[item]['quantidade_aprovada'] + "</td>";
+                        ret += "<td style=\"text-align: center\">" + (data[item]['quantidade_aprovada'] == null ? '' : data[item]['quantidade_aprovada']) + "</td>";
                         ret += "</tr>";
                     }
 
