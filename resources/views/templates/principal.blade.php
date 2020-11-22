@@ -31,7 +31,7 @@
                 $(selectedCollapse).addClass('show');
             }
 
-            $('.selectedMenu').on('click', function(){ 
+            $('.selectedMenu').on('click', function(){
                 let target = $(this).data('target');
                 sessionStorage.setItem('selectedCollapse', target);
             });
@@ -105,7 +105,7 @@
                                         <a data-target="#collapseOne" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.create') }}"><li>Material</li></a>
                                         <a data-target="#collapseOne" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.create') }}"><li>Usuário</li></a>
                                         <a data-target="#collapseOne" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.create') }}"><li>Depósito</li></a>
-                                        <a data-target="#collapseOne" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.create') }}"><li>Cargo</li></a>
+                                        {{-- <a data-target="#collapseOne" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.create') }}"><li>Cargo</li></a> --}}
                                     </div>
                                 </div>
                             </div>
