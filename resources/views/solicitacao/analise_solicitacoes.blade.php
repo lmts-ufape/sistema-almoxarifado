@@ -105,7 +105,7 @@
                     <input type="hidden" id="solicitacaoID" name="solicitacaoID" value="">
 
                     <button id="aprovaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-success" value="aprova">Aprovar</button>
-                    <button id="negaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-danger" value="nega">Negar</button>
+                    <button id="negaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-danger" value="nega" disabled>Negar</button>
                 </div>
               </div>
             </div>
@@ -117,6 +117,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script>
     $(document).ready(function () {
+
+        $('#textObservacaoAdmin').on('input propertychange', function() {
+            if($(this).val().length < 5){
+                $('#negaSolicitacao').prop('disabled', true);
+            } else {
+                $('#negaSolicitacao').prop('disabled', false);
+            }
+        });
+
+        $("#formSolicitacao").submit(function() {
+            if($('#inputQuantAprovada').val().length == 0){
+                alert( "Informe algum valor para a quantidade aprovada" );
+                return false;
+            }
+        });
+
         $(".showDetails").click(function (e) {
             e.preventDefault();
 

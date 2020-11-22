@@ -10,6 +10,7 @@ use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SolicitacaoController extends Controller
 {
@@ -178,7 +179,7 @@ class SolicitacaoController extends Controller
 
     public function despacharSolicitacao(Request $request)
     {
-        $itens = ItemSolicitacao::where('solicitacao_id', '=', $request->id)->get();
+        $itens = ItemSolicitacao::where('solicitacao_id', '=', $request->id)->where('quantidade_aprovada', '!=', NULL)->get();
         $materiaisID = array_column($itens->toArray(), 'material_id');
         $quantAprovadas = array_column($itens->toArray(), 'quantidade_aprovada');
 
