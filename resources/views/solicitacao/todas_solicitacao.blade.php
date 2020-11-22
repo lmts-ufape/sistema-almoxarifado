@@ -1,16 +1,17 @@
 
 @extends('templates.principal')
 
-@section('title') Consultar Solicitações @endsection
+@section('title') Solicitações @endsection
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
-        <h2>CONSULTAR SOLICITAÇÕES</h2>
+        <h2>SOLICITAÇÕES</h2>
     </div>
 
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
+                <th scope="col" style="text-align: center">Requente</th>
                 <th scope="col" style="text-align: center">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
             </tr>
@@ -18,6 +19,7 @@
         <tbody>
             @for ($i = 0; $i < count($status); $i++)
                 <tr class="showDetails" data-id="{{ $status[$i]->solicitacao_id }}" style="cursor: pointer">
+                    <td style="text-align: center">{{ $requerentes[$i]->nome }}</td>
                     <td style="text-align: center">
                         @if ($status[$i]->status == "Aguardando Aprovação")
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clock-history" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -120,7 +122,7 @@
             })
 
             $.ajax({
-                url: '/itens_solicitacao/' + id,
+                url: '/itens_solicitacao_admin/' + id,
                 type: 'GET',
                 dataType: 'json',
                 success : function(data){

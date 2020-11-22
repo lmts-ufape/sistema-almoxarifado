@@ -8,31 +8,13 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            <div id="carouselControls" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#carouselControls" data-slide-to="0" class="active"></li>
-                  <li data-target="#carouselControls" data-slide-to="1"></li>
-                  <li data-target="#carouselControls" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="https://placehold.it/500x500.png" class="d-block w-100" alt="placeholder1">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="https://placehold.it/500x500.png" class="d-block w-100" alt="placeholder2">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="https://placehold.it/500x500.png" class="d-block w-100" alt="placeholder3">
-                  </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-                </a>
+            <div>
+                <h2 style="color: #3E3767"><strong>O que é o sistema de almoxarifado ?</strong></h2>
+                <p style="color: #3E3767">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint rerum fugiat veritatis, animi quisquam fugit sunt ex aliquam quis modi eius velit accusamus repudiandae eum deleniti incidunt impedit voluptate optio?</p>
+                <h2 style="color: #3E3767"><strong>Quais são os benefícios ?</strong></h2>
+                <p style="color: #3E3767">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint rerum fugiat veritatis, animi quisquam fugit sunt ex aliquam quis modi eius velit accusamus repudiandae eum deleniti incidunt impedit voluptate optio?</p>
+                <h2 style="color: #3E3767"><strong>Quais documentos eu posso solicitar ?</strong></h2>
+                <p style="color: #3E3767">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint rerum fugiat veritatis, animi quisquam fugit sunt ex aliquam quis modi eius velit accusamus repudiandae eum deleniti incidunt impedit voluptate optio?</p>
             </div>
         </div>
         <div class="col-sm">
@@ -68,7 +50,7 @@
                 </div>
                 <br>
                 <div class="form-group col-md-9">
-                    <button type="submit" class="btn btn-success btn-block">
+                    <button type="submit" class="btn btn-block" style="background-color: #3E3767; color: white">
                         {{ __('Entrar') }}
                     </button>
                 </div>
@@ -84,7 +66,7 @@
                 <label for="">Clique em cadastre-se para criar uma conta</label>
             </div>
             <div class="form-group col-md-9">
-                <a type="button" href="{{ route('register') }}"class="btn btn-primary btn-block">
+                <a type="button" href="{{ route('register') }}"class="btn btn-block" style="background-color: #3E3767; color: white">
                     {{ __('Cadastre-se') }}
                 </a>
             </div>
