@@ -31,4 +31,15 @@ class TransferenciaStoreRequest extends FormRequest
             'descricao' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'material_id.*' => 'É necessário selecionar um material',
+            'quantidade.*' => 'É necessário fornecer uma quantidade',
+            'deposito_id_origem.*' => 'É necessário selecionar um depósito de origem',
+            'deposito_id_destino.*' => 'É necessário selecionar um depósito de destino',
+            'descricao.*' => 'A descrição é obrigatória',
+        ];
+    }
 }
