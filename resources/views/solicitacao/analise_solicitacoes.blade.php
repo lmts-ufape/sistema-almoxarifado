@@ -140,6 +140,25 @@
             }
         });
 
+        $('#tableSolicitacoes').DataTable({
+            searching: false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "zeroRecords": "Nenhum registro disponível",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo"
+                }
+            },
+            "order": [],
+            "columnDefs": [ {
+                "targets"  : [1],
+                "orderable": false
+            }]
+        });
+
         $(".showDetails").click(function (e) {
             e.preventDefault();
 

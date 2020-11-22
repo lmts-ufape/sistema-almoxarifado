@@ -15,12 +15,11 @@
         @endforeach
     </select>
 
-    <table class="table table-hover" >
+    <table id="tableDepositos" class="table table-hover table-responsive-md" >
         <thead style="background-color: #151631; color: white; border-radius: 15px">
              <tr>
-                {{-- <th scope="col">Imagem</th> --}}
                 <th scope="col">Material</th>
-                <th scope="col">Quantidade</th>
+                <th scope="col" style="text-align: center">Quantidade</th>
             </tr>
         </thead>
         <tbody id="listaEstoque"></tbody>
@@ -35,7 +34,7 @@
             $.get('/get_estoques/' + deposito_id, function (estoques) {
                 $('#listaEstoque').empty();
                 $.each(estoques, function (key, value) {
-                    $('#listaEstoque').append(`<tr><td>${value.nome}</td><td>${value.quantidade}</td></tr>`);
+                    $('#listaEstoque').append(`<tr><td>${value.nome}</td><td style=\"text-align: center\">${value.quantidade}</td></tr>`);
                 });
             });
         });
@@ -45,3 +44,25 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tableDepositos').DataTable({
+            searching: false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "zeroRecords": "Nenhum registro disponível",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo"
+                }
+            },
+            "order": [],
+            "columnDefs": [ {
+                "targets"  : [0,1],
+                "orderable": false
+            }]
+        });
+    });
+</script>

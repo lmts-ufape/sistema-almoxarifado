@@ -132,7 +132,7 @@ class SolicitacaoController extends Controller
     {
         $solicitacoes = Solicitacao::where('usuario_id', '=', Auth::user()->id)->get();
         $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->orderBy('id')->get();
-        return view('solicitacao.consulta_solicitacao', [
+        return view('solicitacao.minha_solicitacao_requerente', [
             'status' => $historicoStatus
         ]);
     }
