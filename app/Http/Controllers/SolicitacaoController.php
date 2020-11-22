@@ -81,34 +81,27 @@ class SolicitacaoController extends Controller
             $errorMessage[] = null;
 
             for ($i = 0; $i < count($itemSolicitacaos); $i++) {
-                if (empty($request->quantAprovada[$i])) {
+                if (empty($request->quantAprovada[$i]) && $request->quantAprovada[$i] >= 0) {
                     $checkInputNull++;
                 } else {
                     if (array_key_exists($itemSolicitacaos[$i]->material_id, $materiaisID)) {
                         $materiaisID[$itemSolicitacaos[$i]->material_id] += $request->quantAprovada[$i];
 
-                        if ($materiaisID[$itemSolicitacaos[$i]->material_id] <= $itemSolicitacaos[$i]->quantidade) {
-                            array_push($itensID, $itemSolicitacaos[$i]->id);
-                            array_push($quantidadesAprovadas, $request->quantAprovada[$i]);
-                        } else {
-                            $checkQuantMinima++;
-                            array_push($errorMessage, $itemSolicitacaos[$i]->nome . "(Dispoível:" . $itemSolicitacaos[$i]->quantidade . ")");
-                        }
                     } else if (!array_key_exists($itemSolicitacaos[$i]->material_id, $materiaisID)) {
                         $materiaisID[$itemSolicitacaos[$i]->material_id] = $request->quantAprovada[$i];
+                    }
 
-                        if ($materiaisID[$itemSolicitacaos[$i]->material_id] <= $itemSolicitacaos[$i]->quantidade) {
-                            array_push($itensID, $itemSolicitacaos[$i]->id);
-                            array_push($quantidadesAprovadas, $request->quantAprovada[$i]);
-                        } else {
-                            $checkQuantMinima++;
-                            array_push($errorMessage, $itemSolicitacaos[$i]->nome . "(Dispoível:" . $itemSolicitacaos[$i]->quantidade . ")");
-                        }
+                    if ($materiaisID[$itemSolicitacaos[$i]->material_id] <= $itemSolicitacaos[$i]->quantidade) {
+                        array_push($itensID, $itemSolicitacaos[$i]->id);
+                        array_push($quantidadesAprovadas, $request->quantAprovada[$i]);
+                    } else {
+                        $checkQuantMinima++;
+                        array_push($errorMessage, $itemSolicitacaos[$i]->nome . "(Dispoível:" . $itemSolicitacaos[$i]->quantidade . ")");
                     }
                 }
             }
             if ($checkInputNull == count($itemSolicitacaos)) {
-                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas');
+                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas e acima de 0');
             } else if ($checkQuantMinima > 0) {
                 return redirect()->back()->withErrors($errorMessage);
             } else {
@@ -139,7 +132,7 @@ class SolicitacaoController extends Controller
     {
         $solicitacoes = Solicitacao::where('usuario_id', '=', Auth::user()->id)->get();
         $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->orderBy('id')->get();
-        return view('solicitacao.consulta_solicitacao', [
+        return view('solicitacao.minha_solicitacao_requerente', [
             'status' => $historicoStatus
         ]);
     }
@@ -169,11 +162,13 @@ class SolicitacaoController extends Controller
 
     public function listTodasSolicitacoes()
     {
-        $solicitacoes = Solicitacao::where('usuario_id', '!=', Auth::user()->id)->get();
-        $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->where('data_finalizado', '!=', NULL)->orderBy('id')->get();
-        $requerentes = Usuario::whereIn('id', array_column($solicitacoes->toArray(), 'usuario_id'))->get();
+        $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
+            from historico_statuses status, usuarios u, solicitacaos soli 
+            where status.data_finalizado IS NOT NULL and status.solicitacao_id = soli.id
+            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id');
+
         return view('solicitacao.todas_solicitacao', [
-            'status' => $historicoStatus, 'requerentes' => $requerentes
+            'dados' => $consulta
         ]);
     }
 

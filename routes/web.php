@@ -46,7 +46,7 @@ Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
     Route::resource('solicita', 'SolicitacaoController');
     Route::get('editar_perfil/{user_id}', 'UsuarioController@edit')->name('perfil.editar');;
     Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
-    Route::get('consulta_solicitacao', 'SolicitacaoController@listSolicitacoesRequerente')->name('consulta.solicitacao');
+    Route::get('minhas_solicitacoes', 'SolicitacaoController@listSolicitacoesRequerente')->name('minhas.solicitacoes');
     Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
 });
 

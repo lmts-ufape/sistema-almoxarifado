@@ -127,10 +127,36 @@
         });
 
         $("#formSolicitacao").submit(function() {
-            if($('#inputQuantAprovada').val().length == 0){
+            vari = $('[name="quantAprovada[]"]');
+            count = 0;
+            for (var i = 0; i < vari.length; i++) {
+                if(vari[i]['value'] == ""){
+                    count++;
+                }
+            }
+            if(count == vari.length){
                 alert( "Informe algum valor para a quantidade aprovada" );
                 return false;
             }
+        });
+
+        $('#tableSolicitacoes').DataTable({
+            searching: false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "zeroRecords": "Nenhum registro disponível",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo"
+                }
+            },
+            "order": [],
+            "columnDefs": [ {
+                "targets"  : [1],
+                "orderable": false
+            }]
         });
 
         $(".showDetails").click(function (e) {

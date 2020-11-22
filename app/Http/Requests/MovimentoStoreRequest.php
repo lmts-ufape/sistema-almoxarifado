@@ -31,4 +31,14 @@ class MovimentoStoreRequest extends FormRequest
             'operacao' => 'numeric'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'material_id.*' => 'É necessário selecionar um material',
+            'quantidade.*' => 'É necessário fornecer uma quantidade',
+            'deposito_id.*' => 'É necessário selecionar um depósito',
+            'descricao.*' => 'A descrição é obrigatória',
+        ];
+    }
 }

@@ -80,7 +80,7 @@ class MaterialController extends Controller
 
         $material->fill($validatedData);
         $material->save();
-        return redirect()->route('material.material_index_edit');
+        return redirect()->route('material.indexEdit');
 
     }
 

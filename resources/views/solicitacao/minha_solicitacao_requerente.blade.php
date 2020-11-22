@@ -1,11 +1,11 @@
 
 @extends('templates.principal')
 
-@section('title') Consultar Solicitações @endsection
+@section('title') Minhas Solicitações @endsection
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
-        <h2>CONSULTAR SOLICITAÇÕES</h2>
+        <h2>MINHAS SOLICITAÇÕES</h2>
     </div>
 
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
@@ -98,6 +98,25 @@
 <script>
 
     $(document).ready(function () {
+        $('#tableSolicitacoes').DataTable({
+            searching: false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "zeroRecords": "Nenhum registro disponível",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo"
+                }
+            },
+            "order": [],
+            "columnDefs": [ {
+                "targets"  : [0],
+                "orderable": false
+            }]
+        });
+
         $(".showDetails").click(function (e) {
             e.preventDefault();
 

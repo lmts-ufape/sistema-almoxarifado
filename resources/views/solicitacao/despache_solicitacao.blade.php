@@ -90,6 +90,25 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script>
     $(document).ready(function () {
+        $('#tableSolicitacoes').DataTable({
+            searching: false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "zeroRecords": "Nenhum registro disponível",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo"
+                }
+            },
+            "order": [],
+            "columnDefs": [ {
+                "targets"  : [1],
+                "orderable": false
+            }]
+        });
+        
         $(".showDetails").click(function (e) {
             e.preventDefault();
 

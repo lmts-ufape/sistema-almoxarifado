@@ -31,4 +31,14 @@ class StoreMaterial extends FormRequest
             // 'imagem' => 'nullable'
         ];
     }
+
+    public function messages()
+    {
+        return[
+            'nome.*' => 'O material é obrigatório e deve possuir de 3 a 50 caracteres',
+            'codigo.*' => 'O código é obrigatório e deve possuir de 1 a 20 caracteres',
+            'quantidade_minima.*' => 'A quantidade mínima é obrigatória',
+            'descricao.*' => 'Uma descrição é necessária',
+        ];
+    }
 }

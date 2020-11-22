@@ -3,7 +3,7 @@
 @extends('../templates.principal')
 
 @section('title')
-    Cargo Edit
+    Editar Cargos
 @endsection
 
 @section('content')
@@ -12,8 +12,8 @@
         <h2>EDITAR CARGO</h2>
     </div>
 
-    <form action="{{ route('cargo.update', $cargo->id) }}" method="POST">   
-    
+    <form action="{{ route('cargo.update', $cargo->id) }}" method="POST">
+
         @csrf
         @method('PUT')
 
@@ -30,7 +30,7 @@
                 <Button class="btn btn-success" type="submit"> Atualizar </Button>
             </div>
             <div class="col-sm-1">
-                <Button type="button" class="btn btn-danger"> Remover </Button> <-- Remoção por chamada assicrona -->
+                <Button type="button" class="btn btn-danger"> Remover </Button>
             </div>
         </div>
 
