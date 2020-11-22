@@ -127,7 +127,14 @@
         });
 
         $("#formSolicitacao").submit(function() {
-            if($('#inputQuantAprovada').val().length == 0){
+            vari = $('[name="quantAprovada[]"]');
+            count = 0;
+            for (var i = 0; i < vari.length; i++) {
+                if(vari[i]['value'] == ""){
+                    count++;
+                }
+            }
+            if(count == vari.length){
                 alert( "Informe algum valor para a quantidade aprovada" );
                 return false;
             }
