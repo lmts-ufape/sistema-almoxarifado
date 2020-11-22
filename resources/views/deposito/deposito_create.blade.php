@@ -23,6 +23,16 @@
                 <input type="text" class="form-control" id="inputCodigo" name="codigo" placeholder="Código" value="{{ old('codigo') }}">
             </div>
         </div>
+
+        @if($errors->any())
+            <div>
+                <ul>
+                    @foreach($errors->all() as $erro)
+                        <li>{{ $erro }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     <input class="btn btn-success" type="submit" value="Salvar">
 
 @endsection
