@@ -3,7 +3,7 @@
 @extends('../templates.principal')
 
 @section('title')
-    Cargo Create
+    Cadastrar Cargos
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
     </div>
 
     <form action="{{ route('cargo.store') }}" method="POST">
-    
+
         @csrf
 
         <div class="form-group">
@@ -21,7 +21,7 @@
                 <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
                     <label for="nome"> Cargo </label>
                     <input class="form-control" type="text" name="nome" id="nome" placeHolder="Cargo">
-                </div>   
+                </div>
             </div>
 
             <div class="form-row">
