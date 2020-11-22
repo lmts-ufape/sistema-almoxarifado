@@ -27,6 +27,16 @@
             </div>
         </div>
 
+        @if($errors->any())
+            <div>
+                <ul>
+                    @foreach($errors->all() as $erro)
+                        <li>{{ $erro }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <input class="btn btn-success" type="submit" value="Atualizar">
     </form>
     <form action="{{ route('deposito.destroy', $deposito->id) }}" method="POST">
