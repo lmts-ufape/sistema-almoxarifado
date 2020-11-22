@@ -42,10 +42,6 @@ class DepositoController extends Controller
     {
         $data = $request->validated();
 
-
-
-        // Falta Validar os Dados
-
         Deposito::create($data);
 
         return redirect(route('deposito.index'));
@@ -61,16 +57,12 @@ class DepositoController extends Controller
         return view('deposito/deposito_edit', ['deposito' => Deposito::find($id)]);
     }
 
-    public function update(Request $request, $id)
+    public function update(DepositoStore $request, $id)
     {
-
+        $data = $request->validated();
         $deposito = Deposito::find($id);
-        $cadastro = ['nome' => $request->nome, 'codigo' => $request->codigo];
 
-
-        // Falta Validar os Dados
-
-        $deposito->fill($cadastro)->save();
+        $deposito->fill($data)->save();
 
         return redirect(route('deposito.index'));
     }
