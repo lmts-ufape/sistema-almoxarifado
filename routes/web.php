@@ -11,7 +11,12 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::resource('usuario', 'UsuarioController');
+Route::middleware(['auth', 'CheckCargosAdminReque'])->group(function(){
+
+    Route::resource('usuario', 'UsuarioController');
+
+});
+
 
 Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 
