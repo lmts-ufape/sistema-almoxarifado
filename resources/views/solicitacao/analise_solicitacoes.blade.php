@@ -38,9 +38,9 @@
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
-                <th scope="col" style="text-align: center">Requerente</th>
-                <th scope="col" style="text-align: center">Situação</th>
-                <th scope="col" style="text-align: center">Data</th>
+                <th class="align-middle" scope="col" style="text-align: center">Requerente</th>
+                <th class="align-middle" scope="col" style="text-align: center">Situação</th>
+                <th class="align-middle" scope="col" style="text-align: center">Data</th>
             </tr>
         </thead>
         <tbody>
