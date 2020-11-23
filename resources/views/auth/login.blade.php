@@ -21,6 +21,10 @@
                     holística do setor. Além disso, o processo de solicitação, aprovação e controle se torna menos dispendioso e mais prático
                     tanto para o administrador quanto para o requerente.
                 </p>
+                <h2 style="color: #3E3767"><strong>Quais materiais posso solicitar ?</strong></h2>
+                <p style="color: #3E3767">
+                    É possível solicitar materiais gerais de almoxarifado, como papel, canetas e lápis. Desde que o material esteja registrado no sistema.
+                </p>
 
             </div>
         </div>
