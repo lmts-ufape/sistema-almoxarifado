@@ -83,10 +83,10 @@
                         <table id="tableItens" class="table table-hover table-responsive-md" style="margin-top: 10px">
                             <thead style="background-color: #151631; color: white; border-radius: 15px">
                                 <tr>
-                                    <th scope="col">Material</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col" style="text-align: center; width: 10%">Qtd. Solicitada</th>
-                                    <th scope="col" style="text-align: center; width: 10%">Qtd. Aprovada</th>
+                                    <th class="align-middle" scope="col">Material</th>
+                                    <th class="align-middle" scope="col">Descrição</th>
+                                    <th class="align-middle" scope="col" style="text-align: center; width: 10%">Qtd. Solicitada</th>
+                                    <th class="align-middle" scope="col" style="text-align: center; width: 10%">Qtd. Aprovada</th>
                                 </tr>
                             </thead>
                             <tbody id="listaItens"></tbody>
