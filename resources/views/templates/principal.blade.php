@@ -64,7 +64,17 @@
                         </a>
                         <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
                             <li class="nav-item " style="padding: 0px 15px">
-                                {{ __('Sobre') }}
+                                {{ __('O Sistema') }}
+                            </li>
+                        </a>
+                        <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
+                            <li class="nav-item " style="padding: 0px 15px">
+                                {{ __('A Parceria') }}
+                            </li>
+                        </a>
+                        <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
+                            <li class="nav-item " style="padding: 0px 15px">
+                                {{ __('Contato') }}
                             </li>
                         </a>
                         @if(!empty(Auth::user()->id))
@@ -90,6 +100,65 @@
                 @auth
                     @if (Auth::user()->cargo_id == 2)
                         <div id="accordion" class="mt-3">
+                            <div>
+                                <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    <div class="menuEffect" id="headingFive" style="padding: 10px">
+                                        <h6 class="mb-0">
+                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-file-earmark-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
+                                                <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z"/>
+                                                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                            </svg>
+                                            Solicitações
+                                        </h6>
+                                    </div>
+                                </a>
+                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                                    <div>
+                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('analise.solicitacoes') }}"><li>Analisar</li></a>
+                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('despache.solicitacoes') }}"><li>Despachar</li></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                    <div class="menuEffect" id="headingThree" style="padding: 10px">
+                                        <h6 class="mb-0">
+                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-box" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+                                            </svg>
+                                            Gerenciar Estoques
+                                        </h6>
+                                    </div>
+                                </a>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                    <div>
+                                        <a data-target="#collapseThree" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.entradaCreate') }}"><li>Nova Entrada</li></a>
+                                        <a data-target="#collapseThree" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.saidaCreate') }}"><li>Nova Saída</li></a>
+                                        <a data-target="#collapseThree" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.transferenciaCreate') }}"><li>Nova Transferência</li></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    <div class="menuEffect" id="headingFour" style="padding: 10px">
+                                        <h6 class="mb-0">
+                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                            </svg>
+                                            Consultar
+                                        </h6>
+                                    </div>
+                                </a>
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                                    <div>
+                                        <a data-target="#collapseFour" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.index') }}"><li>Materiais</li></a>
+                                        <a data-target="#collapseFour" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.consultarDeposito') }}"><li>Depósitos</li></a>
+                                        <a data-target="#collapseFour" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('solicitacoe.admin') }}"><li>Solicitações</li></a>
+                                    </div>
+                                </div>
+                            </div>
                             <div>
                                 <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <div class="menuEffect" id="headingOne" style="padding: 10px">
@@ -126,71 +195,13 @@
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                 <div>
                                     <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.index') }}"><li>Editar Usuario</li></a>
-                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar material</li></a>
-                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar depósito</li></a>
-                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.index') }}"><li>Editar cargo</li></a>
+                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar Material</li></a>
+                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar Depósito</li></a>
+                                    <a data-target="#collapseTwo" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.index') }}"><li>Editar Perfis</li></a>
                                 </div>
                                 </div>
                             </div>
-                            <div>
-                                <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                    <div class="menuEffect" id="headingThree" style="padding: 10px">
-                                        <h6 class="mb-0">
-                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-box" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5 8.186 1.113zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
-                                            </svg>
-                                            Gerenciar materias
-                                        </h6>
-                                    </div>
-                                </a>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                    <div>
-                                        <a data-target="#collapseThree" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.entradaCreate') }}"><li>Nova Entrada</li></a>
-                                        <a data-target="#collapseThree" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.saidaCreate') }}"><li>Nova Saída</li></a>
-                                        <a data-target="#collapseThree" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('movimento.transferenciaCreate') }}"><li>Nova Transferência</li></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    <div class="menuEffect" id="headingFour" style="padding: 10px">
-                                        <h6 class="mb-0">
-                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                                            </svg>
-                                            Consultar
-                                        </h6>
-                                    </div>
-                                </a>
-                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                                    <div>
-                                        <a data-target="#collapseFour" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.index') }}"><li>Materiais</li></a>
-                                        <a data-target="#collapseFour" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.consultarDeposito') }}"><li>Depositos</li></a>
-                                        <a data-target="#collapseFour" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('solicitacoe.admin') }}"><li>Solicitações</li></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    <div class="menuEffect" id="headingFive" style="padding: 10px">
-                                        <h6 class="mb-0">
-                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-file-earmark-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
-                                                <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z"/>
-                                                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                                            </svg>
-                                            Solicitações
-                                        </h6>
-                                    </div>
-                                </a>
-                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                                    <div>
-                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('analise.solicitacoes') }}"><li>Analisar</li></a>
-                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('despache.solicitacoes') }}"><li>Despachar</li></a>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     @endif
                 @endauth
@@ -260,7 +271,7 @@
                                         <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
                                         <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
                                     </svg>
-                                    Logout
+                                    Sair
                                 </h6>
                             </div>
                         </a>
