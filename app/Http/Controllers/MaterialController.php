@@ -17,15 +17,15 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $estoques = Estoque::all();
-        $materials = material::all();
+        $estoques = Estoque::all()->sortByDesc('id');
+        $materials = material::all()->sortByDesc('id');
 
         return view('material.material_consult', ['materials' => $materials, 'estoques' => $estoques]);
     }
 
     public function indexEdit(){
 
-        $materials = material::all();
+        $materials = material::all()->sortByDesc('id');
         return view('material.material_index_edit', ['materials' => $materials]);
     }
 
