@@ -24,16 +24,15 @@ class UsuarioStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'imagem' => 'required|file|image',
-            'nome' => 'required|', // N
-            'cpf' => 'required|numeric|min:1000000000',
-            'rg' => 'required|numeric|min:100000',
+            'nome' => 'required|string|min:5|max:100',
+            'email' => 'required|email|min:5|max:100|unique:usuarios',
+            'cpf' => 'required|numeric|min:0|digits:11',
+            'rg' => 'required|numeric|min:0|digits_between:8,11',
             'data_nascimento' => 'required|date',
-            'matricula' => 'required|integer|min:1',
-            'cargo' => 'required|integer|min:1',
-            'email' => 'required|email',
-            'senha' => 'required|min:8', // N
-            'confirmar_senha' => 'required|min:8', // N
+            'matricula' => 'required|integer|min:0|min:1',
+            'imagem' => 'required|image',
+            'senha' => 'required|string|min:8',
+            // 'senha' => 'required|string|min:8|confirmed',
         ];
     }
 
