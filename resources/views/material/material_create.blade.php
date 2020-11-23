@@ -7,9 +7,13 @@
         <h2>CADASTRAR MATERIAL</h2>
     </div>
 
-    <form method="POST" action="{{ route('material.store') }}">
+    <form method="POST" action="{{ route('material.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-row">
+            <div class="form-group">
+                <label for="imagem"> Selecione uma Imagem </label>
+                <input class="form-control-file" type="file" name="imagem" id="imagem" accept=".png, .jpg, .jpeg, .svg, .dib, .bmp" >
+            </div>
             <div class="form-group col-md-3">
                 <label for="inputMaterial">Material</label>
                 <input type="text" class="form-control" id="inputMaterial" name="nome" placeholder="Material" value="{{ old('nome') }}">

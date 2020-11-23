@@ -49,7 +49,29 @@ class MaterialController extends Controller
     {
         $validatedData = $request->validated();
 
-        $material = material::create($validatedData);
+        if( ($request->hasFile('imagem') && $request->file('imagem')->isValid()) ) {
+
+            $imgExtension = $request->imagem->extension();
+            $imgName = Img::nameNewImage(material::all(), $request->nome, $imgExtension);
+
+            $request->imagem->storeAs(Img::materiaisDir(), $imgName);
+            $request->imagem = $imgName;
+
+        }
+
+        $data = [
+            'nome' => $request->nome,
+            'codigo' => $request->codigo,
+            'descricao' => $request->descricao,
+            'quantidade_minima' => $request->quantidade_minima,
+            'imagem' => $request->imagem
+        ];
+
+
+        // $material = material::create($validatedData);
+        // $material->save();
+
+        $material = material::create($data);
         $material->save();
 
         return redirect(route('material.indexEdit'));

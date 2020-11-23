@@ -30,7 +30,7 @@
                     }
                 @endphp
                 <tr onclick="location.href = '{{ route('material.index') }}'" style="cursor: pointer;">
-                    <td>.jpg</td>
+                    <td> <img src="{{ url('storage/img/meteriais/'.$material->imagem) }}" alt="{{ $material->imagem }}"> </td>
                     <td>{{ $material->nome }}</th>
                     <td>{{ $material->descricao }}</td>
                     <td>{{ $quantidadeTotal }}</td>

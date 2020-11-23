@@ -28,7 +28,7 @@ class StoreMaterial extends FormRequest
             'codigo' => 'bail|min:1|required|max:20',
             'quantidade_minima' => 'required',
             'descricao' => 'bail|min:5|required|max:255',
-            // 'imagem' => 'nullable'
+            'imagem' => 'required|image'
         ];
     }
 
@@ -39,6 +39,7 @@ class StoreMaterial extends FormRequest
             'codigo.*' => 'O código é obrigatório e deve possuir de 1 a 20 caracteres',
             'quantidade_minima.*' => 'A quantidade mínima é obrigatória',
             'descricao.*' => 'Uma descrição é necessária',
+            'imagem.*' => 'A imagem é obrigatória'
         ];
     }
 }

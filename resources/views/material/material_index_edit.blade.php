@@ -21,7 +21,7 @@
 
             @forelse($materials as $material)
                 <tr onclick="location.href = '{{ route('material.edit', ['material' => $material->id]) }}'" style="cursor: pointer;">
-                    <td>.jpg</td>
+                <td> <img src="{{ url('storage/img/materiais/'.$material->imagem) }}" alt="{{ $material->imagem }}" width="80" height="80"></td>
                     <td>{{ $material->nome }}</th>
                     <td>{{ $material->descricao }}</td>
                     <td>{{ $material->quantidade_minima }}</td>

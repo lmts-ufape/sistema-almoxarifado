@@ -7,12 +7,16 @@
         <h2>EDITAR MATERIAL</h2>
     </div>
 
-    <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}">
+    <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}" enctype="multipart/form-data">
 
         @csrf
         @method('PUT')
 
         <div class="form-row">
+          <div class="form-group">
+            <label for="imagem"> Selecione uma Imagem </label>
+            <input class="form-control-file" type="file" name="imagem" id="imagem" accept=".png, .jpg, .jpeg, .svg, .dib, .bmp" >
+          </div>
           <div class="form-group col-md-3">
             <label for="inputMaterial">Material</label>
             <input type="text" class="form-control" id="inputMaterial" name="nome" placeholder="Material" value="{{ old('nome', $material->nome) }}">
