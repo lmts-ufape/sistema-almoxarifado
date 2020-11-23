@@ -11,7 +11,7 @@
         <h2>USUÁRIOS CADASTRADOS</h2>
     </div>
 
-    <table class="table table-hover">
+    <table id="tableUsuarios" class="table table-hover table-responsove-md">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
                 <th scope="col"> Imagem </th>
@@ -33,7 +33,29 @@
             <td colspan="5">Sem usuários cadastrados ainda</td>
         @endempty
         </tbody>
-
     </table>
-
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tableUsuarios').DataTable({
+            searching: false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "zeroRecords": "Nenhum registro disponível",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo"
+                }
+            },
+            "order": [],
+            "columnDefs": [ {
+                "targets"  : [0],
+                "orderable": false
+            }]
+        });
+    });
+</script>
