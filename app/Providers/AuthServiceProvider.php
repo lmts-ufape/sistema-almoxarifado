@@ -29,5 +29,9 @@ class AuthServiceProvider extends ServiceProvider
             return ($user->id == $usuario) || $user->cargo_id == 2;
         });
 
+        Gate::define('read-usuario', function ($user){
+            return  $user->cargo_id == 2;
+        });
+
     }
 }
