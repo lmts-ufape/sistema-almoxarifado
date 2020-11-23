@@ -121,8 +121,17 @@
                 </div>
             @endif
 
-            <Button class="btn btn-secondary" type="button" onclick="location.href = '<?php echo $_SERVER['HTTP_REFERER']; ?>' "> Cancelar</Button>
-            <Button class="btn btn-success" type="submit"> Atualizar</Button>
+            <div class="form-row">
+                <div class="col-sm-1">
+                    <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button>
+                </div>
+                <div class="col-sm-1">
+                    <Button type="button" class="btn btn-danger"> Remover </Button>
+                </div>
+                <div class="col-sm-1">
+                    <Button class="btn btn-success" type="submit"> Atualizar </Button>
+                </div>
+            </div>
 
         </div>
 

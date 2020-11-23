@@ -116,7 +116,7 @@
                                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
                                     <div>
                                         <a data-target="#collapseFive" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('analise.solicitacoes') }}"><li>Analisar</li></a>
-                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('despache.solicitacoes') }}"><li>Despachar</li></a>
+                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('despache.solicitacoes') }}"><li>Atender</li></a>
                                     </div>
                                 </div>
                             </div>

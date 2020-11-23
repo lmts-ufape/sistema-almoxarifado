@@ -104,8 +104,8 @@
                 <div class="modal-footer">
                     <input type="hidden" id="solicitacaoID" name="solicitacaoID" value="">
 
-                    <button id="aprovaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-success" value="aprova">Aprovar</button>
                     <button id="negaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-danger" value="nega" disabled>Negar</button>
+                    <button id="aprovaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-success" value="aprova">Aprovar</button>
                 </div>
               </div>
             </div>

@@ -37,12 +37,22 @@
             </div>
         @endif
 
-        <input class="btn btn-success" type="submit" value="Atualizar">
+        <div class="form-row">
+            <div class="col-sm-1">
+                <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button>
+            </div>
+            <div class="col-sm-1">
+                <Button type="button" class="btn btn-danger"> Remover </Button>
+            </div>
+            <div class="col-sm-1">
+                <Button class="btn btn-success" type="submit"> Atualizar </Button>
+            </div>
+        </div>
     </form>
-    <form action="{{ route('deposito.destroy', $deposito->id) }}" method="POST">
+    {{-- <form action="{{ route('deposito.destroy', $deposito->id) }}" method="POST">
         @csrf
         @method('DELETE')
         <Button class="btn btn-danger" type="submit"> Remover </Button>
-    </form>
+    </form> --}}
 
 @endsection
