@@ -52,7 +52,6 @@ Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::resource('solicita', 'SolicitacaoController');
     Route::get('observacao_solicitacao/{id}', 'SolicitacaoController@getObservacaoSolicitacao')->name('observacao.solicitacao');
 });
 
