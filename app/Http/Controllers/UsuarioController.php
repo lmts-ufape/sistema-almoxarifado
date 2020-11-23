@@ -42,7 +42,7 @@ class UsuarioController extends Controller {
             'matricula' => $request->matricula,
             'cargo_id' => $request->cargo,
             'email' => $request->email,
-            'senha' => $request->senha,
+            'senha' => Hash::make($request->senha)
         ];
 
         Usuario::create($data);
