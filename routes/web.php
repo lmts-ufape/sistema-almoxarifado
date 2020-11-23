@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::middleware(['auth', 'CheckCargosAdminReque'])->group(function(){
+Route::middleware('auth')->group(function(){
 
     Route::resource('usuario', 'UsuarioController');
 
