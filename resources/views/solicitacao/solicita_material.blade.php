@@ -41,7 +41,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="inputQuantidade" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
-                <input type="number" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
+                <input type="number" class="form-control" id="inputQuantidade" name="quantidade" min="0" value="{{ old('quantidade') }}">
             </div>
 
             <div class="form-group col-md-3">
