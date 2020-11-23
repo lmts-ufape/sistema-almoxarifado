@@ -11,7 +11,7 @@
         <h2>CARGOS CADASTRADOS</h2>
     </div>
 
-    <table class="table table-hover">
+    <table id="tableCargos" class="table table-hover table-responsive-md">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <th> Nome </th>
         </thead>
@@ -24,5 +24,28 @@
         @endforeach
         </tbody>
     </table>
-
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tableCargos').DataTable({
+            searching: false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Exibindo página _PAGE_ de _PAGES_",
+                "infoEmpty": "Nenhum registro disponível",
+                "zeroRecords": "Nenhum registro disponível",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Próximo"
+                }
+            },
+            "order": [],
+            "columnDefs": [ {
+                "targets"  : [],
+                "orderable": false
+            }]
+        });
+    });
+</script>
