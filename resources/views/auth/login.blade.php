@@ -25,13 +25,11 @@
                         dispendioso e mais prático
                         tanto para o administrador quanto para o requerente.
                     </p>
-
                     <h2 style="color: #3E3767"><strong>Quais materiais posso solicitar ?</strong></h2>
                     <p style="color: #3E3767; text-align: justify">
                         É possível solicitar materiais gerais de almoxarifado, como papel, canetas e lápis. Desde que o
                         material esteja registrado no sistema.
                     </p>
-
                 </div>
             </div>
             <div class="col-sm-5" style="margin-left: 30px; margin-right: -100px">
