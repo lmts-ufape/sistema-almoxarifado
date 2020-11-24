@@ -36,7 +36,7 @@ class SolicitacaoController extends Controller
             $solicitacao->save();
 
             $historicoStatus = new HistoricoStatus();
-            $historicoStatus->status = "Aguardando Aprovação";
+            $historicoStatus->status = "Aguardando Analise";
             $historicoStatus->solicitacao_id = $solicitacao->id;
             $historicoStatus->save();
 
@@ -110,7 +110,7 @@ class SolicitacaoController extends Controller
 
                 DB::update(
                     'update historico_statuses set status = ?, data_aprovado = ? where solicitacao_id = ?',
-                    [$checkInputNull == 0 ? "Aprovado" : "Aprovado parcialmente", date('Y-m-d H:i:s'), $request->solicitacaoID]
+                    [$checkInputNull == 0 ? "Aprovado" : "Aprovado Parcialmente", date('Y-m-d H:i:s'), $request->solicitacaoID]
                 );
 
                 DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$request->observacaoAdmin, $request->solicitacaoID]);
@@ -182,7 +182,7 @@ class SolicitacaoController extends Controller
 
         DB::update(
             'update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?',
-            ['Despachado', date('Y-m-d H:i:s'), $request->id]
+            ['Entregue', date('Y-m-d H:i:s'), $request->id]
         );
     }
 
