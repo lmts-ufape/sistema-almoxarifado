@@ -17,7 +17,7 @@
                 <th scope="col"> Imagem </th>
                 <th scope="col"> Nome </th>
                 <th scope="col"> Email </th>
-                <th scope="col"> Cargo </th>
+                <th scope="col"> Perfil </th>
             </tr>
         </thead>
 
