@@ -11,7 +11,7 @@
         @csrf
         <div class="form-row">
             <div class="form-group">
-                <label for="imagem"> Selecione uma Imagem </label>
+                <label for="imagem"> Selecione uma imagem </label>
                 <input class="form-control-file" type="file" name="imagem" id="imagem" accept=".png, .jpg, .jpeg, .svg, .dib, .bmp" >
             </div>
             <div class="form-group col-md-3">
@@ -24,7 +24,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="inputQuantidadeMin">Quantidade mínima</label>
-                <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" value="{{ old('quantidade_minima') }}">
+                <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" min="0" value="{{ old('quantidade_minima') }}">
             </div>
         </div>
         <div  >

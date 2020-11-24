@@ -105,7 +105,7 @@ class UsuarioController extends Controller
             'senha' => Hash::make($request->senha)
         ];
 
-        $usuario->fill($data)->save();
+        $usuario->fill($data)->Update();
 
         return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
     }

@@ -5,7 +5,7 @@
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
-        <h2>ATENDER SOLICITAÇÕES</h2>
+      <h2>ATENDER SOLICITAÇÕES</h2>
     </div>
 
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">

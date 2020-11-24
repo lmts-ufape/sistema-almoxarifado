@@ -48,7 +48,7 @@
                     <label for="cpf" class="col-md-4 col-form-label text-md-right">{{ __('CPF') }}</label>
 
                     <div class="col-md-6">
-                        <input id="cpf" type="number" min="0" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="000.000.000-00">
+                        <input id="cpf" type="number" min="0" max="99999999999" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="000.000.000-00">
 
                         @error('cpf')
                             <span class="invalid-feedback" role="alert">
@@ -62,8 +62,7 @@
                     <label for="rg" class="col-md-4 col-form-label text-md-right">{{ __('RG') }}</label>
 
                     <div class="col-md-6">
-                        <input id="rg" type="number" min="0" class="form-control @error('rg') is-invalid @enderror" name="rg" value="{{ old('rg') }}" required autocomplete="rg" autofocus>
-
+                        <input id="rg" type="number" min="0" max="99999999999" class="form-control @error('rg') is-invalid @enderror" name="rg" value="{{ old('rg') }}" required autocomplete="rg" autofocus placeHolder="000.000.0">
                         @error('rg')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -76,7 +75,7 @@
                     <label for="data_nascimento" class="col-md-4 col-form-label text-md-right">{{ __('Data de nascimento') }}</label>
 
                     <div class="col-md-6">
-                        <input id="data_nascimento" type="date" class="form-control @error('data_nascimento') is-invalid @enderror" name="data_nascimento" min="" max="">
+                        <input id="data_nascimento" type="date" class="form-control @error('data_nascimento') is-invalid @enderror" name="data_nascimento" min="1910-01-01" max="2020-12-31">
 
                         @error('data_nascimento')
                             <span class="invalid-feedback" role="alert">

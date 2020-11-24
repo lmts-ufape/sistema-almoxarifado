@@ -26,7 +26,8 @@ class StoreMaterial extends FormRequest
         return [
             'nome' => 'bail|min:3|required|max:50',
             'codigo' => 'bail|min:1|required|max:20',
-            'quantidade_minima' => 'required',
+            'quantidade_minima' => 'required|integer|min:0',
+            // 'quantidade_minima' => 'required',
             'descricao' => 'bail|min:5|required|max:255',
             'imagem' => 'required|image'
         ];

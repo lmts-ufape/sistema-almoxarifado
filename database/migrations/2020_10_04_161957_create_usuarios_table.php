@@ -22,7 +22,7 @@ class CreateUsuariosTable extends Migration
             $table->date('data_nascimento');
             $table->integer('matricula');
             $table->foreignId('cargo_id');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('senha');
             $table->rememberToken();
             $table->timestamps();
