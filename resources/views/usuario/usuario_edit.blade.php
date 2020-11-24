@@ -65,13 +65,13 @@
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="matricula"> Matrícula do Siga </label>
+                    <label for="matricula"> Matrícula </label>
                     <input class="form-control" type="number" name="matricula" id="matricula" placeHolder="000000000"
                            value="{{ $usuario->matricula }}">
                 </div>
                 @if(Auth::user()->cargo_id == 2)
                     <div class="form-group">
-                        <label for="cargo"> Cargo </label>
+                        <label for="cargo"> Perfil </label>
                         <select class="custom-select" name="cargo" id="cargo">
                             <option value="{{ $usuario->cargo_id }}"
                                     selected="selected">{{ $usuario->getCargo($usuario->cargo_id)->nome }}</option>
@@ -92,7 +92,7 @@
             </div>
 
             <div class="form-group">
-                <label for="email"> Email </label>
+                <label for="email"> E-mail </label>
                 <input class="form-control" type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br"
                        value="{{ $usuario->email }}">
             </div>
@@ -121,8 +121,17 @@
                 </div>
             @endif
 
-            <Button class="btn btn-secondary" type="button" onclick="location.href = '<?php echo $_SERVER['HTTP_REFERER']; ?>' "> Cancelar</Button>
-            <Button class="btn btn-success" type="submit"> Atualizar</Button>
+            <div class="form-row">
+                <div class="col-sm-1">
+                    <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button>
+                </div>
+                <div class="col-sm-1">
+                    <Button type="button" class="btn btn-danger"> Remover </Button>
+                </div>
+                <div class="col-sm-1">
+                    <Button class="btn btn-success" type="submit"> Atualizar </Button>
+                </div>
+            </div>
 
         </div>
 

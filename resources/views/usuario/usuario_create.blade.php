@@ -25,7 +25,7 @@
                 <label for="imagem"> Selecione uma Imagem </label>
                 <input class="form-control-file" type="file" name="imagem" id="imagem" accept=".png, .jpg, .jpeg, .svg, .dib, .bmp" >
             </div>
-            
+
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control" type="text" name="nome" id="nome" placeHolder="Nome Completo">
@@ -48,12 +48,12 @@
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="matricula"> Matrícula do Siga </label>
+                    <label for="matricula"> Matrícula </label>
                     <input class="form-control" type="number" name="matricula" id="matricula" placeHolder="000000000">
                 </div>
 
                 <div class="form-group">
-                    <label for="cargo"> Cargo </label>
+                    <label for="cargo"> Perfil </label>
                     <select class="custom-select" name="cargo" id="cargo">
                     <option value="0" selected="selected">Escolha...</option>
                     @foreach( $cargos as $cargo )
@@ -68,7 +68,7 @@
             </div>
 
             <div class="form-group">
-                <label for="email"> Email </label>
+                <label for="email"> E-mail </label>
                 <input class="form-control" type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br">
             </div>
 

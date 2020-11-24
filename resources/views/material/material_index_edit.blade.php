@@ -10,11 +10,11 @@
     <table id="tableMateriais" class="table table-hover table-responsive-md">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
              <tr>
-                <th scope="col">Imagem</th>
-                <th scope="col">Material</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Quantidade minínima</th>
-                <th scope="col">Código</th>
+                <th class="align-middle" scope="col">Imagem</th>
+                <th class="align-middle" scope="col">Material</th>
+                <th class="align-middle" scope="col">Descrição</th>
+                <th class="align-middle" scope="col">Qtd. Mínima</th>
+                <th class="align-middle" scope="col">Código</th>
             </tr>
         </thead>
         <tbody>

@@ -47,13 +47,25 @@
             </div>
         @endif
 
-        <button type="submit" class="btn btn-success">Atualizar</button>
+
+        <div class="form-row">
+            <div class="col-sm-1">
+                <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button>
+            </div>
+            <div class="col-sm-1">
+                <Button type="button" class="btn btn-danger"> Remover </Button>
+            </div>
+            <div class="col-sm-1">
+                <Button class="btn btn-success" type="submit"> Atualizar </Button>
+            </div>
+        </div>
+
 
     </form>
-    <form method="POST" action="{{ route('material.destroy', ['material' => $material->id]) }}">
+    {{-- <form method="POST" action="{{ route('material.destroy', ['material' => $material->id]) }}">
 
         @csrf
         @method('DELETE')
         <button class="btn btn-danger" type="submit">Remover</button>
-    </form>
+    </form> --}}
 @endsection
