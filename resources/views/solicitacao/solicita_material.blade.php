@@ -49,7 +49,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="inputQuantidade" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
-                <input type="number" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
+                <input type="number" min="0" oninput="validity.valid||(value='')" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
             </div>
             <div class="form-group">
                 <button id="addTable" style="margin-top: 30px; margin-left: 10px" class="btn btn-primary" onclick="addTable()">Adicionar</button>
@@ -74,12 +74,12 @@
             <div class="form-group col-md-4">
                 <div class="form-group">
                     <label for="inputNomeReceptor">Nome</label>
-                    <input type="text" class="form-control" id="inputNomeReceptor" name="nomeReceptor" value="" disabled="true">
+                    <input type="text" class="form-control" id="inputNomeReceptor" onkeypress="return apenasLetras(event,this);" maxlength="100" name="nomeReceptor" value="" disabled="true">
                 </div>
             </div>
             <div class="form-group col-md-3" style="margin-left: 20px;">
                 <label for="inputRgReceptor">RG</label>
-                <input type="number" class="form-control" id="inputRgReceptor" name="rgReceptor" value="" disabled="true">
+                <input type="number" min="0" onkeypress="return apenasNumeros(event,this);" oninput="return rgLength();" class="form-control" id="inputRgReceptor" name="rgReceptor" value="" disabled="true">
             </div>
         </div>
         <div class="form-check" style="margin-bottom: 10px">
@@ -145,10 +145,63 @@
                 $("#inputNomeReceptor").prop('disabled', false);
                 $("#inputRgReceptor").prop('disabled', false);
             }
-        })
+        });
     });
 
     var _row = null;
+
+    function rgLength(e, t){
+        var rg = $("#inputRgReceptor").val().length;
+        if (rg > 11) {
+            $("#inputRgReceptor").val($("#inputRgReceptor").val().substring(0, $("#inputRgReceptor").val().length - 1));
+            alert('O RG não pode ter mais 11 dígitos');
+            return false;
+        }
+    }
+
+    function apenasLetras(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            } else if (e) {
+                var charCode = e.which;
+            } else {
+                return true;
+            }
+            if (
+                (charCode > 64 && charCode < 91) || 
+                (charCode > 96 && charCode < 123) ||
+                (charCode > 191 && charCode <= 255) || charCode == 32
+            ){
+                return true;
+            } else {
+                alert('Digite apenas letras no nome');
+                return false;
+            }
+        } catch (err) {
+            alert('Digite apenas letras no nome');
+        }
+    }
+
+    function apenasNumeros(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            } else if (e) {
+                var charCode = e.which;
+            } else {
+                return true;
+            }
+            if ((charCode >= 48 && charCode <= 57) ){
+                return true;
+            } else {
+                alert('Digite apenas números no RG');
+                return false;
+            }
+        } catch (err) {
+            alert('Digite apenas números no RG');
+        }
+    }
 
     function construirTable(quantidade){
         return "<td class=\"quantidadeRow\" style=\"text-align: center\">" + quantidade + "</td>" +
@@ -221,9 +274,21 @@
         }
     }
 
+
     function setValuesRowInput(){
         var materiais = [];
         var quantidades = [];
+
+        if(!$('#checkReceptor').prop('checked')){
+            var rg = $("#inputRgReceptor").val().length;
+            if (rg < 7) {
+                alert('O RG não pode ter menos de 7 dígitos e mais de 11');
+                return false;
+            } else if($("#inputNomeReceptor").val().length < 5 ) {
+                alert('O nome deve ter pelo menos 5 letras');
+                return false;
+            }
+        }
 
         $("#tableMaterial > tbody > tr").children('.materialRow').each(function() {
             materiais.push($(this).data('id'));
