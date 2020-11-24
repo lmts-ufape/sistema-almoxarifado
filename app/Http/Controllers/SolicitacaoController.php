@@ -9,7 +9,6 @@ use App\Solicitacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class SolicitacaoController extends Controller
 {
@@ -21,16 +20,19 @@ class SolicitacaoController extends Controller
 
     public function store(Request $request)
     {
-        if (empty($request->dataTableMaterial) || empty($request->dataTableQuantidade) || empty($request->dataTableReceptor)) {
+        if (empty($request->dataTableMaterial) || empty($request->dataTableQuantidade)) {
             return redirect()->back()->withErrors('Adicione o(s) material(is), sua(s) quantidade(s) e seu(s) receptor(es)');
         } else {
             $materiais = explode(",",  $request->dataTableMaterial);
             $quantidades = explode(",",  $request->dataTableQuantidade);
-            $receptores = explode(",",  $request->dataTableReceptor);
 
             $solicitacao = new Solicitacao();
             $solicitacao->usuario_id = Auth::user()->id;
-            $solicitacao->observacao_requerente = $request->observacao;
+            $solicitacao->observacao_requerente =$request->observacao;
+            if($request->checkReceptor == NULL){
+                $solicitacao->receptor = $request->nomeReceptor;
+                $solicitacao->receptor_rg = $request->rgReceptor;
+            }
             $solicitacao->save();
 
             $historicoStatus = new HistoricoStatus();
@@ -41,12 +43,11 @@ class SolicitacaoController extends Controller
             for ($i = 0; $i < count($materiais); $i++) {
                 $itemSolicitacao = new ItemSolicitacao();
                 $itemSolicitacao->quantidade_solicitada = $quantidades[$i];
-                $itemSolicitacao->receptor = $receptores[$i];
                 $itemSolicitacao->material_id = $materiais[$i];
                 $itemSolicitacao->solicitacao_id = $solicitacao->id;
                 $itemSolicitacao->save();
             }
-            return redirect()->back()->with('success', 'Solicitação feita com sucesso');
+            return redirect()->back()->with('success', 'Solicitação feita com sucesso!');
         }
     }
 
@@ -59,7 +60,7 @@ class SolicitacaoController extends Controller
 
         if ($request->action == 'nega') {
             if (is_null($request->observacaoAdmin)) {
-                return redirect()->back()->withErrors('Informe o motivo de a solicitação ter sido negada');
+                return redirect()->back()->withErrors('Informe o motivo de a solicitação ter sido negada!');
             } else {
                 DB::update('update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?', ["Negado", date('Y-m-d H:i:s'), $request->solicitacaoID]);
                 DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$request->observacaoAdmin, $request->solicitacaoID]);
@@ -71,7 +72,7 @@ class SolicitacaoController extends Controller
                     session()->forget('status');
                 }
 
-                return redirect()->back()->with('success', 'Solicitação cancelada com sucesso');
+                return redirect()->back()->with('success', 'Solicitação cancelada com sucesso!');
             }
         } else if ($request->action == 'aprova') {
             $checkInputNull = 0;
@@ -99,7 +100,7 @@ class SolicitacaoController extends Controller
                 }
             }
             if ($checkInputNull == count($itemSolicitacaos)) {
-                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas e acima de 0');
+                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas e acima de 0!');
             } else if ($checkQuantMinima > 0) {
                 return redirect()->back()->withErrors($errorMessage);
             } else {
@@ -123,7 +124,7 @@ class SolicitacaoController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Solicitação Aprovada com sucesso');
+        return redirect()->back()->with('success', 'Solicitação Aprovada com sucesso!');
     }
 
     public function listSolicitacoesRequerente()

@@ -15,7 +15,6 @@ class CreateUsuariosTable extends Migration
     {
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
-            // $table->binary('imagem');
             $table->string('imagem');
             $table->string('nome');
             $table->string('cpf');

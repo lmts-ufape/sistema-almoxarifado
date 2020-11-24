@@ -16,7 +16,7 @@
     @endif
 
     @if($errors->any())
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <ul>
                 @foreach($errors->all() as $erro)
                         <li>{{ $erro }}</li>
@@ -28,14 +28,22 @@
         </div>
     @endif
 
-    <div style="background-color: #949494">
+    <div id="error" class="alert alert-danger" role="alert" style="margin-top: 10px; display: none">
+        Informe o material, a quantidade e o receptor!
+    </div>
+
+    <div id="remocaoSuccess" class="alert alert-success" role="alert" style="margin-top: 10px; display: none">
+        Remoção realizada! 
+    </div>
+
+    <div style="background-color: #D7D7E6">
         <div class="form-row" style="margin-left: 10px">
             <div class="form-group col-md-4">
                 <label for="inputMaterial" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Material</label>
                 <select id="inputMaterial" class="form-control" name="material_id">
                     <option selected hidden>Escolher...</option>
                     @foreach($materiais as $material)
-                        <option id="optionSelected" value="{{$material->id}}"> {{$material->id}}.{{ $material->nome }} </option>
+                        <option id="optionSelected" data-value="{{$material->id}}"> {{$material->codigo}} - {{ $material->nome }} </option>
                     @endforeach
                 </select>
             </div>
@@ -43,17 +51,10 @@
                 <label for="inputQuantidade" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
                 <input type="number" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
             </div>
-
-            <div class="form-group col-md-3">
-                <label for="inputReceptor" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Receptor</label>
-                <input type="text" class="form-control" id="inputReceptor" name="receptor" value="{{ old('receptor') }}">
+            <div class="form-group">
+                <button id="addTable" style="margin-top: 30px; margin-left: 10px" class="btn btn-primary" onclick="addTable()">Adicionar</button>
             </div>
         </div>
-        <button id="addTable"  class="btn btn-primary" style="margin: 10px" onclick="addTable()">Adicionar</button>
-    </div>
-
-    <div id="error" class="alert alert-danger" role="alert" style="margin-top: 10px; display: none">
-        Informe o material, a quantidade e o receptor.
     </div>
 
     <form method="POST" id="formSolicitacao" name="formSolicitacao" action="{{ route('solicita.store') }}">
@@ -61,15 +62,30 @@
         <table id="tableMaterial" class="table table-hover table-responsive-md" style="margin-top: 10px">
             <thead style="background-color: #151631; color: white; border-radius: 15px">
                 <tr>
-                    <th scope="col" style="text-align: center">Material</th>
+                    <th scope="col">Material</th>
                     <th scope="col" style="text-align: center">Quantidade</th>
-                    <th scope="col" style="text-align: center">Receptor</th>
                     <th scope="col" style="text-align: center">Ações</th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
-
+        <label style="margin-top: 10px"><strong>Receptor</strong></label>
+        <div class="form-row" style="padding: 0 0 0 0;">
+            <div class="form-group col-md-4">
+                <div class="form-group">
+                    <label for="inputNomeReceptor">Nome</label>
+                    <input type="text" class="form-control" id="inputNomeReceptor" name="nomeReceptor" value="" disabled="true">
+                </div>
+            </div>
+            <div class="form-group col-md-3" style="margin-left: 20px;">
+                <label for="inputRgReceptor">RG</label>
+                <input type="number" class="form-control" id="inputRgReceptor" name="rgReceptor" value="" disabled="true">
+            </div>
+        </div>
+        <div class="form-check" style="margin-bottom: 10px">
+            <input type="checkbox" class="form-check-input" id="checkReceptor" name="checkReceptor" checked>
+            <label class="form-check-label" for="checkReceptor">Eu sou o receptor</label>
+        </div>
         <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             <label for="inputObservacao"><strong>Observações:</strong></label>
             <textarea class="form-control" name="observacao" id="inputObservacao" cols="30" rows="3">{{ old('observacao') }}</textarea>
@@ -77,79 +93,159 @@
 
         <input type="hidden" id="dataTableMaterial" name="dataTableMaterial" value="">
         <input type="hidden" id="dataTableQuantidade" name="dataTableQuantidade" value="">
-        <input type="hidden" id="dataTableReceptor" name="dataTableReceptor" value="">
         
         <button id="solicita" class="btn btn-success" disabled onclick="setValuesRowInput()">Solicitar</button>
     </form>
+
+    <div class="modal fade" id="detalhesSolicitacao" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalLabel" style="color:#151631">Editar Solicitação</span></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div id="modalBody">
+                    <div class="form-row" style="margin-left: 10px">
+                        <div class="form-group col-md-4">
+                            <label for="selectMaterial" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Material</label>
+                            <select id="selectMaterial" class="form-control" name="selectMaterial">
+                                <option selected hidden>Escolher...</option>
+                                @foreach($materiais as $material)
+                                    <option id="optionSelectedEdit" value="{{$material->id}}"> {{$material->codigo}} - {{ $material->nome }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="editQuantidade" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
+                            <input type="number" class="form-control" id="editQuantidadeInput" name="editQuantidade" value="{{ old('quantidade') }}">
+                        </div>
+                        <div class="form-group">
+                            <button id="updateMaterial" style="margin-top: 30px; margin-left: 10px" class="btn btn-primary" onclick="confirmarAlteracao()">Atualizar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $('#checkReceptor').change(function() {
+            if($(this).prop('checked')){
+                $("#inputNomeReceptor").prop('disabled', true);
+                $("#inputRgReceptor").prop('disabled', true);
+            } else {
+                $("#inputNomeReceptor").prop('disabled', false);
+                $("#inputRgReceptor").prop('disabled', false);
+            }
+        })
+    });
+
     var _row = null;
-    var nomeMaterial = null;
 
-    function setValuesRowInput(){
-        var materiais = [];
-        var quantidades = [];
-        var receptores = [];
-
-        $("#tableMaterial > tbody > tr").children('.materialRow').each(function() {
-            materiais.push($(this).text().split(".")[0]);
-        });
-
-        $("#tableMaterial > tbody > tr").children('.quantidadeRow').each(function() {
-            quantidades.push($(this).text());
-        });
-
-        $("#tableMaterial > tbody > tr").children('.receptorRow').each(function() {
-            receptores.push($(this).text());
-        });
-
-        $('#dataTableMaterial').val([materiais]);
-        $('#dataTableQuantidade').val([quantidades]);
-        $('#dataTableReceptor').val([receptores]);
-    }
-
-    function construirTable(quantidade, receptor){
+    function construirTable(quantidade){
         return "<td class=\"quantidadeRow\" style=\"text-align: center\">" + quantidade + "</td>" +
-        "<td class=\"receptorRow\" style=\"text-align: center\">" + receptor + "</td>" +
         "<td style=\"text-align: center\">" +
             "<div class=\"dropdown\">" +
                 "<button class=\"btn btn-secondary dropdown\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
                     "⋮" +
                 "</button>" +
                 "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">" +
-                    "<a type=\"button\" class=\"dropdown-item\" onclick=\"deleteRow(this)\">Remover</a>" +
-                    "<a type=\"button\" class=\"dropdown-item\" onclick=\"showData(this)\">Editar</a>" +
+                    "<a type=\"button\" class=\"dropdown-item\" onclick=\"removerMaterial(this)\">Remover</a>" +
+                    "<a type=\"button\" class=\"dropdown-item\" onclick=\"editarMaterial(this)\">Editar</a>" +
                 "</div>" +
             "</div>" +
         "</td>" +
         "</tr>";
     }
 
-    function addTable() {
+    function editarMaterial(ctl){
+        $("#detalhesSolicitacao").modal('show');
 
-        if ($("#addTable").text() == "Atualizar") {
-            if($("#inputQuantidade").val() != '' &&  !(/^0*$/.test($("#inputQuantidade").val())) 
-                && $("#inputReceptor").val() != ''){
-                updateRowTable();
-            } else {
-                $('#error').slideDown();
+        _row = $(ctl).parents("tr");
+        var dados = $(ctl).parents("tr").children("td");
+        $("#selectMaterial").val($(dados[0]).data('id'));
+        $("#editQuantidadeInput").val($(dados[1]).text());
+    }
+
+    function confirmarAlteracao(){
+        var escolha = confirm("Tem certeza que deseja fazer as alterações");
+        if (escolha) {
+            updateRowTable();
+            $("#detalhesSolicitacao").modal('hide');
+            $("#selectMaterial").val(0);
+            $("#editQuantidadeInput").val();
+        }
+    }
+
+    function removerMaterial(ctl){
+        var escolha = confirm("Tem certeza que deseja remover o(s) material(is)?");
+        if (escolha) {
+            deleteRow(ctl);
+            $('#remocaoSuccess').slideDown();
                 setTimeout(function() { 
-                    $('#error').slideUp(); 
-                }, 5000);
-            }
-        } else {
-            if ($("#inputMaterial").val() != 'Escolher...' && $("#inputQuantidade").val() != '' &&
-                    !(/^0*$/.test($("#inputQuantidade").val())) && $("#inputReceptor").val() != '') {
+                    $('#remocaoSuccess').slideUp(); 
+            }, 4000);
+        }
+    }
+
+    function updateRowTable() {
+        $(_row).after(refactorRowtable());
+        $(_row).remove();
+        clearFields();
+    }
+
+    function refactorRowtable() {
+        var ret = "<tr data-id="+ $("#selectMaterial option:selected").val() +  ">" +
+            "<td data-id=" + $("#selectMaterial option:selected").index() + " class=\"materialRow\">" + $("#selectMaterial option:selected").text() + "</td>" + construirTable($("#editQuantidadeInput").val());
+        return ret;
+    }
+
+    function clearFields() {
+        $("#inputMaterial").val($("#inputMaterial option:first").val());
+        $("#inputQuantidade").val("");
+    }
+
+    function deleteRow(ctl) {
+        $(ctl).parents("tr").remove();
+
+        if ($("#tableMaterial >tbody >tr").length == 0) {
+            $("#solicita").attr("disabled", true);
+        }
+    }
+
+    function setValuesRowInput(){
+        var materiais = [];
+        var quantidades = [];
+
+        $("#tableMaterial > tbody > tr").children('.materialRow').each(function() {
+            materiais.push($(this).data('id'));
+        });
+
+        $("#tableMaterial > tbody > tr").children('.quantidadeRow').each(function() {
+            quantidades.push($(this).text());
+        });
+
+        $('#dataTableMaterial').val([materiais]);
+        $('#dataTableQuantidade').val([quantidades]);
+    }
+
+    function addTable() {
+        if ($("#inputMaterial").val() != 'Escolher...' && $("#inputQuantidade").val() != '' &&
+                    !(/^0*$/.test($("#inputQuantidade").val()))) {
                 addRowTable();
-            } else {
-                $('#error').slideDown();
-                setTimeout(function() { 
-                    $('#error').slideUp(); 
-                }, 5000);
-            }
+        } else {
+            $('#error').slideDown();
+            setTimeout(function() { 
+                $('#error').slideUp(); 
+            }, 5000);
         }
         clearFields();
 
@@ -159,50 +255,8 @@
     }
 
     function addRowTable() {
-        $("#tableMaterial tbody").append("<tr>" +
-            "<td class=\"materialRow\" style=\"text-align: center\">" + $("#inputMaterial option:selected").text()+ "</td>" + 
-            construirTable($("#inputQuantidade").val(), $("#inputReceptor").val()));
-    }
-
-    function updateRowTable() {
-        $(_row).after(refactorRowtable());
-        
-        $(_row).remove();
-        
-        clearFields();
-        
-        $("#addTable").text("Adicionar");
-    }
-
-    function refactorRowtable() {
-        var ret = "<tr>" +
-            "<td class=\"materialRow\" style=\"text-align: center\">" + nomeMaterial + "</td>" + construirTable($("#inputQuantidade").val(), $("#inputReceptor").val());
-        
-        nomeMaterial = null;
-        return ret;
-    }
-
-    function clearFields() {
-        $("#inputMaterial").val($("#inputMaterial option:first").val());
-        $("#inputQuantidade").val("");
-        $("#inputReceptor").val("");
-    }
-
-    function showData(ctl) {
-        _row = $(ctl).parents("tr");
-        var cols = _row.children("td");
-        nomeMaterial = $(cols[0]).text();
-        $("#inputQuantidade").val($(cols[1]).text());
-        $("#inputReceptor").val($(cols[2]).text());
-        
-        $("#addTable").text("Atualizar");
-    }
-
-    function deleteRow(ctl) {
-        $(ctl).parents("tr").remove();
-
-        if ($("#tableMaterial >tbody >tr").length == 0) {
-            $("#solicita").attr("disabled", true);
-        }
+        $("#tableMaterial tbody").append("<tr data-id="+ $("#inputMaterial option:selected").data('value') +  ">" +
+            "<td data-id=" + $("#inputMaterial option:selected").index() + " class=\"materialRow\">" + $("#inputMaterial option:selected").text()+ "</td>" + 
+            construirTable($("#inputQuantidade").val()));
     }
 </script>
