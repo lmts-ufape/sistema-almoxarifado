@@ -48,7 +48,7 @@
                     <label for="cpf" class="col-md-4 col-form-label text-md-right">{{ __('CPF') }}</label>
 
                     <div class="col-md-6">
-                        <input id="cpf" type="text" min="0" class="form-control @error('cpf') is-invalid @enderror" name="cpf" pattern="[0-9]{10,11}" maxlength="11" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="000.000.000-00">
+                        <input id="cpf" type="number" min="0" max="99999999999" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="000.000.000-00">
 
                         @error('cpf')
                             <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                     <label for="rg" class="col-md-4 col-form-label text-md-right">{{ __('RG') }}</label>
 
                     <div class="col-md-6">
-                        <input id="rg" type="text" min="0" class="form-control @error('rg') is-invalid @enderror" name="rg" pattern="[0-9]{7,11}" maxlength="11" value="{{ old('rg') }}" required autocomplete="rg" autofocus placeHolder="000.000-0">
+                        <input id="rg" type="number" min="0" max="99999999999" class="form-control @error('rg') is-invalid @enderror" name="rg" value="{{ old('rg') }}" required autocomplete="rg" autofocus placeHolder="000.000.0">
                         @error('rg')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
