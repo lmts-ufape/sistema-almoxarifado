@@ -1,16 +1,16 @@
-@extends('templates.principal')
+@extends('templates.templateLogin')
 
 @section('title')
     Login
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-sm">
                 <div>
                     <h2 style="color: #3E3767"><strong>O que é o sistema de almoxarifado ?</strong></h2>
-                    <p style="color: #3E3767">
+                    <p style="color: #3E3767; text-align: justify">
                         É uma aplicação web desenvolvido pela cooperação LMTS - UPE com o objetivo de informatizar o
                         gerenciamento do setor almoxarifado da UPE, auxiliando os responsáveis pelo almoxarifado nas
                         suas rotinas de trabalho,
@@ -18,7 +18,7 @@
                         materiais.
                     </p>
                     <h2 style="color: #3E3767"><strong>Quais são os benefícios ?</strong></h2>
-                    <p style="color: #3E3767">
+                    <p style="color: #3E3767; text-align: justify">
                         Um sistema informatizado permite maior praticidade e confiabilidade no gerenciamento do
                         almoxarifado, permitindo uma visão
                         holística do setor. Além disso, o processo de solicitação, aprovação e controle se torna menos
@@ -27,15 +27,16 @@
                     </p>
 
                     <h2 style="color: #3E3767"><strong>Quais materiais posso solicitar ?</strong></h2>
-                    <p style="color: #3E3767">
-                        É possível solicitar materiais gerais de almoxarifado, como papel, canetas e lápis. Desde que o material esteja registrado no sistema.
+                    <p style="color: #3E3767; text-align: justify">
+                        É possível solicitar materiais gerais de almoxarifado, como papel, canetas e lápis. Desde que o
+                        material esteja registrado no sistema.
                     </p>
 
                 </div>
             </div>
-            <div class="col-sm-0">
-                <h3 class="col-md-8 offset-md-1"
-                    style="margin-bottom: 5%; font-family: 'Segoe UI'; color: #3E3767; font"><u>Almoxarifado</u></h3>
+            <div class="col-sm-5" style="margin-left: 30px; margin-right: -100px">
+                <h3 class="col-md-8 offset-sm-2"
+                    style="margin-bottom: 5%; font-family: 'Segoe UI'; color: #3E3767;"><u>Almoxarifado</u></h3>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group col-md-9">
@@ -72,7 +73,7 @@
                                id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                         <label class="form-check-label" for="remember">
-                            {{ __('Lembrar Usuário / E-mail e Senha') }}
+                            {{ __('Lembrar E-mail e Senha') }}
                         </label>
                     </div>
                     <br>
@@ -84,19 +85,15 @@
                     @if (Route::has('password.request'))
                         <div class="form-group col-md-9">
                             <center>
-                                <a class=" btn-link" href="{{ route('password.request') }}">Clique aqui</a>
-                                <label>Se você esqueceu a senha</label>
+                                <a class=" btn-link" href="{{ route('password.request') }}">Esqueci minha senha</a>
                             </center>
                             <hr style="margin-top: 0">
                         </div>
                     @endif
                 </form>
-                <div class="col-sm">
-                    <label for="">Clique em cadastre-se para criar uma conta</label>
-                </div>
                 <div class="form-group col-md-9">
                     <a type="button" href="{{ route('register') }}" class="btn btn-block"
-                       style="background-color: #3E3767; color: white">
+                       style="background-color: #006600; color: white">
                         {{ __('Cadastre-se') }}
                     </a>
                 </div>
