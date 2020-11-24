@@ -14,7 +14,7 @@
                 <th scope="col" style="text-align: center">Requerente</th>
                 <th scope="col" style="text-align: center">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
-                <th scope="col" style="text-align: center">Despachar ou Cancelar</th>
+                <th scope="col" style="text-align: center">Cancelar ou Entregue</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
                             @endif
                         </td>
                         <td style="text-align: center">{{ date('d/m/Y',  strtotime($dados[$i]->created_at))}}</td>
-                        <td style="text-align: center"><a type="button" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}">Despachar</a><a type="button" style="margin-left: 10px" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}">Cancelar</a></td>
+                        <td style="text-align: center"><a type="button" style="margin-left: 10px" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}">Cancelar</a>  <a type="button" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}">Entregue</a></td>
                     </tr>
                 @endfor
             @endif
@@ -108,7 +108,7 @@
                 "orderable": false
             }]
         });
-        
+
         $(".showDetails").click(function (e) {
             e.preventDefault();
 
