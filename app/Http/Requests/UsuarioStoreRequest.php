@@ -25,7 +25,7 @@ class UsuarioStoreRequest extends FormRequest
     {
         return [
             'nome' => 'required|string|min:5|max:100',
-            'email' => 'required|email|min:5|max:100|unique:usuarios',
+            'email' => 'required|email|min:5|max:100',
             'cpf' => 'required|numeric|min:0|digits:11',
             'rg' => 'required|numeric|min:0|digits_between:7,11',
             'data_nascimento' => 'required|date',
