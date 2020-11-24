@@ -54,7 +54,7 @@ class UsuarioStoreRequest extends FormRequest
             'imagem.*' => 'O carregamento de uma imagem é obrigatória.',
             'senha.required' => 'A senha é um campo obrigatório.',
             'senha.min' => 'A senha deve ter no mínimo 8 caracteres.',
-            'confirmar_senha.required' => 'A confirmação da senha é obrigatória e deve ser igual a senha inserida.'
+            'senha.confirmed' => 'A confirmação da senha é obrigatória e deve ser igual a senha inserida.',
         ];
     }
 }
