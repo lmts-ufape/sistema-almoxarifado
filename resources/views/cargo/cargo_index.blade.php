@@ -2,7 +2,7 @@
 @extends('../templates.principal')
 
 @section('title')
-    Cargo
+    Perfis
 @endsection
 
 @section('content')
