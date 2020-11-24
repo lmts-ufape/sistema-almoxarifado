@@ -48,13 +48,13 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="cpf"> CPF </label>
-                    <input class="form-control" type="number" min="0" max="99999999999" name="cpf" id="cpf" placeHolder="000.000.000-00"
+                    <input class="form-control" type="text" name="cpf" id="cpf" placeHolder="000.000.000-00"
                            value="{{ $usuario->cpf }}">
                 </div>
 
                 <div class="form-group col-md-2">
                     <label for="rg"> RG </label>
-                    <input class="form-control" type="number" min="0" max="99999999999" name="rg" id="rg" placeHolder="00.000.000"
+                    <input class="form-control" type="text" name="rg" id="rg" placeHolder="00.000.000"
                            value="{{ $usuario->rg }}">
                 </div>
 
