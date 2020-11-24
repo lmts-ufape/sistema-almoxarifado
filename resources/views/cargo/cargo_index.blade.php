@@ -2,13 +2,13 @@
 @extends('../templates.principal')
 
 @section('title')
-    Cargo
+    Perfis
 @endsection
 
 @section('content')
-    
+
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
-        <h2>CARGOS CADASTRADOS</h2>
+        <h2>PERFIS CADASTRADOS</h2>
     </div>
 
     <table id="tableCargos" class="table table-hover table-responsive-md">
