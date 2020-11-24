@@ -3,11 +3,11 @@
 @extends('../templates.principal')
 
 @section('title')
-    Cargo - {{ $cargo->nome }}
+    Perfil - {{ $cargo->nome }}
 @endsection
 
 @section('content')
 
-    <p> Cargo: {{ $cargo->nome }}</p>
+    <p> Perfil: {{ $cargo->nome }}</p>
 
 @endsection
