@@ -8,12 +8,15 @@
         <h2>CONSULTAR DEPÓSITOS</h2>
     </div>
 
-    <select name="selectDeposito" id="selectDeposito" style="float: right">
-        <option selected hidden>Escolher depósito</option>
-        @foreach($depositos as $d)
-            <option value="{{ $d->id }}">{{ $d->id }}. {{$d->nome}} </option>
-        @endforeach
-    </select>
+    <div  style="float: right">
+        <span style="font-weight: bold">Selecione um depósito:</span>
+        <select name="selectDeposito" id="selectDeposito">
+            <option selected hidden>Escolher depósito</option>
+            @foreach($depositos as $d)
+                <option value="{{ $d->id }}">{{ $d->id }}. {{$d->nome}} </option>
+            @endforeach
+        </select>
+    </div>
 
     <table id="tableDepositos" class="table table-hover table-responsive-md" >
         <thead style="background-color: #151631; color: white; border-radius: 15px">

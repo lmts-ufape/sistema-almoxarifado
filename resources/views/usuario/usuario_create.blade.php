@@ -25,7 +25,7 @@
                 <label for="imagem"> Selecione uma Imagem </label>
                 <input class="form-control-file" type="file" name="imagem" id="imagem" accept=".png, .jpg, .jpeg, .svg, .dib, .bmp" >
             </div>
-            
+
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control" type="text" name="nome" id="nome" placeHolder="Nome Completo">
@@ -44,16 +44,16 @@
 
                 <div class="form-group">
                     <label for="data_nascimento"> Data de Nascimento </label>
-                    <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" min="" max="">
+                    <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" min="1910-01-01" max="2020-12-31">
                 </div>
 
                 <div class="form-group col-md-2">
-                    <label for="matricula"> Matrícula do Siga </label>
+                    <label for="matricula"> Matrícula </label>
                     <input class="form-control" type="number" name="matricula" id="matricula" placeHolder="000000000">
                 </div>
 
                 <div class="form-group">
-                    <label for="cargo"> Cargo </label>
+                    <label for="cargo"> Perfil </label>
                     <select class="custom-select" name="cargo" id="cargo">
                     <option value="0" selected="selected">Escolha...</option>
                     @foreach( $cargos as $cargo )

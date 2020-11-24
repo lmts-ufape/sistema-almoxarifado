@@ -49,7 +49,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="inputQuantidade" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
-                <input type="number" min="0" oninput="validity.valid||(value='')" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
+                <input type="number" min="0" onkeypress="return apenasNumerosQuant(event,this);" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
             </div>
             <div class="form-group">
                 <button id="addTable" style="margin-top: 30px; margin-left: 10px" class="btn btn-primary" onclick="addTable()">Adicionar</button>
@@ -200,6 +200,26 @@
             }
         } catch (err) {
             alert('Digite apenas números no RG');
+        }
+    }
+
+    function apenasNumerosQuant(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            } else if (e) {
+                var charCode = e.which;
+            } else {
+                return true;
+            }
+            if ((charCode >= 48 && charCode <= 57) ){
+                return true;
+            } else {
+                alert('Digite apenas números');
+                return false;
+            }
+        } catch (err) {
+            alert('Digite apenas números');
         }
     }
 
