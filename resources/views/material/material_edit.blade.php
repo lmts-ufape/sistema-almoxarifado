@@ -8,7 +8,6 @@
     </div>
 
     <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}" enctype="multipart/form-data">
-
         @csrf
         @method('PUT')
 
@@ -46,8 +45,7 @@
                 </ul>
             </div>
         @endif
-
-
+        
         <div class="form-row">
             <div class="col-sm-1">
                 <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button>
@@ -60,10 +58,10 @@
             </div>
         </div>
 
-
     </form>
     {{-- <form method="POST" action="{{ route('material.destroy', ['material' => $material->id]) }}">
 
+    <form method="POST" action="{{ route('material.destroy', ['material' => $material->id]) }}">
         @csrf
         @method('DELETE')
         <button class="btn btn-danger" type="submit">Remover</button>

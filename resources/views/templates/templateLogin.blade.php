@@ -6,13 +6,11 @@
     <title>Almoxarifado - @yield('title')</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    {{-- COM ESSE SCRIPT ABAIXO, A REQUISIÇÂO AJAX NÂO ESTÁ FUNCIONANDO --}}
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 
     <script>
@@ -51,12 +49,9 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                 </ul>
-                <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto" >
-                    <!-- Authentication Links -->
                     <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
                         <li class="nav-item " style="padding: 0px 15px">
                             {{ __('Inicio') }}

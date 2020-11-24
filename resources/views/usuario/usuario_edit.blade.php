@@ -18,12 +18,10 @@
     @endif
 
     <form action="{{ route('usuario.update', $usuario->id) }}" enctype="multipart/form-data" method="POST">
-
         @csrf
         @method('PUT')
 
         <div class="form-group">
-
             <div class="form-group">
                 <h2 class="h4"> Dados Institucionais / Pessoais </h2>
             </div>
@@ -120,7 +118,7 @@
                     </ul>
                 </div>
             @endif
-
+            
             <div class="form-row">
                 <div class="col-sm-1">
                     <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button>
@@ -134,7 +132,5 @@
             </div>
 
         </div>
-
     </form>
-
 @endsection
