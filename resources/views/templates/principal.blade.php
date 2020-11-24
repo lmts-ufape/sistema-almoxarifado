@@ -37,7 +37,6 @@
             });
         });
     </script>
-
 </head>
 <body style="background-color: #151631">
     <div id="app" >
