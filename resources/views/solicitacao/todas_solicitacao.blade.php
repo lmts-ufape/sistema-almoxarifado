@@ -132,7 +132,7 @@
                     ret += "<td>" + data[item]['nome'] + "</td>";
                     ret += "<td>" + data[item]['descricao'] + "</td>";
                     ret += "<td style=\"text-align: center\">" + data[item]['quantidade_solicitada'] + "</td>";
-                    ret += "<td style=\"text-align: center\">" + data[item]['quantidade_aprovada'] + "</td>";
+                    ret += "<td style=\"text-align: center\">" + (data[item]['quantidade_aprovada'] == null ? '': data[item]['quantidade_aprovada']) + "</td>";
                     ret += "</tr>";
                 }
 
@@ -195,7 +195,7 @@
                             ret += "<tr data-id=" + id + " onclick=\"showItens( " + id + "  )\" style=\"cursor: pointer;\">";
                             ret += "<td>" + data[item]['nome'] + "</td>";
                             ret += "<td>" + data[item]['descricao'] + "</td>";
-                            ret += "<td style=\"text-align: center\">" + data[item]['quantidade_solicitada'] + "</td>";
+                            ret += "<td style=\"text-align: center\">" + (data[item]['quantidade_aprovada'] == null ? '': data[item]['quantidade_aprovada']) + "</td>";
                             ret += "</tr>";
                         }
                         row.child(ret).show();

@@ -9,26 +9,29 @@
         <div class="row">
             <div class="col-sm">
                 <div>
-                    <h2 style="color: #3E3767"><strong>O que é o sistema de almoxarifado ?</strong></h2>
+                    <h2 style="color: #3E3767"><strong>O que é o sistema eletrônico de gestão de almoxarifados (SEGA)?</strong></h2>
                     <p style="color: #3E3767; text-align: justify">
-                        É uma aplicação web desenvolvido pela cooperação LMTS - UPE com o objetivo de informatizar o
-                        gerenciamento do setor almoxarifado da UPE, auxiliando os responsáveis pelo almoxarifado nas
-                        suas rotinas de trabalho,
-                        como gerenciar o estoques e servir entidades como professores e secretaria que requisitarem os
-                        materiais.
+                        É uma aplicação web desenvolvida no âmbito da cooperação técnica UFAPE-LMTS / UPE com o objetivo de informatizar o gerenciamento de almoxarifados,
+                         auxiliando os responsáveis nas suas rotinas de trabalho,
+                         como controlar o estoque e atender demandas dos solicitantes por materiais etc.
                     </p>
-                    <h2 style="color: #3E3767"><strong>Quais são os benefícios ?</strong></h2>
+                    <h2 style="color: #3E3767"><strong>Quais são os benefícios?</strong></h2>
                     <p style="color: #3E3767; text-align: justify">
-                        Um sistema informatizado permite maior praticidade e confiabilidade no gerenciamento do
-                        almoxarifado, permitindo uma visão
-                        holística do setor. Além disso, o processo de solicitação, aprovação e controle se torna menos
-                        dispendioso e mais prático
-                        tanto para o administrador quanto para o requerente.
+                        <ul>
+                            <li>
+                                Praticidade e confiabilidade no gerenciamento do almoxarifado, permitindo uma visão holística do setor.
+                            </li>
+                            <li>
+                                Informatização do processo de solicitação, aprovação e controle de estoque e materiais.
+                            </li>
+                            <li>
+                                Acesso fácil por meio da internet.
+                            </li>
+                        </ul>
                     </p>
-                    <h2 style="color: #3E3767"><strong>Quais materiais posso solicitar ?</strong></h2>
+                    <h2 style="color: #3E3767"><strong>Quais materiais posso solicitar?</strong></h2>
                     <p style="color: #3E3767; text-align: justify">
-                        É possível solicitar materiais gerais de almoxarifado, como papel, canetas e lápis. Desde que o
-                        material esteja registrado no sistema.
+                        Quaisquer materiais cadastrados no sistema e disponíveis no estoque da instituição.
                     </p>
                 </div>
             </div>
@@ -75,7 +78,7 @@
                     </div>
                     <br>
                     <div class="form-group col-md-9">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success btn-block">
                             {{ __('Entrar') }}
                         </button>
                     </div>
@@ -89,7 +92,7 @@
                     @endif
                 </form>
                 <div class="form-group col-md-9">
-                    <a type="button" href="{{ route('register') }}" class="btn btn-primary">
+                    <a type="button" href="{{ route('register') }}" class="btn btn-primary btn-block">
                         {{ __('Cadastre-se') }}
                     </a>
                 </div>

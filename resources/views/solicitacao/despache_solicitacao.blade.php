@@ -121,7 +121,7 @@
                     ret += "<td>" + data[item]['nome'] + "</td>";
                     ret += "<td>" + data[item]['descricao'] + "</td>";
                     ret += "<td style=\"text-align: center\">" + data[item]['quantidade_solicitada'] + "</td>";
-                    ret += "<td style=\"text-align: center\">" + '<input style=\"width: 85%\" type=\"number\" id=\"inputQuantAprovada\" name=\"quantAprovada[]\" value=\"' + data[item]['quantidade_aprovada'] + '\">' + "</td>";
+                    ret += "<td style=\"text-align: center\">" + (data[item]['quantidade_aprovada'] == null ? '': data[item]['quantidade_aprovada']) + "</td>";
                     ret += "</tr>";
                 }
 

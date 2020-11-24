@@ -14,7 +14,7 @@
     <table id="tableDepositos" class="table table-hover table-responsive-md">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
              <tr>
-                <th scope="col" style="text-align: center">Depósito</th>
+                <th class="text-left" scope="col" style="text-align: center">Depósito</th>
                 <th scope="col" style="text-align: center">Código</th>
             </tr>
         </thead>
@@ -22,7 +22,7 @@
 
             @forelse($depositos as $deposito)
                 <tr onclick="location.href = '{{ route('deposito.edit', $deposito->id) }}'" style="cursor: pointer;">
-                    <td style="text-align: center"> {{ $deposito->nome }} </td>
+                    <td class="text-left" style="text-align: center"> {{ $deposito->nome }} </td>
                     <td style="text-align: center"> {{ $deposito->codigo }} </td>
                 </tr>
             @empty
