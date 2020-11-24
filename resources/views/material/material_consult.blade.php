@@ -13,8 +13,8 @@
                 <th class="align-middle" scope="col">Imagem</th>
                 <th class="align-middle" scope="col">Material</th>
                 <th class="align-middle" scope="col">Descrição</th>
-                <th class="align-middle" scope="col">Qtd total</th>
-                <th class="align-middle" scope="col">Qtd minínima</th>
+                <th class="align-middle" scope="col">Qtd Total</th>
+                <th class="align-middle" scope="col">Qtd Mínima</th>
                 <th class="align-middle" scope="col">Código</th>
             </tr>
         </thead>
