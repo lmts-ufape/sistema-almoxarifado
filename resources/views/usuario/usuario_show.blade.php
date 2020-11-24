@@ -9,6 +9,6 @@
 <p> RG: {{ $usuario->rg }} </p>
 <p> Data_Nascimento: {{ $usuario->data_nascimento }} </p>
 <p> Matricula: {{ $usuario->matricula }} </p>
-<p> Cargo: {{ $usuario->getCargo($usuario->cargo_id)->nome }} </p>
+<p> Perfil: {{ $usuario->getCargo($usuario->cargo_id)->nome }} </p>
 <p> E-mail: {{ $usuario->email }} </p>
 <p> Senha: {{ $usuario->senha }} </p>
