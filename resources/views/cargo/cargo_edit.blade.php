@@ -3,7 +3,7 @@
 @extends('../templates.principal')
 
 @section('title')
-    Editar Perfis
+    Editar Perfil
 @endsection
 
 @section('content')
