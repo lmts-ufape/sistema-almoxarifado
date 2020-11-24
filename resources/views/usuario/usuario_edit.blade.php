@@ -18,12 +18,10 @@
     @endif
 
     <form action="{{ route('usuario.update', $usuario->id) }}" enctype="multipart/form-data" method="POST">
-
         @csrf
         @method('PUT')
 
         <div class="form-group">
-
             <div class="form-group">
                 <h2 class="h4"> Dados Institucionais / Pessoais </h2>
             </div>
@@ -92,7 +90,7 @@
             </div>
 
             <div class="form-group">
-                <label for="email"> Email </label>
+                <label for="email"> E-mail </label>
                 <input class="form-control" type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br"
                        value="{{ $usuario->email }}">
             </div>
@@ -121,11 +119,8 @@
                 </div>
             @endif
 
-            <Button class="btn btn-secondary" type="button" onclick="location.href = '<?php echo $_SERVER['HTTP_REFERER']; ?>' "> Cancelar</Button>
+            <Button class="btn btn-danger" type="button" onclick="location.href = '<?php echo $_SERVER['HTTP_REFERER']; ?>' "> Cancelar</Button>
             <Button class="btn btn-success" type="submit"> Atualizar</Button>
-
         </div>
-
     </form>
-
 @endsection

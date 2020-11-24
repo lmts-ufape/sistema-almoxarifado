@@ -16,7 +16,7 @@
             <tr>
                 <th scope="col"> Imagem </th>
                 <th scope="col"> Nome </th>
-                <th scope="col"> Email </th>
+                <th scope="col"> E-mail </th>
                 <th scope="col"> Cargo </th>
             </tr>
         </thead>

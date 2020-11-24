@@ -92,11 +92,11 @@
                             <tbody id="listaItens"></tbody>
                         </table>
                         <div id="observacaoRequerente">
-                            <label for="textObservacaoRequerente">Observações do requerente</label>
+                            <label for="textObservacaoRequerente"><strong>Observações do Requerente:</strong></label>
                             <textarea class="form-control" name="observacaoRequerente" id="textObservacaoRequerente" cols="30" rows="3" readonly></textarea>
                         </div>
                         <div id="observacaoAdmin" style="margin-top: 10px">
-                            <label for="textObservacaoAdmin">Suas observações</label>
+                            <label for="textObservacaoAdmin"><strong>Observações do Administrador:</strong></label>
                             <textarea class="form-control" name="observacaoAdmin" id="textObservacaoAdmin" cols="30" rows="3"></textarea>
                         </div>
                     </div>
@@ -104,8 +104,8 @@
                 <div class="modal-footer">
                     <input type="hidden" id="solicitacaoID" name="solicitacaoID" value="">
 
-                    <button id="aprovaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-success" value="aprova">Aprovar</button>
                     <button id="negaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-danger" value="nega" disabled>Negar</button>
+                    <button id="aprovaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-success" value="aprova">Aprovar</button>
                 </div>
               </div>
             </div>
@@ -117,6 +117,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script>
     $(document).ready(function () {
+        var buttonSubmitID = "";
 
         $('#textObservacaoAdmin').on('input propertychange', function() {
             if($(this).val().length < 5){
@@ -126,17 +127,23 @@
             }
         });
 
-        $("#formSolicitacao").submit(function() {
-            vari = $('[name="quantAprovada[]"]');
-            count = 0;
-            for (var i = 0; i < vari.length; i++) {
-                if(vari[i]['value'] == ""){
-                    count++;
+        $("#formSolicitacao button[type = 'submit']").click(function(e){
+            buttonSubmitID = $(this).attr("id");
+        })
+
+        $("#formSolicitacao").submit(function(e) {
+            if(buttonSubmitID == "aprovaSolicitacao"){
+                vari = $('[name="quantAprovada[]"]');
+                count = 0;
+                for (var i = 0; i < vari.length; i++) {
+                    if(vari[i]['value'] == ""){
+                        count++;
+                    }
                 }
-            }
-            if(count == vari.length){
-                alert( "Informe algum valor para a quantidade aprovada" );
-                return false;
+                if(count == vari.length){
+                    alert( "Informe algum valor para a quantidade aprovada" );
+                    return false;
+                }   
             }
         });
 
@@ -159,7 +166,7 @@
             }]
         });
 
-        $(".showDetails").click(function (e) {
+        $('#tableSolicitacoes tbody').on('click', 'tr', function (e) {
             e.preventDefault();
 
             $("#overlay").show();
@@ -202,7 +209,7 @@
                     $('#negaSolicitacao').show();
                     $('#aprovaSolicitacao').show();
                 }
-            })
+            });
         });
 
         $('#detalhesSolicitacao').on('hidden.bs.modal', function (e) {

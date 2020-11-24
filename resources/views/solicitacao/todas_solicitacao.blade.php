@@ -19,7 +19,7 @@
         <tbody>
             @if (count($dados) > 0)
                 @for ($i = 0; $i < count($dados); $i++)
-                    <tr class="showDetails" data-id="{{ $dados[$i]->solicitacao_id }}" style="cursor: pointer">
+                    <tr data-id="{{ $dados[$i]->solicitacao_id }}" style="cursor: pointer">
                         <td style="text-align: center">{{ $dados[$i]->nome }}</td>
                         <td style="text-align: center">
                             @if ($dados[$i]->status == "Aguardando Aprovação")
@@ -83,11 +83,11 @@
                         <tbody id="listaItens"></tbody>
                     </table>
                     <div id="observacaoRequerente">
-                        <label for="inputObservacaoRequerente">Suas observações</label>
+                        <label for="inputObservacaoRequerente"><strong>Observações do Requerente:</strong></label>
                         <textarea class="form-control" name="observacaoRequerente" id="inputObservacaoRequerente" cols="30" rows="3" readonly></textarea>
                     </div>
-                    <div id="observacaoAdmin">
-                        <label for="inputObservacaoAdmin">Observações do administrador</label>
+                    <div id="observacaoAdmin" style="margin-top: 10px">
+                        <label for="inputObservacaoAdmin"><strong>Observações do Administrador:</strong></label>
                         <textarea class="form-control" name="observacaoAdmin" id="inputObservacaoAdmin" cols="30" rows="3" readonly></textarea>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
             }]
         });
 
-        $(".showDetails").click(function (e) {
+        $('#tableSolicitacoes tbody').on('click', 'tr', function (e) {
             e.preventDefault();
 
             $("#overlay").show();
@@ -130,7 +130,6 @@
             $("#detalhesSolicitacao").modal('show');
 
             $('#numSolicitacao').text(id);
-
             $.ajax({
                 url: '/observacao_solicitacao/' + id,
                 type: 'GET',

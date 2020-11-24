@@ -8,7 +8,6 @@
     </div>
 
     <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}" enctype="multipart/form-data">
-
         @csrf
         @method('PUT')
 
@@ -46,12 +45,10 @@
                 </ul>
             </div>
         @endif
-
         <button type="submit" class="btn btn-success">Atualizar</button>
-
     </form>
-    <form method="POST" action="{{ route('material.destroy', ['material' => $material->id]) }}">
 
+    <form method="POST" action="{{ route('material.destroy', ['material' => $material->id]) }}">
         @csrf
         @method('DELETE')
         <button class="btn btn-danger" type="submit">Remover</button>

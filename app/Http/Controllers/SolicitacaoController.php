@@ -6,7 +6,6 @@ use App\HistoricoStatus;
 use App\ItemSolicitacao;
 use App\material;
 use App\Solicitacao;
-use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -63,9 +62,8 @@ class SolicitacaoController extends Controller
                 return redirect()->back()->withErrors('Informe o motivo de a solicitação ter sido negada');
             } else {
                 DB::update('update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?', ["Negado", date('Y-m-d H:i:s'), $request->solicitacaoID]);
-
                 DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$request->observacaoAdmin, $request->solicitacaoID]);
-
+                
                 if (session()->exists('itemSolicitacoes')) {
                     session()->forget('itemSolicitacoes');
                 }
@@ -142,7 +140,7 @@ class SolicitacaoController extends Controller
         $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
             from historico_statuses status, usuarios u, solicitacaos soli 
             where status.data_aprovado IS NULL and status.data_finalizado IS NULL and status.solicitacao_id = soli.id
-            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id');
+            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
         return view('solicitacao.analise_solicitacoes', [
             'dados' => $consulta
         ]);
@@ -153,7 +151,7 @@ class SolicitacaoController extends Controller
         $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
             from historico_statuses status, usuarios u, solicitacaos soli 
             where status.data_aprovado IS NOT NULL and status.data_finalizado IS NULL and status.solicitacao_id = soli.id
-            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id');
+            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
 
         return view('solicitacao.despache_solicitacao', [
             'dados' => $consulta
@@ -165,8 +163,7 @@ class SolicitacaoController extends Controller
         $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
             from historico_statuses status, usuarios u, solicitacaos soli 
             where status.data_finalizado IS NOT NULL and status.solicitacao_id = soli.id
-            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id');
-
+            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
         return view('solicitacao.todas_solicitacao', [
             'dados' => $consulta
         ]);

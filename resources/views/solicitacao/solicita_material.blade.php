@@ -71,7 +71,7 @@
         </table>
 
         <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
-            <label for="inputObservacao">Observações</label>
+            <label for="inputObservacao"><strong>Observações:</strong></label>
             <textarea class="form-control" name="observacao" id="inputObservacao" cols="30" rows="3">{{ old('observacao') }}</textarea>
         </div>
 
@@ -117,7 +117,7 @@
         "<td style=\"text-align: center\">" +
             "<div class=\"dropdown\">" +
                 "<button class=\"btn btn-secondary dropdown\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" +
-                    ":" +
+                    "⋮" +
                 "</button>" +
                 "<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">" +
                     "<a type=\"button\" class=\"dropdown-item\" onclick=\"deleteRow(this)\">Remover</a>" +

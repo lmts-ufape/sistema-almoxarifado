@@ -1,11 +1,11 @@
 
 @extends('templates.principal')
 
-@section('title') Despachar Solicitações @endsection
+@section('title') Retirar Solicitações @endsection
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
-        <h2>DESPACHAR SOLICITAÇÕES</h2>
+        <h2>RETIRAR SOLICITAÇÕES</h2>
     </div>
 
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
@@ -14,13 +14,13 @@
                 <th scope="col" style="text-align: center">Requerente</th>
                 <th scope="col" style="text-align: center">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
-                <th scope="col" style="text-align: center">Despachar ou Cancelar</th>
+                <th scope="col" style="text-align: center">Cancelar ou Entregar</th>
             </tr>
         </thead>
         <tbody>
             @if (count($dados) > 0)
                 @for ($i = 0; $i < count($dados); $i++)
-                    <tr class="showDetails" data-id="{{ $dados[$i]->solicitacao_id }}" style="cursor: pointer">
+                    <tr data-id="{{ $dados[$i]->solicitacao_id }}" style="cursor: pointer">
                         <td style="text-align: center">{{ $dados[$i]->nome }}</td>
                         <td style="text-align: center">
                             @if ($dados[$i]->status == "Aprovado")
@@ -37,7 +37,7 @@
                             @endif
                         </td>
                         <td style="text-align: center">{{ date('d/m/Y',  strtotime($dados[$i]->created_at))}}</td>
-                        <td style="text-align: center"><a type="button" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}">Despachar</a><a type="button" style="margin-left: 10px" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}">Cancelar</a></td>
+                        <td style="text-align: center"><a type="button" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}">Cancelar</a><a type="button" style="margin-left: 10px" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}">Entregue</a></td>
                     </tr>
                 @endfor
             @endif
@@ -72,11 +72,11 @@
                         <tbody id="listaItens"></tbody>
                     </table>
                     <div id="observacaoRequerente">
-                        <label for="textObservacaoRequerente">Observações do requerente</label>
+                        <label for="textObservacaoRequerente"><strong>Observações do Requerente:</strong></label>
                         <textarea class="form-control" name="observacaoRequerente" id="textObservacaoRequerente" cols="30" rows="3" readonly></textarea>
                     </div>
                     <div id="observacaoAdmin" style="margin-top: 10px">
-                        <label for="textObservacaoAdmin">Observações do administrador</label>
+                        <label for="textObservacaoAdmin"><strong>Observações do Administrador:</strong></label>
                         <textarea class="form-control" name="observacaoAdmin" id="textObservacaoAdmin" cols="30" rows="3" readonly></textarea>
                     </div>
                 </div>
@@ -108,8 +108,8 @@
                 "orderable": false
             }]
         });
-        
-        $(".showDetails").click(function (e) {
+
+        $('#tableSolicitacoes tbody').on('click', 'tr', function (e) {
             e.preventDefault();
 
             $("#overlay").show();
@@ -150,7 +150,7 @@
                     $("#overlay").hide();
                     $("#modalBody").show();
                 }
-            })
+            });
         });
 
         $('#detalhesSolicitacao').on('hidden.bs.modal', function (e) {
@@ -159,7 +159,7 @@
             $("#modalBody").hide();
         });
 
-        $(".despache").click(function (e) {
+        $('#tableSolicitacoes tbody').on('click', '.despache', function (e) {
             e.preventDefault();
             e.stopPropagation();
 
@@ -175,7 +175,7 @@
             });
         });
 
-        $(".cancelaDespache").click(function (e) {
+        $('#tableSolicitacoes tbody').on('click', '.cancelaDespache', function (e) {
             e.preventDefault();
             e.stopPropagation();
 

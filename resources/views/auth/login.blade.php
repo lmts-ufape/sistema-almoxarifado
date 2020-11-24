@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="col-sm">
-            <h3 class="col-md-8 offset-md-3" style="margin-bottom: 5%; font-family: 'Segoe UI'; color: #3E3767; font"><u>Almoxarifado</u></h3>
+            <h3 class="col-md-8 offset-md-3" style="margin-bottom: 5%; font-family: 'Segoe UI'; color: #3E3767; font"><u>Entrar</u></h3>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group col-md-9">
@@ -52,28 +52,24 @@
                     <input class="form-control-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                     <label class="form-check-label" for="remember">
-                        {{ __('Lembrar usuário/e-mail e senha') }}
+                        {{ __('Lembrar e-mail e senha') }}
                     </label>
                 </div>
                 <br>
                 <div class="form-group col-md-9">
-                    <button type="submit" class="btn btn-block" style="background-color: #3E3767; color: white">
+                    <button type="submit" class="btn btn-success btn-block">
                         {{ __('Entrar') }}
                     </button>
                 </div>
                 @if (Route::has('password.request'))
                     <div class="form-group col-md-9">
-                        <a class=" btn-link" href="{{ route('password.request') }}">Clique aqui</a>
-                        <label>se você esqueceu a senha</label>
+                        <a class=" btn-link" href="{{ route('password.request') }}">Esqueci minha senha</a>
                         <hr style="margin-top: 0">
                     </div>
                 @endif
             </form>
-            <div class="col-sm">
-                <label for="">Clique em cadastre-se para criar uma conta</label>
-            </div>
             <div class="form-group col-md-9">
-                <a type="button" href="{{ route('register') }}"class="btn btn-block" style="background-color: #3E3767; color: white">
+                <a type="button" href="{{ route('register') }}"class="btn btn-primary btn-block">
                     {{ __('Cadastre-se') }}
                 </a>
             </div>

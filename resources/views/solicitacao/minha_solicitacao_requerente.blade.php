@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             @for ($i = 0; $i < count($status); $i++)
-                <tr class="showDetails" data-id="{{ $status[$i]->solicitacao_id }}" style="cursor: pointer">
+                <tr data-id="{{ $status[$i]->solicitacao_id }}" style="cursor: pointer">
                     <td style="text-align: center">
                         @if ($status[$i]->status == "Aguardando Aprovação")
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clock-history" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -79,11 +79,11 @@
                         <tbody id="listaItens"></tbody>
                     </table>
                     <div id="observacaoRequerente">
-                        <label for="inputObservacaoRequerente">Suas observações</label>
+                        <label for="inputObservacaoRequerente"><strong>Observações do Requerente:</strong>/label>
                         <textarea class="form-control" name="observacaoRequerente" id="inputObservacaoRequerente" cols="30" rows="3" readonly></textarea>
                     </div>
                     <div id="observacaoAdmin">
-                        <label for="inputObservacaoAdmin">Observações do administrador</label>
+                        <label for="inputObservacaoAdmin"><strong>Observações do Administrador:</strong></label>
                         <textarea class="form-control" name="observacaoAdmin" id="inputObservacaoAdmin" cols="30" rows="3" readonly></textarea>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
             }]
         });
 
-        $(".showDetails").click(function (e) {
+        $('#tableSolicitacoes tbody').on('click', 'tr', function (e) {
             e.preventDefault();
 
             $("#overlay").show();
@@ -157,7 +157,7 @@
                     $("#overlay").hide();
                     $("#modalBody").show();
                 }
-            })
+            });
         });
 
         $('#detalhesSolicitacao').on('hidden.bs.modal', function (e) {
