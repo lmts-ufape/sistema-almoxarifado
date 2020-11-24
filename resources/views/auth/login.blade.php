@@ -34,7 +34,7 @@
             </div>
             <div class="col-sm-5" style="margin-left: 30px; margin-right: -100px">
                 <h3 class="col-md-8 offset-sm-2"
-                    style="margin-bottom: 5%; font-family: 'Segoe UI'; color: #3E3767;"><u>Almoxarifado</u></h3>
+                    style="margin-bottom: 5%; font-family: 'Segoe UI'; color: #3E3767;"><u>Entrar</u></h3>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group col-md-9">
@@ -45,7 +45,6 @@
                                value="{{ old('email') }}"
                                style="padding: 0; color: black; border-radius: 0; box-shadow: none; border: none; border-bottom: 1px solid"
                                required autocomplete="email" autofocus>
-
                         @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -76,7 +75,7 @@
                     </div>
                     <br>
                     <div class="form-group col-md-9">
-                        <button type="submit" class="btn btn-block" style="background-color: #3E3767; color: white">
+                        <button type="submit" class="btn btn-success">
                             {{ __('Entrar') }}
                         </button>
                     </div>
@@ -90,8 +89,7 @@
                     @endif
                 </form>
                 <div class="form-group col-md-9">
-                    <a type="button" href="{{ route('register') }}" class="btn btn-block"
-                       style="background-color: #006600; color: white">
+                    <a type="button" href="{{ route('register') }}" class="btn btn-primary">
                         {{ __('Cadastre-se') }}
                     </a>
                 </div>

@@ -6,11 +6,9 @@ use App\HistoricoStatus;
 use App\ItemSolicitacao;
 use App\material;
 use App\Solicitacao;
-use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class SolicitacaoController extends Controller
 {
@@ -22,32 +20,34 @@ class SolicitacaoController extends Controller
 
     public function store(Request $request)
     {
-        if (empty($request->dataTableMaterial) || empty($request->dataTableQuantidade) || empty($request->dataTableReceptor)) {
+        if (empty($request->dataTableMaterial) || empty($request->dataTableQuantidade)) {
             return redirect()->back()->withErrors('Adicione o(s) material(is), sua(s) quantidade(s) e seu(s) receptor(es)');
         } else {
             $materiais = explode(",",  $request->dataTableMaterial);
             $quantidades = explode(",",  $request->dataTableQuantidade);
-            $receptores = explode(",",  $request->dataTableReceptor);
 
             $solicitacao = new Solicitacao();
             $solicitacao->usuario_id = Auth::user()->id;
-            $solicitacao->observacao_requerente = $request->observacao;
+            $solicitacao->observacao_requerente =$request->observacao;
+            if($request->checkReceptor == NULL){
+                $solicitacao->receptor = $request->nomeReceptor;
+                $solicitacao->receptor_rg = $request->rgReceptor;
+            }
             $solicitacao->save();
 
             $historicoStatus = new HistoricoStatus();
-            $historicoStatus->status = "Aguardando Aprovação";
+            $historicoStatus->status = "Aguardando Analise";
             $historicoStatus->solicitacao_id = $solicitacao->id;
             $historicoStatus->save();
 
             for ($i = 0; $i < count($materiais); $i++) {
                 $itemSolicitacao = new ItemSolicitacao();
                 $itemSolicitacao->quantidade_solicitada = $quantidades[$i];
-                $itemSolicitacao->receptor = $receptores[$i];
                 $itemSolicitacao->material_id = $materiais[$i];
                 $itemSolicitacao->solicitacao_id = $solicitacao->id;
                 $itemSolicitacao->save();
             }
-            return redirect()->back()->with('success', 'Solicitação feita com sucesso');
+            return redirect()->back()->with('success', 'Solicitação feita com sucesso!');
         }
     }
 
@@ -60,12 +60,11 @@ class SolicitacaoController extends Controller
 
         if ($request->action == 'nega') {
             if (is_null($request->observacaoAdmin)) {
-                return redirect()->back()->withErrors('Informe o motivo de a solicitação ter sido negada');
+                return redirect()->back()->withErrors('Informe o motivo de a solicitação ter sido negada!');
             } else {
                 DB::update('update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?', ["Negado", date('Y-m-d H:i:s'), $request->solicitacaoID]);
-
                 DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$request->observacaoAdmin, $request->solicitacaoID]);
-
+                
                 if (session()->exists('itemSolicitacoes')) {
                     session()->forget('itemSolicitacoes');
                 }
@@ -73,7 +72,7 @@ class SolicitacaoController extends Controller
                     session()->forget('status');
                 }
 
-                return redirect()->back()->with('success', 'Solicitação cancelada com sucesso');
+                return redirect()->back()->with('success', 'Solicitação cancelada com sucesso!');
             }
         } else if ($request->action == 'aprova') {
             $checkInputNull = 0;
@@ -101,7 +100,7 @@ class SolicitacaoController extends Controller
                 }
             }
             if ($checkInputNull == count($itemSolicitacaos)) {
-                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas e acima de 0');
+                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas e acima de 0!');
             } else if ($checkQuantMinima > 0) {
                 return redirect()->back()->withErrors($errorMessage);
             } else {
@@ -111,7 +110,7 @@ class SolicitacaoController extends Controller
 
                 DB::update(
                     'update historico_statuses set status = ?, data_aprovado = ? where solicitacao_id = ?',
-                    [$checkInputNull == 0 ? "Aprovado" : "Aprovado parcialmente", date('Y-m-d H:i:s'), $request->solicitacaoID]
+                    [$checkInputNull == 0 ? "Aprovado" : "Aprovado Parcialmente", date('Y-m-d H:i:s'), $request->solicitacaoID]
                 );
 
                 DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$request->observacaoAdmin, $request->solicitacaoID]);
@@ -125,7 +124,7 @@ class SolicitacaoController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Solicitação Aprovada com sucesso');
+        return redirect()->back()->with('success', 'Solicitação Aprovada com sucesso!');
     }
 
     public function listSolicitacoesRequerente()
@@ -142,7 +141,7 @@ class SolicitacaoController extends Controller
         $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
             from historico_statuses status, usuarios u, solicitacaos soli 
             where status.data_aprovado IS NULL and status.data_finalizado IS NULL and status.solicitacao_id = soli.id
-            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id');
+            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
         return view('solicitacao.analise_solicitacoes', [
             'dados' => $consulta
         ]);
@@ -153,7 +152,7 @@ class SolicitacaoController extends Controller
         $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
             from historico_statuses status, usuarios u, solicitacaos soli 
             where status.data_aprovado IS NOT NULL and status.data_finalizado IS NULL and status.solicitacao_id = soli.id
-            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id');
+            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
 
         return view('solicitacao.despache_solicitacao', [
             'dados' => $consulta
@@ -165,8 +164,7 @@ class SolicitacaoController extends Controller
         $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
             from historico_statuses status, usuarios u, solicitacaos soli 
             where status.data_finalizado IS NOT NULL and status.solicitacao_id = soli.id
-            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id');
-
+            and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
         return view('solicitacao.todas_solicitacao', [
             'dados' => $consulta
         ]);
@@ -184,7 +182,7 @@ class SolicitacaoController extends Controller
 
         DB::update(
             'update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?',
-            ['Despachado', date('Y-m-d H:i:s'), $request->id]
+            ['Entregue', date('Y-m-d H:i:s'), $request->id]
         );
     }
 
