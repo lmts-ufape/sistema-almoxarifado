@@ -27,7 +27,7 @@
           </div>
           <div class="form-group col-md-2">
             <label for="inputQuantidadeMin">Quantidade mínima</label>
-            <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" value="{{ old('quantidade_minima', $material->quantidade_minima) }}">
+            <input type="number" class="form-control" id="inputQuantidadeMin" name="quantidade_minima" min="0" value="{{ old('quantidade_minima', $material->quantidade_minima) }}">
           </div>
         </div>
         <div>

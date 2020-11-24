@@ -60,7 +60,7 @@
 
                 <div class="form-group">
                     <label for="data_nascimento"> Data de Nascimento </label>
-                    <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" min="" max=""
+                    <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" min="1910-01-01" max="2020-12-31"
                            value="{{ $usuario->data_nascimento }}">
                 </div>
 
