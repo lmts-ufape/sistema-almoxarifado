@@ -29,8 +29,8 @@ class Usuario extends Authenticatable
     public static $rules = [
         'nome' => 'required|string|min:5|max:100',
         'email' => 'required|email|min:5|max:100|unique:usuarios',
-        'cpf' => 'required|numeric|min:0|digits:11',
-        'rg' => 'required|numeric|min:0|digits_between:8,11',
+        'cpf' => 'required|numeric|min:0|digits_between:10,11',
+        'rg' => 'required|numeric|min:0|digits_between:7,11',
         'data_nascimento' => 'required|date',
         'matricula' => 'required|integer|min:0|min:1',
         'imagem' => 'required|image',
