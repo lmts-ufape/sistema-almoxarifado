@@ -12,15 +12,17 @@
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
                 <th scope="col">Requente</th>
+                <th scope="col">Material</th>
                 <th scope="col">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
             </tr>
         </thead>
         <tbody>
-            @if (count($dados) > 0)
+            @if (count($dados) > 0 && count($materiaisPreview) > 0)
                 @for ($i = 0; $i < count($dados); $i++)
                     <tr data-id="{{ $dados[$i]->solicitacao_id }}" style="cursor: pointer">
                         <td class="expandeOption">{{ $dados[$i]->nome }}</td>
+                        <td class="expandeOption">{{$materiaisPreview[$i]}}...</td>
                         <td class="expandeOption">
                             @if ($dados[$i]->status == "Aguardando Analise")
                                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clock-history" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -162,6 +164,12 @@
                 "targets"  : [1],
                 "orderable": false
             }]
+        });
+
+        $('#tableSolicitacoes').on('page.dt', function() {
+            $('html, body').animate({
+                scrollTop: $(".dataTables_wrapper").offset().top
+            }, 'fast');
         });
 
         $('#tableSolicitacoes tbody').on('click', 'td.expandeOption', function (e) {
