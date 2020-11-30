@@ -20,7 +20,7 @@
                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
 
                     <div class="col-md-6">
-                        <input id="nome" type="text" class="form-control @error('nome') is-invalid @enderror" onkeypress="return onlyLetters(event,this);" maxlength="100" name="nome" value="{{ old('nome') }}" required autocomplete="nome" autofocus placeHolder="Nome Completo">
+                        <input id="nome" type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome') }}" required autocomplete="nome" autofocus placeHolder="Nome Completo">
 
                         @error('nome')
                             <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
                     <label for="cpf" class="col-md-4 col-form-label text-md-right">{{ __('CPF') }}</label>
 
                     <div class="col-md-6">
-                        <input id="cpf" type="number" min="0" max="99999999999" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="00000000000">
+                        <input id="cpf" type="number" min="0" max="99999999999" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="000.000.000-00">
 
                         @error('cpf')
                             <span class="invalid-feedback" role="alert">
@@ -62,7 +62,7 @@
                     <label for="rg" class="col-md-4 col-form-label text-md-right">{{ __('RG') }}</label>
 
                     <div class="col-md-6">
-                        <input id="rg" type="number" min="0" max="99999999999" oninput="return rgLength();" class="form-control @error('rg') is-invalid @enderror" name="rg" value="{{ old('rg') }}" required autocomplete="rg" autofocus placeHolder="0000000">
+                        <input id="rg" type="number" min="0" max="99999999999" class="form-control @error('rg') is-invalid @enderror" name="rg" value="{{ old('rg') }}" required autocomplete="rg" autofocus placeHolder="000.000.0">
                         @error('rg')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -89,7 +89,7 @@
                     <label for="matricula" class="col-md-4 col-form-label text-md-right">{{ __('Matrícula') }}</label>
 
                     <div class="col-md-6">
-                        <input id="matricula" type="number" class="form-control @error('matricula') is-invalid @enderror" min="0" onkeypress="return onlyNums(event,this);" name="matricula" value="{{ old('matricula') }}" required autocomplete="matricula" autofocus placeHolder="000000000">
+                        <input id="matricula" type="number" class="form-control @error('matricula') is-invalid @enderror" name="matricula" value="{{ old('matricula') }}" required autocomplete="matricula" autofocus placeHolder="000000000">
 
                         @error('matricula')
                             <span class="invalid-feedback" role="alert">
@@ -147,54 +147,3 @@
     </div>
 </div>
 @endsection
-<script>
-    function onlyLetters(e, t) {
-        try {
-            if (window.event) {
-                var charCode = window.event.keyCode;
-            } else if (e) {
-                var charCode = e.which;
-            } else {
-                return true;
-            }
-            if (
-                (charCode > 64 && charCode < 91) || 
-                (charCode > 96 && charCode < 123) ||
-                (charCode > 191 && charCode <= 255) || charCode == 32
-            ){
-                return true;
-            } else {
-                return false;
-            }
-        } catch (err) {
-            alert('Digite apenas letras no nome');
-        }
-    }
-
-    function onlyNums(e, t) {
-        try {
-            if (window.event) {
-                var charCode = window.event.keyCode;
-            } else if (e) {
-                var charCode = e.which;
-            } else {
-                return true;
-            }
-            if ((charCode >= 48 && charCode <= 57) ){
-                return true;
-            } else {
-                return false;
-            }
-        } catch (err) {
-            alert('Digite apenas números na matrícula');
-        }
-    }
-
-    function rgLength(e, t){
-        var rg = $("#rg").val().length;
-        if (rg > 11) {
-            $("#rg").val($("#rg").val().substring(0, $("#rg").val().length - 1));
-            return false;
-        }
-    }
-</script>
