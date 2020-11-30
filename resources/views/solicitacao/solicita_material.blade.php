@@ -29,27 +29,31 @@
     @endif
 
     <div id="error" class="alert alert-danger" role="alert" style="margin-top: 10px; display: none">
-        Informe o material, a quantidade e o receptor!
+        Informe o material e a quantidade!
     </div>
 
     <div id="remocaoSuccess" class="alert alert-success" role="alert" style="margin-top: 10px; display: none">
-        Remoção realizada! 
+        Material removido! 
+    </div>
+
+    <div id="editSuccess" class="alert alert-success" role="alert" style="margin-top: 10px; display: none">
+        Material Editado!
     </div>
 
     <div style="background-color: #D7D7E6">
         <div class="form-row" style="margin-left: 10px">
             <div class="form-group col-md-4">
-                <label for="inputMaterial" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Material</label>
-                <select id="inputMaterial" class="form-control" name="material_id">
-                    <option selected hidden>Escolher...</option>
+                <label for="selectMaterial" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Material</label>
+                <select id="selectMaterial" class="selectMaterial" class="form-control" style="width: 95%;">
+                    <option></option>
                     @foreach($materiais as $material)
-                        <option id="optionSelected" data-value="{{$material->id}}"> {{$material->codigo}} - {{ $material->nome }} </option>
+                        <option data-value="{{$material->id}}"> {{$material->codigo}} - {{ $material->nome }} </option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-md-2">
                 <label for="inputQuantidade" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
-                <input type="number" min="0" onkeypress="return apenasNumerosQuant(event,this);" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
+                <input type="number" min="1" onkeypress="return onlyNumsQtd(event,this);" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
             </div>
             <div class="form-group">
                 <button id="addTable" style="margin-top: 30px; margin-left: 10px" class="btn btn-primary" onclick="addTable()">Adicionar</button>
@@ -74,12 +78,12 @@
             <div class="form-group col-md-4">
                 <div class="form-group">
                     <label for="inputNomeReceptor">Nome</label>
-                    <input type="text" class="form-control" id="inputNomeReceptor" onkeypress="return apenasLetras(event,this);" maxlength="100" name="nomeReceptor" value="" disabled="true">
+                    <input type="text" class="form-control" id="inputNomeReceptor" onkeypress="return onlyLetters(event,this);" maxlength="100" name="nomeReceptor" value="" disabled="true">
                 </div>
             </div>
-            <div class="form-group col-md-3" style="margin-left: 20px;">
+            <div class="form-group col-md-3">
                 <label for="inputRgReceptor">RG</label>
-                <input type="number" min="0" onkeypress="return apenasNumeros(event,this);" oninput="return rgLength();" class="form-control" id="inputRgReceptor" name="rgReceptor" value="" disabled="true">
+                <input type="number" min="1" onkeypress="return onlyNums(event,this);" oninput="return rgLength();" class="form-control" id="inputRgReceptor" name="rgReceptor" value="" disabled="true">
             </div>
         </div>
         <div class="form-check" style="margin-bottom: 10px">
@@ -94,7 +98,7 @@
         <input type="hidden" id="dataTableMaterial" name="dataTableMaterial" value="">
         <input type="hidden" id="dataTableQuantidade" name="dataTableQuantidade" value="">
         
-        <button id="solicita" class="btn btn-success" disabled onclick="setValuesRowInput()">Solicitar</button>
+        <button id="solicita" class="btn btn-success" disabled onclick="return setValuesRowInput()">Solicitar</button>
     </form>
 
     <div class="modal fade" id="detalhesSolicitacao" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -108,19 +112,19 @@
             </div>
             <div class="modal-body">
                 <div id="modalBody">
-                    <div class="form-row" style="margin-left: 10px">
-                        <div class="form-group col-md-4">
-                            <label for="selectMaterial" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Material</label>
-                            <select id="selectMaterial" class="form-control" name="selectMaterial">
-                                <option selected hidden>Escolher...</option>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="selectMaterialEdit" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700;">Material</label>
+                            <select id="selectMaterialEdit" style="width: 110%;" class="selectMaterial" class="form-control" name="selectMaterialEdit">
+                                <option></option>
                                 @foreach($materiais as $material)
-                                    <option id="optionSelectedEdit" value="{{$material->id}}"> {{$material->codigo}} - {{ $material->nome }} </option>
+                                    <option value="{{$material->id}}"> {{$material->codigo}} - {{ $material->nome }} </option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="editQuantidade" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
-                            <input type="number" class="form-control" id="editQuantidadeInput" name="editQuantidade" value="{{ old('quantidade') }}">
+                        <div class="form-group col-md-2" style="margin-left: 4%">
+                            <label for="InputQuantEdit" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
+                            <input type="number" min="1" onkeypress="return onlyNumsQtd(event,this);" class="form-control" id="InputQuantEdit" name="InputQuantEdit" value="{{ old('quantidade') }}">
                         </div>
                         <div class="form-group">
                             <button id="updateMaterial" style="margin-top: 30px; margin-left: 10px" class="btn btn-primary" onclick="confirmarAlteracao()">Atualizar</button>
@@ -137,6 +141,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script>
     $(document).ready(function () {
+
+        $('.selectMaterial').select2({
+            placeholder: "Digite algo ou selecione uma opção."
+        });
+
         $('#checkReceptor').change(function() {
             if($(this).prop('checked')){
                 $("#inputNomeReceptor").prop('disabled', true);
@@ -154,12 +163,11 @@
         var rg = $("#inputRgReceptor").val().length;
         if (rg > 11) {
             $("#inputRgReceptor").val($("#inputRgReceptor").val().substring(0, $("#inputRgReceptor").val().length - 1));
-            alert('O RG não pode ter mais 11 dígitos');
             return false;
         }
     }
 
-    function apenasLetras(e, t) {
+    function onlyLetters(e, t) {
         try {
             if (window.event) {
                 var charCode = window.event.keyCode;
@@ -175,7 +183,6 @@
             ){
                 return true;
             } else {
-                alert('Digite apenas letras no nome');
                 return false;
             }
         } catch (err) {
@@ -183,7 +190,7 @@
         }
     }
 
-    function apenasNumeros(e, t) {
+    function onlyNums(e, t) {
         try {
             if (window.event) {
                 var charCode = window.event.keyCode;
@@ -195,7 +202,6 @@
             if ((charCode >= 48 && charCode <= 57) ){
                 return true;
             } else {
-                alert('Digite apenas números no RG');
                 return false;
             }
         } catch (err) {
@@ -203,7 +209,7 @@
         }
     }
 
-    function apenasNumerosQuant(e, t) {
+    function onlyNumsQtd(e, t) {
         try {
             if (window.event) {
                 var charCode = window.event.keyCode;
@@ -215,7 +221,6 @@
             if ((charCode >= 48 && charCode <= 57) ){
                 return true;
             } else {
-                alert('Digite apenas números');
                 return false;
             }
         } catch (err) {
@@ -241,20 +246,24 @@
 
     function editarMaterial(ctl){
         $("#detalhesSolicitacao").modal('show');
-
         _row = $(ctl).parents("tr");
         var dados = $(ctl).parents("tr").children("td");
-        $("#selectMaterial").val($(dados[0]).data('id'));
-        $("#editQuantidadeInput").val($(dados[1]).text());
+        $("#selectMaterialEdit").val($(dados[0]).data('id')).trigger('change');
+        $("#InputQuantEdit").val($(dados[1]).text());
     }
 
     function confirmarAlteracao(){
-        var escolha = confirm("Tem certeza que deseja fazer as alterações");
-        if (escolha) {
-            updateRowTable();
-            $("#detalhesSolicitacao").modal('hide');
-            $("#selectMaterial").val(0);
-            $("#editQuantidadeInput").val();
+
+        if ($("#selectMaterialEdit option:selected").index() > 0 && $("#InputQuantEdit").val() != '') {
+            var escolha = confirm("Tem certeza que deseja fazer as alterações");
+            if (escolha) {
+                updateRowTable();
+                $("#detalhesSolicitacao").modal('hide');
+                $("#selectMaterial").val(0).trigger('change');
+                $("#InputQuantEdit").val();
+            }
+        } else {
+            alert('Informe o material e a quantidade');
         }
     }
 
@@ -273,16 +282,20 @@
         $(_row).after(refactorRowtable());
         $(_row).remove();
         clearFields();
+        $('#editSuccess').slideDown();
+                setTimeout(function() { 
+                    $('#editSuccess').slideUp(); 
+            }, 4000);
     }
 
     function refactorRowtable() {
-        var ret = "<tr data-id="+ $("#selectMaterial option:selected").val() +  ">" +
-            "<td data-id=" + $("#selectMaterial option:selected").index() + " class=\"materialRow\">" + $("#selectMaterial option:selected").text() + "</td>" + construirTable($("#editQuantidadeInput").val());
+        var ret = "<tr data-id="+ $("#selectMaterialEdit option:selected").val() +  ">" +
+            "<td data-id=" + $("#selectMaterialEdit option:selected").index() + " class=\"materialRow\">" + $("#selectMaterialEdit option:selected").text() + "</td>" + construirTable($("#InputQuantEdit").val());
         return ret;
     }
 
     function clearFields() {
-        $("#inputMaterial").val($("#inputMaterial option:first").val());
+        $("#selectMaterial").val("").trigger('change');
         $("#inputQuantidade").val("");
     }
 
@@ -294,20 +307,24 @@
         }
     }
 
-
     function setValuesRowInput(){
         var materiais = [];
         var quantidades = [];
 
-        if(!$('#checkReceptor').prop('checked')){
-            var rg = $("#inputRgReceptor").val().length;
-            if (rg < 7) {
-                alert('O RG não pode ter menos de 7 dígitos e mais de 11');
-                return false;
-            } else if($("#inputNomeReceptor").val().length < 5 ) {
-                alert('O nome deve ter pelo menos 5 letras');
-                return false;
+        var escolha = confirm("Tem certeza que deseja fazer uma solicitação?");
+        if(escolha){
+            if(!$('#checkReceptor').prop('checked')){
+                var rg = $("#inputRgReceptor").val().length;
+                if (rg < 7) {
+                    alert('O RG não pode ter menos de 7 dígitos e mais de 11');
+                    return false;
+                } else if($("#inputNomeReceptor").val().length < 5 ) {
+                    alert('O nome deve ter pelo menos 5 letras');
+                    return false;
+                }
             }
+        } else {
+            return false;
         }
 
         $("#tableMaterial > tbody > tr").children('.materialRow').each(function() {
@@ -323,9 +340,10 @@
     }
 
     function addTable() {
-        if ($("#inputMaterial").val() != 'Escolher...' && $("#inputQuantidade").val() != '' &&
-                    !(/^0*$/.test($("#inputQuantidade").val()))) {
-                addRowTable();
+        if ($("#selectMaterial option:selected").index() > 0 && $("#inputQuantidade").val() != '') {
+            $("#tableMaterial tbody").append("<tr data-id="+ $("#selectMaterial option:selected").data('value') +  ">" +
+                "<td data-id=" + $("#selectMaterial option:selected").index() + " class=\"materialRow\">" + $("#selectMaterial option:selected").text()+ "</td>" + 
+                construirTable($("#inputQuantidade").val()));
         } else {
             $('#error').slideDown();
             setTimeout(function() { 
@@ -337,11 +355,5 @@
         if ($("#tableMaterial >tbody >tr").length > 0) {
             $("#solicita").attr("disabled", false);
         }
-    }
-
-    function addRowTable() {
-        $("#tableMaterial tbody").append("<tr data-id="+ $("#inputMaterial option:selected").data('value') +  ">" +
-            "<td data-id=" + $("#inputMaterial option:selected").index() + " class=\"materialRow\">" + $("#inputMaterial option:selected").text()+ "</td>" + 
-            construirTable($("#inputQuantidade").val()));
     }
 </script>

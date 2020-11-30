@@ -13,6 +13,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <style>
+        .select2-selection {
+            text-align: center;
+            height: 55%!important;
+        }
+
+        .select2-selection__rendered {
+            margin: 1%;
+        }
+
+        .select2-selection__arrow {
+            margin: 1%;
+        }
+    </style>
+
     <script>
         $(document).ready(function(){
             $(".menuEffect").hover(function(){
