@@ -11,6 +11,7 @@
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
+                <th scope="col" style="text-align: center">Material</th>
                 <th scope="col" style="text-align: center">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
             </tr>
@@ -18,6 +19,7 @@
         <tbody>
             @for ($i = 0; $i < count($status); $i++)
                 <tr data-id="{{ $status[$i]->solicitacao_id }}" style="cursor: pointer">
+                    <td class="expandeOption">{{$materiaisPreview[$i]}}...</td>
                     <td class="expandeOption" style="text-align: center">
                         @if ($status[$i]->status == "Aguardando Analise")
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clock-history" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +40,7 @@
                                 <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                             </svg>
                         @endif
-                        @if ($status[$i]->status == "Aprovado parcialmente")
+                        @if ($status[$i]->status == "Aprovado Parcialmente")
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-check2-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                                 <path fill-rule="evenodd" d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z"/>

@@ -11,18 +11,20 @@
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
-                <th scope="col" style="text-align: center">Requerente</th>
-                <th scope="col" style="text-align: center">Situação</th>
+                <th scope="col">Requerente</th>
+                <th scope="col">Material</th>
+                <th scope="col">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
                 <th scope="col" style="text-align: center">Cancelar ou Entregar</th>
             </tr>
         </thead>
         <tbody>
-            @if (count($dados) > 0)
+            @if (count($dados) > 0 && count($materiaisPreview) > 0)
                 @for ($i = 0; $i < count($dados); $i++)
                     <tr data-id="{{ $dados[$i]->solicitacao_id }}" style="cursor: pointer">
                         <td class="expandeOption" style="text-align: center">{{ $dados[$i]->nome }}</td>
-                        <td class="expandeOption" style="text-align: center">
+                        <td class="expandeOption">{{$materiaisPreview[$i]}}...</td>
+                        <td class="expandeOption">
                             @if ($dados[$i]->status == "Aprovado")
                                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-check-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -154,6 +156,12 @@
                 "targets"  : [1],
                 "orderable": false
             }]
+        });
+
+        $('#tableSolicitacoes').on('page.dt', function() {
+            $('html, body').animate({
+                scrollTop: $(".dataTables_wrapper").offset().top
+            }, 'fast');
         });
 
         $('#tableSolicitacoes tbody').on('click', 'td.expandeOption', function (e) {
