@@ -39,17 +39,15 @@
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
                 <th scope="col">Requerente</th>
-                <th scope="col">Material</th>
                 <th scope="col">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
             </tr>
         </thead>
         <tbody>
-            @if (count($dados) > 0 && count($materiaisPreview) > 0)
+            @if (count($dados) > 0)
                 @for ($i = 0; $i < count($dados); $i++)
                     <tr data-id="{{ $dados[$i]->solicitacao_id }}" style="cursor: pointer">
                         <td class="expandeOption">{{ $dados[$i]->nome }}</td>
-                        <td class="expandeOption">{{$materiaisPreview[$i]}}...</td>
                         <td class="expandeOption">
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-clock-history" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
@@ -122,26 +120,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script>
-
-    function onlyNums(e, t) {
-        try {
-            if (window.event) {
-                var charCode = window.event.keyCode;
-            } else if (e) {
-                var charCode = e.which;
-            } else {
-                return true;
-            }
-            if ((charCode >= 48 && charCode <= 57) ){
-                return true;
-            } else {
-                return false;
-            }
-        } catch (err) {
-            alert('Digite apenas números na quantidade');
-        }
-    }
-
     function showItens(id){
         $("#overlay").show();
 
@@ -170,7 +148,7 @@
                     ret += "<td>" + data[item]['nome'] + "</td>";
                     ret += "<td>" + data[item]['descricao'] + "</td>";
                     ret += "<td style=\"text-align: center\">" + data[item]['quantidade_solicitada'] + "</td>";
-                    ret += "<td style=\"text-align: center\">" + '<input min=\"0\" onkeypress=\"return onlyNums(event,this);\" style=\"width: 85%\" type=\"number\" id=\"inputQuantAprovada\" name=\"quantAprovada[]\" value=\"' + data[item]['quantidade_aprovada'] + '\">' + "</td>";
+                    ret += "<td style=\"text-align: center\">" + '<input style=\"width: 85%\" type=\"number\" id=\"inputQuantAprovada\" name=\"quantAprovada[]\" value=\"' + data[item]['quantidade_aprovada'] + '\">' + "</td>";
                     ret += "</tr>";
                 }
 
@@ -198,12 +176,6 @@
         $("#formSolicitacao button[type = 'submit']").click(function(e){
             buttonSubmitID = $(this).attr("id");
         })
-
-        $('#tableSolicitacoes').on('page.dt', function() {
-            $('html, body').animate({
-                scrollTop: $(".dataTables_wrapper").offset().top
-            }, 'fast');
-        });
 
         $("#formSolicitacao").submit(function(e) {
             if(buttonSubmitID == "aprovaSolicitacao"){
