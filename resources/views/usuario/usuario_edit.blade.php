@@ -26,17 +26,6 @@
                 <h2 class="h4"> Dados Institucionais / Pessoais </h2>
             </div>
 
-            <figure caption="{{ $usuario->imagem }}">
-                <img src="{{ url('storage/img/usuarios/'.$usuario->imagem) }}" alt="{{ $usuario->imagem }}" width="80"
-                     height="80">
-            </figure>
-
-            <div class="form-group">
-                <label for="imagem"> Selecione uma Imagem </label>
-                <input class="form-control-file" type="file" name="imagem" id="imagem"
-                       accept=".png, .jpg, .jpeg, .svg, .dib, .bmp">
-            </div>
-
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control" type="text" name="nome" id="nome" placeHolder="Nome Completo"
