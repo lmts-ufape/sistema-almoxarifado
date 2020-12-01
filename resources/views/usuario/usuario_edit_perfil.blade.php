@@ -1,13 +1,13 @@
 @extends('templates.principal')
 
 @section('title')
-    Editar Usuário
+    Editar Perfil
 @endsection
 
 @section('content')
 
     <div style="border-bottom: #949494 2px solid; padding: 5px; margin-bottom: 10px">
-        <h2>Editar Usuário</h2>
+        <h2>Editar Perfil</h2>
     </div>
 
     @if(session()->has('success'))
@@ -17,14 +17,11 @@
         </div>
     @endif
 
-    <form action="{{ route('usuario.update', $usuario->id) }}" enctype="multipart/form-data" method="POST">
+    <form action="{{ route('usuario.update_perfil', $usuario->id) }}" enctype="multipart/form-data" method="POST">
         @csrf
         @method('PUT')
 
         <div class="form-group">
-            <div class="form-group">
-                <h2 class="h4"> Dados Institucionais / Pessoais </h2>
-            </div>
 
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
@@ -75,23 +72,9 @@
             </div>
 
             <div class="form-group">
-                <h2 class="h4"> Dados de Login </h2>
-            </div>
-
-            <div class="form-group">
                 <label for="email"> E-mail </label>
                 <input class="form-control" type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br"
                        value="{{ $usuario->email }}">
-            </div>
-
-            <div class="form-group">
-                <label for="senha"> Senha </label>
-                <input class="form-control" type="password" name="senha" id="senha" placeHolder="">
-            </div>
-
-            <div class="form-group">
-                <label for="confimar_senha"> Confirmar Senha </label>
-                <input class="form-control" type="password" name="confirmar_senha" id="confirmar_senha" placeHolder="">
             </div>
 
             <div class="form-group col-md-12" class="form-row"
@@ -110,11 +93,12 @@
             
             <div class="form-row">
                 <div class="col-sm-1">
-                    <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button>
+                    <!-- <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button> -->
+                    <a href="{{ route('home') }}" class="btn btn-secondary"> Cancelar </a>
                 </div>
-                <div class="col-sm-1">
-                    <Button type="button" class="btn btn-danger"> Remover </Button>
-                </div>
+                <!-- <div class="col-sm-1"> -->
+                    <!-- <Button type="button" class="btn btn-danger"> Remover </Button> -->
+                <!-- </div> -->
                 <div class="col-sm-1">
                     <Button class="btn btn-success" type="submit"> Atualizar </Button>
                 </div>

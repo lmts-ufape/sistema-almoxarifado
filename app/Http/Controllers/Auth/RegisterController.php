@@ -28,10 +28,6 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        $imgExtension = $data['imagem']->extension();
-        $imgName = Img::nameNewImage(Usuario::all(), $data['nome'], $imgExtension);
-
-        $data['imagem']->storeAs(Img::usuariosDir(), $imgName);
 
         return Usuario::create([
             'nome' => $data['nome'],
@@ -40,7 +36,6 @@ class RegisterController extends Controller
             'rg' => $data['rg'],
             'data_nascimento' => $data['data_nascimento'],
             'matricula' => $data['matricula'],
-            'imagem' => $imgName,
             'senha' => Hash::make($data['password']),
             'cargo_id' => 1
         ]);
