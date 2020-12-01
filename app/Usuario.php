@@ -16,7 +16,7 @@ class Usuario extends Authenticatable
 
     protected $table = 'usuarios';
 
-    protected $fillable = ['imagem', 'nome', 'cpf', 'rg', 'data_nascimento', 'matricula', 'cargo_id', 'email', 'senha'];
+    protected $fillable = ['nome', 'cpf', 'rg', 'data_nascimento', 'matricula', 'cargo_id', 'email', 'senha'];
 
     protected $hidden = [
         'senha', 'remember_token',
@@ -33,7 +33,6 @@ class Usuario extends Authenticatable
         'rg' => 'required|numeric|min:0|digits_between:7,11',
         'data_nascimento' => 'required|date',
         'matricula' => 'required|integer|min:1',
-        'imagem' => 'required|image|mimes:png,jpg,jpeg,svg,dib,bmp|max:2048',
         'password' => 'required|string|min:8|confirmed',
     ];
 
@@ -58,9 +57,6 @@ class Usuario extends Authenticatable
         'matricula.required' => 'A matricula é um campo obrigatório.',
         'matricula.min' => 'A matricula deve conter pelo menos 1 dígito.',
         'matricula.integer' => 'A matricula deve ser um número.',
-        'imagem.required' => 'A imagem é obrigatória.',
-        'imagem.max' => 'A imagem deve ter no máximo 2MB',
-        'imagem.mimes' => 'O formato da imagem deve ser png, jpg, jpeg, svg, dib ou bmp.',
         'password.required' => 'A senha é um campo obrigatório.',
         'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
         'password.confirmed' => 'As senhas devem ser iguais.',
