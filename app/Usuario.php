@@ -36,6 +36,19 @@ class Usuario extends Authenticatable
         'password' => 'required|string|min:8|confirmed',
     ];
 
+    public static $rules_edit_perfil = [
+        'nome' => 'required|string|min:5|max:100',
+        'email' => 'required|email|min:5|max:100|unique:usuarios',
+        'cpf' => 'required|numeric|min:0|digits_between:10,11',
+        'rg' => 'required|numeric|min:0|digits_between:7,11',
+        'data_nascimento' => 'required|date',
+        'matricula' => 'required|integer|min:1',
+    ];
+
+    public static $rules_edit_senha = [
+        'password' => 'required|string|min:8|confirmed',
+    ];
+
     public static $messages = [
         'nome.required' => 'O nome é um campo obrigatório.',
         'nome.min' => 'O nome deve ter no mínimo 5 caracteres.',
