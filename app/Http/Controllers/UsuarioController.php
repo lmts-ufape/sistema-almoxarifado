@@ -8,6 +8,8 @@ use App\Http\Requests\UsuarioStoreRequest;
 use App\Http\Controllers\Img;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
@@ -31,18 +33,7 @@ class UsuarioController extends Controller
 
         $validatedFields = $request->validated();
 
-        if (($request->hasFile('imagem') && $request->file('imagem')->isValid())) {
-
-            $imgExtension = $request->imagem->extension();
-            $imgName = Img::nameNewImage(Usuario::all(), $request->nome, $imgExtension);
-
-            $request->imagem->storeAs(Img::usuariosDir(), $imgName);
-            $request->imagem = $imgName;
-
-        }
-
         $data = [
-            'imagem' => $request->imagem,
             'nome' => $request->nome,
             'cpf' => $request->cpf,
             'rg' => $request->rg,
@@ -77,6 +68,43 @@ class UsuarioController extends Controller
         }
     }
 
+
+    public function edit_perfil($id) {
+        return view('usuario/usuario_edit_perfil', ['usuario' => Usuario::find($id), 'cargos' => Cargo::all()]);
+    }
+
+    public function edit_senha($id) {
+        return view('usuario/usuario_edit_senha', ['usuario' => Usuario::find($id)]);
+    }
+
+    public function update_perfil(Request $request, $id) {
+
+        $usuario = Usuario::find($id);
+
+        $validator = Validator::make($request->all(), Usuario::$rules_edit_perfil, Usuario::$messages);
+
+        if($validator->fails()) {
+            redirect()->back()->with('error', ['Error x']);
+        }
+
+        // dd($validator);
+
+        // $usuario->fill($data)->Update();
+
+        return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
+    }
+
+    public function update_senha(Request $request, $id) {
+        
+        $usuario = Usuario::find($id);
+
+        $validator = Validator::make($request->all(), Usuario::$rules_edit_senha, Usuario::$messages);
+
+        // $usuario->fill($data)->Update();
+
+        return redirect()->back()->with('success', 'Senha atualizada com sucesso!');
+    }
+
     public function update(UsuarioStoreRequest $request, $id)
     {
 
@@ -84,17 +112,7 @@ class UsuarioController extends Controller
 
         $request->validated();
 
-        if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-
-            $imgName = Img::nameUpdateImage($id, $request->nome, $request->imagem->extension());
-            $request->imagem->storeAs(Img::usuariosDir(), $imgName);
-
-            $request->imagem = $imgName;
-
-        }
-
         $data = [
-            'imagem' => $request->imagem,
             'nome' => $request->nome,
             'cpf' => $request->cpf,
             'rg' => $request->rg,
