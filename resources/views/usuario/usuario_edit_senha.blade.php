@@ -22,48 +22,34 @@
         @method('PUT')
 
         <div class="form-group">
-
-            <!-- <div class="form-group">
-                <h2 class="h4"> Senha </h2>
-            </div> -->
-
             <div class="form-group">
-                <label for="senha"> Senha </label>
-                <input class="form-control" type="password" name="senha" id="senha" placeHolder="">
+                <label for="password"> Senha </label>
+                <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" id="password" required>
+                
+                @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="form-group">
-                <label for="confimar_senha"> Confirmar Senha </label>
-                <input class="form-control" type="password" name="confirmar_senha" id="confirmar_senha" placeHolder="">
+                <label for="password-confirm"> Confirmar Senha </label>
+                <input class="form-control" type="password" name="password_confirmation" id="password-confirm" required>
             </div>
 
             <div class="form-group col-md-12" class="form-row"
                  style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             </div>
 
-            @if($errors->any())
-                <div>
-                    <ul>
-                        @foreach($errors->all() as $erro)
-                            <li>{{ $erro }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            
             <div class="form-row">
                 <div class="col-sm-1">
-                    <!-- <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button> -->
                     <a href="{{ route('home') }}" class="btn btn-secondary"> Cancelar </a>
                 </div>
-                <!-- <div class="col-sm-1"> -->
-                    <!-- <Button type="button" class="btn btn-danger"> Remover </Button> -->
-                <!-- </div> -->
                 <div class="col-sm-1">
                     <Button class="btn btn-success" type="submit"> Atualizar </Button>
                 </div>
             </div>
-
         </div>
     </form>
 @endsection
