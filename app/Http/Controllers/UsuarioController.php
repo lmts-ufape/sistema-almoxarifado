@@ -83,13 +83,13 @@ class UsuarioController extends Controller
 
         $validator = Validator::make($request->all(), Usuario::$rules_edit_perfil, Usuario::$messages);
 
-        if($validator->fails()) {
-            redirect()->back()->with('error', ['Error x']);
-        }
-
         // dd($validator);
 
-        // $usuario->fill($data)->Update();
+        $data = [
+            'nome' => $request['nome'],
+        ];
+
+        $usuario->fill($data)->Update();
 
         return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
     }
