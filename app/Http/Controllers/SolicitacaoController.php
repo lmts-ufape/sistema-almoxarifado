@@ -9,8 +9,6 @@ use App\Solicitacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use phpDocumentor\Reflection\Types\Self_;
 
 class SolicitacaoController extends Controller
 {
@@ -134,9 +132,14 @@ class SolicitacaoController extends Controller
     {
         $solicitacoes = Solicitacao::where('usuario_id', '=', Auth::user()->id)->get();
         $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->orderBy('id')->get();
-        
-        $materiaisPreview = $this->getMateriaisPreview(array_column($historicoStatus->toArray(), 'solicitacao_id'));
-        
+
+        $solicitacoesID = array_column($historicoStatus->toArray(), 'solicitacao_id');
+        $materiaisPreview = [];
+
+        if(!empty($solicitacoesID)){
+            $materiaisPreview = $this->getMateriaisPreview($solicitacoesID, 'solicitacao_id');
+        }
+
         return view('solicitacao.minha_solicitacao_requerente', [
             'status' => $historicoStatus, 'materiaisPreview' => $materiaisPreview
         ]);
@@ -149,7 +152,12 @@ class SolicitacaoController extends Controller
             where status.data_aprovado IS NULL and status.data_finalizado IS NULL and status.solicitacao_id = soli.id
             and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
 
-        $materiaisPreview = $this->getMateriaisPreview(array_column($consulta, 'solicitacao_id'));
+        $solicitacoesID = array_column($consulta, 'solicitacao_id');
+        $materiaisPreview = [];
+
+        if(!empty($solicitacoesID)){
+            $materiaisPreview = $this->getMateriaisPreview($solicitacoesID);
+        }
 
         return view('solicitacao.analise_solicitacoes', [
             'dados' => $consulta, 'materiaisPreview' => $materiaisPreview
@@ -163,7 +171,12 @@ class SolicitacaoController extends Controller
             where status.data_aprovado IS NOT NULL and status.data_finalizado IS NULL and status.solicitacao_id = soli.id
             and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
 
-        $materiaisPreview = $this->getMateriaisPreview(array_column($consulta, 'solicitacao_id'));
+        $solicitacoesID = array_column($consulta, 'solicitacao_id');
+        $materiaisPreview = [];
+
+        if (!empty($solicitacoesID)) {
+            $materiaisPreview = $this->getMateriaisPreview($solicitacoesID);
+        }
 
         return view('solicitacao.despache_solicitacao', [
             'dados' => $consulta, 'materiaisPreview' => $materiaisPreview
@@ -177,7 +190,12 @@ class SolicitacaoController extends Controller
             where status.data_finalizado IS NOT NULL and status.solicitacao_id = soli.id
             and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
 
-        $materiaisPreview = $this->getMateriaisPreview(array_column($consulta, 'solicitacao_id'));
+        $solicitacoesID = array_column($consulta, 'solicitacao_id');
+        $materiaisPreview = [];
+
+        if (!empty($solicitacoesID)) {
+            $materiaisPreview = $this->getMateriaisPreview($solicitacoesID);
+        }
 
         return view('solicitacao.todas_solicitacao', [
             'dados' => $consulta, 'materiaisPreview' => $materiaisPreview
