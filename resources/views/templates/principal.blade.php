@@ -89,14 +89,31 @@
                                 {{ __('Contato') }}
                             </li>
                         </a>
+
                         @if(!empty(Auth::user()->id))
+                        <div class="dropdown">
+        
+                            <a href="#" id="dropdown_perfil" name="dropdown_perfil" class="dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{-- --}}" alt="" width="50px" height="50px">
+                            </a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdown_perfil">
+                                <a class="dropdown-item" href="{{ route('usuario.edit_perfil', ['id' => Auth::user()->id]) }}"> Perfil </a>
+                                <a class="dropdown-item" href="{{ route('usuario.edit_senha', ['id' => Auth::user()->id]) }}"> Senha </a>
+                                <a class="dropdown-item" href="{{-- --}}"> Sair </a>
+                            </div>
+
+                        </div>
+                        @endif
+
+                        <!-- @if(!empty(Auth::user()->id))
                             <a class="nav-link menuSupEInf" style="color: white; font-weight: bold"
                             href='{{ route('usuario.edit', ['usuario' => Auth::user()->id]) }}'>
                                 <li class="nav-item " style="padding: 0px 15px">
                                     {{ __('Perfil') }}
                                 </li>
                             </a>
-                        @endif
+                        @endif -->
                     </ul>
                 </div>
             </div>

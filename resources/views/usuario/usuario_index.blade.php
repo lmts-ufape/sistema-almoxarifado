@@ -14,7 +14,6 @@
     <table id="tableUsuarios" class="table table-hover table-responsove-md">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
-                <th scope="col"> Imagem </th>
                 <th scope="col"> Nome </th>
                 <th scope="col"> E-mail </th>
                 <th scope="col"> Perfil </th>
@@ -24,7 +23,6 @@
         <tbody>
         @forelse($usuarios as $usuario)
                 <tr onclick="location.href = '{{ route('usuario.edit', ['usuario' => $usuario->id]) }}'" style="cursor: pointer;">
-                <td> <img src="{{ url('storage/img/usuarios/'.$usuario->imagem) }}" alt="{{ $usuario->imagem }}" width="80" height="80"></td>
                 <td>{{ $usuario->nome }}</th>
                 <td>{{ $usuario->email }}</td>
                 <td>{{ $usuario->getCargo($usuario->cargo_id)->nome }}</td>
