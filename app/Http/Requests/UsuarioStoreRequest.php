@@ -30,7 +30,6 @@ class UsuarioStoreRequest extends FormRequest
             'rg' => 'required|numeric|min:0|digits_between:7,11',
             'data_nascimento' => 'required|date',
             'matricula' => 'required|integer|min:0|min:1',
-            'imagem' => 'required|image',
             'senha' => 'required|string|min:8',
             // 'senha' => 'required|string|min:8|confirmed',
         ];
@@ -51,7 +50,6 @@ class UsuarioStoreRequest extends FormRequest
             'data_nascimento.*' => 'A data de nascimento é um campo obrigatório.',
             'matricula.*' => 'A matricula é um campo obrigatório.',
             'cargo.*' => 'Um cargo deve ser selecionado.',
-            'imagem.*' => 'O carregamento de uma imagem é obrigatória.',
             'senha.required' => 'A senha é um campo obrigatório.',
             'senha.min' => 'A senha deve ter no mínimo 8 caracteres.',
             'confirmar_senha.required' => 'A confirmação da senha é obrigatória e deve ser igual a senha inserida.'
