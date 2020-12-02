@@ -54,7 +54,7 @@
 
                 <div class="form-group">
                     <label for="data_nascimento"> Data de Nascimento </label>
-                    <input class="form-control @error('data_nascimento') is-invalid @enderror" autofocus type="date" name="data_nascimento" id="data_nascimento" min="1910-01-01" max="2020-12-31">
+                    <input class="form-control @error('data_nascimento') is-invalid @enderror" value="{{ old('data_nascimento') }}" autofocus type="date" name="data_nascimento" id="data_nascimento" min="1910-01-01" max="2020-12-31">
                     @error('data_nascimento')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
