@@ -40,7 +40,7 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="cpf"> CPF </label>
-                    <input class="form-control @error('cpf') is-invalid @enderror" oninput="return cpfLength();" value="{{ old('cpf', $usuario->cpf) }}" type="text" name="cpf" id="cpf" autocomplete="cpf" autofocus placeHolder="000.000.000-00">
+                    <input class="form-control @error('cpf') is-invalid @enderror" onkeypress="return onlyNums();" oninput="return cpfLength();" value="{{ old('cpf', $usuario->cpf) }}" type="text" name="cpf" id="cpf" autocomplete="cpf" autofocus placeHolder="000.000.000-00">
                     @error('cpf')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
 
                 <div class="form-group col-md-2">
                     <label for="rg"> RG </label>
-                    <input class="form-control @error('rg') is-invalid @enderror" oninput="return rgLength();" value="{{ old('rg', $usuario->rg) }}" type="text" name="rg" id="rg" autocomplete="rg" autofocus placeHolder="00.000.000">
+                    <input class="form-control @error('rg') is-invalid @enderror" onkeypress="return onlyNums();" oninput="return rgLength();" value="{{ old('rg', $usuario->rg) }}" type="text" name="rg" id="rg" autocomplete="rg" autofocus placeHolder="00.000.000">
                     @error('rg')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -70,7 +70,7 @@
 
                 <div class="form-group col-md-2">
                     <label for="matricula"> Matrícula </label>
-                    <input class="form-control @error('matricula') is-invalid @enderror" onkeypress="return onlyNums(event,this);" oninput="return matriculaLength();" value="{{ old('matricula', $usuario->matricula) }}" type="number" name="matricula" id="matricula" autocomplete="matricula" autofocus placeHolder="000000000">
+                    <input class="form-control @error('matricula') is-invalid @enderror" onkeypress="return onlyNums();" onkeypress="return onlyNums(event,this);" oninput="return matriculaLength();" value="{{ old('matricula', $usuario->matricula) }}" type="number" name="matricula" id="matricula" autocomplete="matricula" autofocus placeHolder="000000000">
                     @error('matricula')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
