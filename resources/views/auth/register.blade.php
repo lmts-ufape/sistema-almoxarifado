@@ -75,7 +75,7 @@
                     <label for="data_nascimento" class="col-md-4 col-form-label text-md-right">{{ __('Data de nascimento') }}</label>
 
                     <div class="col-md-6">
-                        <input id="data_nascimento" type="date" class="form-control @error('data_nascimento') is-invalid @enderror" name="data_nascimento" min="1910-01-01" max="2020-12-31">
+                        <input id="data_nascimento" type="date" value="{{ old('data_nascimento') }}"class="form-control @error('data_nascimento') is-invalid @enderror" name="data_nascimento" min="1910-01-01" max="2020-12-31">
 
                         @error('data_nascimento')
                             <span class="invalid-feedback" role="alert">
@@ -89,7 +89,7 @@
                     <label for="matricula" class="col-md-4 col-form-label text-md-right">{{ __('Matrícula') }}</label>
 
                     <div class="col-md-6">
-                        <input id="matricula" type="number" class="form-control @error('matricula') is-invalid @enderror" min="0" onkeypress="return onlyNums(event,this);" name="matricula" value="{{ old('matricula') }}" required autocomplete="matricula" autofocus placeHolder="000000000">
+                        <input id="matricula" type="number" oninput="return matriculaLength();" class="form-control @error('matricula') is-invalid @enderror" min="0" onkeypress="return onlyNums(event,this);" name="matricula" value="{{ old('matricula') }}" required autocomplete="matricula" autofocus placeHolder="000000000">
 
                         @error('matricula')
                             <span class="invalid-feedback" role="alert">
@@ -104,7 +104,7 @@
 
                     <div class="col-md-6">
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                        <span>A senha deve possuir ao menos 8 caracteres</span>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
