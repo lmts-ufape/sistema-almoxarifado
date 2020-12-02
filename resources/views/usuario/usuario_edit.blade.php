@@ -103,7 +103,7 @@
 
             <div class="form-group">
                 <label for="email"> E-mail </label>
-                <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" autocomplete="email" autofocus type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br">
+                <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $usuario->email) }}" autocomplete="email" autofocus type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br">
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
