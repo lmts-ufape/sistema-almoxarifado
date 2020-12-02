@@ -1,0 +1,12 @@
+.select2-selection {
+    text-align: center;
+    height: 55%!important;
+}
+
+.select2-selection__rendered {
+     margin: 1%;
+}
+
+.select2-selection__arrow {
+    margin: 1%;
+}
