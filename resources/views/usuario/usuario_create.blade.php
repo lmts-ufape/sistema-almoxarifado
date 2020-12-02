@@ -64,7 +64,7 @@
 
                 <div class="form-group col-md-2">
                     <label for="matricula"> Matrícula </label>
-                    <input class="form-control @error('matricula') is-invalid @enderror" oninput="return matriculaLength();" value="{{ old('matricula') }}" type="number" name="matricula" id="matricula" autocomplete="matricula" autofocus placeHolder="000000000">
+                    <input class="form-control @error('matricula') is-invalid @enderror" onkeypress="return onlyNums(event,this);" oninput="return matriculaLength();" value="{{ old('matricula') }}" type="number" name="matricula" id="matricula" autocomplete="matricula" autofocus placeHolder="000000000">
                     @error('matricula')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
