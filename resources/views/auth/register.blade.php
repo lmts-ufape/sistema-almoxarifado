@@ -48,7 +48,7 @@
                     <label for="cpf" class="col-md-4 col-form-label text-md-right">{{ __('CPF') }}</label>
 
                     <div class="col-md-6">
-                        <input id="cpf" type="number" min="0" max="99999999999" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="00000000000">
+                        <input id="cpf" type="number" min="0" max="99999999999" oninput="return cpfLength();" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="00000000000">
 
                         @error('cpf')
                             <span class="invalid-feedback" role="alert">
@@ -144,7 +144,7 @@
                 return true;
             }
             if (
-                (charCode > 64 && charCode < 91) || 
+                (charCode > 64 && charCode < 91) ||
                 (charCode > 96 && charCode < 123) ||
                 (charCode > 191 && charCode <= 255) || charCode == 32
             ){
@@ -180,6 +180,14 @@
         var rg = $("#rg").val().length;
         if (rg > 11) {
             $("#rg").val($("#rg").val().substring(0, $("#rg").val().length - 1));
+            return false;
+        }
+    }
+
+    function cpfLength(e, t){
+        var cpf = $("#cpf").val().length;
+        if (cpf > 11) {
+            $("#cpf").val($("#cpf").val().substring(0, $("#cpf").val().length - 1));
             return false;
         }
     }
