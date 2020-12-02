@@ -89,7 +89,7 @@
                     <label for="matricula" class="col-md-4 col-form-label text-md-right">{{ __('Matrícula') }}</label>
 
                     <div class="col-md-6">
-                        <input id="matricula" type="number" class="form-control @error('matricula') is-invalid @enderror" min="0" onkeypress="return onlyNums(event,this);" name="matricula" value="{{ old('matricula') }}" required autocomplete="matricula" autofocus placeHolder="000000000">
+                        <input id="matricula" type="number" oninput="return matriculaLength();" class="form-control @error('matricula') is-invalid @enderror" min="0" onkeypress="return onlyNums(event,this);" name="matricula" value="{{ old('matricula') }}" required autocomplete="matricula" autofocus placeHolder="000000000">
 
                         @error('matricula')
                             <span class="invalid-feedback" role="alert">
@@ -188,6 +188,13 @@
         var cpf = $("#cpf").val().length;
         if (cpf > 11) {
             $("#cpf").val($("#cpf").val().substring(0, $("#cpf").val().length - 1));
+            return false;
+        }
+    }
+    function matriculaLength(e, t){
+        var matricula = $("#matricula").val().length;
+        if (matricula > 11) {
+            $("#matricula").val($("#matricula").val().substring(0, $("#matricula").val().length - 1));
             return false;
         }
     }
