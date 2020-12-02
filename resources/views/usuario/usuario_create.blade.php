@@ -34,7 +34,7 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="cpf"> CPF </label>
-                    <input class="form-control @error('cpf') is-invalid @enderror" oninput="return cpfLength();" value="{{ old('cpf') }}" type="text" name="cpf" id="cpf" autocomplete="cpf" autofocus placeHolder="000.000.000-00">
+                    <input type="text" name="cpf" id="cpf" class="form-control @error('cpf') is-invalid @enderror" onkeypress="return onlyNums();" oninput="return cpfLength();" value="{{ old('cpf') }}"  autocomplete="cpf" autofocus placeHolder="000.000.000-00">
                     @error('cpf')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
 
                 <div class="form-group col-md-2">
                     <label for="rg"> RG </label>
-                    <input class="form-control @error('rg') is-invalid @enderror" oninput="return rgLength();" value="{{ old('rg') }}" type="text" name="rg" id="rg" autocomplete="rg" autofocus placeHolder="00.000.000">
+                    <input name="rg" id="rg" class="form-control @error('rg') is-invalid @enderror" onkeypress="return onlyNums();" oninput="return rgLength();" value="{{ old('rg') }}" type="text"  autocomplete="rg" autofocus placeHolder="00.000.000">
                     @error('rg')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
