@@ -23,33 +23,58 @@
 
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
-                <input class="form-control" type="text" name="nome" id="nome" placeHolder="Nome Completo">
+                <input class="form-control  @error('nome') is-invalid @enderror" type="text" name="nome" id="nome" onkeypress="return onlyLetters(event,this);" maxlength="100" value="{{ old('nome') }}" autocomplete="nome" autofocus placeHolder="Nome Completo">
+                @error('nome')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="cpf"> CPF </label>
-                    <input class="form-control" type="text" name="cpf" id="cpf" placeHolder="000.000.000-00">
+                    <input class="form-control @error('cpf') is-invalid @enderror" oninput="return cpfLength();" value="{{ old('cpf') }}" type="text" name="cpf" id="cpf" autocomplete="cpf" autofocus placeHolder="000.000.000-00">
+                    @error('cpf')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="form-group col-md-2">
                     <label for="rg"> RG </label>
-                    <input class="form-control" type="text" name="rg" id="rg" placeHolder="00.000.000">
+                    <input class="form-control @error('rg') is-invalid @enderror" oninput="return rgLength();" value="{{ old('rg') }}" type="text" name="rg" id="rg" autocomplete="rg" autofocus placeHolder="00.000.000">
+                    @error('rg')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="data_nascimento"> Data de Nascimento </label>
-                    <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" min="1910-01-01" max="2020-12-31">
+                    <input class="form-control @error('data_nascimento') is-invalid @enderror" autofocus type="date" name="data_nascimento" id="data_nascimento" min="1910-01-01" max="2020-12-31">
+                    @error('data_nascimento')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="form-group col-md-2">
                     <label for="matricula"> Matrícula </label>
-                    <input class="form-control" type="number" name="matricula" id="matricula" placeHolder="000000000">
+                    <input class="form-control @error('matricula') is-invalid @enderror" oninput="return matriculaLength();" value="{{ old('matricula') }}" type="number" name="matricula" id="matricula" autocomplete="matricula" autofocus placeHolder="000000000">
+                    @error('matricula')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="cargo"> Perfil </label>
-                    <select class="custom-select" name="cargo" id="cargo">
+                    <select class="custom-select @error('cargo') is-invalid @enderror" autofocus name="cargo" id="cargo">
                     <option value="0" selected="selected">Escolha...</option>
                     @foreach( $cargos as $cargo )
                         <option value="{{ $cargo->id }}"> {{ $cargo->nome }} </option>
@@ -64,31 +89,36 @@
 
             <div class="form-group">
                 <label for="email"> E-mail </label>
-                <input class="form-control" type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br">
+                <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" autocomplete="email" autofocus type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br">
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="senha"> Senha </label>
-                <input class="form-control" type="password" name="senha" id="senha" placeHolder="">
+                <input class="form-control @error('senha') is-invalid @enderror" autofocus autocomplete="new-password" type="password" name="senha" id="senha" placeHolder="">
+                @error('senha')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="form-group">
                 <label for="confimar_senha"> Confirmar Senha </label>
-                <input class="form-control" type="password" name="confirmar_senha" id="confirmar_senha" placeHolder="">
+                <input class="form-control @error('confirmar_senha') is-invalid @enderror" autocomplete="new-password" autofocus type="password" name="confirmar_senha" id="confirmar_senha" placeHolder="">
+                @error('confirmar_senha')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             </div>
-
-            @if($errors->any())
-            <div>
-                <ul>
-                    @foreach($errors->all() as $erro)
-                        <li>{{ $erro }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
 
             <Button class="btn btn-secondary" type="button" onclick="location.href = '../' "> Cancelar </Button>
             <Button class="btn btn-success" type="submit"> Cadastrar </Button>
@@ -98,3 +128,69 @@
     </form>
 
 @endsection
+<script>
+    function onlyLetters(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            } else if (e) {
+                var charCode = e.which;
+            } else {
+                return true;
+            }
+            if (
+                (charCode > 64 && charCode < 91) ||
+                (charCode > 96 && charCode < 123) ||
+                (charCode > 191 && charCode <= 255) || charCode == 32
+            ){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (err) {
+            alert('Digite apenas letras no nome');
+        }
+    }
+
+    function onlyNums(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            } else if (e) {
+                var charCode = e.which;
+            } else {
+                return true;
+            }
+            if ((charCode >= 48 && charCode <= 57) ){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (err) {
+            alert('Digite apenas números na matrícula');
+        }
+    }
+
+    function rgLength(e, t){
+        var rg = $("#rg").val().length;
+        if (rg > 11) {
+            $("#rg").val($("#rg").val().substring(0, $("#rg").val().length - 1));
+            return false;
+        }
+    }
+
+    function cpfLength(e, t){
+        var cpf = $("#cpf").val().length;
+        if (cpf > 11) {
+            $("#cpf").val($("#cpf").val().substring(0, $("#cpf").val().length - 1));
+            return false;
+        }
+    }
+    function matriculaLength(e, t){
+        var matricula = $("#matricula").val().length;
+        if (matricula > 11) {
+            $("#matricula").val($("#matricula").val().substring(0, $("#matricula").val().length - 1));
+            return false;
+        }
+    }
+</script>
