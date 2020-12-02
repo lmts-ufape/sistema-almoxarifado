@@ -98,7 +98,7 @@
             </div>
 
             <div class="form-group">
-                <label for="senha"> Senha </label>
+                <label for="senha"> Senha contendo ao menos 8 dígitos </label>
                 <input class="form-control @error('senha') is-invalid @enderror" autofocus autocomplete="new-password" type="password" name="senha" id="senha" placeHolder="">
                 @error('senha')
                     <span class="invalid-feedback" role="alert">
