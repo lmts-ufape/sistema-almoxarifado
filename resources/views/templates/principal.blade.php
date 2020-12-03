@@ -7,54 +7,16 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="{{asset('css/templates/principal.css')}}" rel="stylesheet"/>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="{{asset('js/templates/principal.js')}}"></script>
 
-    <style>
-        .select2-selection {
-            text-align: center;
-            height: 55%!important;
-        }
-
-        .select2-selection__rendered {
-            margin: 1%;
-        }
-
-        .select2-selection__arrow {
-            margin: 1%;
-        }
-    </style>
-
-    <script>
-        $(document).ready(function(){
-            $(".menuEffect").hover(function(){
-                $(this).css("background-color", "#3E3767");
-                }, function(){
-                    $(this).css("background-color", " #151631");
-            });
-            $(".menuSupEInf").hover(function(){
-                $(this).css("background-color", "#151631");
-                }, function(){
-                    $(this).css("background-color", "#3E3767");
-            });
-
-            let selectedCollapse = sessionStorage.getItem('selectedCollapse');
-            if(selectedCollapse != null) {
-                $(selectedCollapse).addClass('show');
-            }
-
-            $('.selectedMenu').on('click', function(){
-                let target = $(this).data('target');
-                sessionStorage.setItem('selectedCollapse', target);
-            });
-        });
-    </script>
 </head>
 <body style="background-color: #151631">
     <div id="app" >
@@ -92,7 +54,6 @@
 
                         @if(!empty(Auth::user()->id))
                         <div class="dropdown">
-        
                             <a id="dropdown_perfil" name="dropdown_perfil" class="dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <svg style="color: white" width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
@@ -100,13 +61,11 @@
                                     <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
                                 </svg>
                             </a>
-
                             <div class="dropdown-menu" aria-labelledby="dropdown_perfil">
                                 <a class="dropdown-item" href="{{ route('usuario.edit_perfil', ['id' => Auth::user()->id]) }}"> Editar Perfil </a>
                                 <a class="dropdown-item" href="{{ route('usuario.edit_senha', ['id' => Auth::user()->id]) }}"> Editar Senha </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); sessionStorage.clear(); document.getElementById('logout-form').submit();"> Sair </a>
                             </div>
-
                         </div>
                         @endif
 
