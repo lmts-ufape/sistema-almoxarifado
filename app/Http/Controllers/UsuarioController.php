@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Usuario;
 use App\Cargo;
-use App\Http\Requests\UsuarioStoreRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
@@ -28,20 +27,21 @@ class UsuarioController extends Controller
         return view('usuario/usuario_create', ['cargos' => Cargo::all()]);
     }
 
-    public function store(UsuarioStoreRequest $request)
+    public function store(Request $request)
     {
 
-        $validatedFields = $request->validated();
+        $validator = Validator::make($request->all(), Usuario::$rules, Usuario::$messages)->validate();
 
         $data = [
-            'nome' => $request->nome,
-            'cpf' => $request->cpf,
-            'rg' => $request->rg,
-            'data_nascimento' => $request->data_nascimento,
-            'matricula' => $request->matricula,
-            'cargo_id' => $request->cargo,
-            'email' => $request->email,
-            'senha' => Hash::make($request->senha)
+            'nome' => $request['nome'], 
+            'email' => $request['email'],
+            'cpf' => $request['cpf'],
+            'rg' => $request['rg'],
+            'data_nascimento' => $request['data_nascimento'],
+            'matricula' => $request['matricula'],
+            'cargo_id' => $request['cargo'],
+            // 'telefone' => $request['telefone'],
+            'senha' => Hash::make($request->password),
         ];
 
         Usuario::create($data);
@@ -117,7 +117,6 @@ class UsuarioController extends Controller
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
             // 'telefone' => $request['telefone'],
-            // 'whatsapp' => $request['whatsapp'],
         ];
 
         $usuario->fill($data)->Update();
@@ -141,22 +140,22 @@ class UsuarioController extends Controller
         return redirect()->back()->with('success', 'Senha atualizada com sucesso!');
     }
 
-    public function update(UsuarioStoreRequest $request, $id)
+    public function update(Request $request, $id)
     {
 
         $usuario = Usuario::find($id);
 
-        $request->validated();
+        $validator = Validator::make($request->all(), Usuario::$rules, Usuario::$messages)->validate();
 
         $data = [
-            'nome' => $request->nome,
-            'cpf' => $request->cpf,
-            'rg' => $request->rg,
-            'data_nascimento' => $request->data_nascimento,
-            'matricula' => $request->matricula,
-            'cargo_id' => $request->cargo,
-            'email' => $request->email,
-            'senha' => Hash::make($request->senha)
+            'nome' => $request['nome'],
+            'cpf' => $request['cpf'],
+            'rg' => $request['rg'],
+            'data_nascimento' => $request['data_nascimento'],
+            'matricula' => $request['matricula'],
+            'cargo_id' => $request['cargo'],
+            'email' => $request['email'],
+            'senha' => Hash::make($request['senha'])
         ];
 
         $usuario->fill($data)->Update();
