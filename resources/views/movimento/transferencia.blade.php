@@ -70,6 +70,7 @@
                 </ul>
             </div>
         @endif
+        <Button class="btn btn-secondary" type="button" onclick="location.href = '../' "> Cancelar </Button>
         <button class="btn btn-success" type="submit">Transferir</button>
     </form>
 @endsection

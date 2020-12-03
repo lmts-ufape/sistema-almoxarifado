@@ -58,7 +58,8 @@
                     </ul>
                 </div>
             @endif
-        <button class="btn btn-danger" type="submit">Retirar</button>
+            <Button class="btn btn-secondary" type="button" onclick="location.href = '../' "> Cancelar </Button>
+            <button class="btn btn-danger" type="submit">Retirar</button>
     </form>
 @endsection
 
