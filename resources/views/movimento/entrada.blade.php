@@ -28,8 +28,8 @@
                 @enderror
             </div>
             <div class="form-group col-md-4">
-                <label for="inputMaterial">Depósito</label>
-                <select id="inputMaterial" class="form-control @error('deposito_id') is-invalid @enderror" autofocus name="deposito_id">
+                <label for="inputDeposito">Depósito</label>
+                <select id="inputDepositol" class="form-control @error('deposito_id') is-invalid @enderror" autofocus name="deposito_id">
                     <option selected hidden>Escolher...</option>
                     @foreach($depositos as $deposito)
                         <option value="{{ $deposito->id }}"> {{ $deposito->id }}. {{$deposito->nome}} </option>
