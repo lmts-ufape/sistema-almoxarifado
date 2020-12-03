@@ -6,37 +6,10 @@
     <title>Almoxarifado - @yield('title')</title>
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-
-    <script>
-        $(document).ready(function(){
-            $(".menuEffect").hover(function(){
-                $(this).css("background-color", "#3E3767");
-            }, function(){
-                $(this).css("background-color", " #151631");
-            });
-            $(".menuSupEInf").hover(function(){
-                $(this).css("background-color", "#151631");
-            }, function(){
-                $(this).css("background-color", "#3E3767");
-            });
-
-            let selectedCollapse = sessionStorage.getItem('selectedCollapse');
-            if(selectedCollapse != null) {
-                $(selectedCollapse).addClass('show');
-            }
-
-            $('.selectedMenu').on('click', function(){
-                let target = $(this).data('target');
-                sessionStorage.setItem('selectedCollapse', target);
-            });
-        });
-    </script>
 
 </head>
 <body style="background-color: #151631">
