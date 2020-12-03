@@ -33,7 +33,7 @@
     </div>
 
     <div id="remocaoSuccess" class="alert alert-success" role="alert" style="margin-top: 10px; display: none">
-        Material removido! 
+        Material removido!
     </div>
 
     <div id="editSuccess" class="alert alert-success" role="alert" style="margin-top: 10px; display: none">
@@ -97,7 +97,8 @@
 
         <input type="hidden" id="dataTableMaterial" name="dataTableMaterial" value="">
         <input type="hidden" id="dataTableQuantidade" name="dataTableQuantidade" value="">
-        
+
+        <Button class="btn btn-secondary" type="button" onclick="location.href = '../' "> Cancelar </Button>
         <button id="solicita" class="btn btn-success" disabled onclick="return setValuesRowInput()">Solicitar</button>
     </form>
 
