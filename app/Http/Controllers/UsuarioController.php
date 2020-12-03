@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Usuario;
 use App\Cargo;
 use App\Http\Requests\UsuarioStoreRequest;
-use App\Http\Controllers\Img;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UsuarioController extends Controller
 {
@@ -98,15 +98,14 @@ class UsuarioController extends Controller
         
         $usuario = Usuario::find($id);
 
-        $validator = Validator::make($request->all(), Usuario::$rules_edit_senha, Usuario::$messages);
+        $rules = array_slice(Usuario::$rules, 6);
+        $messages = array_slice(Usuario::$messages, 20);
 
-        // dd($validator);
+        $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
-        $data = [
-            'senha' => Hash::make($request->senha),
-        ];
+        $usuario->senha = Hash::make($request->password);
 
-        $usuario->fill($data)->Update();
+        $usuario->save();
 
         return redirect()->back()->with('success', 'Senha atualizada com sucesso!');
     }

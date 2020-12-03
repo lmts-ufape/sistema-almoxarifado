@@ -48,7 +48,7 @@
                     <label for="cpf" class="col-md-4 col-form-label text-md-right">{{ __('CPF') }}</label>
 
                     <div class="col-md-6">
-                        <input id="cpf" type="number" min="0" max="99999999999" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="00000000000">
+                        <input id="cpf" type="number" min="0" max="99999999999" oninput="return cpfLength();" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{ old('cpf') }}" required autocomplete="cpf" autofocus placeHolder="00000000000">
 
                         @error('cpf')
                             <span class="invalid-feedback" role="alert">
@@ -75,7 +75,7 @@
                     <label for="data_nascimento" class="col-md-4 col-form-label text-md-right">{{ __('Data de nascimento') }}</label>
 
                     <div class="col-md-6">
-                        <input id="data_nascimento" type="date" class="form-control @error('data_nascimento') is-invalid @enderror" name="data_nascimento" min="1910-01-01" max="2020-12-31">
+                        <input id="data_nascimento" type="date" value="{{ old('data_nascimento') }}"class="form-control @error('data_nascimento') is-invalid @enderror" name="data_nascimento" min="1910-01-01" max="2020-12-31">
 
                         @error('data_nascimento')
                             <span class="invalid-feedback" role="alert">
@@ -89,7 +89,7 @@
                     <label for="matricula" class="col-md-4 col-form-label text-md-right">{{ __('Matrícula') }}</label>
 
                     <div class="col-md-6">
-                        <input id="matricula" type="number" class="form-control @error('matricula') is-invalid @enderror" min="0" onkeypress="return onlyNums(event,this);" name="matricula" value="{{ old('matricula') }}" required autocomplete="matricula" autofocus placeHolder="000000000">
+                        <input id="matricula" type="number" oninput="return matriculaLength();" class="form-control @error('matricula') is-invalid @enderror" min="0" onkeypress="return onlyNums(event,this);" name="matricula" value="{{ old('matricula') }}" required autocomplete="matricula" autofocus placeHolder="000000000">
 
                         @error('matricula')
                             <span class="invalid-feedback" role="alert">
@@ -104,7 +104,7 @@
 
                     <div class="col-md-6">
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                        <span>A senha deve possuir ao menos 8 caracteres</span>
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -144,7 +144,7 @@
                 return true;
             }
             if (
-                (charCode > 64 && charCode < 91) || 
+                (charCode > 64 && charCode < 91) ||
                 (charCode > 96 && charCode < 123) ||
                 (charCode > 191 && charCode <= 255) || charCode == 32
             ){
@@ -180,6 +180,21 @@
         var rg = $("#rg").val().length;
         if (rg > 11) {
             $("#rg").val($("#rg").val().substring(0, $("#rg").val().length - 1));
+            return false;
+        }
+    }
+
+    function cpfLength(e, t){
+        var cpf = $("#cpf").val().length;
+        if (cpf > 11) {
+            $("#cpf").val($("#cpf").val().substring(0, $("#cpf").val().length - 1));
+            return false;
+        }
+    }
+    function matriculaLength(e, t){
+        var matricula = $("#matricula").val().length;
+        if (matricula > 11) {
+            $("#matricula").val($("#matricula").val().substring(0, $("#matricula").val().length - 1));
             return false;
         }
     }
