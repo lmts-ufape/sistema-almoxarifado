@@ -29,23 +29,12 @@ class Usuario extends Authenticatable
     public static $rules = [
         'nome' => 'required|string|min:5|max:100',
         'email' => 'required|email|min:5|max:100|unique:usuarios',
-        'cpf' => 'required|numeric|min:0|digits_between:10,11',
-        'rg' => 'required|numeric|min:0|digits_between:7,11',
+        'cpf' => 'required|numeric|min:0|digits_between:10,11|unique:usuarios',
+        'rg' => 'required|numeric|min:0|digits_between:7,11|unique:usuarios',
         'data_nascimento' => 'required|date',
-        'matricula' => 'required|integer|min:1',
-        'password' => 'required|string|min:8|confirmed',
-    ];
-
-    public static $rules_edit_perfil = [
-        'nome' => 'required|string|min:5|max:100',
-        'email' => 'required|email|min:5|max:100|unique:usuarios',
-        'cpf' => 'required|numeric|min:0|digits_between:10,11',
-        'rg' => 'required|numeric|min:0|digits_between:7,11',
-        'data_nascimento' => 'required|date',
-        'matricula' => 'required|integer|min:1',
-    ];
-
-    public static $rules_edit_senha = [
+        'matricula' => 'required|integer|min:1|unique:usuarios',
+        // 'telefone' => 'required|',
+        // 'whatsapp' => '',
         'password' => 'required|string|min:8|confirmed',
     ];
 
@@ -61,19 +50,23 @@ class Usuario extends Authenticatable
         'cpf.numeric' => 'O CPF deve conter apenas números.',
         'cpf.min' => 'O CPF não pode ser um número negativo.',
         'cpf.digits_between' => 'O CPF deve ter entre 10 e 11 dígitos.',
+        'cpf.unique' => 'O CPF já está cadastrado',
         'rg.required' => 'O RG é um campo obrigatório.',
         'rg.numeric' => 'O RG deve conter apenas números.',
         'rg.min' => 'O RG não pode ser um número negativo.',
         'rg.digits_between' => 'O RG deve ter entre 7 à 11 dígitos.',
+        'rg.unique' => 'O RG já está cadastrado',
         'data_nascimento.required' => 'A data de nascimento é um campo obrigatório.',
         'data_nascimento.date' => 'A data de nascimento deve ser no formato de data.',
         'matricula.required' => 'A matricula é um campo obrigatório.',
         'matricula.min' => 'A matricula deve conter pelo menos 1 dígito.',
         'matricula.integer' => 'A matricula deve ser um número.',
+        'matricula.unique' => 'A matrícula já está cadastrada',
         'password.required' => 'A senha é um campo obrigatório.',
         'password.min' => 'A senha deve ter no mínimo 8 caracteres.',
         'password.confirmed' => 'As senhas devem ser iguais.',
     ];
+
 
     public function getCargo($cargo_id)
     {
