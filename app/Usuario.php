@@ -34,7 +34,6 @@ class Usuario extends Authenticatable
         'data_nascimento' => 'required|date',
         'matricula' => 'required|integer|min:1|unique:usuarios',
         // 'telefone' => 'required|',
-        // 'whatsapp' => '',
         'password' => 'required|string|min:8|confirmed',
     ];
 
