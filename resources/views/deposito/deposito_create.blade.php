@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <Button class="btn btn-secondary" type="button" onclick="location.href = '../' "> Cancelar </Button>
+        <Button class="btn btn-secondary" type="button" onclick="if(confirm('Tem certeza que deseja Cancelar o cadastro do Deposito?')) location.href = '../' "> Cancelar </Button>
         <input class="btn btn-success" type="submit" value="Salvar">
 
 @endsection

@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="password"> Senha </label>
                 <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" id="password" required>
-                
+
                 @error('password')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -44,10 +44,10 @@
 
             <div class="form-row">
                 <div class="col-sm-1">
-                    <a href="{{ route('home') }}" class="btn btn-secondary"> Cancelar </a>
+                    <a href="{{ route('home') }}" class="btn btn-secondary" onclick="return confirm('Tem certeza que deseja Cancelar a alteração da senha do Usuário?')"> Cancelar </a>
                 </div>
                 <div class="col-sm-1">
-                    <Button class="btn btn-success" type="submit"> Atualizar </Button>
+                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Alterar a senha do Usuário?')"> Atualizar </Button>
                 </div>
             </div>
         </div>
