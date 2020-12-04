@@ -187,7 +187,7 @@
                                     <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.index') }}"><li>Editar Usuário</li></a>
                                     <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar Material</li></a>
                                     <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar Depósito</li></a>
-                                    <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.index') }}"><li>Editar Cargo</li></a>
+                                    {{-- <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.index') }}"><li>Editar Cargo</li></a> --}}
                                 </div>
                                 </div>
                             </div>

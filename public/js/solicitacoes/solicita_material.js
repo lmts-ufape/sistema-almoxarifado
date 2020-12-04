@@ -7,10 +7,14 @@ $(function () {
     $('#checkReceptor').change(function () {
         if ($(this).prop('checked')) {
             $("#inputNomeReceptor").prop('disabled', true);
+            $("#inputNomeReceptor").val($("#nomeReceptor").val())
             $("#inputRgReceptor").prop('disabled', true);
+            $("#inputRgReceptor").val($("#rgReceptor").val())
         } else {
             $("#inputNomeReceptor").prop('disabled', false);
+            $("#inputNomeReceptor").val('')
             $("#inputRgReceptor").prop('disabled', false);
+            $("#inputRgReceptor").val('')
         }
     });
 });

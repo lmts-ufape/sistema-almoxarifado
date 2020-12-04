@@ -33,7 +33,7 @@
     </div>
 
     <div id="remocaoSuccess" class="alert alert-success" role="alert" style="margin-top: 10px; display: none">
-        Material removido! 
+        Material removido!
     </div>
 
     <div id="editSuccess" class="alert alert-success" role="alert" style="margin-top: 10px; display: none">
@@ -82,12 +82,14 @@
             <div class="form-group col-md-4">
                 <div class="form-group">
                     <label for="inputNomeReceptor">Nome</label>
-                    <input type="text" class="form-control" id="inputNomeReceptor" onkeypress="return onlyLetters(event,this);" maxlength="100" name="nomeReceptor" value="" disabled="true">
+                    <input type="hidden" id="nomeReceptor" name="nomeReceptor" value="{{Auth::user()->nome}}">
+                    <input type="text" class="form-control" id="inputNomeReceptor" onkeypress="return onlyLetters(event,this);" maxlength="100" name="nomeReceptor" value="{{Auth::user()->nome}}" disabled="true">
                 </div>
             </div>
             <div class="form-group col-md-3">
                 <label for="inputRgReceptor">RG</label>
-                <input type="number" min="1" onkeypress="return onlyNums(event,this);" oninput="return rgLength();" class="form-control" id="inputRgReceptor" name="rgReceptor" value="" disabled="true">
+                <input type="hidden" id="rgReceptor" name="rgReceptor" value="{{Auth::user()->rg}}">
+                <input type="number" min="1" onkeypress="return onlyNums(event,this);" oninput="return rgLength();" class="form-control" id="inputRgReceptor" name="rgReceptor" value="{{Auth::user()->rg}}" disabled="true">
             </div>
         </div>
         <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0;">
@@ -97,7 +99,8 @@
 
         <input type="hidden" id="dataTableMaterial" name="dataTableMaterial" value="">
         <input type="hidden" id="dataTableQuantidade" name="dataTableQuantidade" value="">
-        
+
+        <Button class="btn btn-secondary" type="button" onclick="location.href = '../' "> Cancelar </Button>
         <button id="solicita" class="btn btn-success" disabled onclick="return setValuesRowInput()">Solicitar</button>
     </form>
 
