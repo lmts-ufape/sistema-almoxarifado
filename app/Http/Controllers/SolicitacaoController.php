@@ -9,6 +9,7 @@ use App\Solicitacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class SolicitacaoController extends Controller
 {
@@ -20,12 +21,23 @@ class SolicitacaoController extends Controller
 
     public function store(Request $request)
     {
-        if (empty($request->dataTableMaterial) || empty($request->dataTableQuantidade)) {
-            return redirect()->back()->withErrors('Adicione o(s) material(is) e sua(s) quantidade(s)');
-        } else {
-            $materiais = explode(",",  $request->dataTableMaterial);
-            $quantidades = explode(",",  $request->dataTableQuantidade);
+        $materiais = explode(",",  $request->dataTableMaterial);
+        $quantidades = explode(",",  $request->dataTableQuantidade);
+       
+        $materiaisCheck = true;
 
+        for($i = 0; $i < count($materiais); $i++){
+            if($materiais[$i] == NULL || $quantidades[$i] == NULL || $materiais[$i] == '' || $quantidades[$i] == ''){
+                $materiaisCheck = false;
+                break;
+            }
+        }
+
+        if (empty($request->dataTableMaterial) || empty($request->dataTableQuantidade) || !$materiaisCheck) {
+            return redirect()->back()->withErrors('Adicione o(s) material(is) e sua(s) quantidade(s)');
+        } else if($request->checkReceptor == NULL && strlen($request->nomeReceptor) > 100 || intval($request->rgReceptor) < 0){
+            return redirect()->back()->withErrors('O nome do receptor deve ter no máximo 100 dígitos e o RG 11 dígitos');
+        } else {
             $solicitacao = new Solicitacao();
             $solicitacao->usuario_id = Auth::user()->id;
             $solicitacao->observacao_requerente = $request->observacao;
@@ -80,9 +92,15 @@ class SolicitacaoController extends Controller
             $checkQuant = 0;
             $errorMessage[] = null;
 
+            if(count($itemSolicitacaos) != count($request->quantAprovada)){
+                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!'); 
+            }
+
             for ($i = 0; $i < count($itemSolicitacaos); $i++) {
                 if (empty($request->quantAprovada[$i]) && $request->quantAprovada[$i] >= 0) {
                     $checkInputNull++;
+                } else if(!empty($request->quantAprovada[$i]) && $request->quantAprovada[$i] < 0){
+                    return redirect()->back()->with('inputNULL', 'Informe valores positivos para as quantidades aprovadas!'); 
                 } else {
                     if (array_key_exists($itemSolicitacaos[$i]->material_id, $materiaisID)) {
                         $materiaisID[$itemSolicitacaos[$i]->material_id] += $request->quantAprovada[$i];
@@ -101,7 +119,7 @@ class SolicitacaoController extends Controller
                 }
             }
             if ($checkInputNull == count($itemSolicitacaos)) {
-                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas e acima de 0!');
+                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!');
             } else if ($checkQuantMin > 0) {
                 return redirect()->back()->withErrors($errorMessage);
             } else {
@@ -122,10 +140,10 @@ class SolicitacaoController extends Controller
                 if (session()->exists('status')) {
                     session()->forget('status');
                 }
+
+                return redirect()->back()->with('success', 'Solicitação Aprovada com sucesso!');
             }
         }
-
-        return redirect()->back()->with('success', 'Solicitação Aprovada com sucesso!');
     }
 
     public function listSolicitacoesRequerente()
@@ -216,6 +234,8 @@ class SolicitacaoController extends Controller
             'update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?',
             ['Entregue', date('Y-m-d H:i:s'), $request->id]
         );
+
+        session()->flash("success", "Solicitação entregue com sucesso!");
     }
 
     public function cancelarSolicitacao(Request $request)
@@ -224,6 +244,8 @@ class SolicitacaoController extends Controller
             'update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?',
             ['Cancelado', date('Y-m-d H:i:s'), $request->id]
         );
+
+        session()->flash("success", "Solicitação cancelada com sucesso!");
     }
 
     public function getItemSolicitacao($id)
