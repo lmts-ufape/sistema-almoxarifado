@@ -17,6 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="{{asset('js/templates/principal.js')}}"></script>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 <body style="background-color: #151631">
     <div id="app" >
@@ -183,12 +185,11 @@
                                     </div>
                                 </a>
                                 <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                                <div>
-                                    <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.index') }}"><li>Editar Usuário</li></a>
-                                    <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar Material</li></a>
-                                    <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar Depósito</li></a>
-                                    {{-- <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('cargo.index') }}"><li>Editar Cargo</li></a> --}}
-                                </div>
+                                    <div>
+                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('usuario.index') }}"><li>Editar Usuário</li></a>
+                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('material.indexEdit') }}"><li>Editar Material</li></a>
+                                        <a data-target="#collapseFive" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('deposito.index') }}"><li>Editar Depósito</li></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

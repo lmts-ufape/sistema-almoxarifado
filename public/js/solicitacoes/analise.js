@@ -1,22 +1,3 @@
-function onlyNums(e, t) {
-    try {
-        if (window.event) {
-            var charCode = window.event.keyCode;
-        } else if (e) {
-            var charCode = e.which;
-        } else {
-            return true;
-        }
-        if ((charCode >= 48 && charCode <= 57)) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (err) {
-        alert('Digite apenas números na quantidade');
-    }
-}
-
 function showItens(id) {
     $("#overlay").show();
 
@@ -72,7 +53,7 @@ $(function () {
         }
     });
 
-    $("#formSolicitacao button[type = 'submit']").click(function (e) {
+    $("#formSolicitacao button[type = 'submit']").on("click", function () {
         buttonSubmitID = $(this).attr("id");
     })
 
@@ -82,19 +63,29 @@ $(function () {
         }, 'fast');
     });
 
-    $("#formSolicitacao").submit(function (e) {
+    $("#formSolicitacao").on("submit", function () {
+        let escolha = "";
         if (buttonSubmitID == "aprovaSolicitacao") {
-            vari = $('[name="quantAprovada[]"]');
-            count = 0;
-            for (var i = 0; i < vari.length; i++) {
-                if (vari[i]['value'] == "") {
-                    count++;
+            escolha = confirm("Tem certeza que deseja aprovar a solicitação?");
+            if (escolha) {
+                vari = $('[name="quantAprovada[]"]');
+                count = 0;
+                for (var i = 0; i < vari.length; i++) {
+                    if (vari[i]['value'] == "") {
+                        count++;
+                    }
                 }
-            }
-            if (count == vari.length) {
-                alert("Informe algum valor para a quantidade aprovada");
+                if (count == vari.length) {
+                    alert("Informe algum valor para a quantidade aprovada");
+                    return false;
+                }
+            } else {
                 return false;
             }
+        } else if (buttonSubmitID == "negaSolicitacao") {
+            escolha = confirm("Tem certeza que deseja negar a solicitação?");
+            if (!escolha)
+                return false;
         }
     });
 
