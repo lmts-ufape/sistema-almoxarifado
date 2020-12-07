@@ -111,7 +111,7 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="senha"> Senha contendo ao menos 8 dígitos </label>
                 <input class="form-control @error('senha') is-invalid @enderror" autofocus autocomplete="new-password" type="password" name="password" id="password" placeHolder="">
                 @error('senha')
@@ -129,7 +129,7 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-            </div>
+            </div> -->
 
             <div class="form-row">
                 <div class="col-sm-1">
