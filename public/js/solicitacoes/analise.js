@@ -157,8 +157,6 @@ $(function () {
         $("#listaItens").empty();
     });
 });
-<<<<<<< HEAD
-=======
 
 function onlyNums(e, t) {
     try {
@@ -178,4 +176,3 @@ function onlyNums(e, t) {
         alert('Digite apenas números na quantidade');
     }
 }
->>>>>>> b37ac6ea71fb7679b0f108adb26db7a1c6a15928
