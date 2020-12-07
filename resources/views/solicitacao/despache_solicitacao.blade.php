@@ -43,7 +43,10 @@
                             </svg>
                         </td>
                         <td class="expandeOption" style="text-align: center">{{ date('d/m/Y',  strtotime($dados[$i]->created_at))}}</td>
-                        <td class="expandeOption" style="text-align: center"><a type="button" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}">Cancelar</a><a type="button" style="margin-left: 10px" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}">Entregue</a></td>
+                        <td class="expandeOption" style="text-align: center">
+                            <a type="button" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}" onclick="return confirm('Tem certeza que deseja Negar a Entrega?')">Cancelar</a>
+                            <a type="button" style="margin-left: 10px" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}" onclick="return confirm('Tem certeza que deseja Aprovar a Entrega?')">Entregue</a>
+                        </td>
                     </tr>
                 @endfor
             @endif

@@ -65,8 +65,10 @@ $(function () {
     $('#textObservacaoAdmin').on('input propertychange', function () {
         if ($(this).val().length < 5) {
             $('#negaSolicitacao').prop('disabled', true);
+            $('#aprovaSolicitacao').prop('disabled', true);
         } else {
             $('#negaSolicitacao').prop('disabled', false);
+            $('#aprovaSolicitacao').prop('disabled', false);
         }
     });
 

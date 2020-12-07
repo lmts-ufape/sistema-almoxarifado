@@ -64,13 +64,13 @@
 
         <div class="form-row">
             <div class="col-sm-1">
-                <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button>
+                <Button class="btn btn-secondary" type="button" onClick="if(confirm('Tem certeza que deseja Cancelar a alteração do Material?')) location.href='../'"> Cancelar </Button>
             </div>
             <div class="col-sm-1">
                 <Button type="button" class="btn btn-danger"> Remover </Button>
             </div>
             <div class="col-sm-1">
-                <Button class="btn btn-success" type="submit"> Atualizar </Button>
+                <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Material?')"> Atualizar </Button>
             </div>
         </div>
 
