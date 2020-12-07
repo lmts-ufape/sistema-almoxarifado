@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Estoque;
 use App\HistoricoStatus;
 use App\ItemSolicitacao;
+use App\Mail\emailMaterialEsgotando;
 use App\material;
 use App\Solicitacao;
+use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class SolicitacaoController extends Controller
 {
@@ -23,7 +27,7 @@ class SolicitacaoController extends Controller
     {
         $materiais = explode(",",  $request->dataTableMaterial);
         $quantidades = explode(",",  $request->dataTableQuantidade);
-       
+
         $materiaisCheck = true;
 
         for($i = 0; $i < count($materiais); $i++){
@@ -93,14 +97,14 @@ class SolicitacaoController extends Controller
             $errorMessage[] = null;
 
             if(count($itemSolicitacaos) != count($request->quantAprovada)){
-                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!'); 
+                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!');
             }
 
             for ($i = 0; $i < count($itemSolicitacaos); $i++) {
                 if (empty($request->quantAprovada[$i]) && $request->quantAprovada[$i] >= 0) {
                     $checkInputNull++;
                 } else if(!empty($request->quantAprovada[$i]) && $request->quantAprovada[$i] < 0){
-                    return redirect()->back()->with('inputNULL', 'Informe valores positivos para as quantidades aprovadas!'); 
+                    return redirect()->back()->with('inputNULL', 'Informe valores positivos para as quantidades aprovadas!');
                 } else {
                     if (array_key_exists($itemSolicitacaos[$i]->material_id, $materiaisID)) {
                         $materiaisID[$itemSolicitacaos[$i]->material_id] += $request->quantAprovada[$i];
@@ -165,8 +169,8 @@ class SolicitacaoController extends Controller
 
     public function listSolicitacoesAnalise()
     {
-        $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
-            from historico_statuses status, usuarios u, solicitacaos soli 
+        $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome
+            from historico_statuses status, usuarios u, solicitacaos soli
             where status.data_aprovado IS NULL and status.data_finalizado IS NULL and status.solicitacao_id = soli.id
             and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
 
@@ -184,8 +188,8 @@ class SolicitacaoController extends Controller
 
     public function listSolicitacoesAprovadas()
     {
-        $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
-            from historico_statuses status, usuarios u, solicitacaos soli 
+        $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome
+            from historico_statuses status, usuarios u, solicitacaos soli
             where status.data_aprovado IS NOT NULL and status.data_finalizado IS NULL and status.solicitacao_id = soli.id
             and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
 
@@ -203,8 +207,8 @@ class SolicitacaoController extends Controller
 
     public function listTodasSolicitacoes()
     {
-        $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome  
-            from historico_statuses status, usuarios u, solicitacaos soli 
+        $consulta = DB::select('select status.status, status.created_at, status.solicitacao_id, u.nome
+            from historico_statuses status, usuarios u, solicitacaos soli
             where status.data_finalizado IS NOT NULL and status.solicitacao_id = soli.id
             and soli.usuario_id = u.id and u.cargo_id != 2 order by status.id desc');
 
@@ -226,7 +230,22 @@ class SolicitacaoController extends Controller
         $materiaisID = array_column($itens->toArray(), 'material_id');
         $quantAprovadas = array_column($itens->toArray(), 'quantidade_aprovada');
 
+        $materiais = material::all();
+        $usuarios = Usuario::all();
+        $estoques = Estoque::all();
         for ($i = 0; $i < count($materiaisID); $i++) {
+            //Codigo para enviar email de alerta
+            $material = $materiais->find($materiaisID[$i]);
+            $estoque = $estoques->find($materiaisID[$i]);
+            Log::info($quantAprovadas[$i]);
+            if (($estoque->quantidade - $quantAprovadas[$i]) <= $material->quantidade_minima) {
+                for ($j = 1; $j < count($usuarios); $j++) {
+                    if ($usuarios->find($j)->cargo_id == 2) {
+                        $usuario = $usuarios->find($j);
+                        \App\Jobs\emailMaterialEsgotando::dispatch($usuario, $material);
+                    }
+                }
+            }
             DB::update('update estoques set quantidade = quantidade - ? where material_id = ?', [$quantAprovadas[$i], $materiaisID[$i]]);
         }
 
@@ -280,7 +299,7 @@ class SolicitacaoController extends Controller
         $materiaisIDItem = ItemSolicitacao::select('material_id', 'solicitacao_id')->whereIn('solicitacao_id', $solicitacoes_id)->orderBy('solicitacao_id', 'desc')->get();
         $itensSolicitacaoID =  array_values(array_unique(array_column($materiaisIDItem->toArray(), 'solicitacao_id')));
 
-        $materiais = DB::select('select item.material_id, item.solicitacao_id, mat.nome 
+        $materiais = DB::select('select item.material_id, item.solicitacao_id, mat.nome
             from item_solicitacaos item, materials mat
             where item.solicitacao_id in (' . implode(',', $solicitacoes_id) . ') and item.material_id = mat.id');
 
