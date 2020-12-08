@@ -12,7 +12,7 @@
 </head>
 <body>
     <img align="right" src="{{ public_path('imagens/logo_upe.png') }}" width="150px" height="75px">
-    <h2>RELATÓRIO DE DEPÓSITOS</h2>
+    <h2>RELATÓRIO DE MATERIAIS EM ESTOQUE</h2>
     <h4>RELATÓRIO REFERENTE AO PERÍODO: {{ date('d/m/Y',  strtotime($datas[0])) }} A {{ date('d/m/Y',  strtotime($datas[1])) }}</h4>
 
     <table id="tableMateriais" style="">
