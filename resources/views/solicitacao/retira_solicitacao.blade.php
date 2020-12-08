@@ -50,7 +50,14 @@
                             </svg>
                         </td>
                         <td class="expandeOption" style="text-align: center">{{ date('d/m/Y',  strtotime($dados[$i]->created_at))}}</td>
-                        <td class="expandeOption" style="text-align: center"><button type="button" class="btn btn-danger cancelaEntregaSolicitacao" data-id="{{ $dados[$i]->solicitacao_id }}">Cancelar</button><button type="button" style="margin-left: 10px" class="btn btn-success entregaSolicitacao" data-id="{{ $dados[$i]->solicitacao_id }}">Entregue</button></td>
+                        <td class="expandeOption" style="text-align: center">
+                            <button type="button" class="btn btn-danger cancelaEntregaSolicitacao" data-id="{{ $dados[$i]->solicitacao_id }}">
+                                Cancelar
+                            </button>
+                            <button type="button" style="margin-left: 10px" class="btn btn-success entregaSolicitacao" data-id="{{ $dados[$i]->solicitacao_id }}">
+                                Entregue
+                            </button>
+                        </td>
                     </tr>
                 @endfor
             @endif

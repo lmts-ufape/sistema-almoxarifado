@@ -90,17 +90,17 @@
                     </ul>
                 </div>
             @endif
-            
+
             <div class="form-row">
                 <div class="col-sm-1">
                     <!-- <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button> -->
-                    <a href="{{ route('home') }}" class="btn btn-secondary"> Cancelar </a>
+                    <a href="{{ route('home') }}" class="btn btn-secondary" onclick="return confirm('Tem certeza que deseja Cancelar a alteração do perfil do Usuário?')"> Cancelar </a>
                 </div>
                 <!-- <div class="col-sm-1"> -->
                     <!-- <Button type="button" class="btn btn-danger"> Remover </Button> -->
                 <!-- </div> -->
                 <div class="col-sm-1">
-                    <Button class="btn btn-success" type="submit"> Atualizar </Button>
+                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o perfil do Usuário?')"> Atualizar </Button>
                 </div>
             </div>
 

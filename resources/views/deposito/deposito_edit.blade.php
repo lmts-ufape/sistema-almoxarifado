@@ -39,13 +39,13 @@
 
         <div class="form-row">
             <div class="col-sm-1">
-                <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button>
+                <Button class="btn btn-secondary" type="button" onClick="if(confirm('Tem certeza que deseja cancelar a Alteração do Deposito?'))location.href='../'"> Cancelar </Button>
             </div>
             <div class="col-sm-1">
-                <Button type="button" class="btn btn-danger"> Remover </Button>
+                <Button type="button" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja Remover o Deposito?')"> Remover </Button>
             </div>
             <div class="col-sm-1">
-                <Button class="btn btn-success" type="submit"> Atualizar </Button>
+                <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Alterar o Deposito?')"> Atualizar </Button>
             </div>
         </div>
     </form>
