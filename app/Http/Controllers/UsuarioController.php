@@ -81,11 +81,8 @@ class UsuarioController extends Controller
 
         $usuario = Usuario::find($id);
 
-        // $rules = array_slice(Usuario::$rules, 0, 8);
-        // $messages = array_alice(Usuario::$messages, 0, );
-
-        $rules = array_slice(Usuario::$rules, 0, 6);
-        $messages = array_slice(Usuario::$messages, 0, 23);
+        $rules = array_slice(Usuario::$rules, 0, 7);
+        $messages = array_slice(Usuario::$messages, 0, 28);
 
         $rules['email'] = [
             'required','email','min:5','max:100',
@@ -116,7 +113,7 @@ class UsuarioController extends Controller
             'rg' => $request['rg'],
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
-            // 'telefone' => $request['telefone'],
+            'numTel' => $request['numTel'],
         ];
 
         $usuario->fill($data)->Update();
@@ -128,8 +125,8 @@ class UsuarioController extends Controller
         
         $usuario = Usuario::find($id);
 
-        $rules = array_slice(Usuario::$rules, 6);
-        $messages = array_slice(Usuario::$messages, 24);
+        $rules = array_slice(Usuario::$rules, 7);
+        $messages = array_slice(Usuario::$messages, 28);
 
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
 

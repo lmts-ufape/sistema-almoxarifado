@@ -10,13 +10,12 @@ $factory->define(Usuario::class, function (Faker $faker) {
     return [
         'nome' => $faker->name,
         'cpf' => rand(10000000000, 99999999999),
+        'numTel' => rand(10000000000, 99999999999),
         'rg' => rand(100000000, 999999999),
         'data_nascimento' => $faker->date('d-m-Y'),
         'matricula' => rand(100000, 999999),
         'cargo_id' => 1,
         'email' => $faker->email,
-
         'senha' => Hash::make('password'),
-
     ];
 });

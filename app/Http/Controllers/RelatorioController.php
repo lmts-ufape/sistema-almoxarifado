@@ -18,10 +18,9 @@ class RelatorioController extends Controller
 
     public function gerarRelatorioMateriais(Request $request)
     {
-        Log::info($request);
-
         Validator::make($request->all(),
-            ["data_inicio" => "required", "date", "data_fim" => "required", "date"],
+            ["data_inicio" => "required", "date", 
+            "data_fim" => "required", "date"],
             ["data_inicio.required" => "A data de início deve ser informada",
             "data_fim.required" => "A data de fim deve ser informada"])->validate();
 

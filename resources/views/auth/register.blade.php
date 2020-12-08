@@ -45,6 +45,20 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="numTel" class="col-md-4 col-form-label text-md-right">{{ __('Número de Celular') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="numTel" type="number" min="0" max="99999999999" oninput="return numTelLength();" onkeypress="return onlyNums(event,this);" class="form-control @error('numTel') is-invalid @enderror" name="numTel" value="{{ old('numTel') }}" required autocomplete="numTel" placeholder="00000000000">
+
+                        @error('numTel')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="cpf" class="col-md-4 col-form-label text-md-right">{{ __('CPF') }}</label>
 
                     <div class="col-md-6">
