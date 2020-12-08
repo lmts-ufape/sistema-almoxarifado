@@ -33,14 +33,14 @@ class UsuarioController extends Controller
         $validator = Validator::make($request->all(), Usuario::$rules, Usuario::$messages)->validate();
 
         $data = [
-            'nome' => $request['nome'], 
+            'nome' => $request['nome'],
             'email' => $request['email'],
             'cpf' => $request['cpf'],
             'rg' => $request['rg'],
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
             'cargo_id' => $request['cargo'],
-            // 'telefone' => $request['telefone'],
+            'numTel' => $request['numTel'],
             'senha' => Hash::make($request->password),
         ];
 
@@ -107,7 +107,7 @@ class UsuarioController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
         $data = [
-            'nome' => $request['nome'], 
+            'nome' => $request['nome'],
             'email' => $request['email'],
             'cpf' => $request['cpf'],
             'rg' => $request['rg'],
@@ -122,7 +122,7 @@ class UsuarioController extends Controller
     }
 
     public function update_senha(Request $request, $id) {
-        
+
         $usuario = Usuario::find($id);
 
         $rules = array_slice(Usuario::$rules, 7);
@@ -174,7 +174,7 @@ class UsuarioController extends Controller
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
             'cargo_id' => $request['cargo'],
-            // 'telefone' => $request['telefone'],
+            'numTel' => $request['numTel'],
             'senha' => Hash::make($request['password']),
         ];
 
