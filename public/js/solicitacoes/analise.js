@@ -157,22 +157,3 @@ $(function () {
         $("#listaItens").empty();
     });
 });
-
-function onlyNums(e, t) {
-    try {
-        if (window.event) {
-            var charCode = window.event.keyCode;
-        } else if (e) {
-            var charCode = e.which;
-        } else {
-            return true;
-        }
-        if ((charCode >= 48 && charCode <= 57)) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (err) {
-        alert('Digite apenas números na quantidade');
-    }
-}
