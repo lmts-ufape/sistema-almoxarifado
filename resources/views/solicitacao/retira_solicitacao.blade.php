@@ -51,8 +51,12 @@
                         </td>
                         <td class="expandeOption" style="text-align: center">{{ date('d/m/Y',  strtotime($dados[$i]->created_at))}}</td>
                         <td class="expandeOption" style="text-align: center">
-                            <a type="button" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}" onclick="return confirm('Tem certeza que deseja Negar a Entrega?')">Cancelar</a>
-                            <a type="button" style="margin-left: 10px" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}" onclick="return confirm('Tem certeza que deseja Aprovar a Entrega?')">Entregue</a>
+                            <button type="button" class="btn btn-danger cancelaEntregaSolicitacao" data-id="{{ $dados[$i]->solicitacao_id }}">
+                                Cancelar
+                            </button>
+                            <button type="button" style="margin-left: 10px" class="btn btn-success entregaSolicitacao" data-id="{{ $dados[$i]->solicitacao_id }}">
+                                Entregue
+                            </button>
                         </td>
                     </tr>
                 @endfor
@@ -104,4 +108,4 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
-<script type="text/javascript" src="{{asset('js/solicitacoes/despache.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/solicitacoes/retira.js')}}"></script>
