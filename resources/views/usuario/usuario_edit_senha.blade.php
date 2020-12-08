@@ -47,7 +47,7 @@
                     <a href="{{ route('home') }}" class="btn btn-secondary" onclick="return confirm('Tem certeza que deseja Cancelar a alteração da senha do Usuário?')"> Cancelar </a>
                 </div>
                 <div class="col-sm-1">
-                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Alterar a senha do Usuário?')"> Atualizar </Button>
+                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja alterar a senha do Usuário?')"> Atualizar </Button>
                 </div>
             </div>
         </div>

@@ -16,7 +16,7 @@ class Usuario extends Authenticatable
 
     protected $table = 'usuarios';
 
-    protected $fillable = ['nome', 'cpf', 'rg', 'data_nascimento', 'matricula', 'cargo_id', 'email', 'senha'];
+    protected $fillable = ['nome', 'cpf', 'numTel', 'rg', 'data_nascimento', 'matricula', 'cargo_id', 'email', 'senha'];
 
     protected $hidden = [
         'senha', 'remember_token',
@@ -33,7 +33,7 @@ class Usuario extends Authenticatable
         'rg' => 'required|numeric|min:0|digits_between:7,11|unique:usuarios',
         'data_nascimento' => 'required|date',
         'matricula' => 'required|integer|min:1|unique:usuarios',
-        // 'telefone' => 'required|',
+        'numTel' => 'required|integer|digits:11',
         'password' => 'required|string|min:8|confirmed',
     ];
 
@@ -45,6 +45,10 @@ class Usuario extends Authenticatable
         'email.min' => 'O e-mail deve ter no mínimo 5 caracteres.',
         'email.max' => 'O e-mail deve ter no máximo 100 caracteres.',
         'email.unique' => 'Este e-mail já está sendo usado.',
+        'numTel.required' => 'O número de celular é um campo obrigatório.',
+        'numTel.integer' => 'O número de celular deve conter apenas números.',
+        'numTel.min' => 'O número de celular não pode ser um número negativo.',
+        'numTel.digits' => 'O número de celular deve ter 11 dígitos.',
         'cpf.required' => 'O CPF é um campo obrigatório.',
         'cpf.numeric' => 'O CPF deve conter apenas números.',
         'cpf.min' => 'O CPF não pode ser um número negativo.',

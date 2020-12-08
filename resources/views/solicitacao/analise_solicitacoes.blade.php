@@ -110,8 +110,8 @@
                 <div class="modal-footer">
                     <input type="hidden" id="solicitacaoID" name="solicitacaoID" value="">
 
-                    <button id="negaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-danger" value="nega" disabled onclick="return confirm('Tem certeza que deseja Negar a Solicitação?')">Negar</button>
-                    <button id="aprovaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-success" value="aprova" disabled onclick="return confirm('Tem certeza que deseja Aprovar a Solicitação?')">Aprovar</button>
+                    <button id="negaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-danger" value="nega" disabled>Negar</button>
+                    <button id="aprovaSolicitacao" style="display: none" name="action" type="submit" class="btn btn-success" value="aprova" disabled>Aprovar</button>
                 </div>
               </div>
             </div>

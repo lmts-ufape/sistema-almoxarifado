@@ -139,7 +139,7 @@ $(function () {
         e.preventDefault();
         e.stopPropagation();
 
-        let escolha = confirm("Tem certeza que deseja fazer a entrega?");
+        let escolha = confirm("Tem certeza que deseja cancelar a entrega?");
 
         if (escolha) {
             var id = $(this).data('id');

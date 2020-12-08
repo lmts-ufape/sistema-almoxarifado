@@ -7,7 +7,7 @@
 @section('content')
 
     <div style="border-bottom: #949494 2px solid; padding: 5px; margin-bottom: 10px">
-        <h2>Editar Perfil</h2>
+        <h2>EDITAR PERFIL</h2>
     </div>
 
     @if(session()->has('success'))
@@ -25,34 +25,65 @@
 
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
-                <input class="form-control" type="text" name="nome" id="nome" placeHolder="Nome Completo"
+                <input class="form-control @error('nome') is-invalid @enderror" type="text" name="nome" id="nome" max="100" onkeypress="return onlyLetters(event,this);" placeHolder="Nome Completo"
                        value="{{ $usuario->nome }}">
+                
+                @error('nome')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="cpf"> CPF </label>
-                    <input class="form-control" type="text" name="cpf" id="cpf" placeHolder="000.000.000-00"
+                    <input class="form-control @error('cpf') is-invalid @enderror" type="number" name="cpf" id="cpf" min="0" max="99999999999" oninput="return cpfLength();" onkeypress="return onlyNums(event,this);" placeHolder="00000000000"
                            value="{{ $usuario->cpf }}">
+
+                    @error('cpf')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="form-group col-md-2">
                     <label for="rg"> RG </label>
-                    <input class="form-control" type="text" name="rg" id="rg" placeHolder="00.000.000"
+                    <input class="form-control @error('rg') is-invalid @enderror" type="number" name="rg" id="rg" min="0" max="99999999999" oninput="return rgLength();" onkeypress="return onlyNums(event,this);"  placeHolder="00000000"
                            value="{{ $usuario->rg }}">
+                    
+                    @error('rg')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="data_nascimento"> Data de Nascimento </label>
-                    <input class="form-control" type="date" name="data_nascimento" id="data_nascimento" min="1910-01-01" max="2020-12-31"
+                    <input class="form-control @error('data_nascimento') is-invalid @enderror" type="date" name="data_nascimento" id="data_nascimento" min="1910-01-01" max="2020-12-31"
                            value="{{ $usuario->data_nascimento }}">
+
+                    @error('data_nascimento')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
 
                 <div class="form-group col-md-2">
                     <label for="matricula"> Matrícula </label>
-                    <input class="form-control" type="number" name="matricula" id="matricula" placeHolder="000000000"
+                    <input class="form-control @error('matricula') is-invalid @enderror" type="number" name="matricula" id="matricula" min="0" max="99999999999" oninput="return matriculaLength();"  onkeypress="return onlyNums(event,this);" placeHolder="000000000"
                            value="{{ $usuario->matricula }}">
+
+                    @error('matricula')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+
                 @if(Auth::user()->cargo_id == 2)
                     <div class="form-group">
                         <label for="cargo"> Perfil </label>
@@ -72,38 +103,43 @@
             </div>
 
             <div class="form-group">
+                <label for="email"> Número de Celular </label>
+                <input class="form-control @error('numTel') is-invalid @enderror" type="number" name="numTel" id="numTel" min="0" max="99999999999" oninput="return numTelLength();"  onkeypress="return onlyNums(event,this);" placeHolder="00000000000"
+                       value="{{ $usuario->numTel }}">
+
+                @error('numTel')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label for="email"> E-mail </label>
-                <input class="form-control" type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br"
+                <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br"
                        value="{{ $usuario->email }}">
+
+                @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="form-group col-md-12" class="form-row"
                  style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             </div>
 
-            @if($errors->any())
-                <div>
-                    <ul>
-                        @foreach($errors->all() as $erro)
-                            <li>{{ $erro }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <div class="form-row">
                 <div class="col-sm-1">
-                    <!-- <Button class="btn btn-secondary" type="button" onClick="location.href='../'"> Cancelar </Button> -->
-                    <a href="{{ route('home') }}" class="btn btn-secondary" onclick="return confirm('Tem certeza que deseja Cancelar a alteração do perfil do Usuário?')"> Cancelar </a>
+                    <a href="{{ route('home') }}" class="btn btn-secondary" onclick="return confirm('Tem certeza que deseja cancelar a alteração do perfil do Usuário?')"> Cancelar </a>
                 </div>
-                <!-- <div class="col-sm-1"> -->
-                    <!-- <Button type="button" class="btn btn-danger"> Remover </Button> -->
-                <!-- </div> -->
                 <div class="col-sm-1">
-                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o perfil do Usuário?')"> Atualizar </Button>
+                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja atualizar o perfil do Usuário?')"> Atualizar </Button>
                 </div>
             </div>
 
         </div>
     </form>
 @endsection
+<script type="text/javascript" src="{{asset('js/usuario/register.js')}}"></script>

@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Usuario;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -27,10 +28,10 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-
         return Usuario::create([
             'nome' => $data['nome'],
             'email' => $data['email'],
+            'numTel' => $data['numTel'],
             'cpf' => $data['cpf'],
             'rg' => $data['rg'],
             'data_nascimento' => $data['data_nascimento'],
