@@ -113,7 +113,7 @@ $(function () {
         $("#modalBody").hide();
     });
 
-    $('#tableSolicitacoes tbody').on('click', '.despache', function (e) {
+    $('#tableSolicitacoes tbody').on('click', '.entregaSolicitacao', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -124,7 +124,7 @@ $(function () {
 
             $.ajax({
                 type: 'POST',
-                url: "despache_solicitacao",
+                url: "entrega_solicitacao",
                 data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id },
                 success: function (data) {
                     location.reload();
@@ -135,7 +135,7 @@ $(function () {
         }
     });
 
-    $('#tableSolicitacoes tbody').on('click', '.cancelaDespache', function (e) {
+    $('#tableSolicitacoes tbody').on('click', '.cancelaEntregaSolicitacao', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -146,7 +146,7 @@ $(function () {
 
             $.ajax({
                 type: 'POST',
-                url: "cancela_solicitacao",
+                url: "cancela_entrega_solicitacao",
                 data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id },
                 success: function (data) {
                     location.reload();

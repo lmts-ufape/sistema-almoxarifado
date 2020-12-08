@@ -109,7 +109,7 @@
                                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div>
                                         <a data-target="#collapseOne" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('analise.solicitacoes') }}"><li>Analisar</li></a>
-                                        <a data-target="#collapseOne" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('despache.solicitacoes') }}"><li>Retirar</li></a>
+                                        <a data-target="#collapseOne" class="menuEffect selectedMenu" class="selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('retira.solicitacoes') }}"><li>Retirar</li></a>
                                     </div>
                                 </div>
                             </div>

@@ -9,7 +9,6 @@ use App\Solicitacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class SolicitacaoController extends Controller
 {
@@ -23,11 +22,11 @@ class SolicitacaoController extends Controller
     {
         $materiais = explode(",",  $request->dataTableMaterial);
         $quantidades = explode(",",  $request->dataTableQuantidade);
-       
+
         $materiaisCheck = true;
 
-        for($i = 0; $i < count($materiais); $i++){
-            if($materiais[$i] == NULL || $quantidades[$i] == NULL || $materiais[$i] == '' || $quantidades[$i] == ''){
+        for ($i = 0; $i < count($materiais); $i++) {
+            if ($materiais[$i] == NULL || $quantidades[$i] == NULL || $materiais[$i] == '' || $quantidades[$i] == '') {
                 $materiaisCheck = false;
                 break;
             }
@@ -35,7 +34,7 @@ class SolicitacaoController extends Controller
 
         if (empty($request->dataTableMaterial) || empty($request->dataTableQuantidade) || !$materiaisCheck) {
             return redirect()->back()->withErrors('Adicione o(s) material(is) e sua(s) quantidade(s)');
-        } else if($request->checkReceptor == NULL && strlen($request->nomeReceptor) > 100 || intval($request->rgReceptor) < 0){
+        } else if ($request->checkReceptor == NULL && strlen($request->nomeReceptor) > 100 || intval($request->rgReceptor) < 0) {
             return redirect()->back()->withErrors('O nome do receptor deve ter no máximo 100 dígitos e o RG 11 dígitos');
         } else {
             $solicitacao = new Solicitacao();
@@ -66,83 +65,94 @@ class SolicitacaoController extends Controller
     public function aprovarSolicitacao(Request $request)
     {
         $itemSolicitacaos = session('itemSolicitacoes');
+
+        if ($request->action == 'nega') {
+            return $this->checarNegarSolicitacao($request->observacaoAdmin, $request->solicitacaoID);
+        } else if ($request->action == 'aprova') {
+            return $this->checarAprovarSolicitacao($itemSolicitacaos, $request->quantAprovada, $request->observacaoAdmin, $request->solicitacaoID);
+        }
+    }
+
+    public function checarNegarSolicitacao($observacaoAdmin, $solicitacaoID)
+    {
+        if (is_null($observacaoAdmin)) {
+            return redirect()->back()->withErrors('Informe o motivo de a solicitação ter sido negada!');
+        } else {
+            DB::update('update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?', ["Negado", date('Y-m-d H:i:s'), $solicitacaoID]);
+            DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$observacaoAdmin, $solicitacaoID]);
+
+            if (session()->exists('itemSolicitacoes')) {
+                session()->forget('itemSolicitacoes');
+            }
+            if (session()->exists('status')) {
+                session()->forget('status');
+            }
+
+            return redirect()->back()->with('success', 'Solicitação cancelada com sucesso!');
+        }
+    }
+
+    public function checarAprovarSolicitacao($itemSolicitacaos, $quantAprovada, $observacaoAdmin, $solicitacaoID)
+    {
         $itensID = [];
         $quantidadesAprovadas = [];
         $materiaisID = [];
 
-        if ($request->action == 'nega') {
-            if (is_null($request->observacaoAdmin)) {
-                return redirect()->back()->withErrors('Informe o motivo de a solicitação ter sido negada!');
+        $checkInputNull = 0;
+        $checkQuantMin = 0;
+        $checkQuant = 0;
+        $errorMessage[] = null;
+
+        if (count($itemSolicitacaos) != count($quantAprovada)) {
+            return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!');
+        }
+
+        for ($i = 0; $i < count($itemSolicitacaos); $i++) {
+            if (empty($quantAprovada[$i]) && $quantAprovada[$i] >= 0) {
+                $checkInputNull++;
+            } else if (!empty($quantAprovada[$i]) && $quantAprovada[$i] < 0) {
+                return redirect()->back()->with('inputNULL', 'Informe valores positivos para as quantidades aprovadas!');
             } else {
-                DB::update('update historico_statuses set status = ?, data_finalizado = ? where solicitacao_id = ?', ["Negado", date('Y-m-d H:i:s'), $request->solicitacaoID]);
-                DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$request->observacaoAdmin, $request->solicitacaoID]);
-
-                if (session()->exists('itemSolicitacoes')) {
-                    session()->forget('itemSolicitacoes');
-                }
-                if (session()->exists('status')) {
-                    session()->forget('status');
+                if (array_key_exists($itemSolicitacaos[$i]->material_id, $materiaisID)) {
+                    $materiaisID[$itemSolicitacaos[$i]->material_id] += $quantAprovada[$i];
+                } else if (!array_key_exists($itemSolicitacaos[$i]->material_id, $materiaisID)) {
+                    $materiaisID[$itemSolicitacaos[$i]->material_id] = $quantAprovada[$i];
                 }
 
-                return redirect()->back()->with('success', 'Solicitação cancelada com sucesso!');
-            }
-        } else if ($request->action == 'aprova') {
-            $checkInputNull = 0;
-            $checkQuantMin = 0;
-            $checkQuant = 0;
-            $errorMessage[] = null;
-
-            if(count($itemSolicitacaos) != count($request->quantAprovada)){
-                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!'); 
-            }
-
-            for ($i = 0; $i < count($itemSolicitacaos); $i++) {
-                if (empty($request->quantAprovada[$i]) && $request->quantAprovada[$i] >= 0) {
-                    $checkInputNull++;
-                } else if(!empty($request->quantAprovada[$i]) && $request->quantAprovada[$i] < 0){
-                    return redirect()->back()->with('inputNULL', 'Informe valores positivos para as quantidades aprovadas!'); 
+                if ($materiaisID[$itemSolicitacaos[$i]->material_id] <= $itemSolicitacaos[$i]->quantidade) {
+                    array_push($itensID, $itemSolicitacaos[$i]->id);
+                    array_push($quantidadesAprovadas, $quantAprovada[$i]);
+                    $checkQuant = $quantAprovada[$i] < $itemSolicitacaos[$i]->quantidade_solicitada;
                 } else {
-                    if (array_key_exists($itemSolicitacaos[$i]->material_id, $materiaisID)) {
-                        $materiaisID[$itemSolicitacaos[$i]->material_id] += $request->quantAprovada[$i];
-                    } else if (!array_key_exists($itemSolicitacaos[$i]->material_id, $materiaisID)) {
-                        $materiaisID[$itemSolicitacaos[$i]->material_id] = $request->quantAprovada[$i];
-                    }
-
-                    if ($materiaisID[$itemSolicitacaos[$i]->material_id] <= $itemSolicitacaos[$i]->quantidade) {
-                        array_push($itensID, $itemSolicitacaos[$i]->id);
-                        array_push($quantidadesAprovadas, $request->quantAprovada[$i]);
-                        $checkQuant = $request->quantAprovada[$i] < $itemSolicitacaos[$i]->quantidade_solicitada;
-                    } else {
-                        $checkQuantMin++;
-                        array_push($errorMessage, $itemSolicitacaos[$i]->nome . "(Dispoível:" . $itemSolicitacaos[$i]->quantidade . ")");
-                    }
+                    $checkQuantMin++;
+                    array_push($errorMessage, $itemSolicitacaos[$i]->nome . "(Dispoível:" . $itemSolicitacaos[$i]->quantidade . ")");
                 }
             }
-            if ($checkInputNull == count($itemSolicitacaos)) {
-                return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!');
-            } else if ($checkQuantMin > 0) {
-                return redirect()->back()->withErrors($errorMessage);
-            } else {
-                for ($i = 0; $i < count($itensID); $i++) {
-                    DB::update('update item_solicitacaos set quantidade_aprovada = ? where id = ?', [$quantidadesAprovadas[$i], $itensID[$i]]);
-                }
-
-                DB::update(
-                    'update historico_statuses set status = ?, data_aprovado = ? where solicitacao_id = ?',
-                    [$checkInputNull == 0 && $checkQuant == 0 ? "Aprovado" : "Aprovado Parcialmente", date('Y-m-d H:i:s'), $request->solicitacaoID]
-                );
-
-                DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$request->observacaoAdmin, $request->solicitacaoID]);
-
-                if (session()->exists('itemSolicitacoes')) {
-                    session()->forget('itemSolicitacoes');
-                }
-                if (session()->exists('status')) {
-                    session()->forget('status');
-                }
-
-                return redirect()->back()->with('success', 'Solicitação Aprovada com sucesso!');
+        }
+        if ($checkInputNull == count($itemSolicitacaos)) {
+            return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!');
+        } else if ($checkQuantMin > 0) {
+            return redirect()->back()->withErrors($errorMessage);
+        } else {
+            for ($i = 0; $i < count($itensID); $i++) {
+                DB::update('update item_solicitacaos set quantidade_aprovada = ? where id = ?', [$quantidadesAprovadas[$i], $itensID[$i]]);
             }
+
+            DB::update(
+                'update historico_statuses set status = ?, data_aprovado = ? where solicitacao_id = ?',
+                [$checkInputNull == 0 && $checkQuant == 0 ? "Aprovado" : "Aprovado Parcialmente", date('Y-m-d H:i:s'), $solicitacaoID]
+            );
+
+            DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$observacaoAdmin, $solicitacaoID]);
+
+            if (session()->exists('itemSolicitacoes')) {
+                session()->forget('itemSolicitacoes');
+            }
+            if (session()->exists('status')) {
+                session()->forget('status');
+            }
+
+            return redirect()->back()->with('success', 'Solicitação Aprovada com sucesso!');
         }
     }
 
@@ -154,7 +164,7 @@ class SolicitacaoController extends Controller
         $solicitacoesID = array_column($historicoStatus->toArray(), 'solicitacao_id');
         $materiaisPreview = [];
 
-        if(!empty($solicitacoesID)){
+        if (!empty($solicitacoesID)) {
             $materiaisPreview = $this->getMateriaisPreview($solicitacoesID, 'solicitacao_id');
         }
 
@@ -173,7 +183,7 @@ class SolicitacaoController extends Controller
         $solicitacoesID = array_column($consulta, 'solicitacao_id');
         $materiaisPreview = [];
 
-        if(!empty($solicitacoesID)){
+        if (!empty($solicitacoesID)) {
             $materiaisPreview = $this->getMateriaisPreview($solicitacoesID);
         }
 
@@ -196,7 +206,7 @@ class SolicitacaoController extends Controller
             $materiaisPreview = $this->getMateriaisPreview($solicitacoesID);
         }
 
-        return view('solicitacao.despache_solicitacao', [
+        return view('solicitacao.retira_solicitacao', [
             'dados' => $consulta, 'materiaisPreview' => $materiaisPreview
         ]);
     }
