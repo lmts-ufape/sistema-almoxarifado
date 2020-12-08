@@ -59,7 +59,7 @@
                 @enderror
             </div>
         </div>
-        <Button class="btn btn-secondary" type="button" onclick="location.href = '../' "> Cancelar </Button>
+        <Button class="btn btn-secondary" type="button" onclick="if(confirm('Tem certeza que deseja Cancelar o cadastro do Material?')) location.href = '../' "> Cancelar </Button>
         <button type="submit" class="btn btn-success">Salvar</button>
       </form>
 

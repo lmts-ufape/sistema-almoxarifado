@@ -40,7 +40,6 @@ function showItens(id) {
     });
 }
 
-
 $(function () {
     var table = $('#tableSolicitacoes').DataTable({
         searching: false,
@@ -118,31 +117,43 @@ $(function () {
         e.preventDefault();
         e.stopPropagation();
 
-        var id = $(this).data('id');
+        let escolha = confirm("Tem certeza que deseja fazer a entrega?");
 
-        $.ajax({
-            url: "{{route('despache.solicitacao')}}",
-            type: 'POST',
-            data: { _token: '{{csrf_token()}}', id: id },
-            success: function (data) {
-                location.reload();
-            }
-        });
+        if (escolha) {
+            var id = $(this).data('id');
+
+            $.ajax({
+                type: 'POST',
+                url: "despache_solicitacao",
+                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id },
+                success: function (data) {
+                    location.reload();
+                }
+            });
+        } else {
+            return false;
+        }
     });
 
     $('#tableSolicitacoes tbody').on('click', '.cancelaDespache', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
-        var id = $(this).data('id');
+        let escolha = confirm("Tem certeza que deseja fazer a entrega?");
 
-        $.ajax({
-            url: "{{route('cancela.solicitacao')}}",
-            type: 'POST',
-            data: { _token: '{{csrf_token()}}', id: id },
-            success: function (data) {
-                location.reload();
-            }
-        });
+        if (escolha) {
+            var id = $(this).data('id');
+
+            $.ajax({
+                type: 'POST',
+                url: "cancela_solicitacao",
+                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id },
+                success: function (data) {
+                    location.reload();
+                }
+            });
+        } else {
+            return false;
+        }
     });
 });

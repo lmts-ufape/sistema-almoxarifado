@@ -5,8 +5,15 @@
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
-      <h2>ATENDER SOLICITAÇÕES</h2>
+      <h2>RETIRAR SOLICITAÇÕES</h2>
     </div>
+
+    @if(session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            <strong>{{session('success')}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
 
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
@@ -43,7 +50,10 @@
                             </svg>
                         </td>
                         <td class="expandeOption" style="text-align: center">{{ date('d/m/Y',  strtotime($dados[$i]->created_at))}}</td>
-                        <td class="expandeOption" style="text-align: center"><a type="button" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}">Cancelar</a><a type="button" style="margin-left: 10px" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}">Entregue</a></td>
+                        <td class="expandeOption" style="text-align: center">
+                            <a type="button" class="btn btn-danger cancelaDespache" data-id="{{ $dados[$i]->solicitacao_id }}" onclick="return confirm('Tem certeza que deseja Negar a Entrega?')">Cancelar</a>
+                            <a type="button" style="margin-left: 10px" class="btn btn-success despache" data-id="{{ $dados[$i]->solicitacao_id }}" onclick="return confirm('Tem certeza que deseja Aprovar a Entrega?')">Entregue</a>
+                        </td>
                     </tr>
                 @endfor
             @endif

@@ -38,7 +38,7 @@ function showItens(id) {
     });
 }
 
-$(document).ready(function () {
+$(function () {
     var table = $('#tableSolicitacoes').DataTable({
         searching: false,
         "language": {
