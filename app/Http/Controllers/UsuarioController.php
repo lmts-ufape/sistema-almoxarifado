@@ -168,11 +168,7 @@ class UsuarioController extends Controller
             Rule::unique('usuarios')->ignore($usuario->id),
         ];
 
-        // Log::info($request->all());
-
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
-
-        Log::info('checgou aqui 2');
 
         $data = [
             'email' => $request['email'],
