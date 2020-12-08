@@ -104,8 +104,19 @@
                  @else
                 <input type="hidden" id="cargo" name="cargo" value="{{$usuario->cargo_id}}">
                 @endif
-
             </div>
+
+            <div class="form-group">
+                <label for="email"> Número de Celular </label>
+                <input class="form-control @error('numTel') is-invalid @enderror" type="number" name="numTel" id="numTel" min="0" max="99999999999" oninput="return numTelLength();"  onkeypress="return onlyNums(event,this);" placeHolder="00000000000"
+                       value="{{ $usuario->numTel }}">
+
+                @error('numTel')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>  
 
             <div class="form-group">
                 <h2 class="h4"> Dados de Login </h2>
