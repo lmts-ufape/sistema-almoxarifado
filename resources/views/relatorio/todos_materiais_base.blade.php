@@ -12,14 +12,14 @@
 </head>
 <body>
     <img align="right" src="{{ public_path('imagens/logo_upe.png') }}" width="150px" height="75px">
-    <h2>RELATÓRIO DE MATERIAIS</h2>
-    <h4>RELATÓRIO REFERENTE AO PERÍODO: 00/00/00 A 00/00/00</h4>
+    <h2>RELATÓRIO DE DEPÓSITOS</h2>
+    <h4>RELATÓRIO REFERENTE AO PERÍODO: {{ date('d/m/Y',  strtotime($datas[0])) }} A {{ date('d/m/Y',  strtotime($datas[1])) }}</h4>
 
     <table id="tableMateriais" style="">
         <thead style="background-color: lightgray; border-radius: 15px">
              <tr>
                 <!--<th class="align-middle" scope="col">Imagem</th>-->
-                <th class="align-middle" scope="col">Departamento</th>
+                <th class="align-middle" scope="col">Depósito</th>
                 <th class="align-middle" scope="col">Código</th>
                 <th class="align-middle" scope="col" style="text-align: center" width="340px">Descrição</th>
                 <th class="align-middle" scope="col">Unidade</th>
