@@ -20,7 +20,7 @@ class CreateUsuariosTable extends Migration
             $table->string('numTel');
             $table->string('rg');
             $table->date('data_nascimento');
-            $table->integer('matricula');
+            $table->bigInteger('matricula');
             $table->foreignId('cargo_id');
             $table->string('email')->unique();
             $table->string('senha');
