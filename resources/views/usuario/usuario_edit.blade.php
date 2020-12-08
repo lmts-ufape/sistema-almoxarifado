@@ -150,7 +150,7 @@
                     <Button type="button" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja Remover o Usuário?')"> Remover </Button>
                 </div>
                 <div class="col-sm-1">
-                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Usuário?')"> Atualizar </Button>
+                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Usuário?')" disabled id="atualizar"> Atualizar </Button>
                 </div>
             </div>
 
@@ -223,3 +223,5 @@
         }
     }
 </script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="{{asset('js/usuario/edit.js')}}"></script>
