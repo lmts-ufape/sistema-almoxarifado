@@ -94,7 +94,18 @@
                  @else
                 <input type="hidden" id="cargo" name="cargo" value="{{$usuario->cargo_id}}">
                 @endif
+            </div>
 
+            <div class="form-group">
+                <label for="email"> Número de Celular </label>
+                <input class="form-control @error('numTel') is-invalid @enderror" type="number" name="numTel" id="numTel" min="0" max="99999999999" oninput="return numTelLength();"  onkeypress="return onlyNums(event,this);" placeHolder="00000000000"
+                       value="{{ $usuario->numTel }}">
+
+                @error('numTel')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
             </div>
 
             <div class="form-group">
@@ -139,7 +150,7 @@
                     <Button type="button" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja Remover o Usuário?')"> Remover </Button>
                 </div>
                 <div class="col-sm-1">
-                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Usuário?')"> Atualizar </Button>
+                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Usuário?')" disabled id="atualizar"> Atualizar </Button>
                 </div>
             </div>
 
@@ -212,3 +223,5 @@
         }
     }
 </script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="{{asset('js/usuario/edit.js')}}"></script>

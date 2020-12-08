@@ -18,7 +18,7 @@ function onlyLetters(e, t) {
             return false;
         }
     } catch (err) {
-        alert('Digite apenas letras no nome');
+        alert('Digite apenas letras');
     }
 }
 
@@ -37,11 +37,11 @@ function onlyNums(e, t) {
             return false;
         }
     } catch (err) {
-        alert('Digite apenas números na matrícula');
+        alert('Digite apenas números');
     }
 }
 
-function rgLength(e, t) {
+function rgLength() {
     var rg = $("#rg").val().length;
     if (rg > 11) {
         $("#rg").val($("#rg").val().substring(0, $("#rg").val().length - 1));
@@ -49,10 +49,18 @@ function rgLength(e, t) {
     }
 }
 
-function cpfLength(e, t) {
+function cpfLength() {
     var rg = $("#cpf").val().length;
     if (rg > 11) {
         $("#cpf").val($("#cpf").val().substring(0, $("#cpf").val().length - 1));
+        return false;
+    }
+}
+
+function numTelLength() {
+    var rg = $("#numTel").val().length;
+    if (rg > 11) {
+        $("#numTel").val($("#numTel").val().substring(0, $("#numTel").val().length - 1));
         return false;
     }
 }

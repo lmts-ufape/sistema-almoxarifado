@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
@@ -33,14 +34,14 @@ class UsuarioController extends Controller
         $validator = Validator::make($request->all(), Usuario::$rules, Usuario::$messages)->validate();
 
         $data = [
-            'nome' => $request['nome'], 
+            'nome' => $request['nome'],
             'email' => $request['email'],
             'cpf' => $request['cpf'],
             'rg' => $request['rg'],
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
             'cargo_id' => $request['cargo'],
-            // 'telefone' => $request['telefone'],
+            'numTel' => $request['numTel'],
             'senha' => Hash::make($request->password),
         ];
 
@@ -110,13 +111,13 @@ class UsuarioController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
         $data = [
-            'nome' => $request['nome'], 
+            'nome' => $request['nome'],
             'email' => $request['email'],
             'cpf' => $request['cpf'],
             'rg' => $request['rg'],
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
-            // 'telefone' => $request['telefone'],
+            'numTel' => $request['numTel'],
         ];
 
         $usuario->fill($data)->Update();
@@ -125,7 +126,7 @@ class UsuarioController extends Controller
     }
 
     public function update_senha(Request $request, $id) {
-        
+
         $usuario = Usuario::find($id);
 
         $rules = array_slice(Usuario::$rules, 6);
@@ -142,10 +143,10 @@ class UsuarioController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $usuario = Usuario::find($id);
 
-        $rules = Usuario::$rules;
+        $rules = array_slice(Usuario::$rules, 0, 6);
+        $messages = array_slice(Usuario::$messages, 0, 23);
 
         $rules['email'] = [
             'required', 'email', 'min:5', 'max:100',
@@ -167,7 +168,7 @@ class UsuarioController extends Controller
             Rule::unique('usuarios')->ignore($usuario->id),
         ];
 
-        $validator = Validator::make($request->all(), $rules, Usuario::$messages)->validate();
+        $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
         $data = [
             'email' => $request['email'],
@@ -177,7 +178,7 @@ class UsuarioController extends Controller
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
             'cargo_id' => $request['cargo'],
-            // 'telefone' => $request['telefone'],
+            'numTel' => $request['numTel'],
             'senha' => Hash::make($request['password']),
         ];
 
