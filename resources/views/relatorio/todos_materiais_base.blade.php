@@ -15,13 +15,13 @@
     <h2>RELATÓRIO DE MATERIAIS</h2>
     <h4>RELATÓRIO REFERENTE AO PERÍODO: 00/00/00 A 00/00/00</h4>
 
-    <table id="tableMateriais" class="table table-hover table-responsive-md">
+    <table id="tableMateriais" style="">
         <thead style="background-color: lightgray; border-radius: 15px">
              <tr>
-                <th class="align-middle" scope="col">Imagem</th>
+                <!--<th class="align-middle" scope="col">Imagem</th>-->
                 <th class="align-middle" scope="col">Departamento</th>
                 <th class="align-middle" scope="col">Código</th>
-                <th class="align-middle" scope="col" style="text-align: center">Descrição</th>
+                <th class="align-middle" scope="col" style="text-align: center" width="340px">Descrição</th>
                 <th class="align-middle" scope="col">Unidade</th>
                 <th class="align-middle" scope="col">Quantidade</th>
             </tr>
@@ -29,16 +29,17 @@
         <tbody>
             @if(count($materiais) > 0)
                 @foreach($materiais as $key => $material)
-                    <tr>
-                        @for($i = 0; $i < count($material); $i++)
-                            <td class="align-middle" style="text-align: center">{{$material[$i]->imagem}}</td>
-                            <td class="align-middle" style="text-align: center">{{$key}}</td>
-                            <td class="align-middle" style="text-align: center">{{$material[$i]->codigo}}</td>
-                            <td class="align-middle" style="text-align: center">{{$material[$i]->nomemat}} - {{$material[$i]->descricao}}</td>
-                            <td class="align-middle" style="text-align: center">Und</td>
-                            <td class="align-middle" style="text-align: center">{{$material[$i]->quantidade}}</td>
-                        @endfor
-                    </tr>
+                    @for($i = 0; $i < count($material); $i++)
+                        <tr style="background-color: @if($i%2 == 1)#ddd @endif">
+                            <!--<td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->imagem}}</td>-->
+                            <td class="align-middle" scope="col" style="text-align: center">{{$key}}</td>
+                            <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->codigo}}</td>
+                            <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->nomemat}} - {{$material[$i]->descricao}}</td>
+                            <td class="align-middle" scope="col" style="text-align: center">Und</td>
+                            <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->quantidade}}</td>
+                        </tr>
+                    @endfor
+
                 @endforeach
             @endif
         </tbody>
