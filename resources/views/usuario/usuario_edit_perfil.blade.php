@@ -27,7 +27,7 @@
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control @error('nome') is-invalid @enderror" type="text" name="nome" id="nome" max="100" onkeypress="return onlyLetters(event,this);" placeHolder="Nome Completo"
                        value="{{ $usuario->nome }}">
-                
+
                 @error('nome')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
                     <label for="rg"> RG </label>
                     <input class="form-control @error('rg') is-invalid @enderror" type="number" name="rg" id="rg" min="0" max="99999999999" oninput="return rgLength();" onkeypress="return onlyNums(event,this);"  placeHolder="00000000"
                            value="{{ $usuario->rg }}">
-                    
+
                     @error('rg')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -103,7 +103,7 @@
             </div>
 
             <div class="form-group">
-                <label for="email"> Número de Celular </label>
+                <label for="numTel"> Número de Celular </label>
                 <input class="form-control @error('numTel') is-invalid @enderror" type="number" name="numTel" id="numTel" min="0" max="99999999999" oninput="return numTelLength();"  onkeypress="return onlyNums(event,this);" placeHolder="00000000000"
                        value="{{ $usuario->numTel }}">
 
@@ -135,7 +135,7 @@
                     <a href="{{ route('home') }}" class="btn btn-secondary" onclick="return confirm('Tem certeza que deseja cancelar a alteração do perfil do Usuário?')"> Cancelar </a>
                 </div>
                 <div class="col-sm-1">
-                    <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja atualizar o perfil do Usuário?')"> Atualizar </Button>
+                    <Button class="btn btn-success" type="submit" disabled onclick="return confirm('Tem certeza que deseja atualizar o perfil do Usuário?')" id="atualizar"> Atualizar </Button>
                 </div>
             </div>
 
@@ -143,3 +143,5 @@
     </form>
 @endsection
 <script type="text/javascript" src="{{asset('js/usuario/register.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="{{asset('js/usuario/edit.js')}}"></script>
