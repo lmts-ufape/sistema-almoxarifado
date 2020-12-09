@@ -163,7 +163,7 @@ class SolicitacaoController extends Controller
     public function listSolicitacoesRequerente()
     {
         $solicitacoes = Solicitacao::where('usuario_id', '=', Auth::user()->id)->get();
-        $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->orderBy('id')->get();
+        $historicoStatus = HistoricoStatus::whereIn('solicitacao_id', array_column($solicitacoes->toArray(), 'id'))->orderBy('id', 'desc')->get();
 
         $solicitacoesID = array_column($historicoStatus->toArray(), 'solicitacao_id');
         $materiaisPreview = [];
