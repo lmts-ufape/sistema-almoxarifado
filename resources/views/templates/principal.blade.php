@@ -70,15 +70,6 @@
                             </div>
                         </div>
                         @endif
-
-                        <!-- @if(!empty(Auth::user()->id))
-                            <a class="nav-link menuSupEInf" style="color: white; font-weight: bold"
-                            href='{{ route('usuario.edit', ['usuario' => Auth::user()->id]) }}'>
-                                <li class="nav-item " style="padding: 0px 15px">
-                                    {{ __('Perfil') }}
-                                </li>
-                            </a>
-                        @endif -->
                     </ul>
                 </div>
             </div>
