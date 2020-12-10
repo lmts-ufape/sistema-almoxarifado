@@ -18,7 +18,6 @@
     <table id="tableMateriais" style="">
         <thead style="background-color: lightgray; border-radius: 15px">
              <tr>
-                <!--<th class="align-middle" scope="col">Imagem</th>-->
                 <th class="align-middle" scope="col">Depósito</th>
                 <th class="align-middle" scope="col">Código</th>
                 <th class="align-middle" scope="col" style="text-align: center" width="340px">Descrição</th>
@@ -31,7 +30,6 @@
                 @foreach($materiais as $key => $material)
                     @for($i = 0; $i < count($material); $i++)
                         <tr style="background-color: @if($i%2 == 1)#ddd @endif">
-                            <!--<td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->imagem}}</td>-->
                             <td class="align-middle" scope="col" style="text-align: center">{{$key}}</td>
                             <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->codigo}}</td>
                             <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->nomemat}} - {{$material[$i]->descricao}}</td>
@@ -39,7 +37,6 @@
                             <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->quantidade}}</td>
                         </tr>
                     @endfor
-
                 @endforeach
             @endif
         </tbody>

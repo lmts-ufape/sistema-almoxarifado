@@ -24,7 +24,6 @@
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-
                 @enderror
             </div>
             <div class="form-group col-md-4">
@@ -63,7 +62,6 @@
                     @enderror
                 </div>
             </div>
-
         <input type="hidden" name="operacao" value="0">
 
         <Button class="btn btn-secondary" type="button" onclick="location.href = '../' "> Cancelar </Button>
