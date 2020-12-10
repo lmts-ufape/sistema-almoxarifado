@@ -16,8 +16,8 @@ class CreateHistoricoStatuses extends Migration
         Schema::create('historico_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('status');
-            $table->date('data_aprovado')->nullable();
-            $table->date('data_finalizado')->nullable();
+            $table->dateTime('data_aprovado')->nullable();
+            $table->dateTime('data_finalizado')->nullable();
             $table->unsignedInteger('solicitacao_id')->index();
             $table->foreign('solicitacao_id')->references('id')->on('solicitacaos');
             $table->timestamps();

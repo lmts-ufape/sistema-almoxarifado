@@ -30,6 +30,7 @@ class RelatorioController extends Controller
         $consulta = DB::select("select dep.nome as nomeDep, mat.nome as nomeMat, mat.codigo, mat.descricao, est.quantidade, mat.imagem from materials mat, estoques est, depositos dep
         where dep.id in (" . $depositosID . ") and dep.id = est.deposito_id and est.material_id = mat.id
         and est.created_at between '". $request->data_inicio ."' and '". $request->data_fim ."' order by dep.id");
+        
         $datas = [$request->data_inicio, $request->data_fim];
         $materiais = [];
 
