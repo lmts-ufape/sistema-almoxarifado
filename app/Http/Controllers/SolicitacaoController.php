@@ -246,10 +246,9 @@ class SolicitacaoController extends Controller
 
         $materiais = material::all();
         $usuarios = Usuario::all();
-        $estoques = Estoque::all();
         for ($i = 0; $i < count($materiaisID); $i++) {
             $material = $materiais->find($materiaisID[$i]);
-            $estoque = $estoques->find($materiaisID[$i]);
+            $estoque = DB::table('estoques')->where('material_id', '=', $materiaisID[$i])->first();
             if (($estoque->quantidade - $quantAprovadas[$i]) <= $material->quantidade_minima) {
                 for ($j = 1; $j < count($usuarios); $j++) {
                     if ($usuarios->find($j)->cargo_id == 2) {
