@@ -27,15 +27,28 @@
         </thead>
         <tbody>
             @if(count($materiais) > 0)
+            <?php
+                $cinza = '#ddd';
+                $branco = '#fff';
+                $cor = $branco;
+                $ultimaCor = $cor;
+            ?>
                 @foreach($materiais as $key => $material)
                     @for($i = 0; $i < count($material); $i++)
-                        <tr style="background-color: @if($i%2 == 1)#ddd @endif">
+
+                        <tr style="background-color:{{ $cor }}" <?php $ultimaCor = $cor?>>
+                            <!--<td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->imagem}}</td>-->
                             <td class="align-middle" scope="col" style="text-align: center">{{$key}}</td>
                             <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->codigo}}</td>
                             <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->nomemat}} - {{$material[$i]->descricao}}</td>
                             <td class="align-middle" scope="col" style="text-align: center">Und</td>
                             <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->quantidade}}</td>
                         </tr>
+                        @if($ultimaCor == $cinza)
+                            <?php $cor = $branco?>
+                        @elseif($ultimaCor == $branco)
+                            <?php $cor = $cinza?>
+                        @endif
                     @endfor
                 @endforeach
             @endif
