@@ -82,9 +82,6 @@ class UsuarioController extends Controller
 
         $usuario = Usuario::find($id);
 
-        // $rules = array_slice(Usuario::$rules, 0, 8);
-        // $messages = array_alice(Usuario::$messages, 0, );
-
         $rules = array_slice(Usuario::$rules, 0, 6);
         $messages = array_slice(Usuario::$messages, 0, 23);
 
@@ -129,8 +126,8 @@ class UsuarioController extends Controller
 
         $usuario = Usuario::find($id);
 
-        $rules = array_slice(Usuario::$rules, 6);
-        $messages = array_slice(Usuario::$messages, 24);
+        $rules = array_slice(Usuario::$rules, 7);
+        $messages = array_slice(Usuario::$messages, 27);
 
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
