@@ -30,17 +30,17 @@
                             {{ __('Inicio') }}
                         </li>
                     </a>
-                    <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
+                    <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('sistema') }}">
                         <li class="nav-item " style="padding: 0px 15px">
                             {{ __('O Sistema') }}
                         </li>
                     </a>
-                    <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
+                    <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('parceria') }}">
                         <li class="nav-item " style="padding: 0px 15px">
                             {{ __('A Parceria') }}
                         </li>
                     </a>
-                    <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
+                    <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('contato') }}">
                         <li class="nav-item " style="padding: 0px 15px">
                             {{ __('Contato') }}
                         </li>
@@ -53,11 +53,11 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md"  style="background-color: #1b1c42; ">
-            <div class="container-fluid" style="background-color: white; margin-bottom: 30px; margin-top: 30px; padding: 20px; border-radius: 15px">
+
                 @yield('content')
 
                 @yield('post-script')
-            </div>
+
         </div>
     </div>
 </div>
