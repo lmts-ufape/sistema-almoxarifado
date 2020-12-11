@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<div class="container-fluid" style="background-color: white; margin-bottom: 30px; margin-top: 30px;padding: 20px; border-radius: 15px">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm">
@@ -99,4 +100,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
