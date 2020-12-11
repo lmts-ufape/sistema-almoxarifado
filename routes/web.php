@@ -1,5 +1,6 @@
 <?php
 
+use Doctrine\DBAL\Schema\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,15 @@ Route::middleware('auth')->group(function(){
     })->name('home');
 
 });
+    Route::get('sistema', function () {
+        return view('infos.sistema');
+    })->name('sistema');
+    Route::get('parceria', function () {
+        return view('infos.parceria');
+    })->name('parceria');
+    Route::get('contato', function () {
+        return view('infos.contato');
+    })->name('contato');
 
 Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 
@@ -39,11 +49,11 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
     Route::resource('solicita', 'SolicitacaoController');
     Route::get('analise_solicitacoes', 'SolicitacaoController@listSolicitacoesAnalise')->name('analise.solicitacoes');
     Route::POST('analise_solicitacoes', 'SolicitacaoController@aprovarSolicitacao')->name('aprovar.solicitacao');
-    
+
     Route::get('retira_solicitacoes', 'SolicitacaoController@listSolicitacoesAprovadas')->name('retira.solicitacoes');
     Route::POST('entrega_solicitacao', 'SolicitacaoController@despacharSolicitacao')->name('entrega.solicitacao');
     Route::POST('cancela_entrega_solicitacao', 'SolicitacaoController@cancelarSolicitacao')->name('cancela.entrega.solicitacao');
-    
+
     Route::get('itens_solicitacao_admin/{id}', 'SolicitacaoController@getItemSolicitacaoAdmin')->name('itens.solicitacao.admin');
     Route::get('solicitacoes_admin', 'SolicitacaoController@listTodasSolicitacoes')->name('solicitacoe.admin');
 
