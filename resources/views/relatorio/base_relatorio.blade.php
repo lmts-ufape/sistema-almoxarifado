@@ -12,7 +12,7 @@
 </head>
 <body>
     <img align="right" src="{{ public_path('imagens/logo_upe.png') }}" width="150px" height="75px">
-    <h2>RELATÓRIO DE MATERIAIS EM ESTOQUE</h2>
+    <h2>RELATÓRIO DE {{ $tipo_relatorio == 0 ? 'ENTRADA' : 'SAÍDA' }} DE MATERIAIS</h2>
     <h4>RELATÓRIO REFERENTE AO PERÍODO: {{ date('d/m/Y',  strtotime($datas[0])) }} A {{ date('d/m/Y',  strtotime($datas[1])) }}</h4>
 
     <table id="tableMateriais" style="">
@@ -33,23 +33,19 @@
                 $cor = $branco;
                 $ultimaCor = $cor;
             ?>
-                @foreach($materiais as $key => $material)
-                    @for($i = 0; $i < count($material); $i++)
-
-                        <tr style="background-color:{{ $cor }}" <?php $ultimaCor = $cor?>>
-                            <!--<td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->imagem}}</td>-->
-                            <td class="align-middle" scope="col" style="text-align: center">{{$key}}</td>
-                            <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->codigo}}</td>
-                            <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->nomemat}} - {{$material[$i]->descricao}}</td>
-                            <td class="align-middle" scope="col" style="text-align: center">Und</td>
-                            <td class="align-middle" scope="col" style="text-align: center">{{$material[$i]->quantidade}}</td>
-                        </tr>
-                        @if($ultimaCor == $cinza)
-                            <?php $cor = $branco?>
-                        @elseif($ultimaCor == $branco)
-                            <?php $cor = $cinza?>
-                        @endif
-                    @endfor
+                @foreach($materiais as $material)
+                    <tr style="background-color:{{ $cor }}" <?php $ultimaCor = $cor?>>
+                        <td class="align-middle" scope="col" style="text-align: center">{{$material->nomedep}}</td>
+                        <td class="align-middle" scope="col" style="text-align: center">{{$material->codigo}}</td>
+                        <td class="align-middle" scope="col" style="text-align: center">{{$material->nomemat}} - {{$material->descricao}}</td>
+                        <td class="align-middle" scope="col" style="text-align: center">Und</td>
+                        <td class="align-middle" scope="col" style="text-align: center">{{$material->quantidade}}</td>
+                    </tr>
+                    @if($ultimaCor == $cinza)
+                        <?php $cor = $branco?>
+                    @elseif($ultimaCor == $branco)
+                        <?php $cor = $cinza?>
+                    @endif
                 @endforeach
             @endif
         </tbody>
