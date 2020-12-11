@@ -103,7 +103,7 @@ $(function () {
         },
         "order": [],
         "columnDefs": [{
-            "targets": [1],
+            "targets": [2],
             "orderable": false
         }]
     });
@@ -155,5 +155,15 @@ $(function () {
         $('#negaSolicitacao').hide();
         $('#aprovaSolicitacao').hide();
         $("#listaItens").empty();
+    });
+
+    $('#tableSolicitacoes').on('page.dt', function () {
+        $('html, body').animate({
+            scrollTop: $(".dataTables_wrapper").offset().top
+        }, 'fast');
+    });
+
+    $('#tableSolicitacoes').DataTable().columns().iterator('column', function (ctx, idx) {
+        $($('#tableSolicitacoes').DataTable().column(idx).header()).append('<span class="sort-icon"/>');
     });
 });

@@ -55,7 +55,7 @@ $(function () {
         },
         "order": [],
         "columnDefs": [{
-            "targets": [1],
+            "targets": [2, 4],
             "orderable": false
         }]
     });
@@ -155,5 +155,15 @@ $(function () {
         } else {
             return false;
         }
+    });
+
+    $('#tableSolicitacoes').on('page.dt', function () {
+        $('html, body').animate({
+            scrollTop: $(".dataTables_wrapper").offset().top
+        }, 'fast');
+    });
+
+    $('#tableSolicitacoes').DataTable().columns().iterator('column', function (ctx, idx) {
+        $($('#tableSolicitacoes').DataTable().column(idx).header()).append('<span class="sort-icon"/>');
     });
 });
