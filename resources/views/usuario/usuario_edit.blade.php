@@ -24,10 +24,6 @@
         <div class="form-group">
 
             <div class="form-group">
-                <h2 class="h4"> Dados Institucionais / Pessoais </h2>
-            </div>
-
-            <div class="form-group">
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control  @error('nome') is-invalid @enderror" type="text" name="nome" id="nome" onkeypress="return onlyLetters(event,this);" maxlength="100" value="{{ old('nome', $usuario->nome) }}" autocomplete="nome" autofocus placeHolder="Nome Completo">
                 @error('nome')
@@ -106,10 +102,6 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-            </div>
-
-            <div class="form-group">
-                <h2 class="h4"> Dados de Login </h2>
             </div>
 
             <div class="form-group">
