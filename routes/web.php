@@ -56,9 +56,6 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 
     Route::get('itens_solicitacao_admin/{id}', 'SolicitacaoController@getItemSolicitacaoAdmin')->name('itens.solicitacao.admin');
     Route::get('solicitacoes_admin', 'SolicitacaoController@listTodasSolicitacoes')->name('solicitacoe.admin');
-
-    Route::get('relatorio.materiais', 'RelatorioController@materiais')->name('relatorio.materiais');
-    Route::POST('relatorio.materiais', 'RelatorioController@gerarRelatorioMateriais')->name('relatorio.materiais');
 });
 
 Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
@@ -69,7 +66,7 @@ Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
     Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
 });
 
-Route::middleware(['auth', 'CheckCargoDiretoria'])->group(function () {
+Route::middleware(['auth', 'CheckCargoAdminDiretoria'])->group(function () {
     Route::get('relatorio.materiais', 'RelatorioController@materiais')->name('relatorio.materiais');
     Route::POST('relatorio.materiais', 'RelatorioController@gerarRelatorioMateriais')->name('relatorio.materiais');
 });
