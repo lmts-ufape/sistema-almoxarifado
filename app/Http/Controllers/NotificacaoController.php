@@ -23,7 +23,7 @@ class NotificacaoController extends Controller
         $notificacoes = DB::table('notificacaos')->where('usuario_id', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
         foreach ($notificacoes as $not) {
             if ($not->visto == false) {
-                $notificacao = Notificacao::find($not);
+                $notificacao = Notificacao::find($not->id);
                 $notificacao->visto = true;
                 $notificacao->update();
             }
