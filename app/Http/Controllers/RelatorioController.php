@@ -31,15 +31,29 @@ class RelatorioController extends Controller
         )->validate();
 
         $datas = [$request->data_inicio, $request->data_fim];
+        $materiais = "";
 
-        $materiais = DB::select("select dep.nome as nomeDep, mat.nome as nomeMat, mat.descricao, mat.codigo, itensMov.quantidade
-        from materials mat, depositos dep, item_movimentos itensMov, movimentos mov, estoques est
-        where mov.created_at between '" . $request->data_inicio . "' and '" . $request->data_fim . "' and mov.operacao = ? and itensMov.movimento_id = mov.id and itensMov.material_id = mat.id and 
-        itensMov.estoque_id = est.id and est.deposito_id = dep.id", [$request->tipo_relatorio]);
+        if ($request->tipo_relatorio == 2) {
+            $materiais = DB::select("select mat.nome, mat.codigo, mat.descricao, est.quantidade from materials mat, estoques est where mat.id = est.material_id
+            except
+            select mat.nome, mat.codigo, mat.descricao, est.quantidade from materials mat, item_solicitacaos item, estoques est
+            where (item.created_at between '" . $request->data_inicio . "' and '" . $request->data_fim . "') 
+            and mat.id = item.material_id and mat.id = est.material_id order by nome");
+        } else if ($request->tipo_relatorio == 0 || $request->tipo_relatorio == 1) {
+            $materiais = DB::select("select dep.nome as nomeDep, mat.nome as nomeMat, mat.descricao, mat.codigo, itensMov.quantidade
+            from materials mat, depositos dep, item_movimentos itensMov, movimentos mov, estoques est
+            where mov.created_at between '" . $request->data_inicio . "' and '" . $request->data_fim . "' and mov.operacao = ? and itensMov.movimento_id = mov.id and itensMov.material_id = mat.id and 
+            itensMov.estoque_id = est.id and est.deposito_id = dep.id", [$request->tipo_relatorio]);
+        }
 
         $tipo_relatorio = $request->tipo_relatorio;
+        $pdf = null;
 
-        $pdf = PDF::loadView('/relatorio/base_relatorio', compact('materiais', 'datas', 'tipo_relatorio'));
+        if ($request->tipo_relatorio == 2) {
+            $pdf = PDF::loadView('/relatorio/relatorio_materiais_nao_movimentados', compact('materiais', 'datas'));
+        } else if ($request->tipo_relatorio == 0 || $request->tipo_relatorio == 1) {
+            $pdf = PDF::loadView('/relatorio/relatorio_entrada_saida_materiais', compact('materiais', 'datas', 'tipo_relatorio'));
+        }
 
         return $pdf->setPaper('a4')->stream('Relatório_Materais.pdf');
     }

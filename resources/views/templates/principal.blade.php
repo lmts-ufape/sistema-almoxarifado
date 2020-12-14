@@ -184,7 +184,7 @@
                                 </div>
                             </div>
                             <div>
-                                <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                <a type="button" class="selectedMenu" style="color: white; text-decoration: none; display: block" href="{{ route('relatorio.materiais') }}">
                                     <div class="menuEffect" id="headingSix" style="padding: 10px">
                                         <h6 class="mb-0">
                                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -194,11 +194,6 @@
                                         </h6>
                                     </div>
                                 </a>
-                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-                                    <div>
-                                        <a data-target="#collapseSix" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('relatorio.materiais') }}"><li>Materiais</li></a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     @endif

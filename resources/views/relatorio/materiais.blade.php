@@ -30,6 +30,7 @@
                         <option value="" selected hidden>Escolher...</option>
                         <option value="0">Entrada de Material</option>
                         <option value="1">Saída de Material</option>
+                        <option value="2">Materiais Não Movimentados</option>
                     </select>
                     @error('tipo_relatorio')
                         <span class="invalid-feedback" role="alert">
