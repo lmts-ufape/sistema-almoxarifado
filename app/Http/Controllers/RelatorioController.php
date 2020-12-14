@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Deposito;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class RelatorioController extends Controller
 {
@@ -18,32 +16,31 @@ class RelatorioController extends Controller
 
     public function gerarRelatorioMateriais(Request $request)
     {
-        Validator::make($request->all(),
-            ["data_inicio" => "required", "date", 
-            "data_fim" => "required", "date"],
-            ["data_inicio.required" => "A data de início deve ser informada",
-            "data_fim.required" => "A data de fim deve ser informada"])->validate();
+        Validator::make(
+            $request->all(),
+            [
+                "data_inicio" => "required", "date",
+                "data_fim" => "required", "date",
+                "tipo_relatorio" => "required"
+            ],
+            [
+                "data_inicio.required" => "A data de início deve ser informada",
+                "data_fim.required" => "A data de fim deve ser informada",
+                "tipo_relatorio.required" => "Escolha um tipo de relatório"
+            ]
+        )->validate();
 
-        $depositos = Deposito::select("id")->get();
-        $depositosID = implode(",", array_column($depositos->toArray(), "id"));
-
-        $consulta = DB::select("select dep.nome as nomeDep, mat.nome as nomeMat, mat.codigo, mat.descricao, est.quantidade, mat.imagem from materials mat, estoques est, depositos dep
-        where dep.id in (" . $depositosID . ") and dep.id = est.deposito_id and est.material_id = mat.id
-        and est.created_at between '". $request->data_inicio ."' and '". $request->data_fim ."' order by dep.id");
-        
         $datas = [$request->data_inicio, $request->data_fim];
-        $materiais = [];
 
-        foreach ($consulta as $i) {
-            if (array_key_exists($i->nomedep, $materiais)) {
-                array_push($materiais[$i->nomedep], $i);
-            } else {
-                $materiais[$i->nomedep] = [$i];
-            }
-        }
+        $materiais = DB::select("select dep.nome as nomeDep, mat.nome as nomeMat, mat.descricao, mat.codigo, itensMov.quantidade
+        from materials mat, depositos dep, item_movimentos itensMov, movimentos mov, estoques est
+        where mov.created_at between '" . $request->data_inicio . "' and '" . $request->data_fim . "' and mov.operacao = ? and itensMov.movimento_id = mov.id and itensMov.material_id = mat.id and 
+        itensMov.estoque_id = est.id and est.deposito_id = dep.id", [$request->tipo_relatorio]);
 
-        $pdf = PDF::loadView('/relatorio/todos_materiais_base', compact('materiais', 'datas'));
+        $tipo_relatorio = $request->tipo_relatorio;
 
-        return $pdf->setPaper('a4')->stream('Relatório_Materais');
+        $pdf = PDF::loadView('/relatorio/base_relatorio', compact('materiais', 'datas', 'tipo_relatorio'));
+
+        return $pdf->setPaper('a4')->stream('Relatório_Materais.pdf');
     }
 }
