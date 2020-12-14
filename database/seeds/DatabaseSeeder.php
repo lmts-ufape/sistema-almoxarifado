@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DepositoSeeder::class);
         $this->call(materialSeeder::class);
         $this->call(EstoqueSeeder::class);
+        $this->call(NotificacaoSeeder::class);
     }
 }

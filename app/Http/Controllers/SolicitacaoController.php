@@ -6,6 +6,7 @@ use App\Estoque;
 use App\HistoricoStatus;
 use App\ItemSolicitacao;
 use App\material;
+use App\Notificacao;
 use App\Solicitacao;
 use App\Usuario;
 use Illuminate\Http\Request;
@@ -254,6 +255,15 @@ class SolicitacaoController extends Controller
                     if ($usuarios->find($j)->cargo_id == 2) {
                         $usuario = $usuarios->find($j);
                         \App\Jobs\emailMaterialEsgotando::dispatch($usuario, $material);
+
+                        //Criação da Notificação no site
+                        $mensagem = $material->nome.' em estado critico.';
+                        $notificacao = new Notificacao();
+                        $notificacao->mensagem = $mensagem;
+                        $notificacao->usuario_id = $usuario->id;
+                        $notificacao->material_id = $material->id;
+                        $notificacao->visto = false;
+                        $notificacao->save();
                     }
                 }
             }
