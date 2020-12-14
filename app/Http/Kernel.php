@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'CheckCargoAdministrador' => \App\Http\Middleware\CheckCargoAdministrador::class,
         'CheckCargoRequerente' => \App\Http\Middleware\CheckCargoRequerente::class,
+        'CheckCargoDiretoria' => \App\Http\Middleware\CheckCargoDiretoria::class,
     ];
 }
