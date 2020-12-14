@@ -69,6 +69,11 @@ Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
     Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
 });
 
+Route::middleware(['auth', 'CheckCargoDiretoria'])->group(function () {
+    Route::get('relatorio.materiais', 'RelatorioController@materiais')->name('relatorio.materiais');
+    Route::POST('relatorio.materiais', 'RelatorioController@gerarRelatorioMateriais')->name('relatorio.materiais');
+});
+
 Route::middleware(['auth'])->group(function () {
 
     Route::get('observacao_solicitacao/{id}', 'SolicitacaoController@getObservacaoSolicitacao')->name('observacao.solicitacao');
