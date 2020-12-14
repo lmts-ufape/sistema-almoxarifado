@@ -68,10 +68,10 @@
         <h5 style="color: #3E3767; font-weight: bold;">Discentes UFAPE:</h5>
         <ul style="color: #3E3767;">
             <li>
-                Edgar
+                Edgar Vinicius Carvalho Vital
             </li>
             <li>
-                Luiz
+                Luís Fernando Rocha Lima
             </li>
         </ul>
         <h5 style="color: #3E3767; font-weight: bold;">Discentes UPE:</h5>
