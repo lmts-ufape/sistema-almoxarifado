@@ -1,4 +1,5 @@
 @extends('templates.templateLogin')
+@section('title') Sistema @endsection
 @section('content')
 <div class="container" style="background: rgb(240, 238, 238); margin: 30px auto; padding: 40px; border-radius: 15px">
     <div class="container" style="background: rgb(240, 238, 238); ">
