@@ -1,3 +1,6 @@
+$(function () {
+    document.getElementById('data_nascimento').max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];   
+});
 
 function onlyLetters(e, t) {
     try {
