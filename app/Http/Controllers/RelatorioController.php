@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RelatorioController extends Controller
 {
-    public function materiais()
+    public function relatorio_escolha()
     {
-        return view('relatorio.materiais');
+        return view('relatorio.relatorio_escolha');
     }
 
     public function gerarRelatorioMateriais(Request $request)
@@ -31,13 +32,15 @@ class RelatorioController extends Controller
         )->validate();
 
         $datas = [$request->data_inicio, $request->data_fim];
+        $data_inicio = date('Y-m-d H:i:s', strtotime($request->data_fim));
+        $data_final = date('Y-m-d H:i:s', strtotime($request->data_fim . ' +1 day'));
         $materiais = "";
 
         if ($request->tipo_relatorio == 2) {
             $materiais = DB::select("select mat.nome, mat.codigo, mat.descricao, est.quantidade from materials mat, estoques est where mat.id = est.material_id
             except
             select mat.nome, mat.codigo, mat.descricao, est.quantidade from materials mat, item_solicitacaos item, estoques est
-            where (item.created_at between '" . $request->data_inicio . "' and '" . $request->data_fim . "') 
+            where (item.created_at between '" . $data_inicio . "' and '" . $data_final . "') 
             and mat.id = item.material_id and mat.id = est.material_id order by nome");
         } else if ($request->tipo_relatorio == 0 || $request->tipo_relatorio == 1) {
             $materiais = DB::select("select dep.nome as nomeDep, mat.nome as nomeMat, mat.descricao, mat.codigo, itensMov.quantidade
