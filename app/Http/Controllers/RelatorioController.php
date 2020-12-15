@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RelatorioController extends Controller
 {
@@ -50,7 +51,7 @@ class RelatorioController extends Controller
         } else if ($request->tipo_relatorio == 0 || $request->tipo_relatorio == 1) {
             $materiais = DB::select("select dep.nome as nomeDep, mat.nome as nomeMat, mat.descricao, mat.codigo, itensMov.quantidade
             from materials mat, depositos dep, item_movimentos itensMov, movimentos mov, estoques est
-            where mov.created_at between '" . $request->data_inicio . "' and '" . $request->data_fim . "' and mov.operacao = ? and itensMov.movimento_id = mov.id and itensMov.material_id = mat.id and 
+            where mov.created_at between '" . $data_inicio . "' and '" . $data_final . "' and mov.operacao = ? and itensMov.movimento_id = mov.id and itensMov.material_id = mat.id and 
             itensMov.estoque_id = est.id and est.deposito_id = dep.id", [$request->tipo_relatorio]);
         }
 
