@@ -21,6 +21,7 @@
                 <th class="align-middle" scope="col">Código</th>
                 <th class="align-middle" scope="col" style="text-align: center" width="340px">Descrição</th>
                 <th class="align-middle" scope="col">Unidade</th>
+                <th class="align-middle" scope="col">Requerente</th>
                 <th class="align-middle" scope="col">Quantidade</th>
             </tr>
         </thead>
@@ -37,6 +38,7 @@
                         <td class="align-middle" scope="col" style="text-align: center">{{$material->codigo}}</td>
                         <td class="align-middle" scope="col" style="text-align: center">{{$material->nome}} - {{$material->descricao}}</td>
                         <td class="align-middle" scope="col" style="text-align: center">Und</td>
+                        <td class="align-middle" scope="col" style="text-align: center">{{$material->nome_usuario}}</td>
                         <td class="align-middle" scope="col" style="text-align: center">{{$material->quantidade_solicitada}}</td>
                     </tr>
                     @if($ultimaCor == $cinza)
