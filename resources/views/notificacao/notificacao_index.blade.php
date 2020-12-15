@@ -10,8 +10,8 @@
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
                 <th class="align-middle" scope="col">Mensagem</th>
-                <th class="align-middle" scope="col">Quantidade Total</th>
-                <th class="align-middle" scope="col">Quantidade Minima</th>
+                <th class="align-middle" scope="col" style="text-align: center">Quantidade Total</th>
+                <th class="align-middle" scope="col" style="text-align: center">Quantidade Minima</th>
             </tr>
         </thead>
         <tbody>
@@ -22,8 +22,8 @@
                 @if(!empty($notificacoes))
                 <tr onclick="location.href = '{{route('notificacao.show', ['notificacao_id' => $notificacao->id])}}'" style="cursor: pointer;">
                     <td>{{ $notificacao->mensagem }}</td>
-                    <td>{{ $estoque->quantidade }}</td>
-                    <td>{{\App\material::all()->find($notificacao->material_id)->quantidade_minima}}</td>
+                    <td style="text-align: center">{{ $estoque->quantidade }}</td>
+                    <td style="text-align: center">{{\App\material::all()->find($notificacao->material_id)->quantidade_minima}}</td>
                 </tr>
                 @endif
             @empty
