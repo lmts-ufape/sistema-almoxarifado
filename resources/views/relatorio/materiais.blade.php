@@ -4,7 +4,7 @@
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding: 5px; margin-bottom: 10px">
-        <h2>RELATÓRIO ENTRADA/SAÍDA DE MATERIAIS</h2>
+        <h2>RELATÓRIO DE MATERIAIS</h2>
     </div>
 
     <div>
@@ -30,6 +30,7 @@
                         <option value="" selected hidden>Escolher...</option>
                         <option value="0">Entrada de Material</option>
                         <option value="1">Saída de Material</option>
+                        <option value="2">Materiais Não Movimentados</option>
                     </select>
                     @error('tipo_relatorio')
                         <span class="invalid-feedback" role="alert">
