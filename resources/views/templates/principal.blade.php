@@ -251,6 +251,36 @@
                                 </div>
                             </div>
                         </div>
+                    @endif
+                @endauth
+                @auth
+                    @if (Auth::user()->cargo_id == 3 )
+                        <div id="accordion" class="mt-3">
+                            <div>
+                                <a type="button" style="color: white; text-decoration: none; display: block" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                                    <div class="menuEffect" id="headingSix" style="padding: 10px">
+                                        <h6 class="mb-0">
+                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                              </svg>
+                                            Relatórios
+                                        </h6>
+                                    </div>
+                                </a>
+                                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                                    <div>
+                                        <a data-target="#collapseSix" class="menuEffect selectedMenu" style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid" href="{{ route('relatorio.materiais') }}"><li>Materiais</li></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endauth
+                @auth
+                    @if (Auth::user()->cargo_id == 1)
+                        <div style="margin-top: 10px">
+                            <a type="button" style="color: white; text-decoration: none; display: block" href="{{ route('solicita.material') }}">
+                                <div class="menuEffect" id="solicitaMaterial" style="padding: 10px">
                         <div>
                             <a type="button" style="color: white; text-decoration: none; display: block"
                                data-toggle="collapse" data-target="#collapseFour" aria-expanded="true"
