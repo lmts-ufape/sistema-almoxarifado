@@ -89,7 +89,7 @@
                     <label for="data_nascimento" class="col-md-4 col-form-label text-md-right">{{ __('Data de nascimento') }}</label>
 
                     <div class="col-md-6">
-                        <input id="data_nascimento" type="date" value="{{ old('data_nascimento') }}"class="form-control @error('data_nascimento') is-invalid @enderror" name="data_nascimento" min="1910-01-01" max="2020-12-31">
+                        <input id="data_nascimento" type="date" value="{{ old('data_nascimento') }}"class="form-control @error('data_nascimento') is-invalid @enderror" name="data_nascimento" min="1910-01-01">
 
                         @error('data_nascimento')
                             <span class="invalid-feedback" role="alert">
@@ -147,4 +147,5 @@
     </div>
 </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="{{asset('js/usuario/register.js')}}"></script>

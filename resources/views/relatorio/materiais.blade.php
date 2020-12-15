@@ -14,7 +14,7 @@
                 <label for="data_inicio" class="col-md-2 col-form-label text-md-right">{{ __('Data de início:') }}</label>
 
                 <div class="col-md-3">
-                    <input id="data_inicio" type="date" value="{{ old('data_inicio') }}" class="form-control @error('data_inicio') is-invalid @enderror" name="data_inicio" min="1910-01-01" max="2020-12-31">
+                    <input id="data_inicio" type="date" value="{{ old('data_inicio') }}" class="form-control @error('data_inicio') is-invalid @enderror" name="data_inicio" min="1910-01-01">
 
                     @error('data_inicio')
                         <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                 <label for="data_fim" class="col-md-2 col-form-label text-md-right">{{ __('Data de fim:') }}</label>
 
                 <div class="col-md-3">
-                    <input id="data_fim" type="date" value="{{ old('data_fim') }}" class="form-control @error('data_fim') is-invalid @enderror" name="data_fim" min="1910-01-01" max="2020-12-31">
+                    <input id="data_fim" type="date" value="{{ old('data_fim') }}" class="form-control @error('data_fim') is-invalid @enderror" name="data_fim" min="1910-01-01">
 
                     @error('data_fim')
                         <span class="invalid-feedback" role="alert">
@@ -58,3 +58,10 @@
         </form>
     </div>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(function () {
+        document.getElementById('data_fim').max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];   
+    });
+</script>
