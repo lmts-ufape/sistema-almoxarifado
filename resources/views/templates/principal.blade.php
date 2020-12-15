@@ -93,19 +93,19 @@
                                     @if($notificacao->visto == false)
 
                                         <a class="dropdown-item text-danger"
-                                           href="{{route('notificacao.show', ['notificacao_id' => $notificacao->id])}}">{{$notificacao->mensagem}}</a>
+                                           href="{{route('notificacao.show', ['notificacao_id' => $notificacao->id])}}" style="text-align: center">{{$notificacao->mensagem}}</a>
 
                                     @endif
                                     <hr style="margin: 0px; padding: 0px">
                                 @endforeach
-                                <a class="dropdown-item" href="{{route('notificacao.index')}}">Ver todas as
-                                    notificações</a>
+                                <a class="dropdown-item" href="{{route('notificacao.index')}}" style="text-align: center">Ver todas as
+                                    notificações.</a>
                             </div>
                         </div>
                     @endif
 
                     @if(!empty(Auth::user()->id))
-                        <div class="dropdown">
+                        <div class="dropdown" onselectstart="return false">
                             <a id="dropdown_perfil" name="dropdown_perfil" class="dropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <svg style="color: white" width="2.5em" height="2.5em" viewBox="0 0 16 16"
@@ -117,7 +117,7 @@
                                           d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
                                 </svg>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown_perfil">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_perfil">
                                 <a class="dropdown-item"
                                    href="{{ route('usuario.edit_perfil', ['id' => Auth::user()->id]) }}"> Editar
                                     Perfil </a>
