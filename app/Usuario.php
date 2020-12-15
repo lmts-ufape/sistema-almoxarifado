@@ -75,6 +75,9 @@ class Usuario extends Authenticatable
     {
         return Cargo::find($cargo_id);
     }
+    public function notificacoes(){
+        return $this->hasMany(Notificacao::class, 'usuario_id')->orderBy('created_at', 'desc')->take(5);
+    }
 
     public function getAuthPassword()
     {
