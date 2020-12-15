@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Estoque;
 use App\HistoricoStatus;
 use App\ItemSolicitacao;
 use App\material;
+use App\Notificacao;
 use App\Solicitacao;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class SolicitacaoController extends Controller
 {
@@ -29,7 +28,7 @@ class SolicitacaoController extends Controller
         $materiaisCheck = true;
 
         for ($i = 0; $i < count($materiais); $i++) {
-            if ($materiais[$i] == NULL || $quantidades[$i] == NULL || $materiais[$i] == '' || $quantidades[$i] == '') {
+            if ($materiais[$i] == NULL || $quantidades[$i] == NULL || empty($materiais[$i]) || empty($quantidades[$i])) {
                 $materiaisCheck = false;
                 break;
             }
@@ -104,8 +103,8 @@ class SolicitacaoController extends Controller
         $errorMessage = [];
 
         $checkInputVazio = 0;
-        $checkQuantMin = 0;
-        $checkQuant = 0;
+        $checkQuantMinima = 0;
+        $checkQuantAprovada = 0;
 
         if (count($itemSolicitacaos) != count($quantMateriais)) {
             return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!');
@@ -127,18 +126,18 @@ class SolicitacaoController extends Controller
                     array_push($itensID, $itemSolicitacaos[$i]->id);
                     array_push($materiaisID, $itemSolicitacaos[$i]->material_id);
                     array_push($quantMatAprovados, $quantMateriais[$i]);
-                    if($quantMateriais[$i] < $itemSolicitacaos[$i]->quantidade_solicitada){
-                        $checkQuant++;
+                    if ($quantMateriais[$i] < $itemSolicitacaos[$i]->quantidade_solicitada) {
+                        $checkQuantAprovada++;
                     }
                 } else {
-                    $checkQuantMin++;
+                    $checkQuantMinima++;
                     array_push($errorMessage, $itemSolicitacaos[$i]->nome . "(Dispoível:" . $itemSolicitacaos[$i]->quantidade . ")");
                 }
             }
         }
         if ($checkInputVazio == count($itemSolicitacaos)) {
             return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!');
-        } else if ($checkQuantMin > 0) {
+        } else if ($checkQuantMinima > 0) {
             return redirect()->back()->withErrors($errorMessage);
         } else {
             for ($i = 0; $i < count($itensID); $i++) {
@@ -148,7 +147,7 @@ class SolicitacaoController extends Controller
 
             DB::update(
                 'update historico_statuses set status = ?, data_aprovado = now() where solicitacao_id = ?',
-                [$checkInputVazio == 0 && $checkQuant == 0 ? "Aprovado" : "Aprovado Parcialmente", $solicitacaoID]
+                [$checkInputVazio == 0 && $checkQuantAprovada == 0 ? "Aprovado" : "Aprovado Parcialmente", $solicitacaoID]
             );
 
             DB::update('update solicitacaos set observacao_admin = ? where id = ?', [$observacaoAdmin, $solicitacaoID]);
@@ -254,6 +253,15 @@ class SolicitacaoController extends Controller
                     if ($usuarios->find($j)->cargo_id == 2) {
                         $usuario = $usuarios->find($j);
                         \App\Jobs\emailMaterialEsgotando::dispatch($usuario, $material);
+
+                        //Criação da Notificação no site
+                        $mensagem = $material->nome.' em estado critico.';
+                        $notificacao = new Notificacao();
+                        $notificacao->mensagem = $mensagem;
+                        $notificacao->usuario_id = $usuario->id;
+                        $notificacao->material_id = $material->id;
+                        $notificacao->visto = false;
+                        $notificacao->save();
                     }
                 }
             }

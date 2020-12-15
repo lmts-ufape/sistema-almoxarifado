@@ -29,6 +29,10 @@ Route::middleware('auth')->group(function(){
 
 Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 
+    Route::resource('notificacao', 'NotificacaoController');
+    Route::get('notificacao/{notificacao_id}', 'NotificacaoController@show')->name('notificacao.show');
+    Route::get('notificacoes', 'NotificacaoController@index')->name('notificacao.index');
+
     Route::resource('material', 'MaterialController')->except(['show']);
     Route::get('material/index_edit', 'MaterialController@indexEdit')->name('material.indexEdit');
 
