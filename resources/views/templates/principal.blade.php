@@ -66,7 +66,7 @@
 
                     @if(!empty(Auth::user()->id) and Auth::user()->cargo_id == 2)
                         @php
-                            $notificacoes = Illuminate\Support\Facades\DB::table('notificacaos')->where('usuario_id', '=', Auth::user()->id)->paginate(5);
+                            $notificacoes = Illuminate\Support\Facades\DB::table('notificacaos')->where('usuario_id', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(5);
                             $notNaoVistas = false;
                             for($i=0; $i < count($notificacoes); $i++){
                                 if($notificacoes[$i]->visto == false){
@@ -75,10 +75,11 @@
                                 }
                             }
                         @endphp
-                        <div class="btn-group" onselectstart="return false">
-                            <a id="dropdown_notificacao" name="dropdown_perfil" class="nav-link dropdown-toggle" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white" >
-                                <li class="nav-item ">
+                        <div class="dropdown" style="padding-right: 10px" onselectstart="return false">
+                            <a id="dropdown_notificacao" name="dropdown_perfil" class="nav-link menuSupEInf"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white">
+                                <li class="dropdown-toggle nav-item " style="padding: 0px 15px">
                                     @if($notNaoVistas == true)
                                         <b style="color: #ffbe0b">Notificações</b>
                                     @else
@@ -90,19 +91,21 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_notificacao">
                                 @foreach($notificacoes as $notificacao)
                                     @if($notificacao->visto == false)
-                                        <a class="dropdown-item text-danger"
-                                           href="{{route('notificacao.show', ['notificacao_id' => $notificacao->id])}}">{{$notificacao->mensagem}}</a>
-                                    <hr></hr>
-                                    @endif
 
+                                        <a class="dropdown-item text-danger"
+                                           href="{{route('notificacao.show', ['notificacao_id' => $notificacao->id])}}" style="text-align: center">{{$notificacao->mensagem}}</a>
+
+                                    @endif
+                                    <hr style="margin: 0px; padding: 0px">
                                 @endforeach
-                                <a class="dropdown-item" href="{{route('notificacao.index')}}">Ver todas as notificações</a>
+                                <a class="dropdown-item" href="{{route('notificacao.index')}}" style="text-align: center">Ver todas as
+                                    notificações.</a>
                             </div>
                         </div>
                     @endif
 
                     @if(!empty(Auth::user()->id))
-                        <div class="dropdown">
+                        <div class="dropdown" onselectstart="return false">
                             <a id="dropdown_perfil" name="dropdown_perfil" class="dropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <svg style="color: white" width="2.5em" height="2.5em" viewBox="0 0 16 16"
@@ -114,7 +117,7 @@
                                           d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
                                 </svg>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown_perfil">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_perfil">
                                 <a class="dropdown-item"
                                    href="{{ route('usuario.edit_perfil', ['id' => Auth::user()->id]) }}"> Editar
                                     Perfil </a>
@@ -328,12 +331,16 @@
                                 </div>
                             </div>
                             <div>
-                                <a type="button" class="selectedMenu" style="color: white; text-decoration: none; display: block" href="{{ route('relatorio.materiais') }}">
+                                <a type="button" class="selectedMenu"
+                                   style="color: white; text-decoration: none; display: block"
+                                   href="{{ route('relatorio.materiais') }}">
                                     <div class="menuEffect" id="headingSix" style="padding: 10px">
                                         <h6 class="mb-0">
-                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                                              </svg>
+                                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-archive"
+                                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                      d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                            </svg>
                                             Relatórios
                                         </h6>
                                     </div>
@@ -346,12 +353,16 @@
             @auth
                 @if(Auth::user()->cargo_id == 3 )
                     <div>
-                        <a type="button" class="selectedMenu" style="color: white; text-decoration: none; display: block" href="{{ route('relatorio.materiais') }}">
+                        <a type="button" class="selectedMenu"
+                           style="color: white; text-decoration: none; display: block"
+                           href="{{ route('relatorio.materiais') }}">
                             <div class="menuEffect" id="headingSix" style="padding: 10px">
                                 <h6 class="mb-0">
-                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                                      </svg>
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-archive"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
                                     Relatórios
                                 </h6>
                             </div>
