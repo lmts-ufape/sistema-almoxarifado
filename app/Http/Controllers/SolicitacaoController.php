@@ -261,7 +261,7 @@ class SolicitacaoController extends Controller
             $usuarios = Usuario::all();
 
             for ($i = 0; $i < count($materiaisID); $i++) {
-                DB::update('update estoques set quantidade = quantidade - ? where material_id = ?', [$quantAprovadas[$i], $materiaisID[$i]]);
+                DB::update('update estoques set quantidade = quantidade - ? where material_id = ? and deposito_id = 1', [$quantAprovadas[$i], $materiaisID[$i]]);
 
                 $material = $materiais->find($materiaisID[$i]);
                 $estoque = DB::table('estoques')->where('material_id', '=', $materiaisID[$i])->first();
@@ -297,12 +297,6 @@ class SolicitacaoController extends Controller
     public function cancelarSolicitacao(Request $request)
     {
         $itens = ItemSolicitacao::where('solicitacao_id', '=', $request->id)->where('quantidade_aprovada', '!=', NULL)->get();
-        $materiaisID = array_column($itens->toArray(), 'material_id');
-        $quantAprovadas = array_column($itens->toArray(), 'quantidade_aprovada');
-
-        for ($i = 0; $i < count($materiaisID); $i++) {
-            DB::update('update estoques set quantidade = quantidade + ? where material_id = ?', [$quantAprovadas[$i], $materiaisID[$i]]);
-        }
 
         DB::update(
             'update historico_statuses set status = ?, data_finalizado = now() where solicitacao_id = ?',
