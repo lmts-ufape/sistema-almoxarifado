@@ -27,7 +27,7 @@
 </head>
 <body style="background-color: #151631">
 
-@include('templates.navegacao')
+@include('templates.navbar')
 
 <div class="container-fluid">
     <div class="row">
