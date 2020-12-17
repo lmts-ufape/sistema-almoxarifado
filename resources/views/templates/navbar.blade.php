@@ -47,10 +47,11 @@
                                 }
                             }
                         @endphp
-                        <div class="btn-group" onselectstart="return false">
-                            <a id="dropdown_notificacao" name="dropdown_perfil" class="nav-link dropdown-toggle" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white" >
-                                <li class="nav-item ">
+                        <div class="dropdown" style="padding-right: 10px" onselectstart="return false">
+                            <a id="dropdown_notificacao" name="dropdown_perfil" class="nav-link menuSupEInf"
+                               role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white">
+                                <li class="dropdown-toggle nav-item " style="padding: 0px 15px">
                                     @if($notNaoVistas == true)
                                         <b style="color: #ffbe0b">Notificações</b>
                                     @else
@@ -62,13 +63,15 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_notificacao">
                                 @foreach($notificacoes as $notificacao)
                                     @if($notificacao->visto == false)
-                                        <a class="dropdown-item text-danger"
-                                           href="{{route('notificacao.show', ['notificacao_id' => $notificacao->id])}}">{{$notificacao->mensagem}}</a>
-                                    <hr></hr>
-                                    @endif
 
+                                        <a class="dropdown-item text-danger"
+                                           href="{{route('notificacao.show', ['notificacao_id' => $notificacao->id])}}" style="text-align: center">{{$notificacao->mensagem}}</a>
+
+                                    @endif
+                                    <hr style="margin: 0px; padding: 0px">
                                 @endforeach
-                                <a class="dropdown-item" href="{{route('notificacao.index')}}">Ver todas as notificações</a>
+                                <a class="dropdown-item" href="{{route('notificacao.index')}}" style="text-align: center">Ver todas as
+                                    notificações.</a>
                             </div>
                         </div>
                     @endif
