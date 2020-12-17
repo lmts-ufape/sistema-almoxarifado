@@ -14,7 +14,7 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="selectMaterial">Material</label>
-                <select id="selectMaterial" class="selectMaterial" class="form-control" style="width: 95%;" autofocus name="material_id">
+                <select id="selectMaterial" class="selectMaterial @error('material_id') is-invalid @enderror" class="form-control" style="width: 95%;" autofocus name="material_id">
                     <option></option>
                     @foreach($materiais as $material)
                         <option value="{{$material->id}}">{{$material->codigo}} - {{ $material->nome }}</option>
