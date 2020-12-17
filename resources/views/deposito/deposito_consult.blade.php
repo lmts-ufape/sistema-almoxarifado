@@ -55,7 +55,7 @@
                 "lengthMenu": "Mostrar _MENU_ registros por página",
                 "info": "Exibindo página _PAGE_ de _PAGES_",
                 "infoEmpty": "",
-                "zeroRecords": "Nenhum registro disponível",
+                "zeroRecords": "Selecione um depósito no campo direito superior",
                 "paginate": {
                     "previous": "Anterior",
                     "next": "Próximo"
