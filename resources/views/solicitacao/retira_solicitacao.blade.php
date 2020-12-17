@@ -15,6 +15,13 @@
         </div>
     @endif
 
+    @if(session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>{{session('error')}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
+
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
