@@ -49,6 +49,7 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
     Route::resource('deposito', 'DepositoController');
     Route::get('get_estoques/{deposito_id}', 'DepositoController@getEstoques')->name('deposito.getEstoque');
     Route::get('consultarDeposito', 'DepositoController@consultarDepositoView')->name('deposito.consultarDeposito');
+    Route::get('deposito/{id}/remover', 'DepositoController@destroy')->name('deposito.destroy');
 
     Route::resource('cargo', 'CargoController');
 
