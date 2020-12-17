@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMaterial;
 use App\material;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MaterialController extends Controller
 {
@@ -131,8 +132,13 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
-        material::destroy($id);
+        $material = material::all()->find($id);
+        $estoque = Estoque::all()->where('material_id', '=', $id)->first();
+        $estoque->delete();
+        $material->delete();
 
-        return redirect()->route('material.index');
+
+
+        return redirect()->route('material.indexEdit');
     }
 }

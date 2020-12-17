@@ -36,6 +36,7 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 
     Route::resource('material', 'MaterialController')->except(['show']);
     Route::get('material/index_edit', 'MaterialController@indexEdit')->name('material.indexEdit');
+    Route::get('material/{id}/remover', 'MaterialController@destroy')->name('material.destroy');
 
     Route::get('nova_entrada_form', 'MovimentoController@createEntrada')->name('movimento.entradaCreate');
     Route::get('nova_saida_form', 'MovimentoController@createSaida')->name('movimento.saidaCreate');
