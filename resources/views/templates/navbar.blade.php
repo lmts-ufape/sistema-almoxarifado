@@ -77,7 +77,7 @@
                     @endif
 
                     @if(!empty(Auth::user()->id))
-                        <div class="dropdown">
+                        <div class="dropdown" onselectstart="return false">
                             <a id="dropdown_perfil" name="dropdown_perfil" class="dropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <svg style="color: white" width="2.5em" height="2.5em" viewBox="0 0 16 16"
@@ -89,7 +89,7 @@
                                           d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
                                 </svg>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown_perfil">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_perfil">
                                 <a class="dropdown-item"
                                    href="{{ route('usuario.edit_perfil', ['id' => Auth::user()->id]) }}"> Editar
                                     Perfil </a>
