@@ -13,11 +13,11 @@
 
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="inputMaterial">Material</label>
-                <select id="inputMaterial" class="form-control @error('material_id') is-invalid @enderror" autofocus name="material_id">
-                    <option selected hidden>Escolher...</option>
+                <label for="selectMaterial">Material</label>
+                <select id="selectMaterial" class="selectMaterial" class="form-control" style="width: 95%;" autofocus name="material_id">
+                    <option></option>
                     @foreach($materiais as $material)
-                        <option value="{{$material->id}}"> {{ $material->id }}. {{ $material->nome }} </option>
+                        <option value="{{$material->id}}">{{$material->codigo}} - {{ $material->nome }}</option>
                     @endforeach
                 </select>
                 @error('material_id')
@@ -68,3 +68,7 @@
         <button class="btn btn-success" type="submit">Registrar Estoque</button>
     </form>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<script type="text/javascript" src="{{asset('js/solicitacoes/solicita_material.js')}}"></script>
