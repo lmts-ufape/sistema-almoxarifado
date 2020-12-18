@@ -10,7 +10,7 @@
     <table id="tableMateriais" class="table table-hover table-responsive-md">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
         <tr>
-            <th class="align-middle" scope="col"></th>
+            <th class="align-middle" scope="col" style="padding: 0px"></th>
             <th class="align-middle" scope="col">Imagem</th>
             <th class="align-middle" scope="col">Material</th>
             <th class="align-middle" scope="col">Descrição</th>

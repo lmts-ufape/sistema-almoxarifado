@@ -475,20 +475,11 @@
     </div>
 </div>
 
-<div id="appRodape" class="navbar-light" style="background-color:#3E3767; padding-bottom:1rem; color:white">
+<div id="appRodape" class="navbar-light" style="background-color:#3E3767; color:white">
     <div class="container">
-        <div class="row justify-content-center"
-             style="border-bottom: #949494 2px solid; padding: 10px; font-weight: bold">
-            <div class="col-sm-3" align="center">
-                <div class="row justify-content-center" style="margin-top:15px;">
-                    <div class="col-sm-12 styleItemMapaDoSite" style=" font-family:arial"><a href="{{ route('home') }}">Início</a>
-                        | <a href="{{ route('home') }}">Sobre</a></div>
-                </div>
-            </div>
-        </div>
         <div class="row justify-content-center">
             <div class="col-sm-6" align="center">
-                <div class="row justify-content-center" style="margin-top:10px; margin-top:1.4rem;">
+                <div class="row justify-content-center" style="margin-top:10px; margin-top:1rem;">
                     <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white">Desenvolvido
                         por
                     </div>
@@ -505,7 +496,7 @@
                 </div>
             </div>
             <div class="col-sm-4" align="center">
-                <div class="row justify-content-center" style="margin-top:10px; margin-top:1.4rem;">
+                <div class="row justify-content-center" style="margin-top:10px; margin-top:1rem;">
                     <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white">Apoio</div>
                     <div style="margin:3px;">
                         <a href="http://www.uag.ufrpe.br/" target="blank">

@@ -13,7 +13,7 @@ $(function () {
         },
         "order": [],
         "columnDefs": [{
-            "targets": [],
+            "targets": [0],
             "orderable": false
         }]
     });
