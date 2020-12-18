@@ -296,8 +296,6 @@ class SolicitacaoController extends Controller
 
     public function cancelarSolicitacao(Request $request)
     {
-        $itens = ItemSolicitacao::where('solicitacao_id', '=', $request->id)->where('quantidade_aprovada', '!=', NULL)->get();
-
         DB::update(
             'update historico_statuses set status = ?, data_finalizado = now() where solicitacao_id = ?',
             ['Cancelado', $request->id]

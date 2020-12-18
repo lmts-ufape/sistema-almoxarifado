@@ -35,25 +35,4 @@
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#tableUsuarios').DataTable({
-            searching: false,
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "info": "Exibindo página _PAGE_ de _PAGES_",
-                "infoEmpty": "Nenhum registro disponível",
-                "zeroRecords": "Nenhum registro disponível",
-                "paginate": {
-                    "previous": "Anterior",
-                    "next": "Próximo"
-                }
-            },
-            "order": [],
-            "columnDefs": [ {
-                "targets"  : [0],
-                "orderable": false
-            }]
-        });
-    });
-</script>
+<script type="text/javascript" src="{{asset('js/usuario/index.js')}}"></script>
