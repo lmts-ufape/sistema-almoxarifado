@@ -7,6 +7,13 @@
         <h2>EDITAR MATERIAL</h2>
     </div>
 
+    @if(session()->has('fail'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>{{session('fail')}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
