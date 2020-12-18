@@ -110,7 +110,7 @@ class MovimentoController extends Controller
         $itemMovimento->movimento_id = $movimentoSaida->id;
 
         $itemMovimento->save();
-        return redirect()->route('deposito.index');
+        return redirect()->route('deposito.consultarDeposito');
     }
     public function transferenciaStore(TransferenciaStoreRequest $requestInput)
     {

@@ -71,7 +71,7 @@ Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
 });
 
 Route::middleware(['auth', 'CheckCargoAdminDiretoria'])->group(function () {
-    Route::get('relatorio.materiais', 'RelatorioController@materiais')->name('relatorio.materiais');
+    Route::get('relatorio.materiais', 'RelatorioController@relatorio_escolha')->name('relatorio.materiais');
     Route::POST('relatorio.materiais', 'RelatorioController@gerarRelatorioMateriais')->name('relatorio.materiais');
 });
 

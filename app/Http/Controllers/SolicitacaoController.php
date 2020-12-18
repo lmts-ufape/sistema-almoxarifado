@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Estoque;
 use App\HistoricoStatus;
 use App\ItemSolicitacao;
 use App\material;
@@ -142,7 +143,6 @@ class SolicitacaoController extends Controller
         } else {
             for ($i = 0; $i < count($itensID); $i++) {
                 DB::update('update item_solicitacaos set quantidade_aprovada = ? where id = ?', [$quantMatAprovados[$i], $itensID[$i]]);
-                DB::update('update estoques set quantidade = quantidade - ? where material_id = ?', [$quantMatAprovados[$i], $materiaisID[$i]]);
             }
 
             DB::update(
@@ -241,50 +241,61 @@ class SolicitacaoController extends Controller
     {
         $itens = ItemSolicitacao::where('solicitacao_id', '=', $request->id)->where('quantidade_aprovada', '!=', NULL)->get();
         $materiaisID = array_column($itens->toArray(), 'material_id');
+        $materiaisNome = material::select('nome')->whereIn('id', $materiaisID)->get();
         $quantAprovadas = array_column($itens->toArray(), 'quantidade_aprovada');
 
-        $materiais = material::all();
-        $usuarios = Usuario::all();
-        for ($i = 0; $i < count($materiaisID); $i++) {
-            $material = $materiais->find($materiaisID[$i]);
-            $estoque = DB::table('estoques')->where('material_id', '=', $materiaisID[$i])->first();
-            if (($estoque->quantidade - $quantAprovadas[$i]) <= $material->quantidade_minima) {
-                for ($j = 1; $j < count($usuarios); $j++) {
-                    if ($usuarios->find($j)->cargo_id == 2) {
-                        $usuario = $usuarios->find($j);
-                        \App\Jobs\emailMaterialEsgotando::dispatch($usuario, $material);
+        $estoque = Estoque::wherein('material_id', $materiaisID)->where('deposito_id', 1)->orderBy('material_id', 'asc')->get();
 
-                        //Criação da Notificação no site
-                        $mensagem = $material->nome.' em estado critico.';
-                        $notificacao = new Notificacao();
-                        $notificacao->mensagem = $mensagem;
-                        $notificacao->usuario_id = $usuario->id;
-                        $notificacao->material_id = $material->id;
-                        $notificacao->visto = false;
-                        $notificacao->save();
-                    }
-                }
+        $checkQuant = true;
+        $errorMessage = "";
+
+        for ($i = 0; $i < count($materiaisID); $i++) {
+            if (($estoque[$i]->quantidade - $quantAprovadas[$i]) < 0) {
+                $checkQuant = false;
+                $errorMessage .= $materiaisNome[$i]->nome . " Disponível(" . $estoque[$i]->quantidade . ")\n";
             }
         }
 
-        DB::update(
-            'update historico_statuses set status = ?, data_finalizado = now() where solicitacao_id = ?',
-            ['Entregue', $request->id]
-        );
+        if ($checkQuant) {
+            $materiais = material::all();
+            $usuarios = Usuario::all();
 
-        session()->flash("success", "Solicitação entregue com sucesso!");
+            for ($i = 0; $i < count($materiaisID); $i++) {
+                DB::update('update estoques set quantidade = quantidade - ? where material_id = ? and deposito_id = 1', [$quantAprovadas[$i], $materiaisID[$i]]);
+
+                $material = $materiais->find($materiaisID[$i]);
+                $estoque = DB::table('estoques')->where('material_id', '=', $materiaisID[$i])->first();
+                if (($estoque->quantidade - $quantAprovadas[$i]) <= $material->quantidade_minima) {
+                    for ($j = 1; $j < count($usuarios); $j++) {
+                        if ($usuarios->find($j)->cargo_id == 2) {
+                            $usuario = $usuarios->find($j);
+                            \App\Jobs\emailMaterialEsgotando::dispatch($usuario, $material);
+
+                            $mensagem = $material->nome . ' em estado critico.';
+                            $notificacao = new Notificacao();
+                            $notificacao->mensagem = $mensagem;
+                            $notificacao->usuario_id = $usuario->id;
+                            $notificacao->material_id = $material->id;
+                            $notificacao->visto = false;
+                            $notificacao->save();
+                        }
+                    }
+                }
+            }
+
+            DB::update(
+                'update historico_statuses set status = ?, data_finalizado = now() where solicitacao_id = ?',
+                ['Entregue', $request->id]
+            );
+
+            return session()->flash("success", "Solicitação entregue com sucesso!");
+        } else {
+            return session()->flash("error", $errorMessage .= "\n\rFaça transferências para o depósito de atendimento");
+        }
     }
 
     public function cancelarSolicitacao(Request $request)
     {
-        $itens = ItemSolicitacao::where('solicitacao_id', '=', $request->id)->where('quantidade_aprovada', '!=', NULL)->get();
-        $materiaisID = array_column($itens->toArray(), 'material_id');
-        $quantAprovadas = array_column($itens->toArray(), 'quantidade_aprovada');
-
-        for ($i = 0; $i < count($materiaisID); $i++) {
-            DB::update('update estoques set quantidade = quantidade + ? where material_id = ?', [$quantAprovadas[$i], $materiaisID[$i]]);
-        }
-
         DB::update(
             'update historico_statuses set status = ?, data_finalizado = now() where solicitacao_id = ?',
             ['Cancelado', $request->id]
@@ -307,7 +318,7 @@ class SolicitacaoController extends Controller
         }
 
         $consulta = DB::select('select item.quantidade_solicitada, item.material_id, mat.nome, mat.descricao, item.quantidade_aprovada, item.id, item.quantidade_solicitada, est.quantidade
-            from item_solicitacaos item, materials mat, estoques est where item.solicitacao_id = ? and mat.id = item.material_id and est.material_id = item.material_id', [$id]);
+            from item_solicitacaos item, materials mat, estoques est where item.solicitacao_id = ? and mat.id = item.material_id and est.material_id = item.material_id and est.deposito_id = 1', [$id]);
 
         session(['itemSolicitacoes' => $consulta]);
 

@@ -13,7 +13,7 @@
         <b>{{\App\material::all()->find($notificacao->material_id)->nome}}</b>, de codigo
         <b>{{\App\material::all()->find($notificacao->material_id)->codigo}}</b> acaba de atingir um estado critico!</p>
     <p style="text-align: center; font-size: medium"><b>Quantidade em Estoque: </b>{{$estoque->quantidade}} <br>
-        <b>Quantidade em Minima: </b>{{\App\material::all()->find($notificacao->material_id)->quantidade_minima}}</p>
+        <b>Quantidade Minima: </b>{{\App\material::all()->find($notificacao->material_id)->quantidade_minima}}</p>
     <center>{{date_format($notificacao->created_at,"d/m/Y H:i:s")}}</center>
 @endsection
 

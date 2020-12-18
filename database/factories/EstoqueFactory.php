@@ -10,7 +10,7 @@ $factory->define(Estoque::class, function (Faker $faker) {
     $depositos = DB::select("select * from depositos");
     return [
         'material_id' => 1,
-        'deposito_id' => rand(1, count($depositos)),
+        'deposito_id' => 1,
         'quantidade' => rand(50, 100),
     ];
 });

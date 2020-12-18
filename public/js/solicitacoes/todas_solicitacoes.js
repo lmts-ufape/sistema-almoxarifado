@@ -58,12 +58,6 @@ $(function () {
         }]
     });
 
-    $('#tableSolicitacoes').on('page.dt', function () {
-        $('html, body').animate({
-            scrollTop: $(".dataTables_wrapper").offset().top
-        }, 'fast');
-    });
-
     $('#tableSolicitacoes tbody').on('click', 'td.expandeOption', function (e) {
         e.preventDefault();
         e.stopPropagation();
