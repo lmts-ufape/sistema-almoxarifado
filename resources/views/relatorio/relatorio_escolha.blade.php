@@ -8,7 +8,7 @@
     </div>
 
     <div>
-        <form method="POST" action="{{ route('relatorio.materiais') }}" enctype="multipart/form-data">
+        <form method="POST" target="_blank" action="{{ route('relatorio.materiais') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group row">
                 <label for="data_inicio" class="col-md-2 col-form-label text-md-right">{{ __('Data de início:') }}</label>
@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-success">Gerar Relatório</button>
+            <button id="gera_Relatorio" type="submit" class="btn btn-success">Gerar Relatório</button>
         </form>
     </div>
 @endsection
@@ -63,6 +63,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $(function () {
-        document.getElementById('data_fim').max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];   
+        document.getElementById('data_fim').max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
     });
 </script>
