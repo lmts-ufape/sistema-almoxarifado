@@ -68,7 +68,7 @@
         </tbody>
     </table>
 
-    <form method="POST" id="formSolicitacao" name="formSolicitacao" action="{{ route('aprovar.solicitacao') }}">
+    <form method="POST" id="formSolicitacao" name="formSolicitacao" action="{{ route('analise.solicitacao') }}">
         @csrf
         <div class="modal fade" id="detalhesSolicitacao" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">

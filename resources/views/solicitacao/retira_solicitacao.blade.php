@@ -17,19 +17,25 @@
 
     @if(session()->has('error'))
         <div class="alert alert-danger alert-dismissible fade show">
-            <strong>{{session('error')}}</strong>
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <ul>
+                @foreach(session('error') as $erro)
+                        <li>{{ $erro }}</li>
+                @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
 
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
-                <th scope="col">Requerente</th>
-                <th scope="col">Material</th>
-                <th scope="col">Situação</th>
-                <th scope="col" style="text-align: center">Data</th>
-                <th scope="col" style="text-align: center">Cancelar ou Entregar</th>
+                <th scope="col" class="align-middle">Requerente</th>
+                <th scope="col" class="align-middle">Material</th>
+                <th scope="col" class="align-middle">Situação</th>
+                <th scope="col" class="align-middle" style="text-align: center">Data</th>
+                <th scope="col" class="align-middle" style="text-align: center">Cancelar ou Entregar</th>
             </tr>
         </thead>
         <tbody>
