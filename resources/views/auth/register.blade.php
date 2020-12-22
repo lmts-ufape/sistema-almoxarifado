@@ -139,17 +139,12 @@
                         <label for="setor" class="col-md-4 col-form-label text-md-right"> Setor </label>
 
                         <div class="col-md-6">
-                            <select id="setor" class="form-control @error('setor') is-invalid @enderror" name="setor">
+                            <select id="setor" class="form-control" name="setor">
                                 <option data-value="Administrativo">Administrativo</option>
                                 <option data-value="Academico">Academico</option>
                                 <option data-value="Administrativo/Academico">Administrativo/Academico</option>
                             </select>
                         </div>
-                        @error('setor')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
                     </div>
 
                     <div class="form-group row">

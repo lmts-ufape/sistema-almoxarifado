@@ -83,6 +83,18 @@
                     @enderror
                 </div>
 
+                <div class="form-group row">
+                    <label for="setor" class="col-md-4 col-form-label text-md-right"> Setor </label>
+
+                    <div class="col-md-6">
+                        <select id="setor" class="form-control" name="setor">
+                            <option data-value="Administrativo">Administrativo</option>
+                            <option data-value="Academico">Academico</option>
+                            <option data-value="Administrativo/Academico">Administrativo/Academico</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="cargo"> Perfil </label>
                     <select class="custom-select @error('cargo') is-invalid @enderror" autofocus name="cargo" id="cargo">

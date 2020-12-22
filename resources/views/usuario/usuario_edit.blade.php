@@ -74,6 +74,25 @@
                     @enderror
                 </div>
 
+                <div class="form-group col-md-2">
+                    <label for="setor"> Setor </label>
+                    <select id="setor" class="form-control" name="setor">
+                        @if($usuario->setor == 'Administrativo')
+                            <option selected value="Administrativo">Administrativo</option>
+                            <option value="Academico">Academico</option>
+                            <option value="Administrativo/Academico">Administrativo/Academico</option>
+                        @elseif($usuario->setor == 'Academico')
+                            <option value="Administrativo">Administrativo</option>
+                            <option selected value="Academico">Academico</option>
+                            <option value="Administrativo/Academico">Administrativo/Academico</option>
+                        @else
+                            <option value="Administrativo">Administrativo</option>
+                            <option value="Academico">Academico</option>
+                            <option selected value="Administrativo/Academico">Administrativo/Academico</option>
+                        @endif
+                    </select>
+                </div>
+
                 @if(Auth::user()->cargo_id == 2)
                 <div class="form-group">
                     <label for="cargo"> Perfil </label>

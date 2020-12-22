@@ -119,6 +119,7 @@ class UsuarioController extends Controller
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
             'numTel' => $request['numTel'],
+            'setor' => $request['setor']
         ];
 
         $usuario->fill($data)->Update();
@@ -182,6 +183,7 @@ class UsuarioController extends Controller
             'cargo_id' => $request['cargo'],
             'numTel' => $request['numTel'],
             'senha' => Hash::make($request['password']),
+            'setor' => $request['setor']
         ];
 
         $usuario->fill($data)->Update();
