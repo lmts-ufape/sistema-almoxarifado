@@ -69,9 +69,15 @@ class DepositoController extends Controller
 
     public function destroy($id)
     {
+        $estoques = Estoque::all()->where('deposito_id', '=', $id)->first();
+        if (empty($estoques)) {
+            $deposito = Deposito::all()->find($id);
+            $deposito->delete();
+            return redirect(route('deposito.index'));
+        } else{
+            return redirect()->back()->with('fail', 'Deposito não vazio, não é possivel remover!');
+        }
 
-        Deposito::destroy($id);
 
-        return redirect(route('deposito.index'));
     }
 }

@@ -65,7 +65,7 @@ class SolicitacaoController extends Controller
         }
     }
 
-    public function aprovarSolicitacao(Request $request)
+    public function checkAnaliseSolicitacao(Request $request)
     {
         $itemSolicitacaos = session('itemSolicitacoes');
 
@@ -111,12 +111,15 @@ class SolicitacaoController extends Controller
             return redirect()->back()->with('inputNULL', 'Informe os valores das quantidades aprovadas!');
         }
 
+        //Verifica todos os materiais da solicitaçõa. Caso todos os campos estejam em branco ou com valor negativo retorna um erro.
         for ($i = 0; $i < count($itemSolicitacaos); $i++) {
             if (empty($quantMateriais[$i])) {
                 $checkInputVazio++;
             } else if (!empty($quantMateriais[$i]) && $quantMateriais[$i] < 0) {
                 return redirect()->back()->with('inputNULL', 'Informe valores positivos para as quantidades aprovadas!');
             } else {
+                //Cada material é adicionado ao auxMateriaisRepetidos. 
+                //Caso o material já esteja inserido nesse array a quantidade do material repetido é adicionada ao que está no array.
                 if (array_key_exists($itemSolicitacaos[$i]->material_id, $auxMateriaisRepetidos)) {
                     $auxMateriaisRepetidos[$itemSolicitacaos[$i]->material_id] += $quantMateriais[$i];
                 } else if (!array_key_exists($itemSolicitacaos[$i]->material_id, $auxMateriaisRepetidos)) {
@@ -237,9 +240,18 @@ class SolicitacaoController extends Controller
         ]);
     }
 
-    public function despacharSolicitacao(Request $request)
+    public function checkEntregarSolicitacao(Request $request)
     {
-        $itens = ItemSolicitacao::where('solicitacao_id', '=', $request->id)->where('quantidade_aprovada', '!=', NULL)->get();
+        if($request->action == "entregar"){
+            return $this->entregarSolicitacao($request->id);
+        } else if($request->action == "cancelarEntrega"){
+            return $this->cancelarEntregaSolicitacao($request->id);
+        }
+    }
+
+    public function entregarSolicitacao($id)
+    {
+        $itens = ItemSolicitacao::where('solicitacao_id', '=', $id)->where('quantidade_aprovada', '!=', NULL)->get();
         $materiaisID = array_column($itens->toArray(), 'material_id');
         $materiaisNome = material::select('nome')->whereIn('id', $materiaisID)->get();
         $quantAprovadas = array_column($itens->toArray(), 'quantidade_aprovada');
@@ -247,12 +259,13 @@ class SolicitacaoController extends Controller
         $estoque = Estoque::wherein('material_id', $materiaisID)->where('deposito_id', 1)->orderBy('material_id', 'asc')->get();
 
         $checkQuant = true;
-        $errorMessage = "";
+        $errorMessage = [];
 
         for ($i = 0; $i < count($materiaisID); $i++) {
             if (($estoque[$i]->quantidade - $quantAprovadas[$i]) < 0) {
                 $checkQuant = false;
-                $errorMessage .= $materiaisNome[$i]->nome . " Disponível(" . $estoque[$i]->quantidade . ")\n";
+                $message = $materiaisNome[$i]->nome . " Disponível(" . $estoque[$i]->quantidade . ")";
+                array_push($errorMessage, $message);
             }
         }
 
@@ -285,23 +298,24 @@ class SolicitacaoController extends Controller
 
             DB::update(
                 'update historico_statuses set status = ?, data_finalizado = now() where solicitacao_id = ?',
-                ['Entregue', $request->id]
+                ['Entregue', $id]
             );
 
             return session()->flash("success", "Solicitação entregue com sucesso!");
         } else {
-            return session()->flash("error", $errorMessage .= "\n\rFaça transferências para o depósito de atendimento");
+            array_push($errorMessage, "Faça transferências para o depósito de atendimento");
+            return session()->flash("error", $errorMessage);
         }
     }
 
-    public function cancelarSolicitacao(Request $request)
+    public function cancelarEntregaSolicitacao($id)
     {
         DB::update(
             'update historico_statuses set status = ?, data_finalizado = now() where solicitacao_id = ?',
-            ['Cancelado', $request->id]
+            ['Cancelado', $id]
         );
 
-        session()->flash("success", "Solicitação cancelada com sucesso!");
+        return session()->flash("success", "Solicitação cancelada com sucesso!");
     }
 
     public function getItemSolicitacao($id)

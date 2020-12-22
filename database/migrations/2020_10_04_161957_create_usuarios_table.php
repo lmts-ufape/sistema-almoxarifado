@@ -24,6 +24,7 @@ class CreateUsuariosTable extends Migration
             $table->foreignId('cargo_id');
             $table->string('email')->unique();
             $table->string('senha');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
 

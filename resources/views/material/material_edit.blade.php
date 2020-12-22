@@ -7,6 +7,13 @@
         <h2>EDITAR MATERIAL</h2>
     </div>
 
+    @if(session()->has('fail'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>{{session('fail')}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
@@ -67,7 +74,7 @@
                 <Button class="btn btn-secondary" type="button" onClick="if(confirm('Tem certeza que deseja Cancelar a alteração do Material?')) location.href='../'"> Cancelar </Button>
             </div>
             <div class="col-sm-1">
-                <Button type="button" class="btn btn-danger"> Remover </Button>
+                <Button type="button" class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja Remover o Material?')) location.href='{{route('material.destroy', $material->id)}}'"> Remover </Button>
             </div>
             <div class="col-sm-1">
                 <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Material?')"> Atualizar </Button>

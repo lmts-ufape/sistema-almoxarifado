@@ -70,15 +70,18 @@ class UsuarioController extends Controller
     }
 
 
-    public function edit_perfil($id) {
+    public function edit_perfil($id)
+    {
         return view('usuario/usuario_edit_perfil', ['usuario' => Usuario::find($id), 'cargos' => Cargo::all()]);
     }
 
-    public function edit_senha($id) {
+    public function edit_senha($id)
+    {
         return view('usuario/usuario_edit_senha', ['usuario' => Usuario::find($id)]);
     }
 
-    public function update_perfil(Request $request, $id) {
+    public function update_perfil(Request $request, $id)
+    {
 
         $usuario = Usuario::find($id);
 
@@ -86,7 +89,7 @@ class UsuarioController extends Controller
         $messages = array_slice(Usuario::$messages, 0, 23);
 
         $rules['email'] = [
-            'required','email','min:5','max:100',
+            'required', 'email', 'min:5', 'max:100',
             Rule::unique('usuarios')->ignore($usuario->id),
         ];
 
@@ -122,7 +125,8 @@ class UsuarioController extends Controller
         return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
     }
 
-    public function update_senha(Request $request, $id) {
+    public function update_senha(Request $request, $id)
+    {
 
         $usuario = Usuario::find($id);
 
@@ -186,7 +190,9 @@ class UsuarioController extends Controller
 
     public function destroy($id)
     {
-        Usuario::destroy($id);
+        $usuario = Usuario::all()->find($id);
+        $usuario->delete();
+
         return redirect(route('usuario.index'));
     }
 
