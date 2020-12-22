@@ -11,6 +11,13 @@
         <h2>EDITAR DEPÓSITO</h2>
     </div>
 
+    @if(session()->has('fail'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>{{session('fail')}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
+
     <form action="{{ route('deposito.update', $deposito->id) }}" method="POST">
 
         @csrf
@@ -42,7 +49,7 @@
                 <Button class="btn btn-secondary" type="button" onClick="if(confirm('Tem certeza que deseja cancelar a Alteração do Deposito?'))location.href='../'"> Cancelar </Button>
             </div>
             <div class="col-sm-1">
-                <Button type="button" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja Remover o Deposito?')"> Remover </Button>
+                <Button type="button" class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja Remover o Deposito?')) location.href='{{route('deposito.destroy', $deposito->id)}}'"> Remover </Button>
             </div>
             <div class="col-sm-1">
                 <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Alterar o Deposito?')"> Atualizar </Button>

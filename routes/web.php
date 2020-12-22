@@ -9,6 +9,7 @@ Route::middleware('auth')->group(function(){
     Route::resource('usuario', 'UsuarioController');
     Route::get('usuario/{id}/edit_perfil', 'UsuarioController@edit_perfil')->name('usuario.edit_perfil');
     Route::get('usuario/{id}/edit_senha', 'UsuarioController@edit_senha')->name('usuario.edit_senha');
+    Route::get('usuario/{id}/remover', 'UsuarioController@destroy')->name('usuario.destroy');
     Route::put('usuario/update_perfil/{id}', 'UsuarioController@update_perfil')->name('usuario.update_perfil');
     Route::put('usuario/update_senha/{id}', 'UsuarioController@update_senha')->name('usuario.update_senha');
 
@@ -35,6 +36,7 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 
     Route::resource('material', 'MaterialController')->except(['show']);
     Route::get('material/index_edit', 'MaterialController@indexEdit')->name('material.indexEdit');
+    Route::get('material/{id}/remover', 'MaterialController@destroy')->name('material.destroy');
 
     Route::get('nova_entrada_form', 'MovimentoController@createEntrada')->name('movimento.entradaCreate');
     Route::get('nova_saida_form', 'MovimentoController@createSaida')->name('movimento.saidaCreate');
@@ -47,6 +49,7 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
     Route::resource('deposito', 'DepositoController');
     Route::get('get_estoques/{deposito_id}', 'DepositoController@getEstoques')->name('deposito.getEstoque');
     Route::get('consultarDeposito', 'DepositoController@consultarDepositoView')->name('deposito.consultarDeposito');
+    Route::get('deposito/{id}/remover', 'DepositoController@destroy')->name('deposito.destroy');
 
     Route::resource('cargo', 'CargoController');
 

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMaterial;
 use App\material;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MaterialController extends Controller
 {
@@ -23,7 +24,8 @@ class MaterialController extends Controller
         return view('material.material_consult', ['materials' => $materials, 'estoques' => $estoques]);
     }
 
-    public function indexEdit(){
+    public function indexEdit()
+    {
 
         $materials = material::all()->sortByDesc('id');
         return view('material.material_index_edit', ['materials' => $materials]);
@@ -42,14 +44,14 @@ class MaterialController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreMaterial $request)
     {
         $validatedData = $request->validated();
 
-        if( ($request->hasFile('imagem') && $request->file('imagem')->isValid()) ) {
+        if (($request->hasFile('imagem') && $request->file('imagem')->isValid())) {
 
             $imgExtension = $request->imagem->extension();
             $imgName = Img::nameNewImage(material::all(), $request->nome, $imgExtension);
@@ -80,7 +82,7 @@ class MaterialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\material  $material
+     * @param \App\material $material
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -91,8 +93,8 @@ class MaterialController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\material  $material
+     * @param \Illuminate\Http\Request $request
+     * @param \App\material $material
      * @return \Illuminate\Http\Response
      */
     public function update(StoreMaterial $request, $id)
@@ -100,7 +102,7 @@ class MaterialController extends Controller
         $material = material::findOrFail($id);
         $validatedData = $request->validated();
 
-        if( ($request->hasFile('imagem') && $request->file('imagem')->isValid()) ) {
+        if (($request->hasFile('imagem') && $request->file('imagem')->isValid())) {
 
             $imgExtension = $request->imagem->extension();
             $imgName = Img::nameNewImage(material::all(), $request->nome, $imgExtension);
@@ -126,13 +128,23 @@ class MaterialController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\material  $material
+     * @param \App\material $material
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        material::destroy($id);
+        $material = material::all()->find($id);
+        $estoque = Estoque::all()->where('material_id', '=', $id)->first();
+        if (empty($estoque)) {
+            $material->forceDelete();
+            return redirect()->route('material.indexEdit');
+        } elseif ($estoque->quantidade == 0) {
+            $estoque->delete();
+            $material->delete();
+            return redirect()->route('material.indexEdit');
+        } else {
+            return redirect()->back()->with('fail', 'Esse material não pode ser removido, ainda há material em estoque!');
+        }
 
-        return redirect()->route('material.index');
     }
 }
