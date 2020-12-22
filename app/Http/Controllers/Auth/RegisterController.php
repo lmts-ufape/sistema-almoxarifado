@@ -37,7 +37,8 @@ class RegisterController extends Controller
             'data_nascimento' => $data['data_nascimento'],
             'matricula' => $data['matricula'],
             'senha' => Hash::make($data['password']),
-            'cargo_id' => 1
+            'cargo_id' => 1,
+            'setor' => $data['setor']
         ]);
     }
 }
