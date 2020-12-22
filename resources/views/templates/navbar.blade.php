@@ -66,9 +66,9 @@
 
                                         <a class="dropdown-item text-danger"
                                            href="{{route('notificacao.show', ['notificacao_id' => $notificacao->id])}}" style="text-align: center">{{$notificacao->mensagem}}</a>
-
+                                        <hr style="margin: 0px; padding: 0px">
                                     @endif
-                                    <hr style="margin: 0px; padding: 0px">
+
                                 @endforeach
                                 <a class="dropdown-item" href="{{route('notificacao.index')}}" style="text-align: center">Ver todas as
                                     notificações.</a>
