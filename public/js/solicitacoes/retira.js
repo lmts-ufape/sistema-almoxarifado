@@ -113,21 +113,34 @@ $(function () {
         $("#modalBody").hide();
     });
 
+    $('#tableSolicitacoes').on('page.dt', function () {
+        $('html, body').animate({
+            scrollTop: $(".dataTables_wrapper").offset().top
+        }, 'fast');
+    });
+
+    $('#tableSolicitacoes').DataTable().columns().iterator('column', function (ctx, idx) {
+        $($('#tableSolicitacoes').DataTable().column(idx).header()).append('<span class="sort-icon"/>');
+    });
+
     $('#tableSolicitacoes tbody').on('click', '.entregaSolicitacao', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
-        let escolha = confirm("Tem certeza que deseja aprovar a Entrega?");
+        let escolha = confirm("Tem certeza que deseja aprovar a entrega?");
 
         if (escolha) {
             var id = $(this).data('id');
 
             $.ajax({
                 type: 'POST',
-                url: "entrega_solicitacao",
-                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id },
-                success: function (data) {
+                url: "retira_solicitacao",
+                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id, action: "entregar"},
+                success: function () {
                     location.reload();
+                },
+                error: function(){
+                    alert("Algo deu errado. Está ação não pode ser completada. Tente recarregar a página");
                 }
             });
         } else {
@@ -146,24 +159,17 @@ $(function () {
 
             $.ajax({
                 type: 'POST',
-                url: "cancela_entrega_solicitacao",
-                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id },
-                success: function (data) {
+                url: "retira_solicitacao",
+                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id, action: "cancelarEntrega" },
+                success: function () {
                     location.reload();
+                },
+                error: function(){
+                    alert("Algo deu errado. Está ação não pode ser completada. Tente recarregar a página");
                 }
             });
         } else {
             return false;
         }
-    });
-
-    $('#tableSolicitacoes').on('page.dt', function () {
-        $('html, body').animate({
-            scrollTop: $(".dataTables_wrapper").offset().top
-        }, 'fast');
-    });
-
-    $('#tableSolicitacoes').DataTable().columns().iterator('column', function (ctx, idx) {
-        $($('#tableSolicitacoes').DataTable().column(idx).header()).append('<span class="sort-icon"/>');
     });
 });
