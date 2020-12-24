@@ -123,7 +123,7 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
                 <label for="email"> E-mail </label>
                 <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $usuario->email) }}" autocomplete="email" autofocus type="email" name="email" id="email" placeHolder="exemplodeemail@upe.br">
                 @error('email')
@@ -133,34 +133,14 @@
                 @enderror
             </div>
 
-            <!-- <div class="form-group">
-                <label for="senha"> Senha contendo ao menos 8 dígitos </label>
-                <input class="form-control @error('senha') is-invalid @enderror" autofocus autocomplete="new-password" type="password" name="password" id="password" placeHolder="">
-                @error('senha')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="confimar_senha"> Confirmar Senha </label>
-                <input class="form-control @error('confirmar_senha') is-invalid @enderror" autocomplete="new-password" autofocus type="password" name="password_confirmation" id="password_confirmation" placeHolder="">
-                @error('confirmar_senha')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div> -->
-
             <div class="form-row">
-                <div class="col-sm-1">
+                <div class="col-sm-auto">
                     <Button class="btn btn-secondary" type="button" onClick="if(confirm('Tem certeza que deseja Cancelar a alteração do Usuário?')) location.href='../'"> Cancelar </Button>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-auto">
                     <Button type="button" class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja Remover o Usuário?')) location.href='{{route('usuario.destroy', $usuario->id)}}'"> Remover </Button>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-auto">
                     <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Usuário?')" disabled id="atualizar"> Atualizar </Button>
                 </div>
             </div>
