@@ -1,6 +1,8 @@
 @extends('templates.principal')
 
-@section('title') Editar Material @endsection
+@section('title')
+    Editar Material
+@endsection
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
@@ -70,13 +72,13 @@
         </div>
 
         <div class="form-row">
-            <div class="col-sm-1">
+            <div class="col-sm-auto">
                 <Button class="btn btn-secondary" type="button" onClick="if(confirm('Tem certeza que deseja Cancelar a alteração do Material?')) location.href='../'"> Cancelar </Button>
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-auto">
                 <Button type="button" class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja Remover o Material?')) location.href='{{route('material.destroy', $material->id)}}'"> Remover </Button>
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-auto">
                 <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Material?')"> Atualizar </Button>
             </div>
         </div>
