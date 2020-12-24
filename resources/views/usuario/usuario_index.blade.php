@@ -34,7 +34,7 @@
                 {{ $usuario->nome }}</th>
                 <td>{{ $usuario->email }}</td>
                 <td>{{ $usuario->getCargo($usuario->cargo_id)->nome }}</td>
-                <td>
+                <td style="text-align: center">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown" type="button" id="dropdownMenuButton"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
