@@ -1,6 +1,8 @@
 @extends('templates.principal')
 
-@section('title') Editar Material @endsection
+@section('title')
+    Editar Material
+@endsection
 
 @section('content')
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">

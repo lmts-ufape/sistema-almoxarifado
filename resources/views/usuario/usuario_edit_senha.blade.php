@@ -7,7 +7,7 @@
 @section('content')
 
     <div style="border-bottom: #949494 2px solid; padding: 5px; margin-bottom: 10px">
-        <h2>Editar Senha</h2>
+        <h2>EDITAR SENHA</h2>
     </div>
 
     @if(session()->has('success'))
