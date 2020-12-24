@@ -121,7 +121,7 @@ class MaterialController extends Controller
 
         $material->fill($data);
         $material->save();
-        return redirect()->route('material.indexEdit');
+        return redirect()->route('material.indexEdit')->with('sucess', 'Material atualizado com sucesso!');
 
     }
 
@@ -137,11 +137,11 @@ class MaterialController extends Controller
         $estoque = Estoque::all()->where('material_id', '=', $id)->first();
         if (empty($estoque)) {
             $material->forceDelete();
-            return redirect()->route('material.indexEdit');
+            return redirect()->route('material.indexEdit')->with('sucess', 'Material removido com sucesso!');
         } elseif ($estoque->quantidade == 0) {
             $estoque->delete();
             $material->delete();
-            return redirect()->route('material.indexEdit');
+            return redirect()->route('material.indexEdit')->with('sucess', 'Material removido com sucesso!');
         } else {
             return redirect()->back()->with('fail', 'Esse material não pode ser removido, ainda há material em estoque!');
         }
