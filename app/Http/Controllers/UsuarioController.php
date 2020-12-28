@@ -188,7 +188,7 @@ class UsuarioController extends Controller
 
         $usuario->fill($data)->Update();
 
-        return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
+        return redirect()->back()->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy($id)
@@ -196,7 +196,7 @@ class UsuarioController extends Controller
         $usuario = Usuario::all()->find($id);
         $usuario->delete();
 
-        return redirect(route('usuario.index'));
+        return redirect(route('usuario.index'))->with('sucess', 'Usuário removido com sucesso!');
     }
 
 }
