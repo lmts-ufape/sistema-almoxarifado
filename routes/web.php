@@ -78,7 +78,6 @@ Route::middleware(['auth', 'CheckCargoAdminDiretoria'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-
     Route::get('observacao_solicitacao/{id}', 'SolicitacaoController@getObservacaoSolicitacao')->name('observacao.solicitacao');
 });
 
