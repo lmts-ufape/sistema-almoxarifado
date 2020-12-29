@@ -19,10 +19,8 @@
     @endif
 
     <form action="{{ route('deposito.update', $deposito->id) }}" method="POST">
-
         @csrf
         @method('PUT')
-
         <div class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             <div class="form-group col-md-3">
                 <label for="nome">Nome do depósito</label>
@@ -53,10 +51,4 @@
             </div>
         </div>
     </form>
-    {{-- <form action="{{ route('deposito.destroy', $deposito->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <Button class="btn btn-danger" type="submit"> Remover </Button>
-    </form> --}}
-
 @endsection

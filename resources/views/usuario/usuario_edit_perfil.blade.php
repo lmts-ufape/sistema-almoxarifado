@@ -22,7 +22,6 @@
         @method('PUT')
 
         <div class="form-group">
-
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control @error('nome') is-invalid @enderror" type="text" name="nome" id="nome"
@@ -177,6 +176,6 @@
         </div>
     </form>
 @endsection
-<script type="text/javascript" src="{{asset('js/usuario/register.js')}}"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="{{asset('js/usuario/edit.js')}}"></script>

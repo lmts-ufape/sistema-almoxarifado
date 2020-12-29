@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Deposito;
-
 use App\Estoque;
 use App\Http\Requests\DepositoStore;
 use Illuminate\Support\Facades\DB;
@@ -77,7 +75,5 @@ class DepositoController extends Controller
         } else{
             return redirect()->back()->with('fail', 'Deposito não vazio, não é possivel remover!');
         }
-
-
     }
 }

@@ -55,7 +55,7 @@ $(function () {
         },
         "order": [],
         "columnDefs": [{
-            "targets": [2, 4],
+            "targets": [2],
             "orderable": false
         }]
     });
@@ -123,7 +123,7 @@ $(function () {
         $($('#tableSolicitacoes').DataTable().column(idx).header()).append('<span class="sort-icon"/>');
     });
 
-    $('#tableSolicitacoes tbody').on('click', '.entregaSolicitacao', function (e) {
+    $('#tableSolicitacoes tbody').on('click', '.aprovaEntrega', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -135,7 +135,7 @@ $(function () {
             $.ajax({
                 type: 'POST',
                 url: "retira_solicitacao",
-                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id, action: "entregar"},
+                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id, action: "aprovaEntrega"},
                 success: function () {
                     location.reload();
                 },
@@ -148,7 +148,7 @@ $(function () {
         }
     });
 
-    $('#tableSolicitacoes tbody').on('click', '.cancelaEntregaSolicitacao', function (e) {
+    $('#tableSolicitacoes tbody').on('click', '.cancelaEntrega', function (e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -160,7 +160,7 @@ $(function () {
             $.ajax({
                 type: 'POST',
                 url: "retira_solicitacao",
-                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id, action: "cancelarEntrega" },
+                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id, action: "cancelaEntrega" },
                 success: function () {
                     location.reload();
                 },

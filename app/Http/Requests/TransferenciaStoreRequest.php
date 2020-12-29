@@ -26,7 +26,6 @@ class TransferenciaStoreRequest extends FormRequest
         return [
             'material_id' => 'bail|required|numeric',
             'quantidade' => 'required|integer|min:0',
-            // 'quantidade' => 'required',
             'deposito_id_origem' => 'bail|required|numeric',
             'deposito_id_destino' => 'bail|required|numeric',
             'descricao' => 'required',

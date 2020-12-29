@@ -7,7 +7,7 @@ use App\Estoque;
 use App\Http\Requests\MovimentoStoreRequest;
 use App\Http\Requests\TransferenciaStoreRequest;
 use App\itemMovimento;
-use App\material;
+use App\Material;
 use App\Movimento;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +16,7 @@ class MovimentoController extends Controller
 
     public function createEntrada()
     {
-        $materiais = material::all();
+        $materiais = Material::all();
         $depositos = Deposito::all();
 
         return view('movimento.entrada', ['materiais' => $materiais, 'depositos' => $depositos]);
@@ -24,7 +24,7 @@ class MovimentoController extends Controller
 
     public function createSaida()
     {
-        $materiais = material::all();
+        $materiais = Material::all();
         $depositos = Deposito::all();
 
         return view('movimento.saida', ['materiais' => $materiais, 'depositos' => $depositos]);
@@ -32,7 +32,7 @@ class MovimentoController extends Controller
 
     public function createTransferencia()
     {
-        $materiais = material::all();
+        $materiais = Material::all();
         $depositos = Deposito::all();
 
         return view('movimento.transferencia', ['materiais' => $materiais, 'depositos' => $depositos]);

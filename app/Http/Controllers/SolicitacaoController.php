@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Estoque;
 use App\HistoricoStatus;
 use App\ItemSolicitacao;
-use App\material;
+use App\Material;
 use App\Notificacao;
 use App\Solicitacao;
 use App\Usuario;
@@ -17,7 +17,7 @@ class SolicitacaoController extends Controller
 {
     public function show()
     {
-        $materiais = material::orderBy('id')->get();
+        $materiais = Material::orderBy('id')->get();
         return view('solicitacao.solicita_material', ['materiais' => $materiais]);
     }
 
@@ -242,9 +242,9 @@ class SolicitacaoController extends Controller
 
     public function checkEntregarSolicitacao(Request $request)
     {
-        if($request->action == "entregar"){
+        if ($request->action == "aprovaEntrega") {
             return $this->entregarSolicitacao($request->id);
-        } else if($request->action == "cancelarEntrega"){
+        } else if ($request->action == "cancelaEntrega") {
             return $this->cancelarEntregaSolicitacao($request->id);
         }
     }
@@ -253,7 +253,7 @@ class SolicitacaoController extends Controller
     {
         $itens = ItemSolicitacao::where('solicitacao_id', '=', $id)->where('quantidade_aprovada', '!=', NULL)->get();
         $materiaisID = array_column($itens->toArray(), 'material_id');
-        $materiaisNome = material::select('nome')->whereIn('id', $materiaisID)->get();
+        $materiaisNome = Material::select('nome')->whereIn('id', $materiaisID)->get();
         $quantAprovadas = array_column($itens->toArray(), 'quantidade_aprovada');
 
         $estoque = Estoque::wherein('material_id', $materiaisID)->where('deposito_id', 1)->orderBy('material_id', 'asc')->get();
@@ -270,7 +270,7 @@ class SolicitacaoController extends Controller
         }
 
         if ($checkQuant) {
-            $materiais = material::all();
+            $materiais = Material::all();
             $usuarios = Usuario::all();
 
             for ($i = 0; $i < count($materiaisID); $i++) {

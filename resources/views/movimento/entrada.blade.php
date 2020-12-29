@@ -8,9 +8,7 @@
     </div>
 
     <form method="POST" action="{{ route('movimento.entradaStore') }}">
-
         @csrf
-
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="selectMaterial">Material</label>
