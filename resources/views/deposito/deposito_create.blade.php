@@ -11,7 +11,6 @@
     </div>
 
     <form action="{{ route('deposito.store') }}" method="POST">
-
         @csrf
         <div class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             <div class="form-group col-md-3">
@@ -35,8 +34,6 @@
                 @enderror
             </div>
         </div>
-
         <Button class="btn btn-secondary" type="button" onclick="if(confirm('Tem certeza que deseja Cancelar o cadastro do Deposito?')) location.href = '../' "> Cancelar </Button>
         <input class="btn btn-success" type="submit" value="Salvar">
-
 @endsection

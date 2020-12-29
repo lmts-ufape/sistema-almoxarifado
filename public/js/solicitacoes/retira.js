@@ -55,7 +55,7 @@ $(function () {
         },
         "order": [],
         "columnDefs": [{
-            "targets": [2, 4],
+            "targets": [2],
             "orderable": false
         }]
     });

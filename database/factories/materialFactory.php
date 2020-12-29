@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\material;
+use App\Material;
 use Faker\Generator as Faker;
 
-$factory->define(material::class, function (Faker $faker) {
+$factory->define(Material::class, function (Faker $faker) {
     $faker = \Faker\Factory::create();
     \Bezhanov\Faker\ProviderCollectionHelper::addAllProvidersTo($faker);
     return [

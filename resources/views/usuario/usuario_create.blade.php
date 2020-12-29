@@ -11,15 +11,11 @@
     </div>
 
     <form action="{{ route('usuario.store') }}" method="POST" enctype="multipart/form-data">
-
         @csrf
-
         <div class="form-group">
-
             <div class="form-group">
                 <h2 class="h4"> Dados Institucionais / Pessoais </h2>
             </div>
-
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control  @error('nome') is-invalid @enderror" type="text" name="nome" id="nome"
@@ -31,9 +27,7 @@
                     </span>
                 @enderror
             </div>
-
             <div class="form-row">
-
                 <div class="form-group col-md-2">
                     <label for="numTel">{{ __('Celular') }}</label>
                     <input id="numTel" type="number" min="0" max="99999999999" oninput="return numTelLength();"
@@ -58,7 +52,6 @@
                         </span>
                     @enderror
                 </div>
-
                 <div class="form-group col-md-2">
                     <label for="rg"> RG </label>
                     <input name="rg" id="rg" class="form-control @error('rg') is-invalid @enderror"
@@ -70,7 +63,6 @@
                         </span>
                     @enderror
                 </div>
-
                 <div class="form-group col-md-2">
                     <label for="data_nascimento"> Data de Nascimento </label>
                     <input class="form-control @error('data_nascimento') is-invalid @enderror"
@@ -82,7 +74,6 @@
                         </span>
                     @enderror
                 </div>
-
                 <div class="form-group col-md-2">
                     <label for="matricula"> Matrícula </label>
                     <input class="form-control @error('matricula') is-invalid @enderror"
@@ -95,7 +86,6 @@
                         </span>
                     @enderror
                 </div>
-
                 <div class="form-group col-md-2">
                     <label for="setor"> Setor </label>
                     <select id="setor" class="form-control" name="setor">
@@ -104,7 +94,6 @@
                         <option data-value="Administrativo/Academico">Administrativo/Academico</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="cargo"> Perfil </label>
                     <select class="custom-select @error('cargo') is-invalid @enderror" autofocus name="cargo"
@@ -115,11 +104,9 @@
                     </select>
                 </div>
             </div>
-
             <div class="form-group">
                 <h2 class="h4"> Dados de Login </h2>
             </div>
-
             <div class="form-group">
                 <label for="email"> E-mail </label>
                 <input class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
@@ -131,7 +118,6 @@
                     </span>
                 @enderror
             </div>
-
             <div class="form-group">
                 <label for="senha"> Senha contendo ao menos 8 dígitos </label>
                 <input class="form-control @error('senha') is-invalid @enderror" autofocus autocomplete="new-password"
@@ -142,7 +128,6 @@
                     </span>
                 @enderror
             </div>
-
             <div class="form-group">
                 <label for="confimar_senha"> Confirmar Senha </label>
                 <input class="form-control @error('confirmar_senha') is-invalid @enderror" autocomplete="new-password"
@@ -153,19 +138,15 @@
                     </span>
                 @enderror
             </div>
-
             <div class="form-group col-md-12" class="form-row"
                  style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             </div>
-
             <Button class="btn btn-secondary" type="button"
                     onclick="if(confirm('Tem certeza que deseja Cancelar o cadastro do Usuário?')) location.href = '../' ">
                 Cancelar
             </Button>
             <Button class="btn btn-success" type="submit"> Cadastrar</Button>
-
         </div>
-
     </form>
 
 @endsection

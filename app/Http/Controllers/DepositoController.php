@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Deposito;
-
 use App\Estoque;
 use App\Http\Requests\DepositoStore;
 use Illuminate\Support\Facades\DB;
@@ -74,10 +72,8 @@ class DepositoController extends Controller
             $deposito = Deposito::all()->find($id);
             $deposito->delete();
             return redirect(route('deposito.index'));
-        } else{
+        } else {
             return redirect()->back()->with('fail', 'Deposito não vazio, não é possivel remover!');
         }
-
-
     }
 }
