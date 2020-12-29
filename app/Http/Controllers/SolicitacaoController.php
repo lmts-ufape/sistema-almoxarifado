@@ -242,9 +242,9 @@ class SolicitacaoController extends Controller
 
     public function checkEntregarSolicitacao(Request $request)
     {
-        if ($request->action == "entregar") {
+        if ($request->action == "aprovaEntrega") {
             return $this->entregarSolicitacao($request->id);
-        } else if ($request->action == "cancelarEntrega") {
+        } else if ($request->action == "cancelaEntrega") {
             return $this->cancelarEntregaSolicitacao($request->id);
         }
     }
