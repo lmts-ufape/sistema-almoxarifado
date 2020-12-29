@@ -9,23 +9,18 @@
         <h2>EDITAR MATERIAL</h2>
     </div>
 
-    @if(session()->has('fail'))
-        <div class="alert alert-danger alert-dismissible fade show">
-            <strong>{{session('fail')}}</strong>
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-        </div>
-    @endif
-
-    <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('material.update', ['material' => $material->id]) }}"
+          enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
         <div class="form-row">
-          <div class="form-group">
-            <label for="imagem"> Selecione uma Imagem </label>
-            <input class="form-control-file @error('imagem') is-invalid @enderror" type="file" name="imagem" id="imagem" accept=".png, .jpg, .jpeg, .svg, .dib, .bmp" >
-            @error('imagem')
-                    <span class="invalid-feedback" role="alert">
+            <div class="form-group">
+                <label for="imagem"> Selecione uma Imagem </label>
+                <input class="form-control-file @error('imagem') is-invalid @enderror" type="file" name="imagem"
+                       id="imagem" accept=".png, .jpg, .jpeg, .svg, .dib, .bmp">
+                @error('imagem')
+                <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
             @enderror
@@ -46,39 +41,45 @@
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-            @enderror
-          </div>
-          <div class="form-group col-md-2">
-            <label for="inputQuantidadeMin">Quantidade mínima</label>
-            <input type="number" class="form-control @error('quantidade_minima') is-invalid @enderror" id="inputQuantidadeMin" name="quantidade_minima" min="0" value="{{ old('quantidade_minima', $material->quantidade_minima) }}">
-            @error('quantidade_minima')
-                    <span class="invalid-feedback" role="alert">
+                @enderror
+            </div>
+            <div class="form-group col-md-2">
+                <label for="inputQuantidadeMin">Quantidade mínima</label>
+                <input type="number" class="form-control @error('quantidade_minima') is-invalid @enderror"
+                       id="inputQuantidadeMin" name="quantidade_minima" min="0"
+                       value="{{ old('quantidade_minima', $material->quantidade_minima) }}">
+                @error('quantidade_minima')
+                <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-            @enderror
-          </div>
+                @enderror
+            </div>
         </div>
         <div>
-          <div div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
-            <label for="inputDescricao">Descrição</label>
-            <textarea class="form-control @error('descricao') is-invalid @enderror" name="descricao" id="inputDescricao" cols="30" rows="3">{{ old('descricao', $material->descricao) }}</textarea>
-            @error('descricao')
-                    <span class="invalid-feedback" role="alert">
+            <div div class="form-group col-md-12" class="form-row"
+                 style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
+                <label for="inputDescricao">Descrição</label>
+                <textarea class="form-control @error('descricao') is-invalid @enderror" name="descricao"
+                          id="inputDescricao" cols="30" rows="3">{{ old('descricao', $material->descricao) }}</textarea>
+                @error('descricao')
+                <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
 
-            @enderror
-          </div>
+                @enderror
+            </div>
         </div>
         <div class="form-row">
             <div class="col-sm-auto">
-                <Button class="btn btn-secondary" type="button" onClick="if(confirm('Tem certeza que deseja Cancelar a alteração do Material?')) location.href='../'"> Cancelar </Button>
+                <Button class="btn btn-secondary" type="button"
+                        onClick="if(confirm('Tem certeza que deseja Cancelar a alteração do Material?')) location.href='{{route('material.indexEdit')}}'">
+                    Cancelar
+                </Button>
             </div>
             <div class="col-sm-auto">
-                <Button type="button" class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja Remover o Material?')) location.href='{{route('material.destroy', $material->id)}}'"> Remover </Button>
-            </div>
-            <div class="col-sm-auto">
-                <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Material?')"> Atualizar </Button>
+                <Button class="btn btn-success" type="submit"
+                        onclick="return confirm('Tem certeza que deseja Atualizar o Material?')"> Atualizar
+                </Button>
             </div>
         </div>
     </form>

@@ -62,7 +62,7 @@ class DepositoController extends Controller
 
         $deposito->fill($data)->save();
 
-        return redirect(route('deposito.index'));
+        return redirect(route('deposito.index'))->with('sucess', 'Deposito alterado com sucesso!');
     }
 
     public function destroy($id)
@@ -71,8 +71,8 @@ class DepositoController extends Controller
         if (empty($estoques)) {
             $deposito = Deposito::all()->find($id);
             $deposito->delete();
-            return redirect(route('deposito.index'));
-        } else {
+            return redirect(route('deposito.index'))->with('sucess', 'Desposito removido com sucesso!');
+        } else{
             return redirect()->back()->with('fail', 'Deposito não vazio, não é possivel remover!');
         }
     }

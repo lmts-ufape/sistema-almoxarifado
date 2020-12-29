@@ -138,9 +138,6 @@
                     <Button class="btn btn-secondary" type="button" onClick="if(confirm('Tem certeza que deseja Cancelar a alteração do Usuário?')) location.href='../'"> Cancelar </Button>
                 </div>
                 <div class="col-sm-auto">
-                    <Button type="button" class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja Remover o Usuário?')) location.href='{{route('usuario.destroy', $usuario->id)}}'"> Remover </Button>
-                </div>
-                <div class="col-sm-auto">
                     <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Atualizar o Usuário?')" disabled id="atualizar"> Atualizar </Button>
                 </div>
             </div>
