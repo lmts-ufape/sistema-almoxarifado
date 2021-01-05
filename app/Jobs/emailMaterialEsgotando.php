@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\material;
+use App\Material;
 use App\Usuario;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -20,7 +20,7 @@ class emailMaterialEsgotando implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(Usuario $usuario, material $material)
+    public function __construct(Usuario $usuario, Material $material)
     {
         $this->usuario = $usuario;
         $this->material = $material;

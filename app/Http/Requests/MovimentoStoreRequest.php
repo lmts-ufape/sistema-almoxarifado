@@ -26,7 +26,6 @@ class MovimentoStoreRequest extends FormRequest
         return [
             'material_id' => 'bail|required|numeric',
             'quantidade' => 'required|integer|min:0',
-            // 'quantidade' => 'required',
             'deposito_id' => 'bail|required|numeric',
             'descricao' => 'required',
             'operacao' => 'numeric'

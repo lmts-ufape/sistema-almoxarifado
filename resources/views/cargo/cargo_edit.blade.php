@@ -13,10 +13,8 @@
     </div>
 
     <form action="{{ route('cargo.update', $cargo->id) }}" method="POST">
-
         @csrf
         @method('PUT')
-
         <div class="form-group">
             <label for="nome"> Nome </label>
             <input class="form-control" type="text" name="nome" id="nome" value="{{ $cargo->nome }}">
@@ -34,5 +32,4 @@
             </div>
         </div>
     </form>
-
 @endsection

@@ -16,7 +16,6 @@ class CreateEstoquesTable extends Migration
         Schema::create('estoques', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('quantidade');
-            // $table->string('codigo');
             $table->unsignedInteger('material_id')->index();
             $table->foreign('material_id')->references('id')->on('materials');
             $table->softDeletes();

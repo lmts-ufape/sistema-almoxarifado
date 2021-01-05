@@ -6,14 +6,8 @@
     <div style="border-bottom: #949494 2px solid; padding-bottom: 5px; margin-bottom: 10px">
         <h2>TRANSFERÊNCIA DE MATERIAL</h2>
     </div>
-
-
     <form method="POST" action="{{ route('movimento.transferenciaStore') }}">
-
         @csrf
-
-        @csrf
-
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="selectMaterial">Material</label>

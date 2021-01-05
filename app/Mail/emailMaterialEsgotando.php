@@ -2,10 +2,9 @@
 
 namespace App\Mail;
 
-use App\material;
+use App\Material;
 use App\Usuario;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -20,7 +19,7 @@ class emailMaterialEsgotando extends Mailable
      *
      * @return void
      */
-    public function __construct(Usuario $usuario, material $material)
+    public function __construct(Usuario $usuario, Material $material)
     {
         $this->usuario = $usuario;
         $this->material = $material;
