@@ -8,6 +8,9 @@
         <h2>SOLICITAÇÕES</h2>
     </div>
 
+    <h6>Clique em uma linha na tabela para visualizar uma amostra dos materiais da solicitação.</h6>
+    <h6>Para ver todos os materiais e aprovar/cancelar uma entrega clique em uma linha da tabela subsequente.</h6>
+
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
@@ -80,8 +83,8 @@
                     <table id="tableItens" class="table table-hover table-responsive-md" style="margin-top: 10px">
                         <thead style="background-color: #151631; color: white; border-radius: 15px">
                             <tr>
-                                <th scope="col">Material</th>
-                                <th scope="col">Descrição</th>
+                                <th scope="col" class="align-middle">Material</th>
+                                <th scope="col" class="align-middle">Descrição</th>
                                 <th scope="col" style="text-align: center; width: 10%">Qtd. Solicitada</th>
                                 <th scope="col" style="text-align: center; width: 10%">Qtd. Aprovada</th>
                             </tr>

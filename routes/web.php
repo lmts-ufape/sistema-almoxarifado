@@ -4,8 +4,7 @@ use Doctrine\DBAL\Schema\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function(){
-
+Route::middleware('auth')->group(function () {
     Route::resource('usuario', 'UsuarioController');
     Route::get('usuario/{id}/edit_perfil', 'UsuarioController@edit_perfil')->name('usuario.edit_perfil');
     Route::get('usuario/{id}/edit_senha', 'UsuarioController@edit_senha')->name('usuario.edit_senha');
@@ -16,7 +15,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/', function () {
         return view('home');
     })->name('home');
-
 });
     Route::get('sistema', function () {
         return view('infos.sistema');
@@ -29,7 +27,6 @@ Route::middleware('auth')->group(function(){
     })->name('contato');
 
 Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
-
     Route::resource('notificacao', 'NotificacaoController');
     Route::get('notificacao/{notificacao_id}', 'NotificacaoController@show')->name('notificacao.show');
     Route::get('notificacoes', 'NotificacaoController@index')->name('notificacao.index');
@@ -57,8 +54,8 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
     Route::get('analise_solicitacoes', 'SolicitacaoController@listSolicitacoesAnalise')->name('analise.solicitacoes');
     Route::POST('analise_solicitacoes', 'SolicitacaoController@checkAnaliseSolicitacao')->name('analise.solicitacao');
 
-    Route::get('retira_solicitacoes', 'SolicitacaoController@listSolicitacoesAprovadas')->name('retira.solicitacoes');
-    Route::POST('retira_solicitacao', 'SolicitacaoController@checkEntregarSolicitacao')->name('retira.solicitacao');
+    Route::get('entrega_materiais', 'SolicitacaoController@listSolicitacoesAprovadas')->name('entrega.materiais');
+    Route::POST('entrega_materiais', 'SolicitacaoController@checkEntregarMateriais')->name('entrega.materiais');
 
     Route::get('itens_solicitacao_admin/{id}', 'SolicitacaoController@getItemSolicitacaoAdmin')->name('itens.solicitacao.admin');
     Route::get('solicitacoes_admin', 'SolicitacaoController@listTodasSolicitacoes')->name('solicitacoe.admin');
@@ -66,7 +63,7 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
 
 Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
     Route::resource('solicita', 'SolicitacaoController');
-    Route::get('editar_perfil/{user_id}', 'UsuarioController@edit')->name('perfil.editar');;
+    Route::get('editar_perfil/{user_id}', 'UsuarioController@edit')->name('perfil.editar');
     Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
     Route::get('minhas_solicitacoes', 'SolicitacaoController@listSolicitacoesRequerente')->name('minhas.solicitacoes');
     Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
