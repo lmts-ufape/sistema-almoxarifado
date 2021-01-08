@@ -56,12 +56,6 @@ $(function () {
 
     $("#formSolicitacao button[type = 'submit']").on("click", function () {
         buttonSubmitID = $(this).attr("id");
-    })
-
-    $('#tableSolicitacoes').on('page.dt', function () {
-        $('html, body').animate({
-            scrollTop: $(".dataTables_wrapper").offset().top
-        }, 'fast');
     });
 
     $("#formSolicitacao").on("submit", function () {
