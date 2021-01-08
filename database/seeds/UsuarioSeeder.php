@@ -13,7 +13,6 @@ class UsuarioSeeder extends Seeder
     {
         factory(\App\Usuario::class, 1)->create(['email' => 'admin@admin.teste', 'cargo_id' => '2', 'nome' => 'administrador']);
         factory(\App\Usuario::class, 1)->create(['email' => 'requerente@admin.teste', 'cargo_id' => '1', 'nome' => 'requerente']);
-        factory(\App\Usuario::class, 1)->create(['email' => 'diretoria@admin.teste', 'cargo_id' => '3', 'nome' => 'requerente']);
-        factory(\App\Usuario::class, 50)->create();
+        factory(\App\Usuario::class, 1)->create(['email' => 'diretoria@admin.teste', 'cargo_id' => '3', 'nome' => 'diretoria']);
     }
 }
