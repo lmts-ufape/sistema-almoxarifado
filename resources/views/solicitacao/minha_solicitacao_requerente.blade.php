@@ -7,6 +7,9 @@
         <h2>MINHAS SOLICITAÇÕES</h2>
     </div>
 
+    <h6>Clique em uma linha na tabela para visualizar uma amostra dos materiais da solicitação.</h6>
+    <h6>Para ver todos os materiais e aprovar/cancelar uma entrega clique em uma linha da tabela subsequente.</h6>
+
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>

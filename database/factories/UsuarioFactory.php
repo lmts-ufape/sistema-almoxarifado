@@ -17,5 +17,6 @@ $factory->define(Usuario::class, function (Faker $faker) {
         'cargo_id' => 1,
         'email' => $faker->email,
         'senha' => Hash::make('password'),
+        'setor' => 'Administrativo'
     ];
 });

@@ -19,10 +19,8 @@
     @endif
 
     <form action="{{ route('deposito.update', $deposito->id) }}" method="POST">
-
         @csrf
         @method('PUT')
-
         <div class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
             <div class="form-group col-md-3">
                 <label for="nome">Nome do depósito</label>
@@ -45,21 +43,12 @@
         </div>
 
         <div class="form-row">
-            <div class="col-sm-1">
+            <div class="col-sm-auto">
                 <Button class="btn btn-secondary" type="button" onClick="if(confirm('Tem certeza que deseja cancelar a Alteração do Deposito?'))location.href='../'"> Cancelar </Button>
             </div>
-            <div class="col-sm-1">
-                <Button type="button" class="btn btn-danger" onclick="if(confirm('Tem certeza que deseja Remover o Deposito?')) location.href='{{route('deposito.destroy', $deposito->id)}}'"> Remover </Button>
-            </div>
-            <div class="col-sm-1">
+            <div class="col-sm-auto">
                 <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja Alterar o Deposito?')"> Atualizar </Button>
             </div>
         </div>
     </form>
-    {{-- <form action="{{ route('deposito.destroy', $deposito->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <Button class="btn btn-danger" type="submit"> Remover </Button>
-    </form> --}}
-
 @endsection

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class RelatorioController extends Controller
 {
@@ -62,16 +61,16 @@ class RelatorioController extends Controller
         $data_inicio = date('d/m/Y', strtotime($request->data_inicio));
         $data_fim = date('d/m/Y', strtotime($request->data_fim));
 
-        if($request->tipo_relatorio == 3){
+        if ($request->tipo_relatorio == 3) {
             $pdf = PDF::loadView('/relatorio/relatorio_saida_materiais_solicitacoes', compact('materiais', 'datas'));
-            $nomePDF = "Relatório_Saída_Materiais_Solicitações_De_". $data_inicio . "_A_". $data_fim .".pdf";
+            $nomePDF = "Relatório_Saída_Materiais_Solicitações_De_" . $data_inicio . "_A_" . $data_fim . ".pdf";
         } else if ($request->tipo_relatorio == 2) {
             $pdf = PDF::loadView('/relatorio/relatorio_materiais_nao_movimentados', compact('materiais', 'datas'));
-            $nomePDF = "Relatório_Materiais_Não_Movimentados_De_". $data_inicio . "_A_". $data_fim .".pdf";
+            $nomePDF = "Relatório_Materiais_Não_Movimentados_De_" . $data_inicio . "_A_" . $data_fim . ".pdf";
         } else if ($request->tipo_relatorio == 0 || $request->tipo_relatorio == 1) {
             $pdf = PDF::loadView('/relatorio/relatorio_entrada_saida_materiais', compact('materiais', 'datas', 'tipo_relatorio'));
-            $nomePDF = $request->tipo_relatorio == 0 ? "Relatório_Entrada_De_Materiais_De_". $data_inicio . "_A_". $data_fim .".pdf" :
-            "Relatório_Saida_De_Materiais_De_". $data_inicio . "_A_". $data_fim.".pdf";
+            $nomePDF = $request->tipo_relatorio == 0 ? "Relatório_Entrada_De_Materiais_De_" . $data_inicio . "_A_" . $data_fim . ".pdf" :
+                "Relatório_Saida_De_Materiais_De_" . $data_inicio . "_A_" . $data_fim . ".pdf";
         }
 
         return $pdf->setPaper('a4')->stream($nomePDF);

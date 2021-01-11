@@ -21,7 +21,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="inputMaterial">Material</label>
-                <input type="text" class="form-control @error('nome') is-invalid @enderror" id="inputMaterial" name="nome" placeholder="Material" autofocus autocomplete="inputMaterial" value="{{ old('nome') }}">
+                <input type="text" class="form-control @error('nome') is-invalid @enderror" id="inputMaterial" name="nome" placeholder="Material" autofocus autocomplete="inputMaterial" onkeypress="return onlyLetters(event,this);" value="{{ old('nome') }}">
                 @error('nome')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="inputCodigo">Código</label>
-                <input type="text" class="form-control @error('codigo') is-invalid @enderror" id="inputCodigo" name="codigo" placeholder="Código" value="{{ old('codigo') }}" autofocus>
+                <input type="text" class="form-control @error('codigo') is-invalid @enderror" id="inputCodigo" name="codigo" placeholder="Código" onkeypress="return onlyNums(event,this);" value="{{ old('codigo') }}" autofocus>
                 @error('codigo')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -62,6 +62,7 @@
         <Button class="btn btn-secondary" type="button" onclick="if(confirm('Tem certeza que deseja Cancelar o cadastro do Material?')) location.href = '../' "> Cancelar </Button>
         <button type="submit" class="btn btn-success">Salvar</button>
       </form>
-
-
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="{{asset('js/material/edit.js')}}"></script>

@@ -7,7 +7,7 @@
 @section('content')
 
     <div style="border-bottom: #949494 2px solid; padding: 5px; margin-bottom: 10px">
-        <h2>Editar Senha</h2>
+        <h2>EDITAR SENHA</h2>
     </div>
 
     @if(session()->has('success'))
@@ -43,10 +43,10 @@
             </div>
 
             <div class="form-row">
-                <div class="col-sm-1">
+                <div class="col-sm-auto">
                     <a href="{{ route('home') }}" class="btn btn-secondary" onclick="return confirm('Tem certeza que deseja Cancelar a alteração da senha do Usuário?')"> Cancelar </a>
                 </div>
-                <div class="col-sm-1">
+                <div class="col-sm-auto">
                     <Button class="btn btn-success" type="submit" onclick="return confirm('Tem certeza que deseja alterar a senha do Usuário?')"> Atualizar </Button>
                 </div>
             </div>

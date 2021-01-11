@@ -20,6 +20,9 @@ $(function () {
     $('#matricula').on('input propertychange', function () {
         $('#atualizar').prop('disabled', false);
     });
+    $('#setor').on('input propertychange', function () {
+        $('#atualizar').prop('disabled', false);
+    });
     $('#nome').on('input propertychange', function () {
         $('#atualizar').prop('disabled', false);
     });

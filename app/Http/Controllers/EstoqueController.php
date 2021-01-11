@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Deposito;
 use App\Estoque;
 use App\Http\Requests\EstoqueStore;
-use App\material;
 use Illuminate\Http\Request;
 
 class EstoqueController extends Controller
@@ -62,7 +60,6 @@ class EstoqueController extends Controller
      */
     public function edit(Estoque $estoque)
     {
-
     }
 
     /**

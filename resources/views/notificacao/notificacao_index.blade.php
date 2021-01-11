@@ -23,7 +23,7 @@
                 <tr onclick="location.href = '{{route('notificacao.show', ['notificacao_id' => $notificacao->id])}}'" style="cursor: pointer;">
                     <td>{{ $notificacao->mensagem }}</td>
                     <td style="text-align: center">{{ $estoque->quantidade }}</td>
-                    <td style="text-align: center">{{\App\material::withTrashed()->find($notificacao->material_id)->quantidade_minima}}</td>
+                    <td style="text-align: center">{{\App\Material::withTrashed()->find($notificacao->material_id)->quantidade_minima}}</td>
                 </tr>
                 @endif
             @empty

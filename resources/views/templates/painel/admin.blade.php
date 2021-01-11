@@ -22,8 +22,8 @@
                 </a>
                 <a data-target="#collapseOne" class="menuEffect selectedMenu" class="selectedMenu"
                     style="padding: 10px 10px 10px 35px; color: white; text-decoration: none; display: grid"
-                    href="{{ route('retira.solicitacoes') }}">
-                    <li>Retirar</li>
+                    href="{{ route('entrega.materiais') }}">
+                    <li>Entregar</li>
                 </a>
             </div>
         </div>

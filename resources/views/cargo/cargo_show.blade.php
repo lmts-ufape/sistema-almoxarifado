@@ -1,5 +1,3 @@
-
-
 @extends('../templates.principal')
 
 @section('title')
@@ -7,7 +5,5 @@
 @endsection
 
 @section('content')
-
     <p> Perfil: {{ $cargo->nome }}</p>
-
 @endsection

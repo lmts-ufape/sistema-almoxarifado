@@ -20,8 +20,6 @@ class CargoController extends Controller {
         
         $cadastro = ['nome' => $request->nome];
 
-        // Falta Validar
-
         Cargo::create($cadastro);
 
         return redirect(route('cargo.index'));
@@ -40,8 +38,6 @@ class CargoController extends Controller {
         $cargo = Cargo::find($id);
         $cadastro = ['nome' => $request->nome];
 
-        // Falta Validar
-
         $cargo->fill($cadastro)->save();
 
         return redirect(route('cargo.index'));
@@ -53,5 +49,4 @@ class CargoController extends Controller {
         
         return redirect(route('cargo.index'));
     }
-    
 }

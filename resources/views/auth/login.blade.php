@@ -8,7 +8,7 @@
 <div class="container-fluid" style="background-color: white; margin-bottom: 30px; margin-top: 30px;padding: 20px; border-radius: 15px">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-sm-7" style="margin-right: 30px">
                 <div>
                     <h2 style="color: #3E3767"><strong>O que é o sistema eletrônico de gestão de almoxarifados (SEGA)?</strong></h2>
                     <p style="color: #3E3767; text-align: justify">
@@ -36,12 +36,12 @@
                     </p>
                 </div>
             </div>
-            <div class="col-sm-5" style="margin-left: 30px; margin-right: -100px">
+            <div class="col-sm-5" style="margin-right: -100px">
                 <h3 class="col-md-8 offset-sm-2"
                     style="margin-bottom: 5%; font-family: 'Segoe UI'; color: #3E3767;"><u>Entrar</u></h3>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-11">
                         <label for="email" class="control-label"
                                style="font-family: 'Segoe UI'; color: #3E3767; font-weight: bold; font-size: 20px">E-mail</label>
                         <input id="email" type="email" name="email"
@@ -55,7 +55,7 @@
                         </span>
                         @enderror
                     </div>
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-11">
                         <label for="password" class="control-label"
                                style="font-family: 'Segoe UI'; color: #3E3767; font-weight: bold; font-size: 20px">Senha</label>
                         <input id="password" type="password" name="password"
@@ -78,13 +78,13 @@
                         </label>
                     </div>
                     <br>
-                    <div class="form-group col-md-9">
+                    <div class="form-group col-md-11">
                         <button type="submit" class="btn btn-success btn-block">
                             {{ __('Entrar') }}
                         </button>
                     </div>
                     @if (Route::has('password.request'))
-                        <div class="form-group col-md-9">
+                        <div class="form-group col-md-11">
                             <center>
                                 <a class=" btn-link" href="{{ route('password.request') }}">Esqueci minha senha</a>
                             </center>
@@ -92,7 +92,7 @@
                         </div>
                     @endif
                 </form>
-                <div class="form-group col-md-9">
+                <div class="form-group col-md-11">
                     <a type="button" href="{{ route('register') }}" class="btn btn-primary btn-block">
                         {{ __('Cadastre-se') }}
                     </a>

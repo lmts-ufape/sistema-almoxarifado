@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Estoque;
-use App\Http\Requests\StoreMaterial;
-use App\material;
-
+use App\Material;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class MaterialController extends Controller
 {
@@ -19,7 +17,7 @@ class MaterialController extends Controller
     public function index()
     {
         $estoques = Estoque::all()->sortByDesc('id');
-        $materials = material::all()->sortByDesc('id');
+        $materials = Material::all()->sortByDesc('id');
 
         return view('material.material_consult', ['materials' => $materials, 'estoques' => $estoques]);
     }
@@ -27,7 +25,7 @@ class MaterialController extends Controller
     public function indexEdit()
     {
 
-        $materials = material::all()->sortByDesc('id');
+        $materials = Material::all()->sortByDesc('id');
         return view('material.material_index_edit', ['materials' => $materials]);
     }
 
@@ -47,18 +45,17 @@ class MaterialController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMaterial $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validated();
+        $validator = Validator::make($request->all(), Material::$rules, Material::$messages)->validate();
 
         if (($request->hasFile('imagem') && $request->file('imagem')->isValid())) {
 
             $imgExtension = $request->imagem->extension();
-            $imgName = Img::nameNewImage(material::all(), $request->nome, $imgExtension);
+            $imgName = Img::nameNewImage(Material::all(), $request->nome, $imgExtension);
 
             $request->imagem->storeAs(Img::materiaisDir(), $imgName);
             $request->imagem = $imgName;
-
         }
 
         $data = [
@@ -69,11 +66,7 @@ class MaterialController extends Controller
             'imagem' => $request->imagem
         ];
 
-
-        // $material = material::create($validatedData);
-        // $material->save();
-
-        $material = material::create($data);
+        $material = Material::create($data);
         $material->save();
 
         return redirect(route('material.indexEdit'));
@@ -82,69 +75,76 @@ class MaterialController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\material $material
+     * @param \App\Material $material
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        return view('material.material_edit', ['material' => material::findOrFail($id)]);
+        return view('material.material_edit', ['material' => Material::findOrFail($id)]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\material $material
+     * @param \App\Material $material
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreMaterial $request, $id)
+    public function update(Request $request, $id)
     {
-        $material = material::findOrFail($id);
-        $validatedData = $request->validated();
+        $material = Material::findOrFail($id);
 
-        if (($request->hasFile('imagem') && $request->file('imagem')->isValid())) {
+        $rules = array_slice(Material::$rules, 0, 4);
+        $messages = array_slice(Material::$messages, 0, 10);
 
-            $imgExtension = $request->imagem->extension();
-            $imgName = Img::nameNewImage(material::all(), $request->nome, $imgExtension);
-
-            $request->imagem->storeAs(Img::materiaisDir(), $imgName);
-            $request->imagem = $imgName;
-        }
+        $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
         $data = [
             'nome' => $request->nome,
             'codigo' => $request->codigo,
             'descricao' => $request->descricao,
             'quantidade_minima' => $request->quantidade_minima,
-            'imagem' => $request->imagem
         ];
+
+        if (($request->hasFile('imagem') && $request->file('imagem')->isValid())) {
+
+            $rules = array_slice(Material::$rules, 4);
+            $messages = array_slice(Material::$messages, 10);
+
+            $validator = Validator::make($request->all(), $rules, $messages)->validate();
+
+            $imgExtension = $request->imagem->extension();
+            $imgName = Img::nameNewImage(Material::all(), $request->nome, $imgExtension);
+
+            $request->imagem->storeAs(Img::materiaisDir(), $imgName);
+            $request->imagem = $imgName;
+            $data['imagem'] = $request->imagem;
+        }
 
         $material->fill($data);
         $material->save();
-        return redirect()->route('material.indexEdit');
-
+        return redirect()->route('material.indexEdit')->with('sucess', 'Material atualizado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\material $material
+     * @param \App\Material $material
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $material = material::all()->find($id);
+        $material = Material::all()->find($id);
         $estoque = Estoque::all()->where('material_id', '=', $id)->first();
         if (empty($estoque)) {
             $material->forceDelete();
-            return redirect()->route('material.indexEdit');
+            return redirect()->route('material.indexEdit')->with('sucess', 'Material removido com sucesso!');
         } elseif ($estoque->quantidade == 0) {
             $estoque->delete();
             $material->delete();
-            return redirect()->route('material.indexEdit');
+            return redirect()->route('material.indexEdit')->with('sucess', 'Material removido com sucesso!');
         } else {
             return redirect()->back()->with('fail', 'Esse material não pode ser removido, ainda há material em estoque!');
         }
-
     }
 }

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
@@ -30,7 +29,6 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), Usuario::$rules, Usuario::$messages)->validate();
 
         $data = [
@@ -43,6 +41,7 @@ class UsuarioController extends Controller
             'cargo_id' => $request['cargo'],
             'numTel' => $request['numTel'],
             'senha' => Hash::make($request->password),
+            'setor' => $request['setor']
         ];
 
         Usuario::create($data);
@@ -118,6 +117,7 @@ class UsuarioController extends Controller
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
             'numTel' => $request['numTel'],
+            'setor' => $request['setor']
         ];
 
         $usuario->fill($data)->Update();
@@ -127,7 +127,6 @@ class UsuarioController extends Controller
 
     public function update_senha(Request $request, $id)
     {
-
         $usuario = Usuario::find($id);
 
         $rules = array_slice(Usuario::$rules, 7);
@@ -181,11 +180,12 @@ class UsuarioController extends Controller
             'cargo_id' => $request['cargo'],
             'numTel' => $request['numTel'],
             'senha' => Hash::make($request['password']),
+            'setor' => $request['setor']
         ];
 
         $usuario->fill($data)->Update();
 
-        return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
+        return redirect()->back()->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy($id)
@@ -193,7 +193,6 @@ class UsuarioController extends Controller
         $usuario = Usuario::all()->find($id);
         $usuario->delete();
 
-        return redirect(route('usuario.index'));
+        return redirect(route('usuario.index'))->with('sucess', 'Usuário removido com sucesso!');
     }
-
 }

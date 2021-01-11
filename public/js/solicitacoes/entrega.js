@@ -34,13 +34,15 @@ function showItens(id) {
             $("#tableItens tbody").append(ret);
             $("#overlay").hide();
             $("#modalBody").show();
-            $('#negaSolicitacao').show();
-            $('#aprovaSolicitacao').show();
+            $('#aprovar_entrega').show();
+            $('#cancelar_entrega').show();
         }
     });
 }
 
 $(function () {
+    var buttonSubmitID = "";
+
     var table = $('#tableSolicitacoes').DataTable({
         searching: false,
         "language": {
@@ -55,15 +57,9 @@ $(function () {
         },
         "order": [],
         "columnDefs": [{
-            "targets": [2, 4],
+            "targets": [2],
             "orderable": false
         }]
-    });
-
-    $('#tableSolicitacoes').on('page.dt', function () {
-        $('html, body').animate({
-            scrollTop: $(".dataTables_wrapper").offset().top
-        }, 'fast');
     });
 
     $('#tableSolicitacoes tbody').on('click', 'td.expandeOption', function (e) {
@@ -111,6 +107,8 @@ $(function () {
         $('#solicitacaoID').val(0);
         $("#listaItens").empty();
         $("#modalBody").hide();
+        $('#aprovar_entrega').hide();
+        $('#cancelar_entrega').hide();
     });
 
     $('#tableSolicitacoes').on('page.dt', function () {
@@ -123,53 +121,20 @@ $(function () {
         $($('#tableSolicitacoes').DataTable().column(idx).header()).append('<span class="sort-icon"/>');
     });
 
-    $('#tableSolicitacoes tbody').on('click', '.entregaSolicitacao', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        let escolha = confirm("Tem certeza que deseja aprovar a entrega?");
-
-        if (escolha) {
-            var id = $(this).data('id');
-
-            $.ajax({
-                type: 'POST',
-                url: "retira_solicitacao",
-                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id, action: "entregar"},
-                success: function () {
-                    location.reload();
-                },
-                error: function(){
-                    alert("Algo deu errado. Está ação não pode ser completada. Tente recarregar a página");
-                }
-            });
-        } else {
-            return false;
-        }
+    $("#formSolicitacao button[type = 'submit']").on("click", function () {
+        buttonSubmitID = $(this).attr("id");
     });
 
-    $('#tableSolicitacoes tbody').on('click', '.cancelaEntregaSolicitacao', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        let escolha = confirm("Tem certeza que deseja cancelar a entrega?");
-
-        if (escolha) {
-            var id = $(this).data('id');
-
-            $.ajax({
-                type: 'POST',
-                url: "retira_solicitacao",
-                data: { _token: $('meta[name="csrf-token"]').attr('content'), id: id, action: "cancelarEntrega" },
-                success: function () {
-                    location.reload();
-                },
-                error: function(){
-                    alert("Algo deu errado. Está ação não pode ser completada. Tente recarregar a página");
-                }
-            });
-        } else {
-            return false;
+    $("#formSolicitacao").on("submit", function () {
+        let escolha = "";
+        if (buttonSubmitID == "aprovar_entrega") {
+            escolha = confirm("Tem certeza que deseja aprovar a entrega dos materiais?");
+            if (!escolha)
+                return false;
+        } else if (buttonSubmitID == "cancelar_entrega") {
+            escolha = confirm("Tem certeza que deseja cancelar a entrega de materiais?");
+            if (!escolha)
+                return false;
         }
     });
 });
