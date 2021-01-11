@@ -42,9 +42,6 @@
                 Prof. Dr. Anderson Fernandes de Alencar
             </li>
             <li>
-                Prof. Dr. Ícaro Lins Leitão da Cunha
-            </li>
-            <li>
                 Prof. Dr. Igor Medeiros Vanderlei
             </li>
             <li>
@@ -58,6 +55,9 @@
         <ul style="color: #3E3767;">
             <li>
                 Prof. Dr. Cleyton Mário de Oliveira
+            </li>
+            <li>
+                Prof. Dr. Emanoel Francisco Sposito Barreiros
             </li>
             <li>
                 Prof. Dr. Ernani Martins dos Santos
