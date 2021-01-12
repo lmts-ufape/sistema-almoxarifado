@@ -123,7 +123,7 @@
             @endguest
         </div>
         <div class="col-10" style="background-color: #1b1c42; ">
-            <div class="container" style="margin-top: 30px; padding: 20px;border-radius: 15px">
+            <div class="container" style="background-color: white;margin: 30px; padding: 20px;border-radius: 15px">
                 @yield('content')
 
                 @yield('post-script')
