@@ -30,26 +30,37 @@ class SolicitacaoController extends Controller
         $materiaisCheck = true;
 
         for ($i = 0; $i < count($materiais); ++$i) {
-            if (null == $materiais[$i] || null == $quantidades[$i] || empty($materiais[$i]) || empty($quantidades[$i])) {
+            if (empty($materiais[$i]) || empty($quantidades[$i]) || !is_numeric($materiais[$i]) || !is_numeric($quantidades[$i])) {
+                $materiaisCheck = false;
+
+                break;
+            }
+
+            if ((is_numeric($materiais[$i]) && intval($materiais[$i]) < 0 || strpos($materiais[$i], '.') || strpos($materiais[$i], ',')) ||
+                    (is_numeric($quantidades[$i]) && intval($quantidades[$i]) < 0 || strpos($quantidades[$i], '.') || strpos($quantidades[$i], ','))) {
                 $materiaisCheck = false;
 
                 break;
             }
         }
 
-        if (empty($request->dataTableMaterial) || empty($request->dataTableQuantidade) || !$materiaisCheck) {
-            return redirect()->back()->withErrors('Adicione o(s) material(is) e sua(s) quantidade(s)');
+        if (!$materiaisCheck) {
+            return redirect()->back()->withErrors('Informe valores validos para o(s) material(is) e sua(s) quantidade(s)');
         }
-        if (null == $request->checkReceptor && strlen($request->nomeReceptor) > 100 || intval($request->rgReceptor) < 0) {
+
+        if (is_null($request->checkReceptor) && strlen($request->nomeReceptor) > 100 || strlen($request->nomeReceptor) < 5 ||
+                (is_numeric($request->rgReceptor) && intval($request->rgReceptor) < 0) || strlen($request->rgReceptor) < 7 || strlen($request->rgReceptor) > 11) {
             return redirect()->back()->withErrors('O nome do receptor deve ter no máximo 100 dígitos e o RG 11 dígitos');
         }
+
         $solicitacao = new Solicitacao();
         $solicitacao->usuario_id = Auth::user()->id;
         $solicitacao->observacao_requerente = $request->observacao;
-        if (null == $request->checkReceptor) {
+        if (is_null($request->checkReceptor)) {
             $solicitacao->receptor = $request->nomeReceptor;
             $solicitacao->receptor_rg = $request->rgReceptor;
         }
+
         $solicitacao->save();
 
         $historicoStatus = new HistoricoStatus();
