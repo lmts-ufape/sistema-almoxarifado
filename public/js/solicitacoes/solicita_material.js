@@ -104,7 +104,7 @@ function setValuesRowInput() {
     if (escolha) {
         if (!$('#checkReceptor').prop('checked')) {
             var rg = $("#inputRgReceptor").val().length;
-            if (rg < 7) {
+            if (rg < 7 || rg > 11) {
                 alert('O RG não pode ter menos de 7 dígitos e mais de 11');
                 return false;
             } else if ($("#inputNomeReceptor").val().length < 5) {
