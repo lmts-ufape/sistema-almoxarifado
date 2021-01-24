@@ -95,16 +95,16 @@
                     <select id="setor" class="form-control" name="setor">
                         @if($usuario->setor == 'Administrativo')
                             <option selected value="Administrativo">Administrativo</option>
-                            <option value="Academico">Academico</option>
-                            <option value="Administrativo/Academico">Administrativo/Academico</option>
+                            <option value="Academico">Acadêmico</option>
+                            <option value="Administrativo/Academico">Administrativo/Acadêmico</option>
                         @elseif($usuario->setor == 'Academico')
                             <option value="Administrativo">Administrativo</option>
-                            <option selected value="Academico">Academico</option>
-                            <option value="Administrativo/Academico">Administrativo/Academico</option>
+                            <option selected value="Academico">Acadêmico</option>
+                            <option value="Administrativo/Academico">Administrativo/Acadêmico</option>
                         @else
                             <option value="Administrativo">Administrativo</option>
-                            <option value="Academico">Academico</option>
-                            <option selected value="Administrativo/Academico">Administrativo/Academico</option>
+                            <option value="Academico">Acadêmico</option>
+                            <option selected value="Administrativo/Academico">Administrativo/Acadêmico</option>
                         @endif
                     </select>
                 </div>

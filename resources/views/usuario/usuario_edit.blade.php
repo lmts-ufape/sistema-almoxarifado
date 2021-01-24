@@ -36,7 +36,7 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="cpf"> CPF </label>
-                    <input class="form-control @error('cpf') is-invalid @enderror" onkeypress="return onlyNums();" oninput="return cpfLength();" value="{{ old('cpf', $usuario->cpf) }}" type="text" name="cpf" id="cpf" autocomplete="cpf" autofocus placeHolder="000.000.000-00">
+                    <input class="form-control @error('cpf') is-invalid @enderror" onkeypress="return onlyNums();" oninput="return cpfLength();" value="{{ old('cpf', $usuario->cpf) }}" type="text" name="cpf" id="cpf" autocomplete="cpf" autofocus placeHolder="00000000000">
                     @error('cpf')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
 
                 <div class="form-group col-md-2">
                     <label for="rg"> RG </label>
-                    <input class="form-control @error('rg') is-invalid @enderror" onkeypress="return onlyNums();" oninput="return rgLength();" value="{{ old('rg', $usuario->rg) }}" type="text" name="rg" id="rg" autocomplete="rg" autofocus placeHolder="00.000.000">
+                    <input class="form-control @error('rg') is-invalid @enderror" onkeypress="return onlyNums();" oninput="return rgLength();" value="{{ old('rg', $usuario->rg) }}" type="text" name="rg" id="rg" autocomplete="rg" autofocus placeHolder="00000000">
                     @error('rg')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -79,16 +79,16 @@
                     <select id="setor" class="form-control" name="setor">
                         @if($usuario->setor == 'Administrativo')
                             <option selected value="Administrativo">Administrativo</option>
-                            <option value="Academico">Academico</option>
-                            <option value="Administrativo/Academico">Administrativo/Academico</option>
+                            <option value="Academico">Acadêmico</option>
+                            <option value="Administrativo/Academico">Administrativo/Acadêmico</option>
                         @elseif($usuario->setor == 'Academico')
                             <option value="Administrativo">Administrativo</option>
-                            <option selected value="Academico">Academico</option>
-                            <option value="Administrativo/Academico">Administrativo/Academico</option>
+                            <option selected value="Academico">Acadêmico</option>
+                            <option value="Administrativo/Academico">Administrativo/Acadêmico</option>
                         @else
                             <option value="Administrativo">Administrativo</option>
-                            <option value="Academico">Academico</option>
-                            <option selected value="Administrativo/Academico">Administrativo/Academico</option>
+                            <option value="Academico">Acadêmico</option>
+                            <option selected value="Administrativo/Academico">Administrativo/Acadêmico</option>
                         @endif
                     </select>
                 </div>

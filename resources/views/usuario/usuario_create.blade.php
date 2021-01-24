@@ -45,7 +45,7 @@
                     <label for="cpf"> CPF </label>
                     <input type="text" name="cpf" id="cpf" class="form-control @error('cpf') is-invalid @enderror"
                            onkeypress="return onlyNums();" oninput="return cpfLength();" value="{{ old('cpf') }}"
-                           autocomplete="cpf" autofocus placeHolder="000.000.000-00">
+                           autocomplete="cpf" autofocus placeHolder="00000000000">
                     @error('cpf')
                     <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -56,7 +56,7 @@
                     <label for="rg"> RG </label>
                     <input name="rg" id="rg" class="form-control @error('rg') is-invalid @enderror"
                            onkeypress="return onlyNums();" oninput="return rgLength();" value="{{ old('rg') }}"
-                           type="text" autocomplete="rg" autofocus placeHolder="00.000.000">
+                           type="text" autocomplete="rg" autofocus placeHolder="00000000">
                     @error('rg')
                     <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -90,8 +90,8 @@
                     <label for="setor"> Setor </label>
                     <select id="setor" class="form-control" name="setor">
                         <option data-value="Administrativo">Administrativo</option>
-                        <option data-value="Academico">Academico</option>
-                        <option data-value="Administrativo/Academico">Administrativo/Academico</option>
+                        <option data-value="Academico">Acadêmico</option>
+                        <option data-value="Administrativo/Academico">Administrativo/Acadêmico</option>
                     </select>
                 </div>
                 <div class="form-group">
