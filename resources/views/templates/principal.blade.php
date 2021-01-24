@@ -13,7 +13,7 @@
     <script defer="defer" src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="hhttps://cdnjs.com/libraries/jquery.mask"></script>
+    <script src="{{ asset('js/jquery-mask-plugin.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
             integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
             crossorigin="anonymous"></script>
@@ -135,14 +135,12 @@
 @include('templates.rodape')
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#nome').mask('#', {
-            maxlength: false,
-            translation: {
-                '#': {pattern: /[A-zÀ-ÿ ]/, recursive: true}
-            }
-        });
-    })
+    $("#nome").mask("#", {
+        maxlength: false,
+        translation: {
+            '#': {pattern: /[A-zÀ-ÿ ]/, recursive: true}
+        }
+    });
 </script>
 </body>
 </html>
