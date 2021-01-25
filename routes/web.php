@@ -1,30 +1,17 @@
 <?php
 
-use Doctrine\DBAL\Schema\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function () {
-    Route::resource('usuario', 'UsuarioController');
-    Route::get('usuario/{id}/edit_perfil', 'UsuarioController@edit_perfil')->name('usuario.edit_perfil');
-    Route::get('usuario/{id}/edit_senha', 'UsuarioController@edit_senha')->name('usuario.edit_senha');
-    Route::get('usuario/{id}/remover', 'UsuarioController@destroy')->name('usuario.destroy');
-    Route::put('usuario/update_perfil/{id}', 'UsuarioController@update_perfil')->name('usuario.update_perfil');
-    Route::put('usuario/update_senha/{id}', 'UsuarioController@update_senha')->name('usuario.update_senha');
-
-    Route::get('/', function () {
-        return view('home');
-    })->name('home');
-});
-    Route::get('sistema', function () {
-        return view('infos.sistema');
-    })->name('sistema');
-    Route::get('parceria', function () {
-        return view('infos.parceria');
-    })->name('parceria');
-    Route::get('contato', function () {
-        return view('infos.contato');
-    })->name('contato');
+Route::get('sistema', function () {
+    return view('infos.sistema');
+})->name('sistema');
+Route::get('parceria', function () {
+    return view('infos.parceria');
+})->name('parceria');
+Route::get('contato', function () {
+    return view('infos.contato');
+})->name('contato');
 
 Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
     Route::resource('notificacao', 'NotificacaoController');
@@ -74,7 +61,18 @@ Route::middleware(['auth', 'CheckCargoAdminDiretoria'])->group(function () {
     Route::POST('relatorio.materiais', 'RelatorioController@gerarRelatorioMateriais')->name('relatorio.materiais');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware('auth')->group(function () {
+    Route::resource('usuario', 'UsuarioController');
+    Route::get('usuario/{id}/edit_perfil', 'UsuarioController@edit_perfil')->name('usuario.edit_perfil');
+    Route::get('usuario/{id}/edit_senha', 'UsuarioController@edit_senha')->name('usuario.edit_senha');
+    Route::get('usuario/{id}/remover', 'UsuarioController@destroy')->name('usuario.destroy');
+    Route::put('usuario/update_perfil/{id}', 'UsuarioController@update_perfil')->name('usuario.update_perfil');
+    Route::put('usuario/update_senha/{id}', 'UsuarioController@update_senha')->name('usuario.update_senha');
+
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
+
     Route::get('observacao_solicitacao/{id}', 'SolicitacaoController@getObservacaoSolicitacao')->name('observacao.solicitacao');
 });
 
