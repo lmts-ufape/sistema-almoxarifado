@@ -19,8 +19,7 @@
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control  @error('nome') is-invalid @enderror" type="text" name="nome" id="nome"
-                       onkeypress="return onlyLetters();" maxlength="100" value="{{ old('nome') }}"
-                       autocomplete="nome" autofocus placeHolder="Nome Completo">
+                       maxlength="100" value="{{ old('nome') }}" autocomplete="nome" autofocus placeHolder="Nome Completo">
                 @error('nome')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -30,10 +29,8 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="numTel">{{ __('Celular') }}</label>
-                    <input id="numTel" type="number" min="0" max="99999999999" oninput="return numTelLength();"
-                           onkeypress="return onlyNums();"
-                           class="form-control @error('numTel') is-invalid @enderror" name="numTel"
-                           value="{{ old('numTel') }}" required autocomplete="numTel" placeholder="00000000000">
+                    <input id="numTel" type="text" min="0" class="form-control @error('numTel') is-invalid @enderror" 
+                        name="numTel" value="{{ old('numTel') }}" required autocomplete="numTel" placeholder="(00)00000-0000">
 
                     @error('numTel')
                     <span class="invalid-feedback" role="alert">
@@ -44,8 +41,7 @@
                 <div class="form-group col-md-2">
                     <label for="cpf"> CPF </label>
                     <input type="text" name="cpf" id="cpf" class="form-control @error('cpf') is-invalid @enderror"
-                           onkeypress="return onlyNums();" oninput="return cpfLength();" value="{{ old('cpf') }}"
-                           autocomplete="cpf" autofocus placeHolder="00000000000">
+                           value="{{ old('cpf') }}" autocomplete="cpf" autofocus placeHolder="000.000.000-00">
                     @error('cpf')
                     <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -54,9 +50,8 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="rg"> RG </label>
-                    <input name="rg" id="rg" class="form-control @error('rg') is-invalid @enderror"
-                           onkeypress="return onlyNums();" oninput="return rgLength();" value="{{ old('rg') }}"
-                           type="text" autocomplete="rg" autofocus placeHolder="00000000">
+                    <input name="rg" id="rg" class="form-control @error('rg') is-invalid @enderror" maxlength="11"
+                           value="{{ old('rg') }}" type="text" autocomplete="rg" autofocus placeHolder="00000000000">
                     @error('rg')
                     <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -76,10 +71,8 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label for="matricula"> Matrícula </label>
-                    <input class="form-control @error('matricula') is-invalid @enderror"
-                           onkeypress="return onlyNums();" oninput="return matriculaLength();"
-                           value="{{ old('matricula') }}" type="number" name="matricula" id="matricula"
-                           autocomplete="matricula" autofocus placeHolder="000000000">
+                    <input class="form-control @error('matricula') is-invalid @enderror" value="{{ old('matricula') }}" type="text" 
+                        name="matricula" id="matricula" maxlength="11" autocomplete="matricula" autofocus placeHolder="00000000000">
                     @error('matricula')
                     <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -151,5 +144,4 @@
 
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="{{asset('js/usuario/register.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/CheckLettersNumbers.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/CheckFieldsUser.js')}}"></script>

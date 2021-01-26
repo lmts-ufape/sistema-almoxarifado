@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control @error('nome') is-invalid @enderror" type="text" name="nome" id="nome"
-                       max="100" onkeypress="return onlyLetters();" placeHolder="Nome Completo"
+                       maxlength="100" placeHolder="Nome Completo"
                        value="{{ $usuario->nome }}">
 
                 @error('nome')
@@ -38,10 +38,8 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="cpf"> CPF </label>
-                    <input class="form-control @error('cpf') is-invalid @enderror" type="number" name="cpf" id="cpf"
-                           min="0" max="99999999999" oninput="return cpfLength();"
-                           onkeypress="return onlyNums();" placeHolder="00000000000"
-                           value="{{ $usuario->cpf }}">
+                    <input class="form-control @error('cpf') is-invalid @enderror" type="text" name="cpf" id="cpf"
+                           min="0" placeHolder="000.000.000-00" value="{{ $usuario->cpf }}">
 
                     @error('cpf')
                     <span class="invalid-feedback" role="alert">
@@ -52,9 +50,8 @@
 
                 <div class="form-group col-md-2">
                     <label for="rg"> RG </label>
-                    <input class="form-control @error('rg') is-invalid @enderror" type="number" name="rg" id="rg"
-                           min="0" max="99999999999" oninput="return rgLength();"
-                           onkeypress="return onlyNums();" placeHolder="00000000"
+                    <input class="form-control @error('rg') is-invalid @enderror" type="text" name="rg" id="rg"
+                           min="0" maxlength="11" placeHolder="00000000000"
                            value="{{ $usuario->rg }}">
 
                     @error('rg')
@@ -79,9 +76,8 @@
 
                 <div class="form-group col-md-2">
                     <label for="matricula"> Matrícula </label>
-                    <input class="form-control @error('matricula') is-invalid @enderror" type="number" name="matricula"
-                           id="matricula" min="0" max="99999999999" onkeypress="return onlyNums();" 
-                           placeHolder="000000000" value="{{ $usuario->matricula }}">
+                    <input class="form-control @error('matricula') is-invalid @enderror" type="text" name="matricula"
+                           id="matricula" min="0" maxlength="11" placeHolder="00000000000" value="{{ $usuario->matricula }}">
 
                     @error('matricula')
                     <span class="invalid-feedback" role="alert">
@@ -129,10 +125,8 @@
 
             <div class="form-group">
                 <label for="numTel"> Número de Celular </label>
-                <input class="form-control @error('numTel') is-invalid @enderror" type="number" name="numTel"
-                       id="numTel" min="0" max="99999999999" oninput="return numTelLength();"
-                       onkeypress="return onlyNums();" placeHolder="00000000000"
-                       value="{{ $usuario->numTel }}">
+                <input class="form-control @error('numTel') is-invalid @enderror" type="text" name="numTel"
+                       id="numTel" placeHolder="(00)00000-0000" value="{{ $usuario->numTel }}">
 
                 @error('numTel')
                 <span class="invalid-feedback" role="alert">
@@ -178,4 +172,4 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="{{asset('js/usuario/edit.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/CheckLettersNumbers.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/CheckFieldsUser.js')}}"></script>

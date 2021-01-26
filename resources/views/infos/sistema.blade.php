@@ -4,7 +4,7 @@
 <div class="container" style="background: rgb(240, 238, 238); margin: 30px auto; padding: 40px; border-radius: 15px">
     <div class="container" style="background: rgb(240, 238, 238); ">
         <h1 style="color: #3E3767; font-weight: bold; margin-bottom:20px">Sobre o sistema</h1>
-        <h2 style="color: #3E3767;font-weight: bold">O que é o sistema eletrônico de gestão de almoxarifados (SEGA)?</h2>
+        <h2 style="color: #3E3767;font-weight: bold">O que é a plataforma eletrônica de gestão de almoxarifado (PEGA)?</h2>
         <p style="color: #3E3767; text-align: justify">
             É uma aplicação web desenvolvida no âmbito da cooperação técnica UFAPE-LMTS / UPE com o objetivo de informatizar o gerenciamento de almoxarifados,
              auxiliando os responsáveis nas suas rotinas de trabalho,

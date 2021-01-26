@@ -29,6 +29,9 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
+        $request['cpf'] = str_replace(['.', '-'], '', $request['cpf']);
+        $request['numTel'] = str_replace(['(', ')', '-'], '', $request['numTel']);
+
         $validator = Validator::make($request->all(), Usuario::$rules, Usuario::$messages)->validate();
 
         $data = [
@@ -106,6 +109,9 @@ class UsuarioController extends Controller
             Rule::unique('usuarios')->ignore($usuario->id),
         ];
 
+        $request['cpf'] = str_replace(['.', '-'], '', $request['cpf']);
+        $request['numTel'] = str_replace(['(', ')', '-'], '', $request['numTel']);
+
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
         $data = [
@@ -130,6 +136,9 @@ class UsuarioController extends Controller
 
         $rules = array_slice(Usuario::$rules, 7);
         $messages = array_slice(Usuario::$messages, 27);
+
+        $request['cpf'] = str_replace(['.', '-'], '', $request['cpf']);
+        $request['numTel'] = str_replace(['(', ')', '-'], '', $request['numTel']);
 
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
@@ -167,6 +176,9 @@ class UsuarioController extends Controller
             'required', 'integer', 'min:1',
             Rule::unique('usuarios')->ignore($usuario->id),
         ];
+
+        $request['cpf'] = str_replace(['.', '-'], '', $request['cpf']);
+        $request['numTel'] = str_replace(['(', ')', '-'], '', $request['numTel']);
 
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
