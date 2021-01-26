@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Usuario;
 use App\Cargo;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Validator;
+use App\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 class UsuarioController extends Controller
 {
-
     public function index()
     {
         if (Gate::allows('read-usuario')) {
             return view('usuario/usuario_index', ['usuarios' => Usuario::all()]);
-        } else if (Gate::denies('read-usuario')) {
+        }
+        if (Gate::denies('read-usuario')) {
             abort('403', 'Não Autorizado');
         }
     }
@@ -41,7 +41,7 @@ class UsuarioController extends Controller
             'cargo_id' => $request['cargo'],
             'numTel' => $request['numTel'],
             'senha' => Hash::make($request->password),
-            'setor' => $request['setor']
+            'setor' => $request['setor'],
         ];
 
         Usuario::create($data);
@@ -53,21 +53,21 @@ class UsuarioController extends Controller
     {
         if (Gate::allows('read-usuario')) {
             return view('usuario/usuario_show', ['usuario' => Usuario::find($id)]);
-        } else if (Gate::denies('read-usuario')) {
+        }
+        if (Gate::denies('read-usuario')) {
             abort('403', 'Não Autorizado');
         }
     }
 
     public function edit($id)
     {
-
         if (Gate::allows('update-usuario', $id)) {
             return view('usuario/usuario_edit', ['usuario' => Usuario::find($id), 'cargos' => Cargo::all()]);
-        } else if (Gate::denies('update-usuario', $id)) {
+        }
+        if (Gate::denies('update-usuario', $id)) {
             abort('403', 'Não Autorizado');
         }
     }
-
 
     public function edit_perfil($id)
     {
@@ -81,10 +81,9 @@ class UsuarioController extends Controller
 
     public function update_perfil(Request $request, $id)
     {
-
         $usuario = Usuario::find($id);
 
-        $rules = array_slice(Usuario::$rules, 0, 6);
+        $rules = array_slice(Usuario::$rules, 0, 7);
         $messages = array_slice(Usuario::$messages, 0, 23);
 
         $rules['email'] = [
@@ -117,7 +116,7 @@ class UsuarioController extends Controller
             'data_nascimento' => $request['data_nascimento'],
             'matricula' => $request['matricula'],
             'numTel' => $request['numTel'],
-            'setor' => $request['setor']
+            'setor' => $request['setor'],
         ];
 
         $usuario->fill($data)->Update();
@@ -145,7 +144,8 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::find($id);
 
-        $rules = array_slice(Usuario::$rules, 0, 6);
+        $rules = array_slice(Usuario::$rules, 0, 7);
+
         $messages = array_slice(Usuario::$messages, 0, 23);
 
         $rules['email'] = [
@@ -180,7 +180,7 @@ class UsuarioController extends Controller
             'cargo_id' => $request['cargo'],
             'numTel' => $request['numTel'],
             'senha' => Hash::make($request['password']),
-            'setor' => $request['setor']
+            'setor' => $request['setor'],
         ];
 
         $usuario->fill($data)->Update();
