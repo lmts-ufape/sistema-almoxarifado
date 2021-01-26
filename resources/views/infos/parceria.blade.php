@@ -50,6 +50,9 @@
             <li>
                 Prof. Dr. Mariel José Pimentel de Andrade
             </li>
+            <li>
+                Prof. Dr. Rodrigo Gusmão de Carvalho Rocha
+            </li>
         </ul>
         <h5 style="color: #3E3767; font-weight: bold;">Docentes UPE:</h5>
         <ul style="color: #3E3767;">

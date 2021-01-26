@@ -14,7 +14,7 @@
                 <ul class="navbar-nav ml-auto">
                     <a class="nav-link menuSupEInf" style="color: white; font-weight: bold" href="{{ route('home') }}">
                         <li class="nav-item " style="padding: 0px 15px">
-                            {{ __('Inicio') }}
+                            {{ __('Início') }}
                         </li>
                     </a>
                     <a class="nav-link menuSupEInf" style="color: white; font-weight: bold"
