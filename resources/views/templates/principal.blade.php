@@ -134,13 +134,6 @@
 
 @include('templates.rodape')
 
-<script type="text/javascript">
-    $("#nome").mask("#", {
-        maxlength: false,
-        translation: {
-            '#': {pattern: /[A-zÀ-ÿ ]/, recursive: true}
-        }
-    });
-</script>
+<script src="{{ asset('js/check-field.js') }}"></script>
 </body>
 </html>
