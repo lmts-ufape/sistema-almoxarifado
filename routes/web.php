@@ -13,7 +13,7 @@ Route::get('contato', function () {
     return view('infos.contato');
 })->name('contato');
 
-Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
+Route::middleware(['auth', 'verified', 'CheckCargoAdministrador'])->group(function () {
     Route::resource('notificacao', 'NotificacaoController');
     Route::get('notificacao/{notificacao_id}', 'NotificacaoController@show')->name('notificacao.show');
     Route::get('notificacoes', 'NotificacaoController@index')->name('notificacao.index');
@@ -48,7 +48,7 @@ Route::middleware(['auth', 'CheckCargoAdministrador'])->group(function () {
     Route::get('solicitacoes_admin', 'SolicitacaoController@listTodasSolicitacoes')->name('solicitacoe.admin');
 });
 
-Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
+Route::middleware(['auth', 'verified', 'CheckCargoRequerente'])->group(function () {
     Route::resource('solicita', 'SolicitacaoController');
     Route::get('editar_perfil/{user_id}', 'UsuarioController@edit')->name('perfil.editar');
     Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
@@ -56,12 +56,12 @@ Route::middleware(['auth', 'CheckCargoRequerente'])->group(function () {
     Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
 });
 
-Route::middleware(['auth', 'CheckCargoAdminDiretoria'])->group(function () {
+Route::middleware(['auth', 'verified', 'CheckCargoAdminDiretoria'])->group(function () {
     Route::get('relatorio.materiais', 'RelatorioController@relatorio_escolha')->name('relatorio.materiais');
     Route::POST('relatorio.materiais', 'RelatorioController@gerarRelatorioMateriais')->name('relatorio.materiais');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
     Route::resource('usuario', 'UsuarioController');
     Route::get('usuario/{id}/edit_perfil', 'UsuarioController@edit_perfil')->name('usuario.edit_perfil');
     Route::get('usuario/{id}/edit_senha', 'UsuarioController@edit_senha')->name('usuario.edit_senha');
@@ -76,4 +76,6 @@ Route::middleware('auth')->group(function () {
     Route::get('observacao_solicitacao/{id}', 'SolicitacaoController@getObservacaoSolicitacao')->name('observacao.solicitacao');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home');

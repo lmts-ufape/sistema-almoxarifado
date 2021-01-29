@@ -8,8 +8,6 @@ class CreateUsuariosTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -28,15 +26,13 @@ class CreateUsuariosTable extends Migration
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
-
+            $table->timestamp('email_verified_at')->nullable();
             $table->foreign('cargo_id')->references('id')->on('cargos');
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

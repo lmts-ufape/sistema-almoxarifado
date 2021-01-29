@@ -139,11 +139,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md"  style="background-color: #1b1c42; ">
-
                 @yield('content')
-
                 @yield('post-script')
-
         </div>
     </div>
 </div>
