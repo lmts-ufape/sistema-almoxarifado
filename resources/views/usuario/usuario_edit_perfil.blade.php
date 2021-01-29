@@ -172,4 +172,4 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="{{asset('js/usuario/edit.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/CheckFieldsUser.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/usuario/CheckFields.js')}}"></script>

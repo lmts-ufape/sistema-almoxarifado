@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Deposito;
 use App\Estoque;
-use App\Http\Requests\DepositoStore;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class DepositoController extends Controller
 {
-
     public function index()
     {
         return view('deposito/deposito_index', ['depositos' => Deposito::all(), 'estoques' => Estoque::all()]);
@@ -26,7 +26,7 @@ class DepositoController extends Controller
 
     public function getEstoques($deposito_id)
     {
-        $estoques = DB::select('Select mat.nome, e.quantidade from estoques e, materials mat where e.deposito_id = ? and mat.id = e.material_id', [$deposito_id]);
+        $estoques = DB::select('Select mat.nome, e.quantidade from estoques e, Depositos mat where e.deposito_id = ? and mat.id = e.material_id', [$deposito_id]);
 
         return response()->json($estoques);
     }
@@ -36,11 +36,17 @@ class DepositoController extends Controller
         return view('deposito/deposito_create');
     }
 
-    public function store(DepositoStore $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
+        $validator = Validator::make($request->all(), Deposito::$rules, Deposito::$messages)->validate();
 
-        Deposito::create($data);
+        $data = [
+            'nome' => $request->nome,
+            'codigo' => $request->codigo,
+        ];
+
+        $deposito = Deposito::create($data);
+        $deposito->save();
 
         return redirect(route('deposito.index'));
     }
@@ -55,10 +61,15 @@ class DepositoController extends Controller
         return view('deposito/deposito_edit', ['deposito' => Deposito::find($id)]);
     }
 
-    public function update(DepositoStore $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->validated();
+        $validator = Validator::make($request->all(), Deposito::$rules, Deposito::$messages)->validate();
         $deposito = Deposito::find($id);
+
+        $data = [
+            'nome' => $request->nome,
+            'codigo' => $request->codigo,
+        ];
 
         $deposito->fill($data)->save();
 
@@ -71,9 +82,10 @@ class DepositoController extends Controller
         if (empty($estoques)) {
             $deposito = Deposito::all()->find($id);
             $deposito->delete();
+
             return redirect(route('deposito.index'))->with('sucess', 'Desposito removido com sucesso!');
-        } else{
-            return redirect()->back()->with('fail', 'Deposito não vazio, não é possivel remover!');
         }
+
+        return redirect()->back()->with('fail', 'Deposito não vazio, não é possivel remover!');
     }
 }
