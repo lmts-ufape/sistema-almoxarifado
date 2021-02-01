@@ -37,8 +37,7 @@
                 </div>
             </div>
             <div class="col-sm-5" style="margin-right: -100px">
-                <h3 class="col-md-8 offset-sm-2"
-                    style="margin-bottom: 5%; font-family: 'Segoe UI'; color: #3E3767;"><u>Entrar</u></h3>
+                <h3 style="font-family: 'Segoe UI'; color: #3E3767; text-align: center; margin-left: -10%"><u>Entrar</u></h3>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group col-md-11">
