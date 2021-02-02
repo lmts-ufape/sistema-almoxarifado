@@ -36,8 +36,8 @@ class SolicitacaoController extends Controller
                 break;
             }
 
-            if ((is_numeric($materiais[$i]) && intval($materiais[$i]) < 0 || strpos($materiais[$i], '.') || strpos($materiais[$i], ',')) ||
-                    (is_numeric($quantidades[$i]) && intval($quantidades[$i]) < 0 || strpos($quantidades[$i], '.') || strpos($quantidades[$i], ','))) {
+            if ((is_numeric($materiais[$i]) && intval($materiais[$i]) < 0 || strpos($materiais[$i], '.') || strpos($materiais[$i], ','))
+                    || (is_numeric($quantidades[$i]) && intval($quantidades[$i]) < 0 || strpos($quantidades[$i], '.') || strpos($quantidades[$i], ','))) {
                 $materiaisCheck = false;
 
                 break;
@@ -48,8 +48,8 @@ class SolicitacaoController extends Controller
             return redirect()->back()->withErrors('Informe valores validos para o(s) material(is) e sua(s) quantidade(s)');
         }
 
-        if (is_null($request->checkReceptor) && strlen($request->nomeReceptor) > 100 || strlen($request->nomeReceptor) < 5 ||
-                (is_numeric($request->rgReceptor) && intval($request->rgReceptor) < 0) || strlen($request->rgReceptor) < 7 || strlen($request->rgReceptor) > 11) {
+        if (is_null($request->checkReceptor) && strlen($request->nomeReceptor) > 100 || strlen($request->nomeReceptor) < 5
+                || (is_numeric($request->rgReceptor) && intval($request->rgReceptor) < 0) || strlen($request->rgReceptor) < 7 || strlen($request->rgReceptor) > 11) {
             return redirect()->back()->withErrors('O nome do receptor deve ter no máximo 100 dígitos e o RG 11 dígitos');
         }
 
@@ -392,5 +392,21 @@ class SolicitacaoController extends Controller
         }
 
         return $materiaisPreview;
+    }
+
+    public function cancelarSolicitacaoReq($id)
+    {
+        $solicitacao = HistoricoStatus::select('data_finalizado')->where('solicitacao_id', $id)->get();
+
+        if (is_null($solicitacao[0]->data_finalizado)) {
+            DB::update(
+                'update historico_statuses set status = ?, data_finalizado = now() where solicitacao_id = ?',
+                ['Cancelado', $id]
+            );
+
+            return redirect()->back()->with('success', 'A solicitação foi cancelada.');
+        }
+
+        return redirect()->back()->with('error', 'A solicitação não pode ser cancelada pois já foi finalizada.');
     }
 }
