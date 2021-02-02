@@ -1,4 +1,3 @@
-
 @extends('templates.principal')
 
 @section('title') Depositos @endsection
