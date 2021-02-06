@@ -27,7 +27,7 @@ function showItens(id) {
                 ret += "<td>" + data[item]['descricao'] + "</td>";
                 ret += "<td style=\"text-align: center\">" + data[item]['quantidade_solicitada'] + "</td>";
                 ret += "<td style=\"text-align: center\">" + data[item]['quantidade'] + "</td>";
-                ret += "<td style=\"text-align: center\">" + '<input class="mascara" min=\"1\" style=\"width: 85%\" type=\"text\" id=\"inputQuantAprovada\"';
+                ret += "<td style=\"text-align: center\">" + '<input class="quantMateriais" min=\"1\" style=\"width: 85%\" type=\"text\" id=\"inputQuantAprovada\"';
                 ret += 'name=\"quantAprovada[]\" value=\"' + (data[item]['quantidade_aprovada'] == null ? '' : data[item]['quantidade_aprovada']) + '\">' + "</td>";
                 ret += "</tr>";
             }
@@ -44,7 +44,7 @@ function showItens(id) {
 
 $(function () { 
 
-    $(document).on("focus", ".mascara", function(){
+    $(document).on("focus", ".quantMateriais", function(){
         $(this).mask("#", {
             maxlength: false,
             translation: {

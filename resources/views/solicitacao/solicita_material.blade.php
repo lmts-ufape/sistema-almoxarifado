@@ -52,8 +52,8 @@
                 </select>
             </div>
             <div class="form-group col-md-2">
-                <label for="inputQuantidade" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
-                <input type="number" min="1" onkeypress="return onlyNums(event,this);" class="form-control" id="inputQuantidade" name="quantidade" value="{{ old('quantidade') }}">
+                <label for="quantMaterial" style="color: #151631; font-family: 'Segoe UI'; font-weight: 700">Quantidade</label>
+                <input type="text" min="1" class="form-control" id="quantMaterial" name="quantidade" value="{{ old('quantidade') }}">
             </div>
             <div class="form-group">
                 <button id="addTable" style="margin-top: 30px; margin-left: 10px" class="btn btn-primary" onclick="addTable()">Adicionar</button>
@@ -89,7 +89,7 @@
             <div class="form-group col-md-3">
                 <label for="inputRgReceptor">RG</label>
                 <input type="hidden" id="rgReceptor" name="rgReceptor" value="{{Auth::user()->rg}}">
-                <input type="number" min="1" onkeypress="return onlyNums(event,this);" oninput="return rgLength();" class="form-control" id="inputRgReceptor" name="rgReceptor" value="{{Auth::user()->rg}}" disabled="true">
+                <input type="text" min="1" maxlength="11" class="form-control" id="inputRgReceptor" name="rgReceptor" value="{{Auth::user()->rg}}" disabled="true">
             </div>
         </div>
         <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0;">

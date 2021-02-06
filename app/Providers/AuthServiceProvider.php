@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Usuario;
+use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Lang;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -18,18 +22,25 @@ class AuthServiceProvider extends ServiceProvider
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
     public function boot()
     {
         $this->registerPolicies();
         Gate::define('update-usuario', function ($user, $usuario) {
-            return ($user->id == $usuario) || $user->cargo_id == 2;
+            return ($user->id == $usuario) || 2 == $user->cargo_id;
         });
 
         Gate::define('read-usuario', function ($user) {
-            return  $user->cargo_id == 2;
+            return 2 == $user->cargo_id;
+        });
+
+        VerifyEmail::toMailUsing(function (Usuario $user, string $verificationUrl) {
+            return (new MailMessage())
+                ->subject(Lang::get('Verificar endereço de e-mail'))
+                ->line(Lang::get('Clique no botão abaixo para verificar o seu endereço de e-mail.'))
+                ->action(Lang::get('Verificar endereço de e-mail'), $verificationUrl)
+                ->line(Lang::get('Se você não criou uma conta, nenhuma ação adicional é necessária.'))
+            ;
         });
     }
 }

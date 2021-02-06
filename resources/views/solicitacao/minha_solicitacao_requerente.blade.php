@@ -71,18 +71,15 @@
                     <td class="expandeOption" style="text-align: center">{{ date('d/m/Y',  strtotime($status[$i]->created_at))}}</td>
                     <td style="text-align: center">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown" type="button" id="dropdownMenuButton"
+                            @if ($status[$i]->status != "Cancelado" && $status[$i]->status != "Entregue" && $status[$i]->status != "Negado")
+                                <button class="btn btn-secondary dropdown" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                ⋮
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                {{-- @if ($status[$i]->status == "Aguardando Analise")
-                                    <a type="button" class="dropdown-item" onclick="location.href=">Editar</a>
-                                @endif --}}
-                                @if ($status[$i]->status != "Cancelado" && $status[$i]->status != "Entregue" && $status[$i]->status != "Negado")
+                                    ⋮
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a type="button" class="dropdown-item" onclick="if(confirm('Tem certeza que deseja cancelar a solicitação?')) location.href='{{ route('cancelar.solicitacao', $status[$i]->solicitacao_id) }}'">Cancelar</a>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                         </div>
                     </td>
                 </tr>

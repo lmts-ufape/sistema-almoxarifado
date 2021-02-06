@@ -85,7 +85,7 @@ function updateRowTable() {
 
 function clearFields() {
     $("#selectMaterial").val("").trigger('change');
-    $("#inputQuantidade").val("");
+    $("#quantMaterial").val("");
 }
 
 function deleteRow(ctl) {
@@ -129,10 +129,10 @@ function setValuesRowInput() {
 }
 
 function addTable() {
-    if ($("#selectMaterial option:selected").index() > 0 && $("#inputQuantidade").val() != '') {
+    if ($("#selectMaterial option:selected").index() > 0 && $("#quantMaterial").val() != '') {
         $("#tableMaterial tbody").append("<tr data-id=" + $("#selectMaterial option:selected").data('value') + ">" +
             "<td data-id=" + $("#selectMaterial option:selected").index() + " class=\"materialRow\">" + $("#selectMaterial option:selected").text() + "</td>" +
-            construirTable($("#inputQuantidade").val()));
+            construirTable($("#quantMaterial").val()));
     } else {
         $('#error').slideDown();
         setTimeout(function () {
@@ -177,21 +177,26 @@ function onlyLetters(e, t) {
     }
 }
 
-function onlyNums(e, t) {
-    try {
-        if (window.event) {
-            var charCode = window.event.keyCode;
-        } else if (e) {
-            var charCode = e.which;
-        } else {
-            return true;
+$(function () {
+    $("#quantMaterial").mask("#", {
+        maxlength: true,
+        translation: {
+            '#': { pattern: /[0-9]/, recursive: true }
         }
-        if ((charCode >= 48 && charCode <= 57)) {
-            return true;
-        } else {
-            return false;
+    });
+
+    $("#inputNomeReceptor").mask("#", {
+        maxlength: true,
+        translation: {
+            '#': { pattern: /^[A-Za-záâãéêíóôõúçÁÂÃÉÊÍÓÔÕÚÇ\s]+$/, recursive: true }
         }
-    } catch (err) {
-        alert('Digite apenas números');
-    }
-}
+    });
+
+    
+    $("#inputRgReceptor").mask("#", {
+        maxlength: true,
+        translation: {
+            '#': { pattern: /[0-9]/, recursive: true }
+        }
+    });
+})
