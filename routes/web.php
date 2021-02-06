@@ -53,7 +53,7 @@ Route::middleware(['auth', 'verified', 'CheckCargoRequerente'])->group(function 
     Route::get('editar_perfil/{user_id}', 'UsuarioController@edit')->name('perfil.editar');
     Route::get('solicita_material', 'SolicitacaoController@show')->name('solicita.material');
     Route::get('minhas_solicitacoes', 'SolicitacaoController@listSolicitacoesRequerente')->name('minhas.solicitacoes');
-    Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacao')->name('itens.solicitacao');
+    Route::get('itens_solicitacao/{id}', 'SolicitacaoController@getItemSolicitacaoRequerente')->name('itens.solicitacao');
     Route::get('cancelar_solicitacao/{id}', 'SolicitacaoController@cancelarSolicitacaoReq')->name('cancelar.solicitacao');
 });
 
