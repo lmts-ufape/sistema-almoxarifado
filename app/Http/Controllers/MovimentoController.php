@@ -7,7 +7,9 @@ use App\Estoque;
 use App\itemMovimento;
 use App\Material;
 use App\Movimento;
+use App\Notificacao;
 use App\Transferencia;
+use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -38,6 +40,26 @@ class MovimentoController extends Controller
         return view('movimento.transferencia', ['materiais' => $materiais, 'depositos' => $depositos]);
     }
 
+    private function notificacao_E_Email($estoque){
+        $material = Material::find($estoque->material_id);
+        $usuarios = Usuario::all();
+        if($estoque->quantidade < $material->quantidade_minima){
+            for ($j = 1; $j < count($usuarios); ++$j) {
+                if (2 == $usuarios->find($j)->cargo_id) {
+                    $usuario = $usuarios->find($j);
+                    \App\Jobs\emailMaterialEsgotando::dispatch($usuario, $material);
+                    $mensagem = $material->nome . ' em estado critico.';
+                    $notificacao = new Notificacao();
+                    $notificacao->mensagem = $mensagem;
+                    $notificacao->usuario_id = $usuario->id;
+                    $notificacao->material_id = $material->id;
+                    $notificacao->visto = false;
+                    $notificacao->save();
+                }
+            }
+        }
+    }
+
     public function entradaStore(Request $request)
     {
         $validator = Validator::make($request->all(), Movimento::$rules, Movimento::$messages)->validate();
@@ -56,9 +78,13 @@ class MovimentoController extends Controller
             $estoque->quantidade = $request['quantidade'];
             $estoque->material_id = $request['material_id'];
             $estoque->deposito_id = $request['deposito_id'];
+
+            $this->notificacao_E_Email($estoque);
         } else {
             $estoque = Estoque::findOrFail($estoque->id);
             $estoque->quantidade += $request['quantidade'];
+
+            $this->notificacao_E_Email($estoque);
         }
 
         $movimentoEntrada->save();
@@ -141,6 +167,7 @@ class MovimentoController extends Controller
                 return redirect()->route('movimento.transferenciaCreate');
             }
             $estoqueSaida->quantidade -= $request['quantidade'];
+            $this->notificacao_E_Email($estoqueSaida);
         } else {
             $request->session()->flash('erro', 'Não existe um estoque do material selecionado nesse depósito');
 
@@ -157,9 +184,11 @@ class MovimentoController extends Controller
             $estoqueEntrada->quantidade = $request['quantidade'];
             $estoqueEntrada->material_id = $request['material_id'];
             $estoqueEntrada->deposito_id = $request['deposito_id_destino'];
+            $this->notificacao_E_Email($estoqueEntrada);
         } else {
             $estoqueEntrada = Estoque::findOrFail($estoqueEntrada->id);
             $estoqueEntrada->quantidade += $request['quantidade'];
+            $this->notificacao_E_Email($estoqueEntrada);
         }
 
         $movimentoSaida->save();
