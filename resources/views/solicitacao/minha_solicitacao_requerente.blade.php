@@ -7,6 +7,20 @@
         <h2>MINHAS SOLICITAÇÕES</h2>
     </div>
 
+    @if(session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            <strong>{{session('success')}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
+
+    @if(session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show">
+            <strong>{{session('error')}}</strong>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+    @endif
+
     <h6>Clique em uma linha na tabela para visualizar uma amostra dos materiais da solicitação.</h6>
     <h6>Para ver todos os materiais e aprovar/cancelar uma entrega clique em uma linha da tabela subsequente.</h6>
 
@@ -16,6 +30,7 @@
                 <th scope="col" style="text-align: center">Material</th>
                 <th scope="col" style="text-align: center">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
+                <th scope="col" style="text-align: center">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -54,6 +69,19 @@
                         </svg>
                     </td>
                     <td class="expandeOption" style="text-align: center">{{ date('d/m/Y',  strtotime($status[$i]->created_at))}}</td>
+                    <td style="text-align: center">
+                        <div class="dropdown">
+                            @if ($status[$i]->status != "Cancelado" && $status[$i]->status != "Entregue" && $status[$i]->status != "Negado")
+                                <button class="btn btn-secondary dropdown" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ⋮
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a type="button" class="dropdown-item" onclick="if(confirm('Tem certeza que deseja cancelar a solicitação?')) location.href='{{ route('cancelar.solicitacao', $status[$i]->solicitacao_id) }}'">Cancelar</a>
+                                </div>
+                            @endif
+                        </div>
+                    </td>
                 </tr>
             @endfor
         </tbody>

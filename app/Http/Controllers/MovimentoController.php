@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Deposito;
 use App\Estoque;
-use App\Http\Requests\MovimentoStoreRequest;
-use App\Http\Requests\TransferenciaStoreRequest;
 use App\itemMovimento;
 use App\Material;
 use App\Movimento;
+use App\Transferencia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class MovimentoController extends Controller
 {
-
     public function createEntrada()
     {
         $materiais = Material::all();
@@ -38,9 +38,9 @@ class MovimentoController extends Controller
         return view('movimento.transferencia', ['materiais' => $materiais, 'depositos' => $depositos]);
     }
 
-    public function entradaStore(MovimentoStoreRequest $request)
+    public function entradaStore(Request $request)
     {
-        $request = $request->validated();
+        $validator = Validator::make($request->all(), Movimento::$rules, Movimento::$messages)->validate();
 
         $movimentoEntrada = new Movimento();
         $movimentoEntrada->operacao = $request['operacao'];
@@ -51,7 +51,7 @@ class MovimentoController extends Controller
             ['material_id', '=', $request['material_id']],
         ])->get()->first();
 
-        if ($estoque == null) {
+        if (null == $estoque) {
             $estoque = new Estoque();
             $estoque->quantidade = $request['quantidade'];
             $estoque->material_id = $request['material_id'];
@@ -71,13 +71,13 @@ class MovimentoController extends Controller
         $itemMovimento->movimento_id = $movimentoEntrada->id;
 
         $itemMovimento->save();
+
         return redirect()->route('deposito.consultarDeposito');
     }
 
-    public function saidaStore(MovimentoStoreRequest $requestInput)
+    public function saidaStore(Request $request)
     {
-
-        $request = $requestInput->validated();
+        $validator = Validator::make($request->all(), Movimento::$rules, Movimento::$messages)->validate();
 
         $movimentoSaida = new Movimento();
         $movimentoSaida->operacao = $request['operacao'];
@@ -88,15 +88,17 @@ class MovimentoController extends Controller
             ['material_id', '=', $request['material_id']],
         ])->get()->first();
 
-        if ($estoque != null) {
+        if (null != $estoque) {
             $estoque = Estoque::findOrFail($estoque->id);
             if ($estoque->quantidade - $request['quantidade'] < 0) {
-                $requestInput->session()->flash('erro', 'Quantidade solicitada é maior que a disponível em estoque');
+                $request->session()->flash('erro', 'Quantidade solicitada é maior que a disponível em estoque');
+
                 return redirect()->route('movimento.saidaCreate');
             }
             $estoque->quantidade -= $request['quantidade'];
         } else {
-            $requestInput->session()->flash('erro', 'Não existe um estoque do material selecionado nesse depósito');
+            $request->session()->flash('erro', 'Não existe um estoque do material selecionado nesse depósito');
+
             return redirect()->route('movimento.saidaCreate');
         }
 
@@ -110,11 +112,13 @@ class MovimentoController extends Controller
         $itemMovimento->movimento_id = $movimentoSaida->id;
 
         $itemMovimento->save();
+
         return redirect()->route('deposito.consultarDeposito');
     }
-    public function transferenciaStore(TransferenciaStoreRequest $requestInput)
+
+    public function transferenciaStore(Request $request)
     {
-        $request = $requestInput->validated();
+        $validator = Validator::make($request->all(), Transferencia::$rules, Transferencia::$messages)->validate();
 
         $movimentoSaida = new Movimento();
         $movimentoSaida->operacao = '1';
@@ -129,15 +133,17 @@ class MovimentoController extends Controller
             ['material_id', '=', $request['material_id']],
         ])->get()->first();
 
-        if ($estoqueSaida != null) {
+        if (null != $estoqueSaida) {
             $estoqueSaida = Estoque::findOrFail($estoqueSaida->id);
             if ($estoqueSaida->quantidade - $request['quantidade'] < 0) {
-                $requestInput->session()->flash('erro', 'Quantidade solicitada é maior que a disponível em estoque');
+                $request->session()->flash('erro', 'Quantidade solicitada é maior que a disponível em estoque');
+
                 return redirect()->route('movimento.transferenciaCreate');
             }
             $estoqueSaida->quantidade -= $request['quantidade'];
         } else {
-            $requestInput->session()->flash('erro', 'Não existe um estoque do material selecionado nesse depósito');
+            $request->session()->flash('erro', 'Não existe um estoque do material selecionado nesse depósito');
+
             return redirect()->route('movimento.transferenciaCreate');
         }
 
@@ -146,7 +152,7 @@ class MovimentoController extends Controller
             ['material_id', '=', $request['material_id']],
         ])->get()->first();
 
-        if ($estoqueEntrada == null) {
+        if (null == $estoqueEntrada) {
             $estoqueEntrada = new Estoque();
             $estoqueEntrada->quantidade = $request['quantidade'];
             $estoqueEntrada->material_id = $request['material_id'];
@@ -160,7 +166,6 @@ class MovimentoController extends Controller
         $estoqueSaida->save();
         $movimentoEntrada->save();
         $estoqueEntrada->save();
-
 
         $itemMovimentoSaida = new itemMovimento();
         $itemMovimentoSaida->quantidade = $request['quantidade'];

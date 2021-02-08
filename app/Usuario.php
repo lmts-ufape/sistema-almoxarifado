@@ -2,31 +2,16 @@
 
 namespace App;
 
+use App\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\ResetPassword;
 
-use App\Cargo;
-
-class Usuario extends Authenticatable
+class Usuario extends Authenticatable implements MustVerifyEmail
 {
-
     use Notifiable;
     use SoftDeletes;
-
-    protected $table = 'usuarios';
-
-    protected $fillable = ['nome', 'cpf', 'numTel', 'rg', 'data_nascimento', 'matricula', 'cargo_id', 'email', 'senha', 'setor'];
-
-    protected $hidden = [
-        'senha', 'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 
     public static $rules = [
         'nome' => 'required|string|min:5|max:100',
@@ -72,12 +57,25 @@ class Usuario extends Authenticatable
         'password.confirmed' => 'As senhas devem ser iguais.',
     ];
 
+    protected $table = 'usuarios';
+
+    protected $fillable = ['nome', 'cpf', 'numTel', 'rg', 'data_nascimento', 'matricula', 'cargo_id', 'email', 'senha', 'setor'];
+
+    protected $hidden = [
+        'senha', 'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
     public function getCargo($cargo_id)
     {
         return Cargo::find($cargo_id);
     }
-    public function notificacoes(){
+
+    public function notificacoes()
+    {
         return $this->hasMany(Notificacao::class, 'usuario_id')->orderBy('created_at', 'desc')->take(5);
     }
 

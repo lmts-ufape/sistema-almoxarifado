@@ -1,7 +1,8 @@
 $(function () {
     $('#tableUsuarios').DataTable({
-        searching: false,
+        searching: true,
         "language": {
+            "search": "Pesquisar:",
             "lengthMenu": "Mostrar _MENU_ registros por página",
             "info": "Exibindo página _PAGE_ de _PAGES_",
             "infoEmpty": "Nenhum registro disponível",

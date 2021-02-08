@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-sm-7" style="margin-right: 30px">
                 <div>
-                    <h2 style="color: #3E3767"><strong>O que é o sistema eletrônico de gestão de almoxarifados (SEGA)?</strong></h2>
+                    <h2 style="color: #3E3767"><strong>O que é a plataforma eletrônica de gestão de almoxarifado (PEGA)?</strong></h2>
                     <p style="color: #3E3767; text-align: justify">
                         É uma aplicação web desenvolvida no âmbito da cooperação técnica UFAPE-LMTS / UPE com o objetivo de informatizar o gerenciamento de almoxarifados,
                          auxiliando os responsáveis nas suas rotinas de trabalho,
@@ -37,8 +37,7 @@
                 </div>
             </div>
             <div class="col-sm-5" style="margin-right: -100px">
-                <h3 class="col-md-8 offset-sm-2"
-                    style="margin-bottom: 5%; font-family: 'Segoe UI'; color: #3E3767;"><u>Entrar</u></h3>
+                <h3 style="font-family: 'Segoe UI'; color: #3E3767; text-align: center; margin-left: -10%"><u>Entrar</u></h3>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group col-md-11">
