@@ -15,7 +15,7 @@ class UsuarioController extends Controller
     public function index()
     {
         if (Gate::allows('read-usuario')) {
-            return view('usuario/usuario_index', ['usuarios' => Usuario::all()]);
+            return view('usuario/usuario_index', ['usuarios' => Usuario::withTrashed()->get()]);
         }
         if (Gate::denies('read-usuario')) {
             abort('403', 'Não Autorizado');
@@ -206,5 +206,12 @@ class UsuarioController extends Controller
         $usuario->delete();
 
         return redirect(route('usuario.index'))->with('sucess', 'Usuário removido com sucesso!');
+    }
+
+    public function restore($id)
+    {
+        $usuario = Usuario::onlyTrashed()->where('id', $id)->first();
+        $usuario->restore();
+        return redirect(route('usuario.index'))->with('sucess', 'Usuário restaurado com sucesso!');
     }
 }

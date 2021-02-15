@@ -26,7 +26,7 @@ class DepositoController extends Controller
 
     public function getEstoques($deposito_id)
     {
-        $estoques = DB::select('Select mat.nome, e.quantidade from estoques e, Depositos mat where e.deposito_id = ? and mat.id = e.material_id', [$deposito_id]);
+        $estoques = DB::select('Select mat.nome, e.quantidade from estoques e, Materials mat where e.deposito_id = ? and mat.id = e.material_id', [$deposito_id]);
 
         return response()->json($estoques);
     }
