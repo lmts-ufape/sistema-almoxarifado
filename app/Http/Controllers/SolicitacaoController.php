@@ -295,9 +295,8 @@ class SolicitacaoController extends Controller
                 $material = $materiais->find($materiaisID[$i]);
                 $estoque = DB::table('estoques')->where('material_id', '=', $materiaisID[$i])->first();
                 if (($estoque->quantidade - $quantAprovadas[$i]) <= $material->quantidade_minima) {
-                    for ($j = 1; $j < count($usuarios); ++$j) {
-                        if (2 == $usuarios->find($j)->cargo_id) {
-                            $usuario = $usuarios->find($j);
+                    foreach ($usuarios as $usuario){
+                        if ($usuario->cargo_id == 2) {
                             \App\Jobs\emailMaterialEsgotando::dispatch($usuario, $material);
 
                             $mensagem = $material->nome.' em estado critico.';

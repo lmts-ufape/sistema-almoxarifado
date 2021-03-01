@@ -52,6 +52,7 @@ class UsuarioController extends Controller
         ];
 
         Usuario::create($data);
+
         $credentials = ['email' => $request['email']];
         Password::sendResetLink($credentials);
 
