@@ -67,6 +67,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('usuario/{id}/edit_perfil', 'UsuarioController@edit_perfil')->name('usuario.edit_perfil');
     Route::get('usuario/{id}/edit_senha', 'UsuarioController@edit_senha')->name('usuario.edit_senha');
     Route::get('usuario/{id}/remover', 'UsuarioController@destroy')->name('usuario.destroy');
+    Route::get('usuario/{id}/restaurar', 'UsuarioController@restore')->name('usuario.restore');
     Route::put('usuario/update_perfil/{id}', 'UsuarioController@update_perfil')->name('usuario.update_perfil');
     Route::put('usuario/update_senha/{id}', 'UsuarioController@update_senha')->name('usuario.update_senha');
 

@@ -305,6 +305,7 @@ class SolicitacaoController extends Controller
                             $notificacao->mensagem = $mensagem;
                             $notificacao->usuario_id = $usuario->id;
                             $notificacao->material_id = $material->id;
+                            $notificacao->material_quant = $estoque->quantidade;
                             $notificacao->visto = false;
                             $notificacao->save();
                         }

@@ -11,7 +11,7 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="selectMaterial">Material</label>
-                <select id="selectMaterial" class="selectMaterial @error('material_id') is-invalid @enderror" class="form-control" 
+                <select id="selectMaterial" class="selectMaterial @error('material_id') is-invalid @enderror" class="form-control"
                     style="width: 95%;" autofocus name="material_id" required>
                     <option></option>
                     @foreach($materiais as $material)
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="inputDepositoOrigem">Depósito de origem</label>
-                <select id="inputDepositoOrigem" class="form-control @error('deposito_id_origem') is-invalid @enderror" 
+                <select id="inputDepositoOrigem" class="form-control @error('deposito_id_origem') is-invalid @enderror"
                     autofocus name="deposito_id_origem" required>
                     <option></option>
                     @foreach($depositos as $deposito)
@@ -41,7 +41,7 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="inputDepositoDestino">Depósito de destino</label>
-                <select id="inputDepositoDestino" class="form-control @error('deposito_id_destino') is-invalid @enderror" 
+                <select id="inputDepositoDestino" class="form-control @error('deposito_id_destino') is-invalid @enderror"
                     autofocus name="deposito_id_destino" required>
                     <option></option>
                     @foreach($depositos as $deposito)
@@ -56,7 +56,7 @@
             </div>
             <div class="form-group col-md-2">
                 <label for="materialQuantidade">Quantidade</label>
-                <input type="text" class="form-control @error('quantidade') is-invalid @enderror" autofocus id="materialQuantidade" 
+                <input type="text" class="form-control @error('quantidade') is-invalid @enderror" autofocus id="materialQuantidade"
                     name="quantidade"  min="1" required value="{{ old('quantidade') }}">
                 @error('quantidade')
                     <span class="invalid-feedback">
@@ -68,7 +68,7 @@
             <div>
                 <div class="form-group col-md-12" class="form-row" style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
                     <label for="inputDescricao">Descrição</label>
-                    <textarea class="form-control @error('descricao') is-invalid @enderror" autofocus name="descricao" id="inputDescricao" 
+                    <textarea class="form-control @error('descricao') is-invalid @enderror" autofocus name="descricao" id="inputDescricao"
                         cols="30" rows="3" min="5" max="255" required>{{ old('descricao') }}</textarea>
                     @error('descricao')
                         <span class="invalid-feedback" role="alert">
@@ -94,3 +94,4 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script type="text/javascript" src="{{asset('js/movimento/CheckFields.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/movimento/entrada_material.js')}}"></script>

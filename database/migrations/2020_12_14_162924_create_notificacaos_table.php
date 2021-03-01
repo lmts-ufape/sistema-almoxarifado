@@ -17,6 +17,7 @@ class CreateNotificacaosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->text('mensagem');
+            $table->integer('material_quant');
             $table->boolean('visto')->default(false);
 
             $table->unsignedInteger('usuario_id')->index();

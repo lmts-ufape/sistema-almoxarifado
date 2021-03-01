@@ -10,7 +10,7 @@
         <h2>CADASTRAR USUÁRIO</h2>
     </div>
 
-    <form action="{{ route('usuario.store') }}" method="POST" enctype="multipart/form-data">
+    <form id="formUsuario" action="{{ route('usuario.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <div class="form-group">
@@ -19,7 +19,8 @@
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
                 <input class="form-control  @error('nome') is-invalid @enderror" type="text" name="nome" id="nome"
-                       maxlength="100" value="{{ old('nome') }}" autocomplete="nome" autofocus placeHolder="Nome Completo">
+                       maxlength="100" value="{{ old('nome') }}" autocomplete="nome" autofocus
+                       placeHolder="Nome Completo">
                 @error('nome')
                 <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -30,8 +31,9 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="numTel">{{ __('Celular') }}</label>
-                    <input id="numTel" type="text" min="0" class="form-control @error('numTel') is-invalid @enderror" 
-                        name="numTel" value="{{ old('numTel') }}" required autocomplete="numTel" placeholder="(00)00000-0000">
+                    <input id="numTel" type="text" min="0" class="form-control @error('numTel') is-invalid @enderror"
+                           name="numTel" value="{{ old('numTel') }}" required autocomplete="numTel"
+                           placeholder="(00)00000-0000">
 
                     @error('numTel')
                     <span class="invalid-feedback" role="alert">
@@ -75,8 +77,10 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="matricula"> Matrícula </label>
-                    <input class="form-control @error('matricula') is-invalid @enderror" value="{{ old('matricula') }}" type="text" 
-                        name="matricula" id="matricula" maxlength="11" autocomplete="matricula" autofocus placeHolder="00000000000">
+                    <input class="form-control @error('matricula') is-invalid @enderror" value="{{ old('matricula') }}"
+                           type="text"
+                           name="matricula" id="matricula" maxlength="11" autocomplete="matricula" autofocus
+                           placeHolder="00000000000">
                     @error('matricula')
                     <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -116,28 +120,15 @@
                     </span>
                 @enderror
             </div>
-            <div class="form-group">
-                <label for="senha"> Senha contendo ao menos 8 dígitos </label>
-                <input class="form-control @error('senha') is-invalid @enderror" autofocus autocomplete="new-password"
-                       type="password" name="password" id="password" placeHolder="">
-                @error('senha')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="confimar_senha"> Confirmar Senha </label>
-                <input class="form-control @error('confirmar_senha') is-invalid @enderror" autocomplete="new-password"
-                       autofocus type="password" name="password_confirmation" id="password_confirmation" placeHolder="">
-                @error('confirmar_senha')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
+            <input hidden class="form-control @error('senha') is-invalid @enderror" autofocus
+                   autocomplete="new-password"
+                   type="password" name="password" id="password" placeHolder="" value="almoxarifado123">
+            <input hidden class="form-control @error('confirmar_senha') is-invalid @enderror"
+                   autocomplete="new-password"
+                   autofocus type="password" name="password_confirmation" id="password_confirmation" placeHolder=""
+                   value="almoxarifado123">
             <div class="form-group col-md-12" class="form-row"
-                 style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
+                 style="border-bottom: #cfc5c5 1px solid; padding: 0 0 10px 0; margin-bottom: 20px">
             </div>
             <Button class="btn btn-secondary" type="button"
                     onclick="if(confirm('Tem certeza que deseja Cancelar o cadastro do Usuário?')) location.href = '../' ">

@@ -34,6 +34,11 @@
                 {{ $usuario->nome }}</th>
                 <td>{{ $usuario->email }}</td>
                 <td>{{ $usuario->getCargo($usuario->cargo_id)->nome }}</td>
+                @if($usuario->deleted_at == null)
+                    <td>Ativo</td>
+                @else
+                    <td>Desativado</td>
+                @endIf
                 <td style="text-align: center">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown" type="button" id="dropdownMenuButton"
@@ -41,8 +46,14 @@
                             ⋮
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a type="button" class="dropdown-item" onclick="location.href='{{ route('usuario.edit', ['usuario' => $usuario->id]) }}'">Editar</a>
-                            <a type="button" class="dropdown-item" onclick="if(confirm('Tem certeza que deseja Remover o Usuário?')) location.href='{{route('usuario.destroy', $usuario->id)}}'">Remover</a>
+                            <a type="button" class="dropdown-item"
+                               onclick="location.href='{{ route('usuario.edit', ['usuario' => $usuario->id]) }}'">Editar</a>
+                            <a type="button" class="dropdown-item"
+                               onclick="if(confirm('Tem certeza que deseja Remover o Usuário?')) location.href='{{route('usuario.destroy', $usuario->id)}}'">Remover</a>
+                            @if($usuario->deleted_at != null)
+                                <a type="button" class="dropdown-item"
+                                   onclick="if(confirm('Tem certeza que deseja Restaurar o Usuário?')) location.href='{{route('usuario.restore', $usuario->id)}}'">Restaurar</a>
+                            @endif
                         </div>
                     </div>
                 </td>
