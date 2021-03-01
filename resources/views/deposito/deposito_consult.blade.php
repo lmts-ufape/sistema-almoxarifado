@@ -20,7 +20,7 @@
     <table id="tableDepositos" class="table table-hover table-responsive-md" >
         <thead style="background-color: #151631; color: white; border-radius: 15px">
              <tr>
-                <th scope="col">Material</th>
+                <th scope="col" style="padding-left: 10px">Material</th>
                 <th scope="col" style="text-align: center">Quantidade</th>
             </tr>
         </thead>
@@ -46,25 +46,4 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#tableDepositos').DataTable({
-            searching: false,
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ registros por página",
-                "info": "Exibindo página _PAGE_ de _PAGES_",
-                "infoEmpty": "",
-                "zeroRecords": "Selecione um depósito no campo direito superior",
-                "paginate": {
-                    "previous": "Anterior",
-                    "next": "Próximo"
-                }
-            },
-            "order": [],
-            "columnDefs": [ {
-                "targets"  : [0,1],
-                "orderable": false
-            }]
-        });
-    });
-</script>
+<script type="text/javascript" src="{{asset('js/deposito/consulta.js')}}"></script>

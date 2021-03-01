@@ -21,12 +21,12 @@
     <table id="tableMateriais" class="table table-hover table-responsive-md">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
         <tr>
-            <th class="align-middle" scope="col">Imagem</th>
-            <th class="align-middle" scope="col">Material</th>
-            <th class="align-middle" scope="col">Descrição</th>
-            <th class="align-middle" scope="col">Qtd. Mínima</th>
-            <th class="align-middle" scope="col">Código</th>
-            <th class="align-middle" scope="col">Ações</th>
+            <th class="align-middle" scope="col" style="padding-left: 10px">Imagem</th>
+            <th class="align-middle" scope="col" style="padding-left: 10px">Material</th>
+            <th class="align-middle" scope="col" style="padding-left: 10px">Descrição</th>
+            <th class="align-middle" scope="col" style="text-align: center">Qtd. Mínima</th>
+            <th class="align-middle" scope="col" style="text-align: center">Código</th>
+            <th class="align-middle" scope="col" style="text-align: center">Ações</th>
         </tr>
         </thead>
         <tbody>
@@ -37,8 +37,8 @@
                 <td>
                 {{ $material->nome }}</th>
                 <td>{{ $material->descricao }}</td>
-                <td>{{ $material->quantidade_minima }}</td>
-                <td>{{ $material->codigo }}</td>
+                <td style="text-align: center">{{ $material->quantidade_minima }}</td>
+                <td style="text-align: center">{{ $material->codigo }}</td>
                 <td style="text-align: center">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown" type="button" id="dropdownMenuButton"

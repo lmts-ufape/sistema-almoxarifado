@@ -21,6 +21,8 @@
         @csrf
         @method('PUT')
 
+        <p style="font-weight: bold; font-size: 15px">Dados Pessoais</p>
+
         <div class="form-group">
             <div class="form-group">
                 <label for="nome"> Nome Completo </label>
@@ -36,7 +38,7 @@
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <label for="cpf"> CPF </label>
                     <input class="form-control @error('cpf') is-invalid @enderror" type="text" name="cpf" id="cpf"
                            min="0" placeHolder="000.000.000-00" value="{{ $usuario->cpf }}">
@@ -48,7 +50,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <label for="rg"> RG </label>
                     <input class="form-control @error('rg') is-invalid @enderror" type="text" name="rg" id="rg"
                            min="0" maxlength="11" placeHolder="00000000000"
@@ -61,7 +63,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-md-4">
                     <label for="data_nascimento"> Data de Nascimento </label>
                     <input class="form-control @error('data_nascimento') is-invalid @enderror" type="date"
                            name="data_nascimento" id="data_nascimento" min="1910-01-01"
@@ -73,11 +75,42 @@
                         </span>
                     @enderror
                 </div>
+            </div>
 
-                <div class="form-group col-md-2">
+            <p style="font-weight: bold; font-size: 15px">Informações para contato</p>
+
+            <div class="form-group">
+                <label for="email"> E-mail </label>
+                <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email"
+                       placeHolder="exemplodeemail@upe.br"
+                       value="{{ $usuario->email }}">
+
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="numTel"> Número de Celular </label>
+                <input class="form-control @error('numTel') is-invalid @enderror" type="text" name="numTel"
+                       id="numTel" placeHolder="(00)00000-0000" value="{{ $usuario->numTel }}">
+
+                @error('numTel')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <p style="font-weight: bold; font-size: 15px">Informações institucionais</p>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
                     <label for="matricula"> Matrícula </label>
                     <input class="form-control @error('matricula') is-invalid @enderror" type="text" name="matricula"
-                           id="matricula" min="0" maxlength="11" placeHolder="00000000000" value="{{ $usuario->matricula }}">
+                            id="matricula" min="0" maxlength="11" placeHolder="00000000000" value="{{ $usuario->matricula }}">
 
                     @error('matricula')
                     <span class="invalid-feedback" role="alert">
@@ -86,7 +119,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <label for="setor"> Setor </label>
                     <select id="setor" class="form-control" name="setor">
                         @if($usuario->setor == 'Administrativo')
@@ -106,7 +139,7 @@
                 </div>
 
                 @if(Auth::user()->cargo_id == 2)
-                    <div class="form-group">
+                    <div class="form-group col-md-4">
                         <label for="cargo"> Perfil </label>
                         <select class="custom-select" name="cargo" id="cargo">
                             <option value="{{ $usuario->cargo_id }}"
@@ -123,34 +156,7 @@
                 @endif
             </div>
 
-            <div class="form-group">
-                <label for="numTel"> Número de Celular </label>
-                <input class="form-control @error('numTel') is-invalid @enderror" type="text" name="numTel"
-                       id="numTel" placeHolder="(00)00000-0000" value="{{ $usuario->numTel }}">
-
-                @error('numTel')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="email"> E-mail </label>
-                <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email"
-                       placeHolder="exemplodeemail@upe.br"
-                       value="{{ $usuario->email }}">
-
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-
-            <div class="form-group col-md-12" class="form-row"
-                 style="border-bottom: #cfc5c5 1px solid; padding: 0 0 20px 0; margin-bottom: 20px">
-            </div>
+           <hr>
 
             <div class="form-row">
                 <div class="col-sm-auto">

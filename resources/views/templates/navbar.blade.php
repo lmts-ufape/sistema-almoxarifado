@@ -77,7 +77,7 @@
                     @endif
 
                     @if(!empty(Auth::user()->id))
-                        <div class="dropdown" onselectstart="return false">
+                        <div class="dropdown" onselectstart="return false" style="margin-left: 10px">
                             <a id="dropdown_perfil" name="dropdown_perfil" class="dropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                <img src="{{asset('imagens/logo_pega_pequeno.png')}}" style="width:35px"/>

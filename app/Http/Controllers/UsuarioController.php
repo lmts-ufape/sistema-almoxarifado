@@ -191,7 +191,6 @@ class UsuarioController extends Controller
             'matricula' => $request['matricula'],
             'cargo_id' => $request['cargo'],
             'numTel' => $request['numTel'],
-            'senha' => Hash::make($request['password']),
             'setor' => $request['setor'],
         ];
 

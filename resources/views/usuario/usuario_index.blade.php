@@ -20,10 +20,10 @@
     <table id="tableUsuarios" class="table table-hover table-responsove-md">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
         <tr>
-            <th scope="col"> Nome</th>
-            <th scope="col"> E-mail</th>
-            <th scope="col"> Perfil</th>
-            <th scope="col"> Ações</th>
+            <th scope="col" style="padding-left: 10px"> Nome</th>
+            <th scope="col" style="padding-left: 10px"> E-mail</th>
+            <th scope="col" style="padding-left: 10px"> Perfil</th>
+            <th scope="col" style="text-align: center"> Ações</th>
         </tr>
         </thead>
 

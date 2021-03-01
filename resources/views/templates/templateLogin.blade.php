@@ -106,7 +106,7 @@
                     @endif
 
                     @if(!empty(Auth::user()->id))
-                        <div class="dropdown" onselectstart="return false">
+                        <div class="dropdown" onselectstart="return false" style="margin-left: 10px">
                             <a id="dropdown_perfil" name="dropdown_perfil" class="dropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{asset('imagens/logo_pega_pequeno.png')}}" style="width:35px"/>
@@ -144,8 +144,10 @@
             <div class="col-sm-3" align="center" >
                 <div class="row justify-content-center" style="margin-top:15px;">
                     <div class="col-sm-12 styleItemMapaDoSite" style=" font-family:arial">
-                        <a href="{{ route('home') }}">Início</a> | 
-                        <a href="{{ route('parceria') }}">Sobre</a>
+                        <a href="{{ route('home') }}">Início</a> |
+                        <a href="{{ route('sistema') }}">Sistema</a> |
+                        <a href="{{ route('parceria') }}">Parceria</a> |
+                        <a href="{{ route('contato') }}">Contato</a>
                     </div>
                 </div>
             </div>

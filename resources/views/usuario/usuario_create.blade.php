@@ -26,8 +26,9 @@
                     </span>
                 @enderror
             </div>
+
             <div class="form-row">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="numTel">{{ __('Celular') }}</label>
                     <input id="numTel" type="text" min="0" class="form-control @error('numTel') is-invalid @enderror" 
                         name="numTel" value="{{ old('numTel') }}" required autocomplete="numTel" placeholder="(00)00000-0000">
@@ -38,7 +39,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="cpf"> CPF </label>
                     <input type="text" name="cpf" id="cpf" class="form-control @error('cpf') is-invalid @enderror"
                            value="{{ old('cpf') }}" autocomplete="cpf" autofocus placeHolder="000.000.000-00">
@@ -48,7 +49,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="rg"> RG </label>
                     <input name="rg" id="rg" class="form-control @error('rg') is-invalid @enderror" maxlength="11"
                            value="{{ old('rg') }}" type="text" autocomplete="rg" autofocus placeHolder="00000000000">
@@ -58,7 +59,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="data_nascimento"> Data de Nascimento </label>
                     <input class="form-control @error('data_nascimento') is-invalid @enderror"
                            value="{{ old('data_nascimento') }}" autofocus type="date" name="data_nascimento"
@@ -69,7 +70,10 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-2">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
                     <label for="matricula"> Matrícula </label>
                     <input class="form-control @error('matricula') is-invalid @enderror" value="{{ old('matricula') }}" type="text" 
                         name="matricula" id="matricula" maxlength="11" autocomplete="matricula" autofocus placeHolder="00000000000">
@@ -79,7 +83,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <label for="setor"> Setor </label>
                     <select id="setor" class="form-control" name="setor">
                         <option data-value="Administrativo">Administrativo</option>
@@ -87,7 +91,7 @@
                         <option data-value="Administrativo/Academico">Administrativo/Acadêmico</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-md-4">
                     <label for="cargo"> Perfil </label>
                     <select class="custom-select @error('cargo') is-invalid @enderror" autofocus name="cargo"
                             id="cargo">
@@ -97,6 +101,7 @@
                     </select>
                 </div>
             </div>
+
             <div class="form-group">
                 <h2 class="h4"> Dados de Login </h2>
             </div>
