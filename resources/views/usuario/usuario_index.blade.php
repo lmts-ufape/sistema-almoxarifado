@@ -23,6 +23,7 @@
             <th scope="col" style="padding-left: 10px"> Nome</th>
             <th scope="col" style="padding-left: 10px"> E-mail</th>
             <th scope="col" style="padding-left: 10px"> Perfil</th>
+            <th scope="col" style="padding-left: 10px"> Situação</th>
             <th scope="col" style="text-align: center"> Ações</th>
         </tr>
         </thead>

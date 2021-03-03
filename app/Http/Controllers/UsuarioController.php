@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Cargo;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Notifications\ResetPassword;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -144,8 +141,11 @@ class UsuarioController extends Controller
         $rules = array_slice(Usuario::$rules, 7);
         $messages = array_slice(Usuario::$messages, 27);
 
-        $request['cpf'] = str_replace(['.', '-'], '', $request['cpf']);
-        $request['numTel'] = str_replace(['(', ')', '-'], '', $request['numTel']);
+        $rules['current_password'] = 'required|string|min:8|password';
+
+        $messages['current_password.required'] = 'A senha atual é um campo obrigatório.';
+        $messages['current_password.min'] = 'A senha atual deve ter no mínimo 8 caracteres.';
+        $messages['current_password.password'] = 'A senha atual está incorreta';
 
         $validator = Validator::make($request->all(), $rules, $messages)->validate();
 
@@ -218,6 +218,7 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::onlyTrashed()->where('id', $id)->first();
         $usuario->restore();
+
         return redirect(route('usuario.index'))->with('sucess', 'Usuário restaurado com sucesso!');
     }
 }

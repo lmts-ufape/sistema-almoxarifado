@@ -79,29 +79,31 @@
 
             <p style="font-weight: bold; font-size: 15px">Informações para contato</p>
 
-            <div class="form-group">
-                <label for="email"> E-mail </label>
-                <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email"
-                       placeHolder="exemplodeemail@upe.br"
-                       value="{{ $usuario->email }}">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="email"> E-mail </label>
+                    <input class="form-control @error('email') is-invalid @enderror" type="email" name="email" id="email"
+                        placeHolder="exemplodeemail@upe.br"
+                        value="{{ $usuario->email }}">
 
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-            <div class="form-group">
-                <label for="numTel"> Número de Celular </label>
-                <input class="form-control @error('numTel') is-invalid @enderror" type="text" name="numTel"
-                       id="numTel" placeHolder="(00)00000-0000" value="{{ $usuario->numTel }}">
+                <div class="form-group col-md-6">
+                    <label for="numTel"> Número de Celular </label>
+                    <input class="form-control @error('numTel') is-invalid @enderror" type="text" name="numTel"
+                        id="numTel" placeHolder="(00)00000-0000" value="{{ $usuario->numTel }}">
 
-                @error('numTel')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    @error('numTel')
+                    <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
 
             <p style="font-weight: bold; font-size: 15px">Informações institucionais</p>
