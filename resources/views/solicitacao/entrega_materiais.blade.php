@@ -34,8 +34,8 @@
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
-                <th scope="col" class="align-middle">Requerente</th>
-                <th scope="col" class="align-middle">Material</th>
+                <th scope="col" class="align-middle" style="padding-left: 10px">Requerente</th>
+                <th scope="col" class="align-middle" style="padding-left: 10px">Material</th>
                 <th scope="col" class="align-middle">Situação</th>
                 <th scope="col" class="align-middle" style="text-align: center">Data</th>
             </tr>
@@ -44,7 +44,7 @@
             @if (count($dados) > 0 && count($materiaisPreview) > 0)
                 @for ($i = 0; $i < count($dados); $i++)
                     <tr data-id="{{ $dados[$i]->solicitacao_id }}" style="cursor: pointer">
-                        <td class="expandeOption" style="text-align: center">{{ $dados[$i]->nome }}</td>
+                        <td class="expandeOption">{{ $dados[$i]->nome }}</td>
                         <td class="expandeOption">{{$materiaisPreview[$i]}}...</td>
                         <td class="expandeOption">
                             @if ($dados[$i]->status == "Aprovado")

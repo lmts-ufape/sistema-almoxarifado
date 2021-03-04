@@ -11,12 +11,12 @@
         <thead style="background-color: #151631; color: white; border-radius: 15px">
         <tr>
             <th class="align-middle" scope="col" style="padding: 0px"></th>
-            <th class="align-middle" scope="col">Imagem</th>
-            <th class="align-middle" scope="col">Material</th>
-            <th class="align-middle" scope="col">Descrição</th>
-            <th class="align-middle" scope="col">Qtd Total</th>
-            <th class="align-middle" scope="col">Qtd Mínima</th>
-            <th class="align-middle" scope="col">Código</th>
+            <th class="align-middle" scope="col" style="padding-left: 10px">Imagem</th>
+            <th class="align-middle" scope="col" style="padding-left: 10px">Material</th>
+            <th class="align-middle" scope="col" style="padding-left: 10px">Descrição</th>
+            <th class="align-middle" scope="col" style="text-align: center">Qtd Total</th>
+            <th class="align-middle" scope="col" style="text-align: center">Qtd Mínima</th>
+            <th class="align-middle" scope="col" style="text-align: center">Código</th>
         </tr>
         </thead>
         <tbody>
@@ -45,14 +45,13 @@
                          width="80" height="80"></td>
                 <td>{{ $material->nome }}</td>
                 <td>{{ $material->descricao }}</td>
-                <td>{{ $quantidadeTotal }}</td>
-                <td>{{ $material->quantidade_minima }}</td>
-                <td>{{ $material->codigo }}</td>
+                <td style="text-align: center">{{ $quantidadeTotal }}</td>
+                <td style="text-align: center">{{ $material->quantidade_minima }}</td>
+                <td style="text-align: center">{{ $material->codigo }}</td>
             </tr>
         @empty
             <td colspan="5">Sem materiais cadastrados ainda</td>
         @endempty
-
         </tbody>
     </table>
 @endsection
