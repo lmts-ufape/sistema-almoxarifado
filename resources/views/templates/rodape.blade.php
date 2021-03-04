@@ -6,7 +6,9 @@
                 <div class="row justify-content-center" style="margin-top:15px;">
                     <div class="col-sm-12 styleItemMapaDoSite" style=" font-family:arial">
                         <a href="{{ route('home') }}">Início</a> |
-                        <a href="{{ route('parceria') }}">Sobre</a>
+                        <a href="{{ route('sistema') }}">Sistema</a> |
+                        <a href="{{ route('parceria') }}">Parceria</a> |
+                        <a href="{{ route('contato') }}">Contato</a>
                     </div>
                 </div>
             </div>

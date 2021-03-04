@@ -23,7 +23,18 @@
 
         <div class="form-group">
             <div class="form-group">
-                <label for="password"> Senha </label>
+                <label for="current-password"> Senha Atual </label>
+                <input class="form-control @error('current_password') is-invalid @enderror" type="password" name="current_password" id="current-password" required>
+
+                @error('current_password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="password"> Nova Senha </label>
                 <input class="form-control @error('password') is-invalid @enderror" type="password" name="password" id="password" required>
 
                 @error('password')
@@ -34,7 +45,7 @@
             </div>
 
             <div class="form-group">
-                <label for="password-confirm"> Confirmar Senha </label>
+                <label for="password-confirm"> Confirmar Nova Senha </label>
                 <input class="form-control" type="password" name="password_confirmation" id="password-confirm" required>
             </div>
 

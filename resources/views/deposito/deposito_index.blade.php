@@ -26,7 +26,7 @@
     <table id="tableDepositos" class="table table-hover table-responsive-md">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
              <tr>
-                <th class="text-left" scope="col" style="text-align: center">Depósito</th>
+                <th class="text-left" scope="col" style="padding-left: 10px">Depósito</th>
                 <th scope="col" style="text-align: center">Código</th>
                  <th scope="col" style="text-align: center">Ações</th>
             </tr>

@@ -14,8 +14,8 @@
     <table id="tableSolicitacoes" class="table table-hover table-responsive-md" style="margin-top: 10px;">
         <thead style="background-color: #151631; color: white; border-radius: 15px">
             <tr>
-                <th scope="col">Requente</th>
-                <th scope="col">Material</th>
+                <th scope="col" style="padding-left: 10px">Requente</th>
+                <th scope="col" style="padding-left: 10px">Material</th>
                 <th scope="col">Situação</th>
                 <th scope="col" style="text-align: center">Data</th>
             </tr>
