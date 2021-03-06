@@ -30,6 +30,11 @@
 @include('templates.navbar')
 
 <div class="container-fluid">
+    @auth
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    @endauth
     <div class="row">
         <div class="col-md"  style="background-color: #1b1c42; ">
                 @yield('content')
