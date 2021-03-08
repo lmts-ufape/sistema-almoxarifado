@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-sm-6" align="center">
                 <div class="row justify-content-center" style="margin-top:10px; margin-top:1.4rem;">
-                    <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white">
+                    <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white; margin-left: 18%; margin-bottom: 4%">
                         Desenvolvido por
                     </div>
                     <div style="margin:3px;">
@@ -24,14 +24,14 @@
                             <img src="{{ asset('/imagens/logo_lmts.png') }}">
                         </a>
                     </div>
-                    <div style="margin:3px;">
+                    <div style="margin-left: 3px">
                         <a href="http://www.upe.br/garanhuns/" target="blank">
                             <img style="width: 100px" src="{{ asset('/imagens/logo_upe.png') }}">
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4" align="center">
+            <div class="col-sm-1" align="center">
                 <div class="row justify-content-center" style="margin-top:10px; margin-top:1.4rem;">
                     <div class="col-sm-12" id="" style="font-weight:bold; font-family:arial; color:white">
                         Apoio
