@@ -14,7 +14,8 @@
                 <label for="data_inicio" class="col-md-2 col-form-label text-md-right">{{ __('Data de início:') }}</label>
 
                 <div class="col-md-3">
-                    <input id="data_inicio" type="date" value="{{ old('data_inicio') }}" class="form-control @error('data_inicio') is-invalid @enderror" name="data_inicio" min="1910-01-01">
+                    <input id="data_inicio" type="date" value="{{ old('data_inicio') }}"
+                        class="form-control @error('data_inicio') is-invalid @enderror" name="data_inicio" min="1910-01-01">
 
                     @error('data_inicio')
                         <span class="invalid-feedback" role="alert">
@@ -23,15 +24,18 @@
                     @enderror
                 </div>
 
-                <label for="tipo_relatorio" class="col-md-2 col-form-label text-md-right">{{ __('Tipo de Relatório:') }}</label>
+                <label for="tipo_relatorio"
+                    class="col-md-2 col-form-label text-md-right">{{ __('Tipo de Relatório:') }}</label>
 
                 <div class="col-md-3">
-                    <select id="tipo_relatorio" class="form-control @error('tipo_relatorio') is-invalid @enderror" name="tipo_relatorio">
+                    <select id="tipo_relatorio" class="form-control @error('tipo_relatorio') is-invalid @enderror"
+                        name="tipo_relatorio">
                         <option value="" selected hidden>Escolher...</option>
                         <option value="0">Entrada de Material</option>
                         <option value="1">Saída de Material</option>
                         <option value="2">Materiais Não Movimentados</option>
                         <option value="3">Saída de Material(Solicitação)</option>
+                        <option value="4">Materiais mais movimentados(Solicitação)</option>
                     </select>
                     @error('tipo_relatorio')
                         <span class="invalid-feedback" role="alert">
@@ -45,7 +49,8 @@
                 <label for="data_fim" class="col-md-2 col-form-label text-md-right">{{ __('Data de fim:') }}</label>
 
                 <div class="col-md-3">
-                    <input id="data_fim" type="date" value="{{ old('data_fim') }}" class="form-control @error('data_fim') is-invalid @enderror" name="data_fim" min="1910-01-01">
+                    <input id="data_fim" type="date" value="{{ old('data_fim') }}"
+                        class="form-control @error('data_fim') is-invalid @enderror" name="data_fim" min="1910-01-01">
 
                     @error('data_fim')
                         <span class="invalid-feedback" role="alert">
@@ -61,8 +66,4 @@
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-    $(function () {
-        document.getElementById('data_fim').max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
-    });
-</script>
+<script type="text/javascript" src="{{asset('js/relatorio/relatorio_escolha.js')}}"></script>
